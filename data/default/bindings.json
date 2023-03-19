@@ -1,0 +1,12 @@
+{
+  "UP": 119,
+  "LEFT": 97,
+  "DOWN": 115,
+  "RIGHT": 100,
+  "INTERACT": 101,
+  "TAB": 9,
+  "ESC": 27,
+  "SPACE": 32,
+  "ENTER": 13,
+  "BACKSPACE": 8
+}
