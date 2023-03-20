@@ -43,7 +43,7 @@ class GameObject(Position, Render):
         return self._visible
 
     @visible.setter
-    def visible(self, value: int):
+    def visible(self, value: bool):
         self._visible = value
 
     @property
@@ -58,10 +58,19 @@ class GameObject(Position, Render):
             return True
         return False
 
+    def update(self):
+        ...
+
     def activate(self):
+        """
+        Activates the object.
+        """
         if not self.active:
             self.active = True
 
     def deactivate(self):
+        """
+        Deactivates the object.
+        """
         if self.active:
             self.active = False
