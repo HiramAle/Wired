@@ -10,9 +10,5 @@ class MainMenu(Scene):
         super().__init__("main_menu")
         pygame.mouse.set_visible(True)
 
-    def update(self) -> None:
-        if input.keyboard.keys["SPACE"]:
-            window.set_cursor("hand")
-
     def render(self) -> None:
         self.display.fill("red")

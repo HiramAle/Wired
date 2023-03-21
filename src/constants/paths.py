@@ -47,3 +47,6 @@ BINDINGS = "data/user/bindings.json"
 DEFAULT_BINDINGS = "data/default/bindings.json"
 # Assets
 CURSORS = "assets/cursors"
+FONTS = "assets/fonts"
+IMAGES_MISC = "assets/images/misc"
+ANIMATIONS = "assets/animations"

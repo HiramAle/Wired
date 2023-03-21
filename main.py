@@ -21,7 +21,6 @@ class Game:
             input.update()
             scene_manager.update()
             scene_manager.render()
-            scene_manager.print_stack()
             time.update()
             window.update()
 

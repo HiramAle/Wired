@@ -1,5 +1,6 @@
 from __future__ import annotations
 import pygame
+from typing import Optional
 from src.game_object.game_object import GameObject
 from src.game_object.components import Render
 
@@ -19,7 +20,15 @@ class Sprite(GameObject, Render):
         """
         GameObject.__init__(self, name, position, image.get_size())
         Render.__init__(self, image)
-        self.groups = groups if groups else []
+        self.groups: list[SpriteGroup] = []
+        if groups:
+            self.add(*groups)
+
+    # @Render.image.setter
+    # def image(self, new_image: pygame.Surface):
+    #     Render.image.setter = new_image
+    #     self._source_image = new_image
+    #     self._image = self._source_image.copy()
 
     @property
     def rect(self) -> pygame.Rect:
@@ -28,7 +37,7 @@ class Sprite(GameObject, Render):
         else:
             return self.image.get_rect(topleft=self.position)
 
-    def render(self, display: pygame.Surface, special_flags=None):
+    def render(self, display: pygame.Surface, special_flags=0):
         """
         Renders the sprite onto the display surface.
         :param display: The surface to render the sprite on.

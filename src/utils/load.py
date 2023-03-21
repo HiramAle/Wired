@@ -1,7 +1,9 @@
 import pygame
 from json import dumps, load
-from os.path import exists, isdir, join
+from src.utils.image import load_sprite_sheet
+from os.path import isdir
 from os import listdir
+from src.gui.font import Font
 
 
 def read_json(path: str) -> dict:
@@ -55,7 +57,7 @@ def load_image_directory(path: str) -> dict:
     return data
 
 
-def load_cursor(path: str) -> dict[str, pygame.cursors.Cursor]:
+def load_cursors(path: str) -> dict[str, pygame.cursors.Cursor]:
     """
     Load a directory of cursor images and return them as a dictionary of pygame Cursor objects.
     :param path: The path to the directory containing the cursor images.
@@ -63,3 +65,37 @@ def load_cursor(path: str) -> dict[str, pygame.cursors.Cursor]:
     """
     return {name: pygame.cursors.Cursor((0, 0), pygame.transform.scale_by(image, 3))
             for name, image in load_image_directory(path).items()}
+
+
+def load_fonts(path: str) -> dict[str, Font]:
+    fonts = {}
+    for font_file in listdir(path):
+        file_path = f"{path}/{font_file}"
+        font_name = font_file.split(".")[0]
+        fonts[font_name] = Font(font_name, file_path)
+    return fonts
+
+
+def load_animation(path: str) -> tuple[pygame.Surface, dict]:
+    data = None
+    sprite_sheet = None
+    for file in listdir(path):
+        if file.endswith(".json"):
+            data = read_json(f"{path}/data.json")
+        else:
+            sprite_sheet = load_image(f"{path}/{file}")
+    return sprite_sheet, data
+
+
+def load_animations(path: str) -> dict[str, dict[str, list]]:
+    animations = {}
+    for folder in listdir(path):
+        folder_path = f"{path}/{folder}"
+        animations[folder] = {}
+        for animation in listdir(folder_path):
+            animation_path = f"{folder_path}/{animation}"
+            sprite_sheet, data = load_animation(animation_path)
+            frames = load_sprite_sheet(sprite_sheet, data)
+            animations[folder][animation] = frames, data
+
+    return animations

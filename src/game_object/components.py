@@ -118,14 +118,15 @@ class Animation:
     Component that represents that represent an animation made up of multiple frames.
     """
 
-    def __init__(self, frames: list[pygame.Surface]):
+    def __init__(self, data: list):
         """
         Initializes a new Animation object.
         :param frames: A list of Pygame Surfaces representing the frames of the animation.
         """
-        self.frames = frames
+        self.data = data[1]
+        self.frames = data[0]
         self.actual_frame = 0
-        self.speed = 10
+        self.speed = self.data["speed"]
 
     @property
     def frame(self) -> pygame.Surface:
