@@ -1,10 +1,10 @@
 from __future__ import annotations
 import pygame
-
 from src.game_object.game_object import GameObject
+from src.game_object.components import Render
 
 
-class Sprite(GameObject):
+class Sprite(GameObject, Render):
     """
     A class representing a graphical Sprite that can be drawn on a surface and can be added to a SpriteGroup.
     """
@@ -17,8 +17,16 @@ class Sprite(GameObject):
         :param image: The sprite's image.
         :param groups: The groups that the sprite belongs to.
         """
-        super().__init__(name, position, image)
+        GameObject.__init__(self, name, position, image.get_size())
+        Render.__init__(self, image)
         self.groups = groups if groups else []
+
+    @property
+    def rect(self) -> pygame.Rect:
+        if self.centered:
+            return self.image.get_rect(center=self.position)
+        else:
+            return self.image.get_rect(topleft=self.position)
 
     def render(self, display: pygame.Surface, special_flags=None):
         """
@@ -26,8 +34,6 @@ class Sprite(GameObject):
         :param display: The surface to render the sprite on.
         :param special_flags: Pygame special rendering flags, such as pygame.BLEND_RGBA_ADD.
         """
-        if not self.active:
-            return
         display.blit(self.image, self.rect, special_flags=special_flags)
 
     def add(self, *groups: SpriteGroup):
@@ -84,6 +90,8 @@ class SpriteGroup:
         Call the update method of each Sprite in the group.
         """
         for sprite in self.sprites:
+            if not sprite.active:
+                continue
             sprite.update()
 
     def render(self, display: pygame.Surface):
@@ -92,4 +100,6 @@ class SpriteGroup:
         :param display: The surface to render the Sprites onto.
         """
         for sprite in self.sprites:
+            if not sprite.active:
+                continue
             sprite.render(display)

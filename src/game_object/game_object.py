@@ -3,32 +3,49 @@ import src.engine.input as input
 from src.game_object.components import Position, Render
 
 
-class GameObject(Position, Render):
+class GameObject(Position):
     """
     Represents a game object.
     """
 
-    def __init__(self, name="GameObject", position=(0, 0), image=pygame.Surface((0, 0))):
+    def __init__(self, name="GameObject", position=(0, 0), size=(16, 16)):
         """
         Initializes a new GameObject.
         :param name: The name of the object. Default is GameObject.
         :param position: The initial position of the game object. Default is (0, 0).
-        :param image: The image of the game object. Default is an empty surface with size (0, 0).
         """
-        Position.__init__(self, position)
-        Render.__init__(self, image)
+        super().__init__(position)
         self.name = name
         self._centered = True
         self._visible = True
         self.active = True
         self.interactive = False
+        self.size = size
+
+    @property
+    def width(self):
+        return self.size[0]
+
+    @width.setter
+    def width(self, value: int | float):
+        self.size[0] = value
+
+    @property
+    def height(self):
+        return self.size[1]
+
+    @height.setter
+    def height(self, value: int | float):
+        self.size[1] = value
 
     @property
     def rect(self) -> pygame.Rect:
+        rect = pygame.Rect(0, 0, self.size)
         if self._centered:
-            return self.image.get_rect(center=self.position)
+            rect.center = self.position
         else:
-            return self.image.get_rect(topleft=self.position)
+            rect.topleft = self.position
+        return rect
 
     @property
     def centered(self) -> bool:
@@ -74,3 +91,5 @@ class GameObject(Position, Render):
         """
         if self.active:
             self.active = False
+
+

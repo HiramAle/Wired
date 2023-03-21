@@ -25,7 +25,14 @@ def init():
     height = preferences.window_height
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption(GAME_NAME)
-    pygame.mouse.set_cursor(assets.cursors["arrow"])
+    set_cursor("arrow")
+
+
+def set_cursor(cursor: str):
+    # The cursor it's trying to set is the same as the actual cursor.
+    if assets.cursors[cursor] == pygame.mouse.get_cursor():
+        return
+    pygame.mouse.set_cursor(assets.cursors[cursor])
 
 
 def update():
