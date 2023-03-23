@@ -4,7 +4,8 @@ import src.engine.input as input
 import src.engine.time as time
 import src.user.preferences as preferences
 import src.engine.assets as assets
-import src.scene.scene_manager as scene_manager
+import src.scene.core.scene_manager as scene_manager
+import src.engine.data as data
 
 
 class Game:
@@ -14,6 +15,7 @@ class Game:
         preferences.init()
         window.init()
         scene_manager.init()
+        data.init()
 
     @staticmethod
     def run():

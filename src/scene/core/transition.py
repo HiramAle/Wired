@@ -1,10 +1,10 @@
 import math
 
 import pygame
-import src.scene.scene_manager as scene_manager
+import src.scene.core.scene_manager as scene_manager
 import src.engine.time as time
 from src.constants.locals import CORNERS
-from src.scene.scene import Scene
+from src.scene.core.scene import Scene
 from src.constants.colors import *
 
 

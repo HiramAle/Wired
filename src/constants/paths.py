@@ -52,3 +52,7 @@ IMAGES_MISC = "assets/images/misc"
 ANIMATIONS = "assets/animations"
 IMAGES_MAIN_MENU = "assets/images/main_menu"
 IMAGES_SELECTOR = "assets/images/selector"
+IMAGES_CABLES = "assets/images/cables"
+IMAGES_SUBNETTING = "assets/images/subnetting"
+# Scene Data
+DATA_CABLES = "data/scenes/cables.json"

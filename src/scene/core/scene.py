@@ -1,10 +1,8 @@
 from __future__ import annotations
 import pygame
-from enum import Enum
 from src.constants.locals import CANVAS_WIDTH, CANVAS_HEIGHT
 from src.game_object.game_object import GameObject
 from src.game_object.sprite import SpriteGroup
-import src.scene.scene_manager as scene_manager
 
 
 class Scene:
@@ -13,6 +11,9 @@ class Scene:
         self.display = pygame.Surface((CANVAS_WIDTH, CANVAS_HEIGHT))
         self.transitionPosition = self.center
         self._objects: list[GameObject] = []
+
+    def start(self):
+        ...
 
     @property
     def center_x(self):

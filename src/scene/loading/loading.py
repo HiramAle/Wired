@@ -1,16 +1,17 @@
 import pygame
-import src.scene.scene_manager as scene_manager
-import src.engine.input as input
+import src.scene.core.scene_manager as scene_manager
 import src.engine.assets as assets
-from src.scene.scene import Scene
+from src.scene.core.scene import Scene
 from threading import Thread, Event
 from time import sleep
-from src.custom_scenes.main_menu import MainMenu
+from src.scene.main_menu.main_menu import MainMenu
 from src.game_object.sprite import Sprite, SpriteGroup
 from src.constants.colors import *
 from src.gui.text import GUIText
 from src.gui.image import GUIImage
 from src.game_object.components import Animation
+from src.scene.cables.order import OrderCable
+from src.scene.subnetting.subnetting import Subnetting
 
 
 class Intro(Sprite, Animation):
@@ -42,7 +43,7 @@ class Loading(Scene):
         self.sprites = SpriteGroup()
         self.veilSurface = self.display.copy()
         self.veilSurface.set_colorkey(GREEN_MOTION)
-        GUIText("LOADING", (200, 180), 48, self.sprites)
+        GUIText("CARGANDO", (200, 180), 48, self.sprites)
         self.crt_effect = GUIImage("crt", (0, 0), assets.images_misc["crt"], centered=False)
         for i in range(3):
             Point((160 + i * 40, 220), self.sprites)
@@ -51,7 +52,6 @@ class Loading(Scene):
     def load(self):
         self.loading.set()
         assets.load()
-        sleep(5)
         self.loading.clear()
 
     def render(self) -> None:
@@ -61,4 +61,4 @@ class Loading(Scene):
     def update(self) -> None:
         self.sprites.update()
         if not self.loading.is_set():
-            scene_manager.change_scene(self, MainMenu(), swap=True)
+            scene_manager.change_scene(self, Subnetting(), swap=True)

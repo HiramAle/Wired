@@ -1,4 +1,4 @@
-from src.scene.scene import Scene
+from src.scene.core.scene import Scene
 from src.gui.image import GUIImage
 from src.gui.text import GUIText
 from src.constants.locals import CANVAS_WIDTH, CANVAS_HEIGHT

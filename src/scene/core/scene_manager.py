@@ -1,7 +1,7 @@
 import pygame
-from src.scene.scene import Scene
-from src.custom_scenes.loading import Loading
-from src.scene.transition import CircularTransition
+from src.scene.core.scene import Scene
+from src.scene.loading.loading import Loading
+from src.scene.core.transition import CircularTransition
 import src.engine.window as window
 
 stack_scene: list[Scene] = []
@@ -33,6 +33,7 @@ def set_scene(scene: Scene, swap=False):
     if swap:
         exit_scene()
     stack_scene.append(scene)
+    scene.start()
 
 
 def change_scene(from_scene: Scene, to_scene: Scene, transition=False, swap=False) -> None:
