@@ -3,11 +3,8 @@ import pygame
 from enum import Enum
 from src.constants.locals import CANVAS_WIDTH, CANVAS_HEIGHT
 from src.game_object.game_object import GameObject
+from src.game_object.sprite import SpriteGroup
 import src.scene.scene_manager as scene_manager
-
-
-class Transitions(Enum):
-    CIRCULAR = 0
 
 
 class Scene:
@@ -42,3 +39,50 @@ class Scene:
 
     def render(self) -> None:
         ...
+
+
+class Stage(Scene):
+    def __init__(self, name: str, scene: StagedScene):
+        super().__init__(name)
+        self.scene = scene
+        self.display = scene.display
+        self.enabled = True
+        self.group = SpriteGroup()
+
+    def update(self) -> None:
+        if not self.enabled:
+            return
+        self.group.update()
+
+    def render(self) -> None:
+        if not self.enabled:
+            return
+        self.group.render(self.display)
+
+
+class StagedScene(Scene):
+    def __init__(self, name: str):
+        super().__init__(name)
+        self._stages: list[Stage] = []
+
+    def set_stage(self, stage: Stage):
+        if self.current_stage:
+            self.current_stage.enabled = False
+        self._stages.append(stage)
+
+    def exit_stage(self):
+        self._stages.pop()
+        self.current_stage.enabled = True
+
+    @property
+    def current_stage(self) -> Stage:
+        if self._stages:
+            return self._stages[-1]
+
+    def render_stage(self):
+        if self._stages:
+            self.current_stage.render()
+
+    def update_stage(self):
+        if self._stages:
+            self.current_stage.update()

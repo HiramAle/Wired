@@ -10,7 +10,7 @@ class Sprite(GameObject, Render):
     A class representing a graphical Sprite that can be drawn on a surface and can be added to a SpriteGroup.
     """
 
-    def __init__(self, name: str, position: tuple[float, float], image: pygame.Surface, *groups):
+    def __init__(self, name: str, position: tuple[float, float], image: pygame.Surface, *groups, **kwargs):
         """
         Initializes a new Sprite object.
         :param name: The name of the sprite.
@@ -21,8 +21,20 @@ class Sprite(GameObject, Render):
         GameObject.__init__(self, name, position, image.get_size())
         Render.__init__(self, image)
         self.groups: list[SpriteGroup] = []
+        self._flags = 0
         if groups:
             self.add(*groups)
+
+        for key, value in kwargs.items():
+            match key:
+                case "flags":
+                    self._flags = value
+                case "layer":
+                    self.layer = value
+                case "centered":
+                    self.centered = value
+                case "scale":
+                    self.scale = value
 
     # @Render.image.setter
     # def image(self, new_image: pygame.Surface):
@@ -37,13 +49,13 @@ class Sprite(GameObject, Render):
         else:
             return self.image.get_rect(topleft=self.position)
 
-    def render(self, display: pygame.Surface, special_flags=0):
+    def render(self, display: pygame.Surface):
         """
         Renders the sprite onto the display surface.
         :param display: The surface to render the sprite on.
         :param special_flags: Pygame special rendering flags, such as pygame.BLEND_RGBA_ADD.
         """
-        display.blit(self.image, self.rect, special_flags=special_flags)
+        display.blit(self.image, self.rect, special_flags=self._flags)
 
     def add(self, *groups: SpriteGroup):
         """

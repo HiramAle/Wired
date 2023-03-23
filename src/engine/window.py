@@ -26,6 +26,7 @@ def init():
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption(GAME_NAME)
     set_cursor("arrow")
+    pygame.display.set_icon(pygame.image.load("assets/images/misc/icon.png").convert_alpha())
 
 
 def set_cursor(cursor: str):

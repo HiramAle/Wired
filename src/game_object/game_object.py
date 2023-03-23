@@ -21,6 +21,7 @@ class GameObject(Position):
         self.active = True
         self.interactive = False
         self.size = size
+        self.was_hovered = False
 
     @property
     def width(self):
@@ -65,15 +66,35 @@ class GameObject(Position):
 
     @property
     def hovered(self) -> bool:
-        if self.rect.collidepoint(input.mouse.position):
-            return True
-        return False
+        hovered = self.rect.collidepoint(input.mouse.position)
+        if hovered != self.was_hovered:
+            self.was_hovered = hovered
+            if hovered:
+                self.on_mouse_enter()
+            else:
+                self.on_mouse_exit()
+        return hovered
+
+    def on_mouse_enter(self):
+        """
+        This method is called when the mouse enters the object.
+        """
+        ...
+
+    def on_mouse_exit(self):
+        """
+        This method is called when the mouse exits the object.
+        """
+        ...
 
     @property
     def clicked(self) -> bool:
         if self.hovered and input.mouse.buttons["left"]:
             return True
         return False
+
+    def _update(self):
+        ...
 
     def update(self):
         ...
@@ -91,5 +112,3 @@ class GameObject(Position):
         """
         if self.active:
             self.active = False
-
-

@@ -6,15 +6,15 @@ from typing import Literal
 
 
 class GUIText(Sprite):
-    def __init__(self, text: str, position: tuple, size: Literal[16, 32, 48], *groups, **settings):
+    def __init__(self, text: str, position: tuple, size: Literal[16, 32, 48], *groups, **kwargs):
         text_surface = assets.fonts["monogram"].render(text, size)
-        super().__init__(text, position, text_surface, *groups)
+        super().__init__(text, position, text_surface, *groups, **kwargs)
         self._text = text
         self._size = size
         self._color = WHITE_MOTION
         self._shadow_color = DARK_BLACK_MOTION
         self.shadow = True
-        for name, value in settings:
+        for name, value in kwargs.items():
             match name:
                 case "color":
                     self._color = value

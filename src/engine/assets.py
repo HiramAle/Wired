@@ -9,6 +9,8 @@ cursors: dict[str, pygame.cursors.Cursor] = {}
 fonts: dict[str, Font] = {}
 images_misc: dict[str, pygame.Surface] = {}
 animations: dict[str, dict[str, list]] = {}
+images_main_menu: dict[str, pygame.Surface] = {}
+images_selector: dict[str, pygame.Surface] = {}
 
 
 def prepare() -> None:
@@ -24,4 +26,6 @@ def prepare() -> None:
 
 
 def load() -> None:
-    ...
+    global images_main_menu
+    images_main_menu = load_image_directory(IMAGES_MAIN_MENU)
+    images_main_menu = load_image_directory(IMAGES_SELECTOR)

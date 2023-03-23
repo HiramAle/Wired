@@ -43,7 +43,7 @@ class Loading(Scene):
         self.veilSurface = self.display.copy()
         self.veilSurface.set_colorkey(GREEN_MOTION)
         GUIText("LOADING", (200, 180), 48, self.sprites)
-        self.crt_effect = GUIImage((0, 0), assets.images_misc["crt"], name="crt", centered=False)
+        self.crt_effect = GUIImage("crt", (0, 0), assets.images_misc["crt"], centered=False)
         for i in range(3):
             Point((160 + i * 40, 220), self.sprites)
         self.animation = Intro((440, 180), assets.animations["loading"]["intro"], self.sprites)
