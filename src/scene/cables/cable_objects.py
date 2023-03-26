@@ -1,9 +1,10 @@
 import pygame
 import src.engine.assets as assets
 import src.engine.window as window
+import src.engine.time as time
 from src.game_object.sprite import Sprite
 from src.game_object.components import Animation
-from src.constants.colors import DARK_BLACK_MOTION
+from src.constants.colors import DARK_BLACK_MOTION, WHITE_MOTION, GREEN_MOTION, RED_MOTION
 
 
 class Cable(Sprite):
@@ -12,20 +13,48 @@ class Cable(Sprite):
         super().__init__(name, position, image, *groups, **kwargs)
         self.color = color
         self.scale = 2
-        self.shadow = self.image.copy()
-        self.shadow.set_colorkey(color)
-        # self.shadow.fill(DARK_BLACK_MOTION)
-        pygame.draw.rect(self.shadow, DARK_BLACK_MOTION, pygame.Rect(0, 0, 168, 16), border_radius=3)
-        self.shadow.set_alpha(100)
+        shadow_mask = pygame.mask.from_surface(self.image)
+        self.shadow = shadow_mask.to_surface(setcolor=DARK_BLACK_MOTION, unsetcolor=(0, 0, 0))
+        self.shadow.set_colorkey((0, 0, 0))
+        self.shadow.set_alpha(60)
         self.shadowActive = True
+        self.swapping = False
+        self.new_position = 0
+        self.dragging = False
+        self.outline_color = WHITE_MOTION
+        self.right_order = False
+        self.colored_outline = False
 
-    def render(self, display: pygame.Surface):
-        if self.shadowActive:
-            shadow_rect = self.rect
-            shadow_rect.y = self.rect.y + 2
-            shadow_rect.x = self.rect.x - 2
-            display.blit(self.shadow, shadow_rect)
-        super().render(display)
+    def update(self):
+        if self.swapping:
+            self.y -= (self.y - self.new_position) / (0.1 / time.dt)
+            if abs(self.y - self.new_position) <= 0.5:
+                self.y = self.new_position
+                self.swapping = False
+
+        if self.right_order:
+            self.outline_color = GREEN_MOTION
+        elif not self.dragging:
+            self.outline_color = RED_MOTION
+
+    def swap(self, position: int | float):
+        self.new_position = position
+        self.swapping = True
+
+    def render(self, display: pygame.Surface, offset=(0, 0)):
+        if self.dragging or self.colored_outline:
+            if self.dragging:
+                self.outline_color = WHITE_MOTION
+            mask = pygame.mask.from_surface(self.image)
+            mask_surface = mask.to_surface(setcolor=self.outline_color, unsetcolor=(0, 0, 0))
+            mask_surface.set_colorkey((0, 0, 0))
+            display.blit(mask_surface, (self.rect.x - 2, self.rect.y))
+            display.blit(mask_surface, (self.rect.x + 2, self.rect.y))
+            display.blit(mask_surface, (self.rect.x, self.rect.y - 2))
+            display.blit(mask_surface, (self.rect.x, self.rect.y + 2))
+        else:
+            display.blit(self.shadow, (self.rect.x + 1, self.rect.y + 2))
+        super().render(display, offset)
 
     def __repr__(self):
         return str(self.name)
@@ -35,43 +64,34 @@ class CrimpTool(Sprite, Animation):
     def __init__(self, position: tuple, data: list, *groups, **kwargs):
         Animation.__init__(self, data)
         Sprite.__init__(self, "crimp_tool", position, self.frame, *groups, **kwargs)
-        self.moving = True
         self.default_image = assets.images_cables["crimp_tool"]
-        self.playing = False
 
-        self.collider = pygame.Rect(self.x - 130, self.rect.centery - 25, 50, 50)
+    def move(self, position: tuple):
+        self.x -= (self.x - position[0]) / (0.1 / time.dt)
+        self.y -= (self.y - position[1]) / (0.1 / time.dt)
 
-    def on_mouse_enter(self):
-        window.set_cursor("hand")
-
-    def on_mouse_exit(self):
-        window.set_cursor("arrow")
+    @property
+    def crimp_area(self) -> pygame.Rect:
+        return pygame.Rect(self.x - 130, self.rect.centery - 25, 50, 50)
 
     def rewind(self):
         self.actual_frame = 0
-        self.playing = True
 
-    def re_position(self, rect: pygame.Rect):
+    def align_with_rect(self, rect: pygame.Rect):
         self.x = 130 - 25 + rect.centerx
         self.y = rect.centery
 
     def update(self):
-        hovered = self.hovered
-        if self.moving:
-            self.image = self.default_image
-        else:
-            self.image = self.frame
+        # if self.moving:
+        #     self.image = self.default_image
+        # else:
+        #     self.image = self.frame
 
         # Update collider
-        self.collider = pygame.Rect(self.x - 130, self.rect.centery - 25, 50, 50)
+        ...
 
-        if self.playing:
-            self.play()
+        # if self.playing:
+        #     self.play()
 
-        if self.actual_frame >= len(self.frames) - 1:
-            self.playing = False
-
-
-
-
-
+        # if self.actual_frame >= len(self.frames) - 1:
+        #     self.playing = False

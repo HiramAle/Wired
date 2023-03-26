@@ -7,8 +7,6 @@ def load_sprite_sheet(sprite_sheet: pygame.Surface, data: dict) -> list[pygame.S
     image = sprite_sheet.convert_alpha()
     tile_num_x = image.get_size()[0] // sprite_width
     tile_num_y = image.get_size()[1] // sprite_height
-    print(tile_num_x)
-    print(tile_num_y)
     cut_images = []
     for row in range(tile_num_y):
         for col in range(tile_num_x):

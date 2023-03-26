@@ -12,6 +12,8 @@ from src.gui.image import GUIImage
 from src.game_object.components import Animation
 from src.scene.cables.order import OrderCable
 from src.scene.subnetting.subnetting import Subnetting
+from src.scene.map.test_map import TestMap
+from src.custom_scenes.animation import AnimationScene
 
 
 class Intro(Sprite, Animation):
@@ -61,4 +63,4 @@ class Loading(Scene):
     def update(self) -> None:
         self.sprites.update()
         if not self.loading.is_set():
-            scene_manager.change_scene(self, Subnetting(), swap=True)
+            scene_manager.change_scene(self, OrderCable(), swap=True)

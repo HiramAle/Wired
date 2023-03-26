@@ -68,9 +68,7 @@ class Option(Sprite):
             self.text.text_color = BLUE_MOTION
 
     def on_mouse_enter(self):
-        print("enter")
         window.set_cursor("hand")
 
     def on_mouse_exit(self):
-        print("exit")
         window.set_cursor("arrow")

@@ -11,11 +11,12 @@ import src.engine.data as data
 class Game:
     def __init__(self):
         pygame.init()
+        data.init()
         assets.prepare()
         preferences.init()
         window.init()
         scene_manager.init()
-        data.init()
+
 
     @staticmethod
     def run():

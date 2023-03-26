@@ -49,13 +49,17 @@ class Sprite(GameObject, Render):
         else:
             return self.image.get_rect(topleft=self.position)
 
-    def render(self, display: pygame.Surface):
+    def render(self, display: pygame.Surface, offset=(0, 0)):
         """
         Renders the sprite onto the display surface.
         :param display: The surface to render the sprite on.
         :param special_flags: Pygame special rendering flags, such as pygame.BLEND_RGBA_ADD.
+        :param offset: Pygame special rendering flags, such as pygame.BLEND_RGBA_ADD.
         """
-        display.blit(self.image, self.rect, special_flags=self._flags)
+        rect = self.rect
+        rect.centerx -= offset[0]
+        rect.centery -= offset[1]
+        display.blit(self.image, rect, special_flags=self._flags)
 
     def add(self, *groups: SpriteGroup):
         """
@@ -115,12 +119,13 @@ class SpriteGroup:
                 continue
             sprite.update()
 
-    def render(self, display: pygame.Surface):
+    def render(self, display: pygame.Surface, offset=(0, 0)):
         """
         Call the render method of each Sprite in the group.
         :param display: The surface to render the Sprites onto.
+        :param offset: The surface to render the Sprites onto.
         """
         for sprite in self.sprites:
             if not sprite.active:
                 continue
-            sprite.render(display)
+            sprite.render(display, offset=offset)

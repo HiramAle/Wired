@@ -23,13 +23,14 @@ class Transition(Scene):
         super().__init__(name)
         self.fromScene: Scene = to_scene
         self.toScene: Scene = from_scene
-        self.transitionSpeed = 300
+        self.transitionSpeed = 700
 
 
 class CircularTransition(Transition):
     """
     Subclass of Transition that provides a circular transition effect.
     """
+
     def __init__(self, to_scene: Scene, from_scene: Scene):
         """
         Initializes a new CircularTransition object.

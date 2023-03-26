@@ -41,7 +41,7 @@ class GameObject(Position):
 
     @property
     def rect(self) -> pygame.Rect:
-        rect = pygame.Rect(0, 0, self.size)
+        rect = pygame.Rect(0, 0, self.size[0], self.size[1])
         if self._centered:
             rect.center = self.position
         else:

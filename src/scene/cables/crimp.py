@@ -22,7 +22,7 @@ class CrimpCable(Scene):
         self.cable_rect.center = (200, 180)
         self.magnetic_rect = pygame.Rect(0, 0, 100, 100)
         self.magnetic_rect.center = self.cable_rect.center
-        GUIImage("crimp_cable", (200, 180), assets.images_cables["crimp_cable"], self.group)
+        GUIImage("crimp_cable", (0, self.center_y), assets.images_cables["crimp_cable"], self.group, centered=False)
         self.index = 1
         self.cable1 = GUIImage("crimp_cable", (320 - 30, 330), assets.images_cables["StandardA"], self.group,
                                scale=0.25)
@@ -38,65 +38,73 @@ class CrimpCable(Scene):
         self.color_bar.deactivate()
         self.indicator.deactivate()
 
-        self.movement = 100
+        self.movement = 200
         self.indicator_moving = True
 
+        self.crimp_tool_set = False
+
     def drag(self):
-        if not self.dragging and input.mouse.buttons["left"]:
-            if self.crimp_tool.rect.collidepoint(input.mouse.position):
+        if not self.dragging:
+            if self.crimp_tool.rect.collidepoint(input.mouse.position) and input.mouse.buttons["left"]:
                 self.dragging = True
-                self.crimp_tool.moving = True
-                self.mouse_offset = input.mouse.y - self.crimp_tool.y
-                pygame.mouse.set_visible(False)
+                # pygame.mouse.set_visible(False)
 
         # On dragging
         if self.dragging:
-            distance_x = self.crimp_tool.x - input.mouse.x - 130
-            distance_y = self.crimp_tool.y - input.mouse.y
-
-            self.crimp_tool.x -= int(distance_x / 10)
-            self.crimp_tool.y -= int(distance_y / 10)
+            if self.crimp_tool_set:
+                self.crimp_tool.move((self.cable_rect.centerx + 105, self.cable_rect.centery))
+            else:
+                self.crimp_tool.move((input.mouse.x + 105, input.mouse.y))
 
         # End dragging
-        if self.cable_rect.colliderect(self.crimp_tool.collider):
+        if self.cable_rect.colliderect(self.crimp_tool.crimp_area):
             if self.magnetic_rect.collidepoint(input.mouse.position):
-                self.crimp_tool.re_position(self.cable_rect)
-                self.crimp_tool.moving = False
-                self.indicator.activate()
-                self.color_bar.activate()
-                self.crimp_tool.moving = True
+                self.crimp_tool_set = True
             else:
-                self.crimp_tool.moving = True
-                self.color_bar.deactivate()
-                self.indicator.deactivate()
-                self.indicator_moving = False
+                self.crimp_tool_set = False
 
-            if input.mouse.buttons["left"]:
-                self.crimp_tool.rewind()
-                self.dragging = False
-                self.indicator_moving = False
-                print(self.color_bar.image.get_at((int(self.indicator.x - self.color_bar.rect.left), 9)))
+            # self.crimp_tool.align_with_rect(self.cable_rect)
 
-            if self.crimp_tool.actual_frame >= len(self.crimp_tool.frames) - 1:
-                self.crimp_tool.position = (600, 180)
-                self.crimp_tool.actual_frame = 0
-                self.crimp_tool.moving = True
-                pygame.mouse.set_visible(True)
-                if self.index == 1:
-                    self.cable1.activate()
-                if self.index == 2:
-                    self.cable2.activate()
-                self.index += 1
-                self.color_bar.deactivate()
-                self.indicator.deactivate()
-                self.indicator_moving = True
+            # if self.magnetic_rect.collidepoint(input.mouse.position):
+            #     self.crimp_tool.re_position(self.cable_rect)
+            #     self.crimp_tool.moving = False
+            #     self.indicator.activate()
+            #     self.color_bar.activate()
+            #     self.crimp_tool.moving = True
+            # else:
+            #     self.crimp_tool.moving = True
+            #     self.color_bar.deactivate()
+            #     self.indicator.deactivate()
+            #     self.indicator_moving = False
+            #
+            # if input.mouse.buttons["left"]:
+            #     self.crimp_tool.rewind()
+            #     self.dragging = False
+            #     self.indicator_moving = False
+            #
+            # if self.crimp_tool.actual_frame >= len(self.crimp_tool.frames) - 1:
+            #     self.crimp_tool.position = (600, 180)
+            #     self.crimp_tool.actual_frame = 0
+            #     self.crimp_tool.moving = True
+            #     pygame.mouse.set_visible(True)
+            #     if self.index == 1:
+            #         self.cable1.activate()
+            #     if self.index == 2:
+            #         self.cable2.activate()
+            #     self.index += 1
+            #     self.color_bar.deactivate()
+            #     self.indicator.deactivate()
+            #     self.indicator_moving = True
 
     def update(self) -> None:
         self.drag()
         self.group.update()
-        if self.indicator_moving:
-            self.indicator.x += time.dt * self.movement
+        if self.crimp_tool_set:
+            self.indicator.activate()
+            self.color_bar.activate()
 
+            # Updates Indicator position
+            self.indicator.x += time.dt * self.movement
             if self.indicator.x > self.color_bar.rect.right:
                 self.indicator.x = self.color_bar.rect.right
                 self.movement *= -1
@@ -104,6 +112,10 @@ class CrimpCable(Scene):
             if self.indicator.x < self.color_bar.rect.left:
                 self.indicator.x = self.color_bar.rect.left
                 self.movement *= -1
+        else:
+            self.indicator.deactivate()
+            self.indicator.position = self.color_bar.rect.right, 37
+            self.color_bar.deactivate()
 
     def start(self):
         pygame.mouse.set_visible(True)
@@ -114,4 +126,4 @@ class CrimpCable(Scene):
 
         pygame.draw.rect(self.display, "CYAN", self.cable_rect, 2)
         pygame.draw.rect(self.display, "BLUE", self.magnetic_rect, 2)
-        pygame.draw.rect(self.display, "PINK", self.crimp_tool.collider, 2)
+        pygame.draw.rect(self.display, "PINK", self.crimp_tool.crimp_area, 2)

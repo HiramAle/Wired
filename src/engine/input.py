@@ -19,23 +19,28 @@ class Keyboard:
         bindings to False.
 
         """
-        self.bindings = read_json(BINDINGS)
-        self.keys = {key: False for key in self.bindings}
+        self.data = read_json(BINDINGS)
+        self.keys = {key: False for key in self.data}
         self.key_pressed = ""
 
-    def reset(self):
+
+    def press_reset(self):
         """
         Resets the state of all keys to not pressed and keyPressed to empty.
         """
-        self.keys = {key: False for key in self.keys}
+        for action in self.data:
+            if self.data[action]["trigger"] == "press":
+                self.keys[action] = False
+        # self.keys = {key: False for key in self.keys if self.data[key]["trigger"] == "press"}
         self.key_pressed = ""
 
     def restore_bindings(self):
         """
         Loads the default key bindings.
         """
-        self.bindings = read_json(DEFAULT_BINDINGS)
+        self.data = read_json(DEFAULT_BINDINGS)
 
+    # TODO: Adjust change and save bindings
     def change_binding(self, key: str, new_binding: int):
         """
         Changes the keycode of a given key.
@@ -56,14 +61,14 @@ class Keyboard:
         :param event: The Pygame event to process.
         """
         if event.type == pygame.KEYDOWN:
-            for binding in self.bindings:
-                if event.key == self.bindings[binding]:
-                    self.keys[binding] = True
+            for action in self.data:
+                if event.key == self.data[action]["binding"]:
+                    self.keys[action] = True
 
         if event.type == pygame.KEYUP:
-            for binding in self.bindings:
-                if event.key == self.bindings[binding]:
-                    self.keys[binding] = False
+            for action in self.data:
+                if event.key == self.data[action]["binding"]:
+                    self.keys[action] = False
 
 
 class Mouse:
@@ -158,7 +163,7 @@ def update() -> None:
     """
 
     mouse.reset()
-    keyboard.reset()
+    keyboard.press_reset()
 
     for event in pygame.event.get():
         event: pygame.Event
@@ -169,4 +174,3 @@ def update() -> None:
 
         mouse.update(event)
         keyboard.update(event)
-

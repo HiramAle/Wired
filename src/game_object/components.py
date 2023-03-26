@@ -41,7 +41,7 @@ class Position:
 
     @y.setter
     def y(self, value: int | float) -> None:
-        self._position.y = int(value)
+        self._position.y = value
 
     @layer.setter
     def layer(self, value: int) -> None:
@@ -52,7 +52,7 @@ class Position:
         self.x, self.y = value
 
     @position_vector.setter
-    def position_vector(self, value: pygame.math.Vector2) -> None:
+    def position_vector(self, value: pygame.Vector2) -> None:
         self._position = value
 
 
@@ -111,6 +111,8 @@ class Render:
             raise ValueError("Opacity factor must be greater than zero and lesser than 255")
         self._opacity = new_opacity
         self._image.set_alpha(new_opacity)
+
+
 
 
 class Animation:

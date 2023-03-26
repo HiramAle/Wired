@@ -1,12 +1,42 @@
 {
-  "UP": 119,
-  "LEFT": 97,
-  "DOWN": 115,
-  "RIGHT": 100,
-  "INTERACT": 101,
-  "TAB": 9,
-  "ESC": 27,
-  "SPACE": 32,
-  "ENTER": 13,
-  "BACKSPACE": 8
+  "up": {
+    "trigger": "hold",
+    "binding": 119
+  },
+  "left": {
+    "trigger": "hold",
+    "binding": 97
+  },
+  "down": {
+    "trigger": "hold",
+    "binding": 115
+  },
+  "right": {
+    "trigger": "hold",
+    "binding": 100
+  },
+  "interact": {
+    "trigger": "press",
+    "binding": 101
+  },
+  "tab": {
+    "trigger": "press",
+    "binding": 9
+  },
+  "esc": {
+    "trigger": "press",
+    "binding": 27
+  },
+  "space": {
+    "trigger": "press",
+    "binding": 32
+  },
+  "enter": {
+    "trigger": "press",
+    "binding": 13
+  },
+  "backspace": {
+    "trigger": "press",
+    "binding": 8
+  }
 }
