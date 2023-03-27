@@ -1,6 +1,7 @@
 import pygame
 import src.engine.assets as assets
 import src.engine.window as window
+import src.engine.input as input
 import src.engine.time as time
 from src.game_object.sprite import Sprite
 from src.game_object.components import Animation
@@ -65,6 +66,10 @@ class CrimpTool(Sprite, Animation):
         Animation.__init__(self, data)
         Sprite.__init__(self, "crimp_tool", position, self.frame, *groups, **kwargs)
         self.default_image = assets.images_cables["crimp_tool"]
+        self.image = self.default_image
+        self.set = False
+        self.loop = False
+        self.playing = False
 
     def move(self, position: tuple):
         self.x -= (self.x - position[0]) / (0.1 / time.dt)
@@ -74,22 +79,36 @@ class CrimpTool(Sprite, Animation):
     def crimp_area(self) -> pygame.Rect:
         return pygame.Rect(self.x - 130, self.rect.centery - 25, 50, 50)
 
-    def rewind(self):
-        self.actual_frame = 0
-
-    def align_with_rect(self, rect: pygame.Rect):
-        self.x = 130 - 25 + rect.centerx
-        self.y = rect.centery
-
     def update(self):
+        if self.set:
+            self.image = self.frame
+            if self.playing:
+                self.play()
+        else:
+            self.image = self.default_image
+
+        # if self.set:
+        #     self.image = self.frame
+        #     if input.mouse.buttons["left"]:
+        #         self.playing = True
+        #     if self.playing:
+        #         self.play()
+        #         if self.done:
+        #             self.playing = False
+        #             self.rewind()
+        #             self.image = self.default_image
+        #
+        # else:
+        #     self.playing = False
+        #     self.rewind()
+        #     self.image = self.default_image
+        ...
         # if self.moving:
         #     self.image = self.default_image
         # else:
         #     self.image = self.frame
 
         # Update collider
-        ...
-
         # if self.playing:
         #     self.play()
 

@@ -113,8 +113,6 @@ class Render:
         self._image.set_alpha(new_opacity)
 
 
-
-
 class Animation:
     """
     Component that represents that represent an animation made up of multiple frames.
@@ -127,18 +125,35 @@ class Animation:
         """
         self.data = data[1]
         self.frames = data[0]
-        self.actual_frame = 0
+        self.frame_index = 0
         self.speed = self.data["speed"]
+        self.loop = True
+        self.done = False
+
+    def rewind(self):
+        self.frame_index = 0
+        self.done = False
+
+    def check_done(self):
+        if self.frame_index >= len(self.frames) - 1:
+            self.done = True
+        else:
+            self.done = False
 
     @property
     def frame(self) -> pygame.Surface:
-        return self.frames[int(self.actual_frame)]
+        return self.frames[int(self.frame_index)]
 
     def play(self):
         """
         Plays the animation by incrementing the actual_frame attribute based on the speed and the delta time. If the
         actual_frame attribute exceeds the number of frames, it is reset to 0.
         """
-        self.actual_frame += self.speed * time.dt
-        if self.actual_frame >= len(self.frames):
-            self.actual_frame = 0
+        if not self.done:
+            self.frame_index += self.speed * time.dt
+            if self.frame_index >= len(self.frames):
+                if self.loop:
+                    self.frame_index = 0
+                else:
+                    self.done = True
+                    self.frame_index = len(self.frames) - 1
