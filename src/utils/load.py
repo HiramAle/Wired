@@ -6,7 +6,7 @@ from os import listdir
 from src.gui.font import Font
 
 
-def read_json(path: str) -> dict:
+def load_json(path: str) -> dict:
     """
     Get the data from a JSON file into a dict.
     :param path: Path from the JSON file.
@@ -81,7 +81,7 @@ def load_animation(path: str) -> tuple[pygame.Surface, dict]:
     sprite_sheet = None
     for file in listdir(path):
         if file.endswith(".json"):
-            data = read_json(f"{path}/data.json")
+            data = load_json(f"{path}/data.json")
         else:
             sprite_sheet = load_image(f"{path}/{file}")
     return sprite_sheet, data

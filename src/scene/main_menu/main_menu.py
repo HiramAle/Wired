@@ -17,7 +17,7 @@ class MainMenu(StagedScene):
         self.visual = SpriteGroup()
         self.foreground = SpriteGroup()
         GUIImage("sky", (0, 0), assets.images_main_menu["sky"], self.visual, centered=False, layer=0)
-        self.add(CloudGenerator((400, 60), self.visual))  # 1
+        self.clouds = CloudGenerator((400, 60), self.visual)  # 1
         computer_background = pygame.Surface((310, 240))
         computer_background.fill(BLACK_MOTION)
         GUIImage("pc_bg", (96, 52), computer_background, self.visual, centered=False, layer=2)
@@ -32,7 +32,7 @@ class MainMenu(StagedScene):
         self.set_stage(MainMenuStage(self))
 
     def update(self) -> None:
-        self.update_objects()
+        self.clouds.update()
         self.visual.update()
         self.current_stage.update()
 

@@ -5,7 +5,7 @@ import pygame.event
 import src.engine.window as window
 from src.constants.locals import CANVAS_WIDTH, CANVAS_HEIGHT
 from src.constants.paths import BINDINGS, DEFAULT_BINDINGS
-from src.utils.load import read_json, write_json
+from src.utils.load import load_json, write_json
 
 
 class Keyboard:
@@ -19,7 +19,7 @@ class Keyboard:
         bindings to False.
 
         """
-        self.data = read_json(BINDINGS)
+        self.data = load_json(BINDINGS)
         self.keys = {key: False for key in self.data}
         self.key_pressed = ""
 
@@ -38,7 +38,7 @@ class Keyboard:
         """
         Loads the default key bindings.
         """
-        self.data = read_json(DEFAULT_BINDINGS)
+        self.data = load_json(DEFAULT_BINDINGS)
 
     # TODO: Adjust change and save bindings
     def change_binding(self, key: str, new_binding: int):

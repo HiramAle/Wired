@@ -57,5 +57,5 @@ IMAGES_SUBNETTING = "assets/images/subnetting"
 # Scene Data
 DATA_CABLES = "data/scenes/cables.json"
 # Maps
-TILED_HOUSE = "data/maps/Casa/TMX/Casa.tmx"
+TILED_HOUSE = "data/maps/TMX/Players_House.tmx"
 

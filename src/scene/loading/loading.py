@@ -9,7 +9,7 @@ from src.game_object.sprite import Sprite, SpriteGroup
 from src.constants.colors import *
 from src.gui.text import GUIText
 from src.gui.image import GUIImage
-from src.game_object.components import Animation
+from src.components.animation import Animation
 from src.scene.cables.order import OrderCable
 from src.scene.subnetting.subnetting import Subnetting
 from src.scene.map.test_map import TestMap
@@ -28,11 +28,11 @@ class Intro(Sprite, Animation):
 
 class Point(Sprite):
     def __init__(self, position: tuple, *groups: SpriteGroup):
-        image = pygame.Surface((6, 8))
-        image.set_colorkey((0, 0, 0))
-        pygame.draw.rect(image, DARK_BLACK_MOTION, pygame.Rect(0, 2, 6, 6))
-        pygame.draw.rect(image, WHITE_MOTION, pygame.Rect(0, 0, 6, 6))
-        super().__init__("point", position, image, *groups)
+        super().__init__("point", position, pygame.Surface((6, 8)), *groups)
+        self.image = pygame.Surface((6, 8))
+        self.image.set_colorkey((0, 0, 0))
+        pygame.draw.rect(self.image, DARK_BLACK_MOTION, pygame.Rect(0, 2, 6, 6))
+        pygame.draw.rect(self.image, WHITE_MOTION, pygame.Rect(0, 0, 6, 6))
 
 
 class Loading(Scene):
@@ -63,4 +63,4 @@ class Loading(Scene):
     def update(self) -> None:
         self.sprites.update()
         if not self.loading.is_set():
-            scene_manager.change_scene(self, OrderCable(), swap=True)
+            scene_manager.change_scene(self, MainMenu(), swap=True)

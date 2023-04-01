@@ -12,8 +12,6 @@ class Player(Entity):
         self.movement = pygame.Vector2(0, 0)
         self.collision_group = collision_group
 
-
-
     def set_movement(self):
         self.movement.x, self.movement.y = 0, 0
         if input.keyboard.keys["left"]:

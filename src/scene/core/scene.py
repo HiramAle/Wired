@@ -1,7 +1,6 @@
 from __future__ import annotations
 import pygame
 from src.constants.locals import CANVAS_WIDTH, CANVAS_HEIGHT
-from src.game_object.game_object import GameObject
 from src.game_object.sprite import SpriteGroup
 
 
@@ -10,7 +9,6 @@ class Scene:
         self.name = name
         self.display = pygame.Surface((CANVAS_WIDTH, CANVAS_HEIGHT))
         self.transitionPosition = self.center
-        self._objects: list[GameObject] = []
 
     def start(self):
         ...
@@ -26,14 +24,6 @@ class Scene:
     @property
     def center(self) -> tuple:
         return self.center_x, self.center_y
-
-    def add(self, new_object: GameObject):
-        self._objects.append(new_object)
-
-    def update_objects(self):
-        for game_object in self._objects:
-            if game_object.active:
-                game_object.update()
 
     def update(self) -> None:
         ...

@@ -67,8 +67,4 @@ class Option(Sprite):
             self.image.fill(BLACK_MOTION)
             self.text.text_color = BLUE_MOTION
 
-    def on_mouse_enter(self):
-        window.set_cursor("hand")
 
-    def on_mouse_exit(self):
-        window.set_cursor("arrow")

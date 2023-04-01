@@ -2,7 +2,8 @@ from __future__ import annotations
 import pygame
 from typing import Optional
 from src.game_object.game_object import GameObject
-from src.game_object.components import Render
+from src.components.render import Render
+import src.engine.time as time
 
 
 class Sprite(GameObject, Render):
@@ -20,27 +21,80 @@ class Sprite(GameObject, Render):
         """
         GameObject.__init__(self, name, position, image.get_size())
         Render.__init__(self, image)
-        self.groups: list[SpriteGroup] = []
+        self.__groups: list[SpriteGroup] = []
         self._flags = 0
+        self._layer = 0
+
         if groups:
             self.add(*groups)
 
-        for key, value in kwargs.items():
-            match key:
-                case "flags":
-                    self._flags = value
-                case "layer":
-                    self.layer = value
-                case "centered":
-                    self.centered = value
-                case "scale":
-                    self.scale = value
+        for key, val in kwargs.items():
+            if key in ["flags", "layer", "centered", "scale"] and hasattr(self, key):
+                setattr(self, key, val)
 
-    # @Render.image.setter
-    # def image(self, new_image: pygame.Surface):
-    #     Render.image.setter = new_image
-    #     self._source_image = new_image
-    #     self._image = self._source_image.copy()
+    @property
+    def layer(self) -> int:
+        return self._layer
+
+    @layer.setter
+    def layer(self, value: int) -> None:
+        self._layer = value
+
+    def add_internal(self, group: SpriteGroup):
+        """
+        Adds the sprite to a sprite group.
+        :param group: The sprite group to add the sprite to.
+        """
+        self.__groups.append(group)
+
+    def remove_internal(self, group: SpriteGroup):
+        """
+        Removes the sprite from a sprite group.
+        :param group: The sprite group to remove the sprite from.
+        """
+        self.__groups.remove(group)
+
+    def add(self, *groups: SpriteGroup):
+        """
+        Adds the sprite to the specified sprite groups.
+        :param groups: The sprite groups to add the sprite to.
+        """
+        for group in groups:
+            if not group.has(self):
+                group.add_internal(self)
+                self.add_internal(group)
+
+    def remove(self, *groups: SpriteGroup):
+        """
+        Removes the sprite from the specified sprite groups.
+        :param groups: The sprite groups to remove the sprite from.
+        """
+        for group in groups:
+            if group.has(self):
+                group.remove_internal(self)
+                self.remove_internal(group)
+
+    def kill(self):
+        """
+        Removes the sprite from all sprite groups.
+        """
+        for group in self.__groups:
+            group.remove(self)
+
+    def groups(self) -> list[SpriteGroup]:
+        """
+        Returns the sprite groups that the sprite belongs to.
+        :return: A list of sprite groups that the sprite belongs to.
+        """
+        return self.__groups.copy()
+
+    @property
+    def flags(self):
+        return self._flags
+
+    @flags.setter
+    def flags(self, value: int):
+        self._flags = value
 
     @property
     def rect(self) -> pygame.Rect:
@@ -49,34 +103,8 @@ class Sprite(GameObject, Render):
         else:
             return self.image.get_rect(topleft=self.position)
 
-    def render(self, display: pygame.Surface, offset=(0, 0)):
-        """
-        Renders the sprite onto the display surface.
-        :param display: The surface to render the sprite on.
-        :param special_flags: Pygame special rendering flags, such as pygame.BLEND_RGBA_ADD.
-        :param offset: Pygame special rendering flags, such as pygame.BLEND_RGBA_ADD.
-        """
-        rect = self.rect
-        rect.centerx -= offset[0]
-        rect.centery -= offset[1]
-        display.blit(self.image, rect, special_flags=self._flags)
-
-    def add(self, *groups: SpriteGroup):
-        """
-        Adds the sprite to the specified sprite groups.
-        :param groups: The sprite groups to add the sprite to.
-        """
-        for group in groups:
-            if self not in group.sprites:
-                self.groups.append(group)
-                group.add(self)
-
-    def kill(self):
-        """
-        Removes the sprite from all sprite groups.
-        """
-        for group in self.groups:
-            group.remove(self)
+    def __repr__(self):
+        return self.name
 
 
 class SpriteGroup:
@@ -84,15 +112,27 @@ class SpriteGroup:
     A class for grouping Sprites together and updating/rendering them.
     """
 
-    def __init__(self):
+    def __init__(self, *sprites: Sprite):
         """
-        Initializes a new Sprite object.
+        Initializes a new SpriteGroup object.
         """
-        self._sprites: list[Sprite] = []
+        self.__sprites = []
+        if sprites:
+            self.add(*sprites)
 
-    @property
-    def sprites(self):
-        return sorted(self._sprites, key=lambda sprite: sprite.layer)
+    def add_internal(self, sprite: Sprite):
+        """
+        Adds a Sprite to the group.
+        :param sprite: The Sprite instance to add to the group.
+        """
+        self.__sprites.append(sprite)
+
+    def remove_internal(self, sprite: Sprite):
+        """
+        Removes a Sprite from the group.
+        :param sprite: The Sprite instance to remove from the group.
+        """
+        self.__sprites.remove(sprite)
 
     def add(self, *sprites: Sprite):
         """
@@ -100,32 +140,50 @@ class SpriteGroup:
         :param sprites: One or more Sprite instances.
         """
         for sprite in sprites:
-            self._sprites.append(sprite)
+            if not self.has(sprite):
+                self.__sprites.append(sprite)
+                sprite.add_internal(self)
 
-    def remove(self, sprite: Sprite):
+    def remove(self, *sprites: Sprite):
         """
         Remove a Sprite from the group.
-        :param sprite: The Sprite instance to remove.
+        :param sprites: The Sprite instances to remove.
         """
-        if sprite in self._sprites:
-            self._sprites.remove(sprite)
+        for sprite in sprites:
+            if self.has(sprite):
+                self.__sprites.remove(sprite)
+                sprite.remove_internal(self)
 
-    def update(self):
+    def has(self, sprite: Sprite) -> bool:
+        """
+        Returns True if the given Sprite is in the group, False otherwise.
+        :param sprite: The Sprite instance to check.
+        :return: True if the Sprite is in the group, False otherwise.
+        """
+        return sprite in self.__sprites
+
+    def sprites(self) -> list[Sprite]:
+        """
+        Returns a list of Sprites in the group.
+        :return: A list of Sprites in the group.
+        """
+        return self.__sprites
+
+    def update(self, *args, **kwargs):
         """
         Call the update method of each Sprite in the group.
         """
-        for sprite in self.sprites:
-            if not sprite.active:
-                continue
-            sprite.update()
+        for sprite in self.sprites():
+            sprite.update(*args, **kwargs)
 
     def render(self, display: pygame.Surface, offset=(0, 0)):
         """
         Call the render method of each Sprite in the group.
         :param display: The surface to render the Sprites onto.
-        :param offset: The surface to render the Sprites onto.
+        :param offset: The position offset of the group from the display surface origin, defaults to (0, 0).
         """
-        for sprite in self.sprites:
-            if not sprite.active:
-                continue
-            sprite.render(display, offset=offset)
+        for sprite in sorted(self.__sprites, key=lambda sprite_: sprite_.layer):
+            rect = sprite.rect
+            rect.centerx -= offset[0]
+            rect.centery -= offset[1]
+            display.blit(sprite.image, rect, special_flags=sprite.flags)

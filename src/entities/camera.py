@@ -1,34 +1,58 @@
 import pygame
 import src.engine.time as time
-import src.engine.window as window
 from src.constants.locals import CANVAS_WIDTH, CANVAS_HEIGHT
 from src.game_object.game_object import GameObject
 from src.entities.entity import Entity
+from typing import Optional
 
 
 class Camera(GameObject):
+    """
+    A class representing the camera used to track an Entity or a specific position.
+    """
     def __init__(self):
-        super().__init__("camera", (0, 0))
-        self.entity_tracking: Entity | None = None
-        self.target_position = pygame.math.Vector2((CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2))
-        self.rate = 0.3
-        self.timer = time.Timer(1)
-        self.timer.start()
+        """
+        Initializes a new Camera object.
+        """
+        super().__init__("camera", (CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2))
+        self._entity: Optional[Entity] = None
+        self._target = pygame.math.Vector2(self.position)
+        self._rate = 0.3
 
-    def set_target(self, position: tuple):
-        self.target_position = pygame.math.Vector2(position)
+    @property
+    def tracked_entity(self) -> Entity:
+        return self._entity
 
-    def update(self):
-        if self.entity_tracking:
-            self.set_target((self.entity_tracking.x - CANVAS_WIDTH // 2, self.entity_tracking.y - CANVAS_HEIGHT // 2))
+    @tracked_entity.setter
+    def tracked_entity(self, value: Entity):
+        self._entity = value
 
-        self.position += (self.target_position - self.position) / (self.rate / time.dt)
+    @property
+    def target_position(self) -> tuple:
+        return self._target.x, self._target.y
 
-        # if self.entity_tracking is not None:
-        #     self.target_position = self.entity_tracking.rect.center
-        #
-        # diff = self.target_position - pygame.math.Vector2(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2) - self.position
-        # if abs(diff.x) > 20:
-        #     self.x += diff.x * time.dt
-        # if abs(diff.y) > 20:
-        #     self.y += diff.y * time.dt
+    @target_position.setter
+    def target_position(self, value: tuple):
+        self._target.x, self._target.y = value
+
+    @property
+    def speed(self) -> float:
+        return self._rate * 10
+
+    @speed.setter
+    def speed(self, value: int | float):
+        if value < 0:
+            raise ValueError("Speed only can be positive.")
+        self._rate = value / 10
+
+    def update(self, *args, **kwargs):
+        """
+        Update the position of the camera.
+        """
+        if self._entity:
+            distance_x = self._entity.x - CANVAS_WIDTH // 2
+            distance_y = self._entity.y - CANVAS_HEIGHT // 2
+            self.target_position = distance_x, distance_y
+
+        if self.position != self.target_position:
+            self.position += (self._target - self.position_vector) / (self._rate / time.dt)

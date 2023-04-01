@@ -1,7 +1,7 @@
 import pygame
 from src.utils.load import *
 from src.gui.font import Font
-from src.game_object.components import Animation
+from src.components.animation import Animation
 from src.constants.paths import *
 
 # ---------- Assets ----------

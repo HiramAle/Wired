@@ -1,4 +1,5 @@
 import pygame
+import src.engine.input as input
 from src.game_object.sprite import Sprite
 from src.gui.text import GUIText
 from src.constants.colors import *
@@ -25,3 +26,10 @@ class Option(Sprite):
         self.image.set_colorkey((0, 0, 0))
         pygame.draw.rect(self._image, color, pygame.Rect(0, 0, self.width, self.height), border_radius=4)
         self.text = GUIText(str(value), self.position, 32, *groups)
+        self.dragging = False
+
+    def update(self):
+        if self.dragging:
+            self.move(input.mouse.position)
+
+

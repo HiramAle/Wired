@@ -23,6 +23,8 @@ class MainMenuStage(Stage):
         if self.options.clicked:
             self.scene.set_stage(OptionsStage(self.scene))
 
+        # print(self.group.sprites())
+
 
 class OptionsStage(Stage):
     def __init__(self, scene: StagedScene):

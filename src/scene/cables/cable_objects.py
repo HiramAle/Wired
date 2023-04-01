@@ -4,7 +4,7 @@ import src.engine.window as window
 import src.engine.input as input
 import src.engine.time as time
 from src.game_object.sprite import Sprite
-from src.game_object.components import Animation
+from src.components.animation import Animation
 from src.constants.colors import DARK_BLACK_MOTION, WHITE_MOTION, GREEN_MOTION, RED_MOTION
 
 
@@ -70,10 +70,6 @@ class CrimpTool(Sprite, Animation):
         self.set = False
         self.loop = False
         self.playing = False
-
-    def move(self, position: tuple):
-        self.x -= (self.x - position[0]) / (0.1 / time.dt)
-        self.y -= (self.y - position[1]) / (0.1 / time.dt)
 
     @property
     def crimp_area(self) -> pygame.Rect:
