@@ -1,5 +1,6 @@
 import pygame
 import src.engine.assets as assets
+import src.engine.input as input
 from src.scene.core.scene import StagedScene, Stage
 from src.game_object.sprite import SpriteGroup
 from src.gui.image import GUIImage
@@ -16,6 +17,7 @@ class MainMenu(StagedScene):
         # Groups
         self.visual = SpriteGroup()
         self.foreground = SpriteGroup()
+        self.leds = SpriteGroup()
         GUIImage("sky", (0, 0), assets.images_main_menu["sky"], self.visual, centered=False, layer=0)
         self.clouds = CloudGenerator((400, 60), self.visual)  # 1
         computer_background = pygame.Surface((310, 240))
@@ -23,7 +25,7 @@ class MainMenu(StagedScene):
         GUIImage("pc_bg", (96, 52), computer_background, self.visual, centered=False, layer=2)
         # Leds
         for i in range(3):
-            RouterLed((494 + i * 6, 272), self.visual, layer=3)
+            RouterLed((494 + i * 6, 272), self.leds)
         # CRT Effect
         crt_image = pygame.Surface((310, 240))
         crt_image.blit(assets.images_misc["crt"], (0, 0))
@@ -34,6 +36,7 @@ class MainMenu(StagedScene):
     def update(self) -> None:
         self.clouds.update()
         self.visual.update()
+        self.leds.update()
         self.current_stage.update()
 
     def render(self) -> None:
@@ -41,3 +44,4 @@ class MainMenu(StagedScene):
         self.visual.render(self.display)
         self.current_stage.render()
         self.foreground.render(self.display)
+        self.leds.render(self.display)
