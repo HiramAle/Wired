@@ -1,31 +1,52 @@
 import pygame
+
+# Inicializar Pygame
 pygame.init()
-SURF_WIDTH, SURF_HEIGHT = 400, 300
-surface = pygame.display.set_mode((SURF_WIDTH, SURF_HEIGHT))
-pygame.display.set_caption("Layers")
 
-class MySprite(pygame.sprite.Sprite):
-    def __init__(self, x, y, width=50, height=20, colour="red", layer=0):
-        super().__init__()
-        self.image = pygame.Surface((width, height))
-        self.image.fill(colour)
-        self.rect = self.image.get_rect().move(x, y)
-        self._layer = layer
+# Crear la ventana
+window = pygame.display.set_mode((640, 480))
 
-layers = pygame.sprite.LayeredUpdates()
-layers.add(MySprite(x=120, y=140))
-layers.add(MySprite(x=160, y=140, colour="blue", layer=1))
 
-running = True
-while running:
+class Sprite:
+    def __init__(self, surface: pygame.Surface):
+        self.image = surface
+        self.visible = True
+
+    def render(self, display: pygame.Surface, x: int):
+        display.blit(self.image, (x, 200))
+
+
+# Cargar los sprites
+sprite1 = Sprite(pygame.image.load("../../assets/images/main_menu/note_music.png"))
+sprite2 = Sprite(pygame.image.load("../../assets/images/main_menu/note_music.png"))
+sprite3 = Sprite(pygame.image.load("../../assets/images/main_menu/note_music.png"))
+sprites = [sprite1, sprite2, sprite3]
+
+# Índice del último sprite oculto
+hidden_index = len(sprites) - 1
+
+# Bucle principal
+while True:
+    # Manejar eventos
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                layers.switch_layer(0, 1)
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:  # Botón izquierdo
+                if hidden_index >= 0:
+                    sprites[hidden_index].visible = False
+                    hidden_index -= 1
+            elif event.button == 3:  # Botón derecho
+                if hidden_index < len(sprites) - 1:
+                    hidden_index += 1
+                    sprites[hidden_index].visible = True
 
-    layers.draw(surface)
+    # Dibujar los sprites
+    window.fill((255, 255, 255))  # Rellenar la ventana con blanco
+    for i, sprite in enumerate(sprites):
+        if sprite.visible:
+            sprite.render(window, 10 + (i * 20))
+
+    # Actualizar la pantalla
     pygame.display.update()
-
-pygame.quit()

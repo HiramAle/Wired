@@ -29,6 +29,14 @@ def init():
     pygame.display.set_icon(pygame.image.load("assets/images/misc/icon.png").convert_alpha())
 
 
+def set_window_size(size: tuple):
+    global width, height
+    width = size[0]
+    height = size[1]
+    preferences.set_preferences({"window_width": width, "window_height": height})
+    pygame.display.set_mode((width, height))
+
+
 def set_cursor(cursor: str):
     # The cursor it's trying to set is the same as the actual cursor.
     if assets.cursors[cursor] == pygame.mouse.get_cursor():

@@ -5,7 +5,7 @@ from src.game_object.sprite import SpriteGroup
 from src.gui.image import GUIImage
 from src.constants.colors import *
 from src.scene.main_menu.main_menu_objects import CloudGenerator, RouterLed
-from src.scene.main_menu.main_menu_stages import MainMenuStage
+from src.scene.main_menu.main_stage import MainMenuStage
 
 
 class MainMenu(StagedScene):

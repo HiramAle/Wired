@@ -52,7 +52,7 @@ class Render:
 
     @opacity.setter
     def opacity(self, new_opacity: int):
-        if new_opacity <= 0 or new_opacity > 255:
+        if new_opacity < 0 or new_opacity > 255:
             raise ValueError("Opacity factor must be greater than zero and lesser than 255.")
         self._opacity = new_opacity
         self._image.set_alpha(new_opacity)

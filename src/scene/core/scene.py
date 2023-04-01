@@ -37,18 +37,6 @@ class Stage(Scene):
         super().__init__(name)
         self.scene = scene
         self.display = scene.display
-        self.enabled = True
-        self.group = SpriteGroup()
-
-    def update(self) -> None:
-        if not self.enabled:
-            return
-        self.group.update()
-
-    def render(self) -> None:
-        if not self.enabled:
-            return
-        self.group.render(self.display)
 
 
 class StagedScene(Scene):

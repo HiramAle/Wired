@@ -1,6 +1,5 @@
 {
-  "window_width": 0,
-  "window_height": 0,
-  "sounds": 5,
-  "music": 5
+  "window_width": 1920,
+  "window_height": 1080,
+  "volume": 5
 }

@@ -1,9 +1,7 @@
 from __future__ import annotations
 import pygame
-from typing import Optional
 from src.game_object.game_object import GameObject
 from src.components.render import Render
-import src.engine.time as time
 
 
 class Sprite(GameObject, Render):

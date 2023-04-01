@@ -56,7 +56,6 @@ class Option(Sprite):
         super().__init__(option_name, position, pygame.Surface((310, 30)), *groups, **kwargs)
         self.image.fill(BLACK_MOTION)
         self.centered = False
-        self.interactive = True
         self.text = GUIText(option_name, self.rect.center, 32, *groups, shadow=False, color=BLUE_MOTION, layer=4)
 
     def update(self):
