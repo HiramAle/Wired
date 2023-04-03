@@ -58,4 +58,6 @@ IMAGES_SUBNETTING = "assets/images/subnetting"
 DATA_CABLES = "data/scenes/cables.json"
 # Maps
 TILED_HOUSE = "data/maps/TMX/Players_House.tmx"
+# Character creation
+BODIES = "assets/character_creation/bodies"
 

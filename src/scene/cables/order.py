@@ -54,7 +54,7 @@ class OrderCable(Scene):
         self.tutorial = False
 
         self.text = GUIText("Presiona Espacio para continuar", (self.center_x, 300), 32, self.group, layer=10)
-        self.text.deactivate()
+        self.text.opacity = 0
         GUIText("Estanard", (562, self.center_y - 10), 32, self.group, layer=10)
         GUIText(self.standardName, (562, self.center_y + 10), 32, self.group, layer=10)
 
@@ -123,7 +123,7 @@ class OrderCable(Scene):
             window.set_cursor("arrow")
 
         if self.ordered:
-            self.text.activate()
+            self.text.opacity = 255
             self.can_drag = False
             if input.keyboard.keys["space"]:
                 scene_manager.change_scene(self, CrimpCable(self.standardName), swap=True, transition=True)

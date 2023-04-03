@@ -13,6 +13,8 @@ images_main_menu: dict[str, pygame.Surface] = {}
 images_selector: dict[str, pygame.Surface] = {}
 images_cables: dict[str, pygame.Surface] = {}
 images_subnetting: dict[str, pygame.Surface] = {}
+# Character creation
+bodies: list[pygame.Surface] = []
 
 
 def prepare() -> None:
@@ -28,8 +30,9 @@ def prepare() -> None:
 
 
 def load() -> None:
-    global images_main_menu, images_selector, images_cables, images_subnetting
+    global images_main_menu, images_selector, images_cables, images_subnetting, bodies
     images_main_menu = load_image_directory(IMAGES_MAIN_MENU)
     images_selector = load_image_directory(IMAGES_SELECTOR)
     images_cables = load_image_directory(IMAGES_CABLES)
     images_subnetting = load_image_directory(IMAGES_SUBNETTING)
+    bodies = load_image_directory(BODIES)

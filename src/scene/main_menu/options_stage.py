@@ -28,13 +28,13 @@ class OptionsStage(Stage):
         self.interactive = SpriteGroup()
         self.display_group = SpriteGroup()
         self.volume_group = SpriteGroup()
-        GUIText("OPTIONS", (209, 61), 32, self.group, color=WHITE_MOTION, centered=False)
+        GUIText("OPTIONS", (209, 61), 32, self.group, color=WHITE_MOTION, centered=False, shadow=False)
         GUIImage("top_line", (51, 54), assets.images_main_menu["doted_line"], self.group, centered=False)
         GUIImage("bottom_line", (51, 99), assets.images_main_menu["doted_line"], self.group, centered=False)
         GUIImage("top_description_line", (51, 246), assets.images_main_menu["doted_line"], self.group, centered=False)
         GUIImage("bottom_description_line", (51, 290), assets.images_main_menu["doted_line"], self.group,
                  centered=False)
-        self.description = GUIText(self.descriptions.get("volume"), (250, 268), 16, self.group)
+        self.description = GUIText(self.descriptions.get("volume"), (250, 268), 16, self.group, shadow=False)
         self.exit_button = ExitButton((110, 69), self.group, self.interactive)
         # Preferences
         self.display_sizes = [(960, 540), (1280, 720), (1920, 1080)]
@@ -42,7 +42,7 @@ class OptionsStage(Stage):
         self.selected_size = self.display_sizes[self.size_index]
         # Display
         self.size_text = GUIText(format_size(self.selected_size), (250, 130), 32, self.group, self.display_group,
-                                 color=BLUE_MOTION)
+                                 color=BLUE_MOTION, shadow=False)
         self.display_left = ArrowButton((96 + 70, 130), "right", self.group, self.display_group, self.interactive)
         self.display_right = ArrowButton((96 + 310 - 70, 130), "left", self.group, self.display_group, self.interactive)
         # Volume

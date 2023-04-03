@@ -59,6 +59,7 @@ class DescriptionTitle(GUIText):
     def __init__(self, position: tuple, text: str, *groups: SpriteGroup):
         super().__init__(text, position, 16, *groups)
         self.text = text
+        self.shadow = False
 
     @property
     def text(self) -> str:

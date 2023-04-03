@@ -22,6 +22,7 @@ class Sprite(GameObject, Render):
         self.__groups: list[SpriteGroup] = []
         self._flags = 0
         self._layer = 0
+        self.active = True
 
         if groups:
             self.add(*groups)
@@ -29,6 +30,14 @@ class Sprite(GameObject, Render):
         for key, val in kwargs.items():
             if key in ["flags", "layer", "centered", "scale"] and hasattr(self, key):
                 setattr(self, key, val)
+
+    def activate(self):
+        if not self.active:
+            self.active = True
+
+    def deactivate(self):
+        if self.active:
+            self.active = False
 
     @property
     def layer(self) -> int:
@@ -104,6 +113,17 @@ class Sprite(GameObject, Render):
     def __repr__(self):
         return self.name
 
+    def render(self, display: pygame.Surface, offset):
+        """
+        Renders the sprite onto the display surface.
+        :param display: The surface to render the sprite on.
+        :param offset: Pygame special rendering flags, such as pygame.BLEND_RGBA_ADD.
+        """
+        rect = self.rect
+        rect.centerx -= offset[0]
+        rect.centery -= offset[1]
+        display.blit(self.image, rect, special_flags=self.flags)
+
 
 class SpriteGroup:
     """
@@ -165,13 +185,15 @@ class SpriteGroup:
         Returns a list of Sprites in the group.
         :return: A list of Sprites in the group.
         """
-        return self.__sprites
+        return sorted(self.__sprites, key=lambda sprite_: sprite_.layer)
 
     def update(self, *args, **kwargs):
         """
         Call the update method of each Sprite in the group.
         """
         for sprite in self.sprites():
+            if not sprite.active:
+                continue
             sprite.update(*args, **kwargs)
 
     def render(self, display: pygame.Surface, offset=(0, 0)):
@@ -180,8 +202,7 @@ class SpriteGroup:
         :param display: The surface to render the Sprites onto.
         :param offset: The position offset of the group from the display surface origin, defaults to (0, 0).
         """
-        for sprite in sorted(self.__sprites, key=lambda sprite_: sprite_.layer):
-            rect = sprite.rect
-            rect.centerx -= offset[0]
-            rect.centery -= offset[1]
-            display.blit(sprite.image, rect, special_flags=sprite.flags)
+        for sprite in self.sprites():
+            if not sprite.active:
+                continue
+            sprite.render(display, offset)

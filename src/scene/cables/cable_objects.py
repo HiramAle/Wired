@@ -75,6 +75,10 @@ class CrimpTool(Sprite, Animation):
     def crimp_area(self) -> pygame.Rect:
         return pygame.Rect(self.x - 130, self.rect.centery - 25, 50, 50)
 
+    def move(self, position: tuple):
+        self.x -= (self.x - position[0]) / (0.1 / time.dt)
+        self.y -= (self.y - position[1]) / (0.1 / time.dt)
+
     def update(self):
         if self.set:
             self.image = self.frame
@@ -82,31 +86,3 @@ class CrimpTool(Sprite, Animation):
                 self.play()
         else:
             self.image = self.default_image
-
-        # if self.set:
-        #     self.image = self.frame
-        #     if input.mouse.buttons["left"]:
-        #         self.playing = True
-        #     if self.playing:
-        #         self.play()
-        #         if self.done:
-        #             self.playing = False
-        #             self.rewind()
-        #             self.image = self.default_image
-        #
-        # else:
-        #     self.playing = False
-        #     self.rewind()
-        #     self.image = self.default_image
-        ...
-        # if self.moving:
-        #     self.image = self.default_image
-        # else:
-        #     self.image = self.frame
-
-        # Update collider
-        # if self.playing:
-        #     self.play()
-
-        # if self.actual_frame >= len(self.frames) - 1:
-        #     self.playing = False
