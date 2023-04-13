@@ -113,7 +113,7 @@ class Sprite(GameObject, Render):
     def __repr__(self):
         return self.name
 
-    def render(self, display: pygame.Surface, offset):
+    def render(self, display: pygame.Surface, offset=(0, 0)):
         """
         Renders the sprite onto the display surface.
         :param display: The surface to render the sprite on.
@@ -134,7 +134,7 @@ class SpriteGroup:
         """
         Initializes a new SpriteGroup object.
         """
-        self.__sprites = []
+        self.__sprites: list[Sprite] = []
         if sprites:
             self.add(*sprites)
 
@@ -206,3 +206,7 @@ class SpriteGroup:
             if not sprite.active:
                 continue
             sprite.render(display, offset)
+
+    def empty(self):
+        for sprite in self.__sprites:
+            sprite.kill()

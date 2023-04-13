@@ -1,7 +1,10 @@
+import threading
+import time
+
 import pygame
 import src.engine.window as window
 import src.engine.input as input
-import src.engine.time as time
+import src.engine.time as game_time
 import src.user.preferences as preferences
 import src.engine.assets as assets
 import src.scene.core.scene_manager as scene_manager
@@ -17,15 +20,29 @@ class Game:
         window.init()
         scene_manager.init()
 
-
-    @staticmethod
-    def run():
+    def run(self):
         while True:
+            start_time = time.time()
             input.update()
-            scene_manager.update()
-            scene_manager.render()
-            time.update()
+
+            update = threading.Thread(target=scene_manager.update)
+            render = threading.Thread(target=scene_manager.render)
+
+            update.start()
+            render.start()
+
+            update.join()
+            render.join()
+
+            # scene_manager.update()
+            # scene_manager.render()
+
+            game_time.update()
             window.update()
+
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            print(f"Tiempo de ejecución: {elapsed_time} segundos")
 
 
 if __name__ == '__main__':

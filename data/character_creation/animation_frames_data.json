@@ -1,0 +1,37 @@
+{
+  "base": {
+    "right": 1,
+    "up": 1,
+    "left": 1,
+    "down": 1
+  },
+  "idle": {
+    "right": 6,
+    "up": 6,
+    "left": 6,
+    "down": 6
+  },
+  "walk": {
+    "right": 6,
+    "up": 6,
+    "left": 6,
+    "down": 6
+  },
+  "sleep": {
+    "down": 6
+  },
+  "sit_1": {
+    "right": 6,
+    "left": 6
+  },
+  "sit_2": {
+    "right": 6,
+    "left": 6
+  },
+  "phone": {
+    "down": 12
+  },
+  "book": {
+    "down": 12
+  }
+}

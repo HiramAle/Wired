@@ -24,24 +24,24 @@ class Animation:
         """
         self.data: dict = data[1]
         self.frames: list[pygame.Surface] = data[0]
-        self.frame_index = 0
+        self._frame_index = 0
         self.speed = self.data["speed"]
         self.loop = True
         self.done = False
 
     def rewind(self):
-        self.frame_index = 0
+        self._frame_index = 0
         self.done = False
 
     def check_done(self):
-        if self.frame_index >= len(self.frames) - 1:
+        if self._frame_index >= len(self.frames) - 1:
             self.done = True
         else:
             self.done = False
 
     @property
     def frame(self) -> pygame.Surface:
-        return self.frames[int(self.frame_index)]
+        return self.frames[int(self._frame_index)]
 
     def play(self):
         """
@@ -49,10 +49,10 @@ class Animation:
         actual_frame attribute exceeds the number of frames, it is reset to 0.
         """
         if not self.done:
-            self.frame_index += self.speed * time.dt
-            if self.frame_index >= len(self.frames):
+            self._frame_index += self.speed * time.dt
+            if self._frame_index >= len(self.frames):
                 if self.loop:
-                    self.frame_index = 0
+                    self._frame_index = 0
                 else:
                     self.done = True
-                    self.frame_index = len(self.frames) - 1
+                    self._frame_index = len(self.frames) - 1

@@ -54,10 +54,20 @@ IMAGES_MAIN_MENU = "assets/images/main_menu"
 IMAGES_SELECTOR = "assets/images/selector"
 IMAGES_CABLES = "assets/images/cables"
 IMAGES_SUBNETTING = "assets/images/subnetting"
+IMAGES_CHARACTER_CREATION = "assets/images/character_creation"
 # Scene Data
 DATA_CABLES = "data/scenes/cables.json"
+DATA_CHARACTER_CREATION_FRAMES = "data/character_creation/animation_frames_data.json"
 # Maps
 TILED_HOUSE = "data/maps/TMX/Players_House.tmx"
 # Character creation
 BODIES = "assets/character_creation/bodies"
+EYES = "assets/character_creation/eyes"
+HAIRSTYLES = "assets/character_creation/hairstyles"
+OUTFITS = "assets/character_creation/outfits"
+# Character creation data
+BODY_COLORS = "data/character_creation/bodies_colors.json"
+EYES_COLORS = "data/character_creation/eyes_colors.json"
+HAIRSTYLE_COLORS = "data/character_creation/hairstyles_colors.json"
+OUTFIT_COLORS = "data/character_creation/outfits_colors.json"
 
