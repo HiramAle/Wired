@@ -45,6 +45,7 @@ SAVES = [join(SAVES_FOLDER, f"slot_{i}") for i in range(1, 4)]
 DEFAULT_PREFERENCES = "data/default/preferences.json"
 BINDINGS = "data/user/bindings.json"
 DEFAULT_BINDINGS = "data/default/bindings.json"
+USER_DATA = "data/user"
 # Assets
 CURSORS = "assets/cursors"
 FONTS = "assets/fonts"

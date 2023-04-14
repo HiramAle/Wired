@@ -202,31 +202,28 @@ def import_category_animations(category: str) -> dict[int, dict]:
     return category_animations
 
 
-def import_by_category(category: str):
-    path = paths.get(category)
-    category_animations = {}
-    files = {}
+def save_sprite_sheet(body: int, eyes: int, hairstyle: tuple[int, int], outfit: tuple[int, int]):
+    body_path = f"{BODIES}/body_{body}.png"
+    eyes_path = f"{EYES}/eyes_{eyes}.png"
+    hairstyle_path = f"{HAIRSTYLES}/hairstyle_{hairstyle[0]}_{hairstyle[1]}.png"
+    outfit_path = f"{OUTFITS}/outfit_{outfit[0]}_{outfit[1]}.png"
 
+    try:
+        body_image = load_image(body_path)
+        eyes_image = load_image(eyes_path)
+        hairstyle_image = load_image(hairstyle_path)
+        outfit_image = load_image(outfit_path)
+    except FileNotFoundError:
+        print("File Not Found")
+    else:
+        sprite_sheet = pygame.Surface(body_image.get_size(), pygame.SRCALPHA)
 
-def import_all_categories():
-    start_time = time.time()
-    paths = paths = {
-        "bodies": BODIES,
-        "eyes": EYES,
-        "hairstyles": HAIRSTYLES,
-        "outfits": OUTFITS
-    }
+        sprite_sheet.blit(body_image, (0, 0))
+        sprite_sheet.blit(outfit_image, (0, 0))
+        sprite_sheet.blit(hairstyle_image, (0, 0))
+        sprite_sheet.blit(eyes_image, (0, 0))
 
-    files: dict[str, dict] = {category: {} for category in paths.keys()}
-
-    for category, path in paths.items():
-        for filename in sorted(listdir(path)):
-            if category in ["bodies", "eyes"]:
-                # sprite_sheet = load_image(f"{path}/{filename}")
-                # files[category][]
-                ...
-            elif category in ["hairstyles", "outfits"]:
-                ...
+        pygame.image.save(sprite_sheet, f"{USER_DATA}/sprite_sheet.png")
 
 
 def import_character_generator():

@@ -3,6 +3,7 @@ import src.engine.time as time
 import src.engine.assets as assets
 from src.game_object.sprite import Sprite
 from src.components.animation import Animation
+from src.utils.load import save_sprite_sheet
 
 
 class Avatar(Sprite, Animation):
@@ -67,6 +68,10 @@ class Avatar(Sprite, Animation):
     @property
     def hairstyle_frame(self) -> pygame.Surface:
         return assets.hairstyles[self.hairstyle][self.hairstyle_color][self.direction][self.frame_index]
+
+    def save_character(self):
+        save_sprite_sheet(self.body, self.eyes, (self.hairstyle, self.hairstyle_color),
+                          (self.outfit, self.outfit_color))
 
     @property
     def image(self) -> pygame.Surface:

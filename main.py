@@ -22,27 +22,22 @@ class Game:
 
     def run(self):
         while True:
-            start_time = time.time()
             input.update()
 
-            update = threading.Thread(target=scene_manager.update)
-            render = threading.Thread(target=scene_manager.render)
+            # update = threading.Thread(target=scene_manager.update)
+            # render = threading.Thread(target=scene_manager.render)
 
-            update.start()
-            render.start()
+            # update.start()
+            # render.start()
 
-            update.join()
-            render.join()
+            # update.join()
+            # render.join()
 
-            # scene_manager.update()
-            # scene_manager.render()
+            scene_manager.update()
+            scene_manager.render()
 
             game_time.update()
             window.update()
-
-            end_time = time.time()
-            elapsed_time = end_time - start_time
-            print(f"Tiempo de ejecución: {elapsed_time} segundos")
 
 
 if __name__ == '__main__':

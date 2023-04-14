@@ -29,7 +29,6 @@ class CharacterCreation(Scene):
         self.eyes_picker = ColorPicker((self.table.rect.centerx, 194), data.eyes_colors, self.group)
         self.outfit_picker = ColorPicker((self.table.rect.centerx, 256), data.outfit_colors[self.avatar.outfit],
                                          self.group)
-
         self.hair_picker = ColorPicker((self.table.rect.centerx, 286), data.hairstyle_colors["normal"], self.group)
 
     def update(self) -> None:
@@ -53,6 +52,9 @@ class CharacterCreation(Scene):
             self.avatar.next_outfit()
             self.outfit_picker.colors = data.outfit_colors[self.avatar.outfit]
             print(self.outfit_picker.selected_color)
+
+        elif input.keyboard.keys["space"]:
+            self.avatar.save_character()
 
     @staticmethod
     def get_prevalent_color(surface: pygame.Surface):

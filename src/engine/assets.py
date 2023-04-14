@@ -86,9 +86,6 @@ def load_character_creation_assets():
     elapsed_time = end_time - start_time
     print(f"Tiempo de ejecución: {elapsed_time} segundos")
 
-
-
-
     # for body, directions in bodies.items():
     #     print(body, end=": ")
     #     for direction in directions:
