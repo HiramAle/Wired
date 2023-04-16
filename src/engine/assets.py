@@ -46,7 +46,7 @@ def load() -> None:
     images_cables = load_image_directory(IMAGES_CABLES)
     images_subnetting = load_image_directory(IMAGES_SUBNETTING)
     images_character_creation = load_image_directory(IMAGES_CHARACTER_CREATION)
-    load_character_creation_assets()
+    # load_character_creation_assets()
 
 
 def load_character_creation_assets():

@@ -86,7 +86,7 @@ class Sprite(GameObject, Render):
         Removes the sprite from all sprite groups.
         """
         for group in self.__groups:
-            group.remove(self)
+            group.remove_internal(self)
 
     def groups(self) -> list[SpriteGroup]:
         """
@@ -208,5 +208,6 @@ class SpriteGroup:
             sprite.render(display, offset)
 
     def empty(self):
-        for sprite in self.__sprites:
-            sprite.kill()
+        for sprite in self.sprites():
+            self.remove_internal(sprite)
+            sprite.remove_internal(self)

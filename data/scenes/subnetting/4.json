@@ -1,0 +1,1 @@
+{"ip": "101.0.0.0", "class": "A", "default_mask": "255.0.0.0", "subnets_needed": 2, "custom_mask": "255.128.0.0", "subnets": {"subnet_1": {"id": "101.0.0.0", "broadcast": "101.127.255.255", "first": "101.0.0.1"}, "subnet_2": {"id": "101.128.0.0", "broadcast": "101.255.255.255", "first": "101.128.0.1"}}}

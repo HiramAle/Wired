@@ -39,8 +39,12 @@ def load_image(path: str, color_key=(0, 0, 0)) -> pygame.Surface:
     :param color_key: The color to use as the transparent color in the image.
     :return: A Pygame Surface object representing the loaded image.
     """
+
     image = pygame.image.load(path).convert_alpha()
-    image.set_colorkey(color_key)
+    # image.set_colorkey(color_key)
+
+    # new_image = pygame.Surface(image.get_size(), pygame.SRCALPHA)
+    # new_image.blit(image, (0, 0))
     return image
 
 

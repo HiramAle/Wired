@@ -14,6 +14,7 @@ class GUIText(Sprite):
         self._color = WHITE_MOTION
         self._shadow_color = DARK_BLACK_MOTION
         self.shadow = True
+        self.font = "monogram"
         for name, value in kwargs.items():
             match name:
                 case "color":
@@ -22,17 +23,22 @@ class GUIText(Sprite):
                     self._shadow_color = value
                 case "shadow":
                     self.shadow = value
+                case "font":
+                    self.font = value
         self._shadow_padding = (size // 16) * 1.25 if self.shadow else 0
         self.text = text
 
     def _update_text(self):
-        text_surface = assets.fonts["monogram"].render(self._text, self._size, self._color)
-        self.image = pygame.Surface((text_surface.get_width(), text_surface.get_height() + self._shadow_padding))
-        if self.shadow:
-            shadow_surface = assets.fonts["monogram"].render(self._text, self._size, self._shadow_color)
-            self.image.blit(shadow_surface, (0, self._shadow_padding))
+        text_surface = assets.fonts[self.font].render(self._text, self._size, self._color)
+        self.image = pygame.Surface(
+            (text_surface.get_width(), text_surface.get_height() + self._shadow_padding)).convert_alpha()
 
-        self.image.blit(text_surface, (0, 0))
+        if self.shadow:
+            shadow_surface = assets.fonts[self.font].render(self._text, self._size, self._shadow_color)
+            self.image.blit(shadow_surface, (0, self._shadow_padding))
+            # self.image.blit(text_surface, (0, 0))
+
+        self.image.blit(text_surface, (0, -self._shadow_padding))
         self.image.set_colorkey((0, 0, 0))
 
     @property

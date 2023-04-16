@@ -1,3 +1,5 @@
+import os
+
 import pytmx
 from src.utils.load import load_json
 from src.constants.paths import *
@@ -9,11 +11,13 @@ body_colors: dict[int, tuple] = {}
 eyes_colors: dict[int, tuple] = {}
 hairstyle_colors: dict[str, dict[int, tuple]] = {}
 outfit_colors: dict[int, dict[int, tuple]] = {}
+subnetting: dict[int, dict] = {}
 
 
 def init():
     global cable_data, tiled_map, character_creation_frames
     global body_colors, eyes_colors, hairstyle_colors, outfit_colors
+    global subnetting
     cable_data = load_json(DATA_CABLES)
     tiled_map = pytmx.load_pygame(TILED_HOUSE, pixelalpha=True)
     character_creation_frames = load_json(DATA_CHARACTER_CREATION_FRAMES)
@@ -22,6 +26,9 @@ def init():
 
     hairstyle_colors = convert_dictionary(load_json(HAIRSTYLE_COLORS))
     outfit_colors = convert_dictionary(load_json(OUTFIT_COLORS))
+
+    subnetting = {int(file.split(".")[0]): load_json(f"{SUBNETTING_EXERCISES}/{file}") for file in
+                  os.listdir(SUBNETTING_EXERCISES)}
 
 
 def convert_dictionary(dictionary: dict):

@@ -59,6 +59,7 @@ IMAGES_CHARACTER_CREATION = "assets/images/character_creation"
 # Scene Data
 DATA_CABLES = "data/scenes/cables.json"
 DATA_CHARACTER_CREATION_FRAMES = "data/character_creation/animation_frames_data.json"
+SUBNETTING_EXERCISES = "data/scenes/subnetting"
 # Maps
 TILED_HOUSE = "data/maps/TMX/Players_House.tmx"
 # Character creation
@@ -71,4 +72,3 @@ BODY_COLORS = "data/character_creation/bodies_colors.json"
 EYES_COLORS = "data/character_creation/eyes_colors.json"
 HAIRSTYLE_COLORS = "data/character_creation/hairstyles_colors.json"
 OUTFIT_COLORS = "data/character_creation/outfits_colors.json"
-

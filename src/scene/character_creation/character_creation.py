@@ -64,10 +64,7 @@ class CharacterCreation(Scene):
                 color = surface.get_at((x, y))
                 color_tuple = tuple(color)
 
-                if color == (58, 58, 80, 255) or color == (58, 58, 80, 0):
-                    continue
-
-                if color == (0, 0, 0, 0):
+                if color == (58, 58, 80, 255) or color == (58, 58, 80, 0) or color == (0, 0, 0, 0):
                     continue
 
                 if color_tuple not in colors:
