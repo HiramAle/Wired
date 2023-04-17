@@ -1,6 +1,7 @@
 import enum
 import pygame
 import src.engine.assets as assets
+import src.engine.input as game_input
 import src.engine.data as game_data
 from src.game_object.sprite import Sprite
 from src.gui.text import GUIText
@@ -22,6 +23,7 @@ class Subnet:
 class CustomMaskProblem:
     def __init__(self, zone: str, exercise=randint(1, 10)):
         self.zone = zone
+        self.buildings: list[Building] = []
         self.data: dict = game_data.subnetting.get(exercise)
         self.ip: str = self.data["ip"]
         self.ipClass: str = self.data["class"]
@@ -31,8 +33,14 @@ class CustomMaskProblem:
         self.subnets: list[Subnet] = [Subnet(name, data) for name, data in self.data["subnets"].items()]
         self.blanks = self.defaultMask.count("0")
         self.correctAnswers = self.customMask.split(".")[4 - self.blanks:]
-        self.house_positions: list[tuple] = []
         print(self.customMask, self.blanks, self.correctAnswers)
+
+    def subnet_answers(self, index: int) -> list:
+        subnet = self.subnets[index]
+        number = 4 - self.ip.split(".").count("0")
+        id_answers = subnet.id.split(".")[number:]
+        broadcast_answers = subnet.broadcast.split(".")[number:]
+        return id_answers + broadcast_answers
 
 
 class Building(Sprite):
@@ -42,6 +50,8 @@ class Building(Sprite):
         self.default_image = assets.images_subnetting["test_house"]
         self.outline_image = assets.images_subnetting["test_house_outline"]
         self._selected = False
+        self.name = GUIText(self.building_type, (self.rect.centerx + 7.5, self.rect.top + 5), 16)
+        self.subnet = Subnet("", {"id": "", "broadcast": "", "first": ""})
 
     @property
     def selected(self):
@@ -54,6 +64,15 @@ class Building(Sprite):
 
         self.image = self.outline_image if value else self.default_image
         self._selected = value
+
+    def update(self, *args, **kwargs):
+        if self.hovered and self.scale == 1:
+            self.name.position = game_input.mouse.x + 20, game_input.mouse.y - 20
+
+    def render(self, display: pygame.Surface, offset=(0, 0)):
+        super().render(display, offset)
+        if self.hovered and self.scale == 1:
+            self.name.render(display)
 
 
 class LabelStates(enum.Enum):
@@ -105,6 +124,7 @@ class Label(Sprite):
         self._state = LabelStates.STICK
         self.text = GUIText(str(value), self.rect.center, 32, font="monogram", shadow=False, color=DARK_BLACK_MOTION)
         self.holder: LabelHolder = kwargs.get("holder", None)
+        self.can_move = False if static else True
 
     def render(self, display: pygame.Surface, offset=(0, 0)):
         super().render(display, offset)

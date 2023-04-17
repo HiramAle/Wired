@@ -57,6 +57,9 @@ class SubnetMask(Stage):
         GUIText("Custom mask:", (157, 306), 32, self.group, font="fool", color="#2E2E2E", shadow=False, centered=False)
         GUIText("Clase", (62, 254), 32, self.group, font="fool", color="#2E2E2E", shadow=False, centered=False)
 
+        self.continue_message = GUIText("Presiona la siguiente pestaña para\ncontinuar :-)", (478, 237), 16,
+                                        shadow=False, color="#2E2E2E")
+
         for network_class, position in self.class_positions.items():
             ClassLabel(position, network_class, self.group, self.class_labels)
 
@@ -76,29 +79,32 @@ class SubnetMask(Stage):
         self.selected_label: ClassLabel | Label | None = None
 
         self.class_answer: ClassLabel | None = None
-
-        # Draw houses
-        map_padding_x = 266 / 4
-        map_padding_y = 138 / 2
-        for y in range(2):
-            for x in range(4):
-                if (x, y) in self.data.house_positions:
-                    building_x = 57 + (map_padding_x * x) + map_padding_x / 2
-                    building_y = 29 + (map_padding_y * y) + map_padding_y / 2
-                    Building((building_x, building_y), "house", self.group)
+        self.group.add(*self.data.buildings)
+        # TODO: Center zone name
+        # TODO: Remove dots when class removed
+        # TODO: Check swap class answer and labels
+        self.drag_class = True
 
     def drag(self):
         # Start dragging
         if not self.dragging and game_input.mouse.buttons["left_hold"]:
             for label in self.class_labels.sprites() + self.labels.sprites():
                 if label.rect.collidepoint(game_input.mouse.position):
+                    if isinstance(label, ClassLabel) and not self.drag_class:
+                        continue
+
+                    if isinstance(label, Label):
+                        if not label.can_move:
+                            return
                     self.dragging = True
+
                     self.selected_label = label
                     self.selected_label.state = LabelStates.FULL
                     self.selected_label.layer = 1
 
                     if isinstance(self.selected_label, Label):
                         label.holder = None
+
                     break
 
         # On dragging
@@ -109,9 +115,8 @@ class SubnetMask(Stage):
         # End dragging
         if self.dragging and not game_input.mouse.buttons["left_hold"]:
             if isinstance(self.selected_label, ClassLabel):
-
                 if self.class_holder.rect.collidepoint(game_input.mouse.position):
-                    # TODO: Check swap class answer
+
                     self.selected_label.position = self.class_holder.rect.center
                     self.class_answer = self.selected_label
                     default_mask = self.default_masks[self.class_answer.network_class]
@@ -131,6 +136,11 @@ class SubnetMask(Stage):
                         GUIText(".", (340 + 50 + 7.5 + (index * 65), 308 + 13.5), 32, self.group, font="fool",
                                 shadow=False,
                                 color=DARK_BLACK_MOTION)
+
+                    if self.class_answer.network_class == self.data.ipClass.lower():
+                        self.class_holder.deactivate()
+                        self.drag_class = False
+
 
                 else:
                     self.class_answer = None
@@ -153,20 +163,59 @@ class SubnetMask(Stage):
                             label.holder = None
                             label.position = label.default_position
 
-
             elif isinstance(self.selected_label, Label):
                 for holder in self.holders.sprites():
                     holder: LabelHolder
-                    if holder.rect.collidepoint(game_input.mouse.position):
+                    if holder.rect.collidepoint(game_input.mouse.position) and holder.active:
                         self.selected_label.holder = holder
                 if not self.selected_label.holder:
                     self.selected_label.position = self.selected_label.default_position
                     self.selected_label.state = LabelStates.STICK
-                    self.selected_label.layer = 0
+                self.selected_label.layer = 0
+
+                used_holders = len([label.holder for label in self.labels.sprites() if label.holder])
+
+                if not self.class_answer:
+                    self.dragging = False
+                    self.selected_label = None
+                    return
+
+                if self.holders_number[self.class_answer.network_class] == used_holders and not self.drag_class:
+                    right_indexes = []
+                    for index, answer in enumerate(self.get_answers()):
+                        if self.data.correctAnswers[index] == answer:
+                            right_indexes.append(index)
+
+                    for index, holder in enumerate(self.holders.sprites()):
+                        if index in right_indexes:
+                            for label in self.labels.sprites():
+                                if label.holder == holder:
+                                    # label.remove(self.labels)
+                                    label.can_move = False
+                                    label.layer = 0
+                            holder.deactivate()
+                            # self.holders_number[self.class_answer.network_class] -= 1
+
+                    print(self.data.correctAnswers)
+                    print(self.get_answers())
+
+                    if self.data.correctAnswers == self.get_answers():
+                        self.continue_message.add(self.group)
 
             self.dragging = False
-
             self.selected_label = None
+
+    def get_answers(self):
+        answers = []
+        for holder in self.holders.sprites():
+            holder: LabelHolder
+            for label in self.labels.sprites():
+                label: Label
+                print(label.layer)
+                if label.holder == holder:
+                    answers.append(str(label.value))
+
+        return answers
 
     def update(self) -> None:
         self.group.update()
