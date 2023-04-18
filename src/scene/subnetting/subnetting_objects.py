@@ -1,6 +1,9 @@
 import enum
+import math
+
 import pygame
 import src.engine.assets as assets
+import src.engine.time as game_time
 import src.engine.input as game_input
 import src.engine.data as game_data
 from src.game_object.sprite import Sprite
@@ -50,7 +53,8 @@ class Building(Sprite):
         self.default_image = assets.images_subnetting["test_house"]
         self.outline_image = assets.images_subnetting["test_house_outline"]
         self._selected = False
-        self.name = GUIText(self.building_type, (self.rect.centerx + 7.5, self.rect.top + 5), 16)
+        self.name = GUIText(self.building_type, (self.rect.centerx + 7.5, self.rect.bottom - 5), 16)
+        self.subnet_id = GUIText("", (self.rect.centerx + 7.5, self.rect.top + 5), 16)
         self.subnet = Subnet("", {"id": "", "broadcast": "", "first": ""})
 
     @property
@@ -73,6 +77,9 @@ class Building(Sprite):
         super().render(display, offset)
         if self.hovered and self.scale == 1:
             self.name.render(display)
+        if self.subnet.name != "":
+            self.subnet_id.text = self.subnet.id + "\n" + self.subnet.broadcast
+            self.subnet_id.render(display)
 
 
 class LabelStates(enum.Enum):
@@ -112,6 +119,7 @@ class LabelHolder(Sprite):
     def __init__(self, position: tuple, *groups, **kwargs):
         image = assets.images_subnetting["label_holder"]
         super().__init__("label_holder", position, image, *groups, **kwargs)
+        self.label: Label | None = None
         self.centered = False
 
 
@@ -125,6 +133,19 @@ class Label(Sprite):
         self.text = GUIText(str(value), self.rect.center, 32, font="monogram", shadow=False, color=DARK_BLACK_MOTION)
         self.holder: LabelHolder = kwargs.get("holder", None)
         self.can_move = False if static else True
+        self.shifting = False
+        self.shift_position = (0, 0)
+
+    def shift(self):
+        if not self.shifting:
+            return
+
+        if math.dist(self.shift_position, self.position) < 2:
+            self.shifting = False
+            return
+
+        self.y -= (self.y - game_input.mouse.y) / (0.01 / game_time.dt)
+        self.x -= (self.x - game_input.mouse.x) / (0.01 / game_time.dt)
 
     def render(self, display: pygame.Surface, offset=(0, 0)):
         super().render(display, offset)

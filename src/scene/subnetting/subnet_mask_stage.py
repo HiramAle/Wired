@@ -220,7 +220,7 @@ class SubnetMask(Stage):
     def update(self) -> None:
         self.group.update()
         # Tab
-        if self.tab.clicked:
+        if self.tab.clicked and self.continue_message in self.group.sprites():
             self.scene.set_stage(Zone(self.scene, self.data))
         # Get answers
         class_answer = ""

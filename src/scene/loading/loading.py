@@ -64,4 +64,4 @@ class Loading(Scene):
     def update(self) -> None:
         self.sprites.update()
         if not self.loading.is_set():
-            scene_manager.change_scene(self, Subnetting(), swap=True)
+            scene_manager.change_scene(self, MainMenu(), swap=True)

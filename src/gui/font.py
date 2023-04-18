@@ -7,7 +7,7 @@ class Font:
     def __init__(self, name: str, path: str):
         self.name = name
         self.path = path
-        self._sizes = (16, 32, 48)
+        self._sizes = (16, 32, 48, 64)
         self.fonts: dict[int, pygame.Font] = {size: pygame.Font(path, size) for size in self._sizes}
 
     def size(self, text: str, font_size: Literal[16, 32, 48]) -> tuple[int, int]:

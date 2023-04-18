@@ -2,6 +2,7 @@ import pygame
 import src.engine.assets as assets
 import src.engine.input as input
 import src.engine.time as time
+import src.scene.core.scene_manager as scene_manager
 from src.scene.core.scene import StagedScene
 from src.scene.subnetting.subnetting_objects import *
 from src.game_object.sprite import SpriteGroup
@@ -11,11 +12,13 @@ from src.gui.text import GUIText
 from src.constants.colors import *
 from random import choice
 from src.scene.subnetting.subnet_mask_stage import SubnetMask
+from src.scene.subnetting.results_stage import Results
 
 
 class Subnetting(StagedScene):
     def __init__(self):
         super().__init__("subnetting")
+
         pygame.mouse.set_visible(True)
         zones = ["Museo", "Hotel", "Hospital", "Escuela", "Oficina", "Supermercado"]
         building_names = {
@@ -56,7 +59,7 @@ class Subnetting(StagedScene):
 
         for y in range(2):
             for x in range(4):
-                if (x*map_padding_x, y*map_padding_y) in building_positions:
+                if (x * map_padding_x, y * map_padding_y) in building_positions:
                     building_name: str = choice(buildings)
                     while building_name in selected_buildings:
                         building_name = choice(buildings)
@@ -74,6 +77,12 @@ class Subnetting(StagedScene):
     def update(self) -> None:
         self.group.update()
         self.current_stage.update()
+
+        try:
+            if self.current_stage.finished:
+                self.set_stage(Results(self))
+        except:
+            ...
 
     def render(self) -> None:
         self.display.fill("#242424")
