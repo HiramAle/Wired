@@ -1,4 +1,5 @@
 import math
+import random
 
 import pygame
 import src.engine.assets as assets
@@ -38,10 +39,13 @@ class ColorPicker(Sprite):
         self.total_width = 0
         self.remaining_space = 0
         self.starting_position = 0
-        self._image.fill((255, 0, 0, 30))
+        # self._image.fill((255, 0, 0, 30))
         self.colors = colors
 
         self.selected_color = 0
+
+    def randomize(self):
+        self.selected_color = random.choice(list(self._colors.keys()))
 
     @property
     def colors(self) -> dict:

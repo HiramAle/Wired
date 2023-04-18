@@ -1,3 +1,5 @@
+import random
+
 import pygame
 import src.engine.time as time
 import src.engine.assets as assets
@@ -8,7 +10,7 @@ from src.utils.load import save_sprite_sheet
 
 class Avatar(Sprite, Animation):
     def __init__(self, *groups):
-        super().__init__("avatar", (411, 234), pygame.Surface((64, 128), pygame.SRCALPHA), *groups)
+        super().__init__("avatar", (445, 225), pygame.Surface((64, 128), pygame.SRCALPHA), *groups)
         self._frame_index = 0
         self.direction = "down"
         self.animation_speed = 8
@@ -20,6 +22,12 @@ class Avatar(Sprite, Animation):
         self.hairstyle_color = 0
         self.outfit = 0
         self.outfit_color = 0
+
+    def randomize(self):
+        self.hairstyle = random.choice(range(len(assets.hairstyles) - 1))
+        self.outfit = random.choice(range(len(assets.outfits) - 1))
+        self.body = random.choice(range(len(assets.bodies) - 1))
+        self.eyes = random.choice(range(len(assets.eyes) - 1))
 
     def __repr__(self):
         return f"{self.outfit}"

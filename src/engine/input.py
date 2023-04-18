@@ -64,6 +64,7 @@ class Keyboard:
             for action in self.data:
                 if event.key == self.data[action]["binding"]:
                     self.keys[action] = True
+            self.key_pressed = event.unicode
 
         if event.type == pygame.KEYUP:
             for action in self.data:

@@ -28,8 +28,9 @@ class Sprite(GameObject, Render):
             self.add(*groups)
 
         for key, val in kwargs.items():
-            if key in ["flags", "layer", "centered", "scale"] and hasattr(self, key):
+            if key in ["flags", "layer", "centered", "scale", "opacity"] and hasattr(self, key):
                 setattr(self, key, val)
+
 
     def activate(self):
         if not self.active:
