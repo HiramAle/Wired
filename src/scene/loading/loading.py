@@ -37,10 +37,12 @@ class Point(Sprite):
 
 
 class Loading(Scene):
-    def __init__(self):
+    def __init__(self, loading_function: callable, scene: type[Scene]):
         super().__init__("loading_scene")
+        self.next_scene = scene
         self.loading = Event()
-        Thread(name="loading_assets", target=self.load).start()
+        self.loading.set()
+        Thread(name="loading_assets", target=loading_function, args=[self.loading]).start()
         self.transitionPosition = 440, 180
         pygame.mouse.set_visible(False)
         self.sprites = SpriteGroup()
@@ -64,4 +66,4 @@ class Loading(Scene):
     def update(self) -> None:
         self.sprites.update()
         if not self.loading.is_set():
-            scene_manager.change_scene(self, CharacterCreation(), swap=True)
+            scene_manager.change_scene(self, self.next_scene(), swap=True)

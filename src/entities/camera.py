@@ -10,6 +10,7 @@ class Camera(GameObject):
     """
     A class representing the camera used to track an Entity or a specific position.
     """
+
     def __init__(self):
         """
         Initializes a new Camera object.
@@ -26,6 +27,7 @@ class Camera(GameObject):
     @tracked_entity.setter
     def tracked_entity(self, value: Entity):
         self._entity = value
+        # self.position = value.position
 
     @property
     def target_position(self) -> tuple:

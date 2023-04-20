@@ -1,3 +1,5 @@
+import threading
+
 import pygame
 import time
 from threading import Thread
@@ -39,17 +41,18 @@ def prepare() -> None:
     animations = load_animations(ANIMATIONS)
 
 
-def load() -> None:
+def load(event: threading.Event) -> None:
     global images_main_menu, images_selector, images_cables, images_subnetting, images_character_creation
     images_main_menu = load_image_directory(IMAGES_MAIN_MENU)
     images_selector = load_image_directory(IMAGES_SELECTOR)
     images_cables = load_image_directory(IMAGES_CABLES)
     images_subnetting = load_image_directory(IMAGES_SUBNETTING)
     images_character_creation = load_image_directory(IMAGES_CHARACTER_CREATION)
-    load_character_creation_assets()
+    # load_character_creation_assets()
+    event.clear()
 
 
-def load_character_creation_assets():
+def load_character_creation_assets(event: threading.Event):
     def load_bodies():
         global bodies
         bodies = import_category_animations("bodies")
@@ -100,3 +103,5 @@ def load_character_creation_assets():
     # end_time = time.time()
     # elapsed_time = end_time - start_time
     # print(f"Tiempo de ejecución: {elapsed_time} segundos")
+
+    event.clear()

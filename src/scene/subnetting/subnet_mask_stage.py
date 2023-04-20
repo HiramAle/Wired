@@ -211,7 +211,6 @@ class SubnetMask(Stage):
             holder: LabelHolder
             for label in self.labels.sprites():
                 label: Label
-                print(label.layer)
                 if label.holder == holder:
                     answers.append(str(label.value))
 
@@ -233,7 +232,6 @@ class SubnetMask(Stage):
                 for label in self.labels.sprites():
                     label: Label
                     if label.holder == holder:
-                        print(label.value)
                         label_answers.append(str(label.value))
             if class_answer == self.data.ipClass.lower() and label_answers == self.data.correctAnswers:
                 print("good")

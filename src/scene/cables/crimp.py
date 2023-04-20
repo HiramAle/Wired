@@ -3,6 +3,7 @@ import random
 import pygame.mouse
 import src.engine.assets as assets
 import src.engine.input as input
+import src.scene.core.scene_manager as scene_manager
 import src.engine.time as time
 from src.scene.cables.cable_objects import CrimpTool
 from src.game_object.sprite import SpriteGroup
@@ -139,6 +140,9 @@ class CrimpCable(Scene):
             if self.final_cable.x - 122 < 1:
                 self.standard_text.activate()
                 self.continue_text.activate()
+
+            if input.keyboard.keys["space"]:
+                scene_manager.exit_scene()
 
     def start(self):
         pygame.mouse.set_visible(True)

@@ -13,11 +13,11 @@
             }
         },
         "TMX/Players_House.tmx": {
-            "scale": 1.5,
+            "scale": 2,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 472.66666666666663,
-                "y": 436
+                "x": 880.25,
+                "y": 541.75
             }
         },
         "TSX/Tileset_Casa.tsx": {

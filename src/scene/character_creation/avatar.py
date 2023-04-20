@@ -3,6 +3,7 @@ import random
 import pygame
 import src.engine.time as time
 import src.engine.assets as assets
+import src.engine.data as data
 from src.game_object.sprite import Sprite
 from src.components.animation import Animation
 from src.utils.load import save_sprite_sheet

@@ -5,6 +5,9 @@ import pygame
 import src.engine.assets as assets
 import src.engine.input as game_input
 import src.engine.data as data
+import src.engine.window as window
+import src.scene.core.scene_manager as scene_manager
+import src.user.saves as saves
 from src.scene.core.scene import Scene
 from src.game_object.sprite import SpriteGroup
 from src.gui.image import GUIImage
@@ -13,6 +16,7 @@ from src.scene.character_creation.avatar import Avatar
 from src.scene.character_creation.colors import ColorPicker
 from src.constants.colors import *
 from src.scene.character_creation.character_objects import Tab, NameLabel
+from src.scene.map.test_map import TestMap
 import random
 
 alphabet_dict = {
@@ -48,9 +52,11 @@ class CharacterCreation(Scene):
     def __init__(self):
         super().__init__("character_creation")
         pygame.mouse.set_visible(True)
+        self.save_index = data.active_save
         self.default_group = SpriteGroup()
         self.character_selection = SpriteGroup()
         self.character_info = SpriteGroup()
+        self.interactive = SpriteGroup()
         GUIImage("background", (0, 0), assets.images_character_creation["players_house_background"], self.default_group,
                  centered=False)
         self.clipboard = GUIImage("clipboard", (21, 31), assets.images_character_creation["clip_board"],
@@ -66,25 +72,27 @@ class CharacterCreation(Scene):
         GUIText("Color de ropa", (self.clipboard_padding, 262), 32, self.character_selection, color=BLACK_SPRITE,
                 shadow=False)
 
-        self.skin_picker = ColorPicker((self.clipboard_padding, 122), data.body_colors, self.character_selection)
-        self.eyes_picker = ColorPicker((self.clipboard_padding, 178), data.eyes_colors, self.character_selection)
+        self.skin_picker = ColorPicker((self.clipboard_padding, 122), data.body_colors, self.character_selection,
+                                       self.interactive)
+        self.eyes_picker = ColorPicker((self.clipboard_padding, 178), data.eyes_colors, self.character_selection,
+                                       self.interactive)
         self.hair_picker = ColorPicker((self.clipboard_padding, 234), data.hairstyle_colors["normal"],
-                                       self.character_selection)
+                                       self.character_selection, self.interactive)
         self.outfit_picker = ColorPicker((self.clipboard_padding, 290), data.outfit_colors[self.avatar.outfit],
-                                         self.character_selection)
+                                         self.character_selection, self.interactive)
 
         self.left_hair = GUIImage("left_hair", (377, 218), assets.images_character_creation["left_button_temp"],
-                                  self.character_selection)
+                                  self.character_selection, self.interactive)
         self.right_hair = GUIImage("left_hair", (513, 218), assets.images_character_creation["right_button_temp"],
-                                   self.character_selection)
+                                   self.character_selection, self.interactive)
         self.left_outfit = GUIImage("left_outfit", (377, 267), assets.images_character_creation["left_button_temp"],
-                                    self.character_selection)
+                                    self.character_selection, self.interactive)
         self.right_outfit = GUIImage("right_outfit", (513, 267), assets.images_character_creation["right_button_temp"],
-                                     self.character_selection)
+                                     self.character_selection, self.interactive)
 
         # Tabs
-        self.selection_tab = Tab((65, 71), "character", self.default_group)
-        self.info_tab = Tab((94, 71), "data", self.default_group)
+        self.selection_tab = Tab((65, 71), "character", self.default_group, self.interactive)
+        self.info_tab = Tab((94, 71), "data", self.default_group, self.interactive)
         self.selection_tab.state = "opened"
 
         self.name_label = NameLabel((self.clipboard_padding, 134.5), self.character_info)
@@ -109,10 +117,11 @@ class CharacterCreation(Scene):
 
         self.active_tab = "selection"
 
+        window.set_cursor("arrow")
+
     def draw_signature(self, name: str):
         offset = 0
         width = (21 * len(name)) + (1 * (len(name) - 1))
-        print("width", width)
         surface = pygame.Surface((width, 30), pygame.SRCALPHA)
         joints = []
         for l_index, letter in enumerate(name):
@@ -134,10 +143,7 @@ class CharacterCreation(Scene):
                 next_y = (alphabet_dict[name[l_index + 1].lower()][0][1] * 3)
                 joints.append(math.dist((final_x, final_y), (next_x, next_y)))
                 pygame.draw.line(surface, BLACK_SPRITE, (final_x, final_y), (next_x, next_y), 2)
-            else:
-                print("max", letter, max(lines) + offset)
-            if joints:
-                print("max_joint", letter, max(joints) + offset)
+
             offset += 20
         return surface
 
@@ -248,6 +254,10 @@ class CharacterCreation(Scene):
         elif self.active_tab == "info":
             self.character_info.render(self.display)
             pygame.draw.line(self.display, BLACK_SPRITE, (126, 298), (224, 298))
-            if self.name.text != "" and game_input.keyboard.key_pressed in ["F", "f"]:
+            if self.name.text != "" and game_input.keyboard.key_pressed in ["F", "f"] and not self.name_label.writing:
                 GUIImage("test", (self.clipboard_padding, 283), self.draw_signature(self.name.text), self.default_group)
                 self.instructions.kill()
+                saves.write_save_data(self.save_index, {"name": self.name.text})
+                self.avatar.save_character()
+                scene_manager.change_scene(self, TestMap(), True)
+

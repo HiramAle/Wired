@@ -6,6 +6,7 @@ import src.engine.window as window
 import src.engine.input as input
 import src.engine.time as game_time
 import src.user.preferences as preferences
+import src.user.saves as saves
 import src.engine.assets as assets
 import src.scene.core.scene_manager as scene_manager
 import src.engine.data as data
@@ -17,6 +18,7 @@ class Game:
         data.init()
         assets.prepare()
         preferences.init()
+        saves.init()
         window.init()
         scene_manager.init()
 

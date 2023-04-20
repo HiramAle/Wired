@@ -2,6 +2,8 @@ import pygame
 from src.scene.core.scene import Scene
 from src.scene.loading.loading import Loading
 from src.scene.core.transition import CircularTransition
+from src.scene.main_menu.main_menu import MainMenu
+import src.engine.assets as assets
 import src.engine.window as window
 
 stack_scene: list[Scene] = []
@@ -11,7 +13,7 @@ def init():
     """
     Initializes the scene stack by setting the current scene to a Loading Scene.
     """
-    set_scene(Loading())
+    set_scene(Loading(assets.load, MainMenu))
 
 
 def current_scene() -> Scene:

@@ -39,11 +39,14 @@ class TiledMap:
         self.dynamic: list[Tile] = []
         self.objects: list[Object] = []
 
+        # self.obstacles = []
+        # self.furniture = []
+        #
         self.load()
         # for tile_object in self.tmx_data.objects:
         #     self.obstacles.append(Obstacle((tile_object.x, tile_object.y), tile_object.width, tile_object.height))
         #
-        # layer1: pytmx.TiledTileLayer = self.tmx_data.get_layer_by_name("muebles")
+        # layer1: pytmx.TiledTileLayer = self.tmx_data.get_layer_by_name("furniture")
         # layer2: pytmx.TiledTileLayer = self.tmx_data.get_layer_by_name("toppers")
         #
         # for x, y, tile in layer1.tiles():

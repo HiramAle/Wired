@@ -65,6 +65,7 @@ class CircularTransition(Transition):
             if self.circleRadius <= 0:
                 self.transitioningIn = False
                 self.circlePosition = self.toScene.transitionPosition
+
         else:
             self.circleRadius += time.dt * self.transitionSpeed
             if self.circleRadius >= self.exitCircleRadius:
@@ -76,10 +77,10 @@ class CircularTransition(Transition):
         Render the current state of the transition effect.
         """
         if self.transitioningIn:
-            self.fromScene.render()
+            # self.fromScene.render()
             self.display.blit(self.fromScene.display, (0, 0))
         else:
-            self.toScene.render()
+            # self.toScene.render()
             self.display.blit(self.toScene.display, (0, 0))
         self.transitionSurface.fill(DARK_BLACK_MOTION)
         pygame.draw.circle(self.transitionSurface, WHITE_MOTION, self.circlePosition, self.circleRadius)

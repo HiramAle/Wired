@@ -5,10 +5,10 @@ from src.game_object.sprite import SpriteGroup
 
 
 class Scene:
-    def __init__(self, name: str):
+    def __init__(self, name: str = ""):
         self.name = name
         self.display = pygame.Surface((CANVAS_WIDTH, CANVAS_HEIGHT))
-        self.transitionPosition = self.center
+        self.transitionPosition: tuple = self.center
 
     def start(self):
         ...

@@ -19,16 +19,16 @@ class OptionsStage(Stage):
     def __init__(self, scene: StagedScene):
         super().__init__("options_stage", scene)
         window.set_cursor("arrow")
-        self.descriptions = {"DISPLAY": "Changes the way the game looks! Or maybe it’s\njust the window size changer.",
-                             "VOLUME": "Changes the volume of the sounds in the game.",
-                             "APPLY": "Apply the changes to the game.",
-                             "EXIT": "Get back to the main menu."}
+        self.descriptions = {"RESOLUCIÓN": "Cambia el tamaño de la ventana del juego.",
+                             "VOLÚMEN": "Cambia el volúmen de los efectos y la música.",
+                             "GUARDAR": "Guarda las preferencias.",
+                             "SALIR": "Regresa al menú principal."}
         self.option = ""
         self.group = SpriteGroup()
         self.interactive = SpriteGroup()
         self.display_group = SpriteGroup()
         self.volume_group = SpriteGroup()
-        GUIText("OPTIONS", (209, 61), 32, self.group, color=WHITE_MOTION, centered=False, shadow=False)
+        GUIText("OPCIONES", (209, 61), 32, self.group, color=WHITE_MOTION, centered=False, shadow=False)
         GUIImage("top_line", (51, 54), assets.images_main_menu["doted_line"], self.group, centered=False)
         GUIImage("bottom_line", (51, 99), assets.images_main_menu["doted_line"], self.group, centered=False)
         GUIImage("top_description_line", (51, 246), assets.images_main_menu["doted_line"], self.group, centered=False)
@@ -48,30 +48,31 @@ class OptionsStage(Stage):
         # Volume
         self.volume_left = ArrowButton((96 + 70, 170), "right", self.group, self.volume_group, self.interactive)
         self.volume_right = ArrowButton((96 + 310 - 70, 170), "left", self.group, self.volume_group, self.interactive)
-        self.description_title = DescriptionTitle((256, 245), "Display", self.group)
+        self.description_title = DescriptionTitle((256, 245), "Pantalla", self.group)
         self.hidden_index = preferences.volume
         self.music_icons: list[GUIImage] = []
         for i in range(5):
-            sprite = GUIImage("music", (190 + (i * 30), 170), assets.images_main_menu["note_music"], self.group)
+            sprite = GUIImage("music", (190 + (i * 30), 170), assets.images_main_menu["note_music"], self.group,
+                              self.volume_group)
             if i > preferences.volume:
                 if i < self.hidden_index:
                     self.hidden_index = i
                 sprite.opacity = 0
             self.music_icons.append(sprite)
 
-        self.apply_button = TextButton("- APPLY -", (197, 210), self.group, self.interactive)
+        self.apply_button = TextButton("- GUARDAR -", (197, 210), self.group, self.interactive)
 
     def update(self):
         self.group.update()
         # Change description
         if any([sprite.hovered for sprite in self.display_group.sprites()]):
-            self.option = "DISPLAY"
+            self.option = "RESOLUCIÓN"
         elif any([sprite.hovered for sprite in self.volume_group.sprites()]):
-            self.option = "VOLUME"
+            self.option = "VOLÚMEN"
         elif self.apply_button.hovered:
-            self.option = "APPLY"
+            self.option = "GUARDAR"
         elif self.exit_button.hovered:
-            self.option = "EXIT"
+            self.option = "SALIR"
         else:
             self.option = ""
         self.description.text = self.descriptions.get(self.option, "")

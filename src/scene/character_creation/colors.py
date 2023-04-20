@@ -31,6 +31,7 @@ class Color(Sprite):
 
 class ColorPicker(Sprite):
     def __init__(self, position: tuple, colors: dict[int, tuple], *groups, **kwargs):
+        print(groups)
         image = pygame.Surface((274, 30), pygame.SRCALPHA)
         super().__init__("color_picker", position, image, *groups, **kwargs)
         self._colors: dict[int, tuple] = {}
@@ -43,6 +44,9 @@ class ColorPicker(Sprite):
         self.colors = colors
 
         self.selected_color = 0
+
+        self.interactive_group = groups[1]
+        self.remove(self.interactive_group)
 
     def randomize(self):
         self.selected_color = random.choice(list(self._colors.keys()))

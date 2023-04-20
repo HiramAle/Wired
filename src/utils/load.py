@@ -9,6 +9,7 @@ from os.path import isdir
 from os import listdir
 from src.gui.font import Font
 from src.constants.paths import *
+import src.engine.data as game_data
 
 
 def load_json(path: str) -> dict:
@@ -227,7 +228,7 @@ def save_sprite_sheet(body: int, eyes: int, hairstyle: tuple[int, int], outfit: 
         sprite_sheet.blit(hairstyle_image, (0, 0))
         sprite_sheet.blit(eyes_image, (0, 0))
 
-        pygame.image.save(sprite_sheet, f"{USER_DATA}/sprite_sheet.png")
+        pygame.image.save(sprite_sheet, f"{USER_DATA}/saves/save_{game_data.active_save}/sprite_sheet.png")
 
 
 def import_character_generator():

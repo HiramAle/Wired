@@ -38,14 +38,14 @@ def get_game_data_folder() -> str:
 
 # Data paths
 ROOT = dirname(dirname(__file__))
-DATA_FOLDER = get_game_data_folder()
-SAVES_FOLDER = join(DATA_FOLDER, "Saves")
-PREFERENCES = join(DATA_FOLDER, "preferences.json")
+# DATA_FOLDER = get_game_data_folder()
+USER_DATA = "data/user"
+SAVES_FOLDER = join(USER_DATA, "saves")
+PREFERENCES = join(USER_DATA, "preferences.json")
 SAVES = [join(SAVES_FOLDER, f"slot_{i}") for i in range(1, 4)]
 DEFAULT_PREFERENCES = "data/default/preferences.json"
 BINDINGS = "data/user/bindings.json"
 DEFAULT_BINDINGS = "data/default/bindings.json"
-USER_DATA = "data/user"
 # Assets
 CURSORS = "assets/cursors"
 FONTS = "assets/fonts"

@@ -26,7 +26,6 @@ class GUIText(Sprite):
                 case "font":
                     self.font = value
         self._shadow_padding = (size // 16) * 0.75 if self.shadow else 0
-        print(self._shadow_padding)
         self.text = text
 
     def _update_text(self):
