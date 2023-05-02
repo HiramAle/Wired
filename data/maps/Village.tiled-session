@@ -1,0 +1,133 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "TSX/singles.tsx",
+    "expandedProjectPaths": [
+    ],
+    "exportAsImage.drawTileGrid": true,
+    "exportAsImage.includeBackgroundColor": true,
+    "file.lastUsedOpenFilter": "Todos los archivos (*)",
+    "fileStates": {
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TMX/City.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1725.7575757575758,
+                "y": 1893.939393939394
+            }
+        },
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TMX/Village.tmx": {
+            "expandedGroupLayers": [
+                46,
+                36,
+                29
+            ],
+            "scale": 2,
+            "selectedLayer": 31,
+            "viewCenter": {
+                "x": 960,
+                "y": 959.75
+            }
+        },
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TSX/Buildings.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TSX/Camping.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TSX/City.tsx": {
+            "scaleInDock": 0.5
+        },
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TSX/City_Props.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TSX/Donut.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TSX/Modern_Exteriors.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TSX/New_Cars.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TSX/Police_Station.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TSX/Pool.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TSX/Terrains.tsx": {
+            "scaleInDock": 0.5
+        },
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TSX/Vehicles.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TSX/Villas.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "TMX/Village.tmx": {
+            "expandedObjectLayers": [
+                30,
+                24,
+                20,
+                23,
+                17,
+                19,
+                29,
+                13
+            ],
+            "scale": 2,
+            "selectedLayer": 15,
+            "viewCenter": {
+                "x": 341.75,
+                "y": 281
+            }
+        },
+        "TSX/Camping_Village.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5,
+            "scaleInEditor": 0.75
+        },
+        "TSX/Floors_and_Water.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5,
+            "scaleInEditor": 0.75
+        },
+        "TSX/singles.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.125,
+            "scaleInEditor": 0.25
+        }
+    },
+    "last.imagePath": "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Village_Map/Images/singles/village",
+    "map.height": 60,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 60,
+    "openFiles": [
+        "TMX/Village.tmx",
+        "TSX/Floors_and_Water.tsx",
+        "TSX/Camping_Village.tsx",
+        "TSX/singles.tsx",
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TMX/Village.tmx"
+    ],
+    "project": "Village.tiled-project",
+    "recentFiles": [
+        "TMX/Village.tmx",
+        "TSX/Floors_and_Water.tsx",
+        "TSX/Camping_Village.tsx",
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TMX/Village.tmx",
+        "TSX/singles.tsx",
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TMX/City.tmx",
+        "C:/Users/kkitk/OneDrive/Documentos/ESCOM/TT Recursos/Tiled Maps/Casa/TSX/Camping.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.type": 1
+}

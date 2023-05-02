@@ -23,6 +23,7 @@ class Sprite(GameObject, Render):
         self._flags = 0
         self._layer = 0
         self.active = True
+        self.sorting_point = self.y
 
         if groups:
             self.add(*groups)
@@ -30,7 +31,6 @@ class Sprite(GameObject, Render):
         for key, val in kwargs.items():
             if key in ["flags", "layer", "centered", "scale", "opacity"] and hasattr(self, key):
                 setattr(self, key, val)
-
 
     def activate(self):
         if not self.active:
@@ -135,7 +135,7 @@ class SpriteGroup:
         """
         Initializes a new SpriteGroup object.
         """
-        self.__sprites: list[Sprite] = []
+        self._sprites: list[Sprite] = []
         if sprites:
             self.add(*sprites)
 
@@ -144,14 +144,14 @@ class SpriteGroup:
         Adds a Sprite to the group.
         :param sprite: The Sprite instance to add to the group.
         """
-        self.__sprites.append(sprite)
+        self._sprites.append(sprite)
 
     def remove_internal(self, sprite: Sprite):
         """
         Removes a Sprite from the group.
         :param sprite: The Sprite instance to remove from the group.
         """
-        self.__sprites.remove(sprite)
+        self._sprites.remove(sprite)
 
     def add(self, *sprites: Sprite):
         """
@@ -160,7 +160,7 @@ class SpriteGroup:
         """
         for sprite in sprites:
             if not self.has(sprite):
-                self.__sprites.append(sprite)
+                self._sprites.append(sprite)
                 sprite.add_internal(self)
 
     def remove(self, *sprites: Sprite):
@@ -170,7 +170,7 @@ class SpriteGroup:
         """
         for sprite in sprites:
             if self.has(sprite):
-                self.__sprites.remove(sprite)
+                self._sprites.remove(sprite)
                 sprite.remove_internal(self)
 
     def has(self, sprite: Sprite) -> bool:
@@ -179,14 +179,14 @@ class SpriteGroup:
         :param sprite: The Sprite instance to check.
         :return: True if the Sprite is in the group, False otherwise.
         """
-        return sprite in self.__sprites
+        return sprite in self._sprites
 
     def sprites(self) -> list[Sprite]:
         """
         Returns a list of Sprites in the group.
         :return: A list of Sprites in the group.
         """
-        return sorted(self.__sprites, key=lambda sprite_: sprite_.layer)
+        return sorted(self._sprites, key=lambda sprite_: sprite_.layer)
 
     def update(self, *args, **kwargs):
         """

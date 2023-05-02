@@ -15,31 +15,32 @@ from src.scene.main_menu.stage_objects import ArrowButton, TextButton, ExitButto
 from src.scene.character_creation.character_creation import CharacterCreation
 import src.scene.loading.loading as loading
 from src.scene.map.test_map import TestMap
+from src.utils.json_saver import instance as save_manager
 
 
 class NewGame(Stage):
     def __init__(self, scene: StagedScene):
         super().__init__("new_game", scene)
-        self.default_group = SpriteGroup()
+        self.group = SpriteGroup()
         self.interactive = SpriteGroup()
         self.save_buttons = SpriteGroup()
-        GUIText("JUGAR", (251, 80), 32, self.default_group, color=WHITE_MOTION, shadow=False)
-        GUIImage("top_line", (51, 54), assets.images_main_menu["doted_line"], self.default_group, centered=False)
-        GUIImage("bottom_line", (51, 99), assets.images_main_menu["doted_line"], self.default_group, centered=False)
-        GUIImage("top_description_line", (51, 246), assets.images_main_menu["doted_line"], self.default_group,
+        GUIText("JUGAR", (251, 80), 32, self.group, color=WHITE_MOTION, shadow=False)
+        GUIImage("top_line", (51, 54), assets.images_main_menu["doted_line"], self.group, centered=False)
+        GUIImage("bottom_line", (51, 99), assets.images_main_menu["doted_line"], self.group, centered=False)
+        GUIImage("top_description_line", (51, 246), assets.images_main_menu["doted_line"], self.group,
                  centered=False)
-        GUIImage("bottom_description_line", (51, 290), assets.images_main_menu["doted_line"], self.default_group,
+        GUIImage("bottom_description_line", (51, 290), assets.images_main_menu["doted_line"], self.group,
                  centered=False)
-        self.exit_button = ExitButton((110, 69), self.default_group, self.interactive)
+        self.exit_button = ExitButton((110, 69), self.group, self.interactive)
 
-        for index, save in enumerate(saves.saves):
-            if save["name"] == "":
-                Option("- VACIO -", (96, 119 + (30 * index)), self.default_group, self.interactive, self.save_buttons)
+        for index, save in enumerate(save_manager.saves):
+            if save.name == "":
+                Option("- VACIO -", (96, 119 + (30 * index)), self.group, self.interactive, self.save_buttons)
             else:
-                Option(save["name"], (96, 119 + (30 * index)), self.default_group, self.interactive, self.save_buttons)
+                Option(save.name, (96, 119 + (30 * index)), self.group, self.interactive, self.save_buttons)
 
     def update(self) -> None:
-        self.default_group.update()
+        self.group.update()
 
         if game_input.keyboard.keys["esc"] or self.exit_button.clicked:
             self.scene.exit_stage()
@@ -47,13 +48,15 @@ class NewGame(Stage):
         for index, save_button in enumerate(self.save_buttons.sprites()):
             if save_button.clicked:
                 self.transitionPosition = save_button.rect.center
-                data.active_save = index
+                save_manager.index = index
                 if save_button.name == "- VACIO -":
                     scene_manager.change_scene(self.scene,
                                                loading.Loading(assets.load_character_creation_assets,
                                                                CharacterCreation))
                 else:
-                    scene_manager.change_scene(self, TestMap(), True)
+                    scene_manager.change_scene(self.scene,
+                                               loading.Loading(data.load_map, TestMap, ("playershouse",), ("playershouse",)),
+                                               True)
 
         # Change cursor
         if any([sprite.hovered for sprite in self.interactive.sprites()]):
@@ -65,4 +68,4 @@ class NewGame(Stage):
             window.set_cursor("arrow")
 
     def render(self) -> None:
-        self.default_group.render(self.display)
+        self.group.render(self.display)

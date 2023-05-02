@@ -11,7 +11,7 @@ class Camera(GameObject):
     A class representing the camera used to track an Entity or a specific position.
     """
 
-    def __init__(self):
+    def __init__(self, max_x, max_y):
         """
         Initializes a new Camera object.
         """
@@ -19,6 +19,8 @@ class Camera(GameObject):
         self._entity: Optional[Entity] = None
         self._target = pygame.math.Vector2(self.position)
         self._rate = 0.3
+        self.max_x = max_x
+        self.max_y = max_y
 
     @property
     def tracked_entity(self) -> Entity:
@@ -58,3 +60,15 @@ class Camera(GameObject):
 
         if self.position != self.target_position:
             self.position += (self._target - self.position_vector) / (self._rate / time.dt)
+
+        if self.x < 0:
+            self.x = 0
+
+        if self.y < 0:
+            self.y = 0
+
+        if self.x > self.max_x - 640:
+            self.x = self.max_x - 640
+
+        if self.y > self.max_y - 360:
+            self.y = self.max_y - 360

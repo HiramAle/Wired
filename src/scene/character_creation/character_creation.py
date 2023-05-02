@@ -1,6 +1,4 @@
-import json
 import math
-
 import pygame
 import src.engine.assets as assets
 import src.engine.input as game_input
@@ -17,7 +15,7 @@ from src.scene.character_creation.colors import ColorPicker
 from src.constants.colors import *
 from src.scene.character_creation.character_objects import Tab, NameLabel
 from src.scene.map.test_map import TestMap
-import random
+from src.utils.json_saver import instance as save_manager
 
 alphabet_dict = {
     'a': [(1, 5), (3, 1), (5, 5), (3, 8), (1, 5), (5, 5)],
@@ -105,6 +103,7 @@ class CharacterCreation(Scene):
         self.pronoun_index = 0
         self.pronoun_icons = [assets.images_character_creation["el"], assets.images_character_creation["ella"],
                               assets.images_character_creation["elle"]]
+        self.pronouns = ["el", "ella", "elle"]
         self.pronoun_icon = GUIImage("pronoun_icon", (self.clipboard_padding, 244),
                                      self.pronoun_icons[self.pronoun_index], self.character_info)
 
@@ -257,7 +256,9 @@ class CharacterCreation(Scene):
             if self.name.text != "" and game_input.keyboard.key_pressed in ["F", "f"] and not self.name_label.writing:
                 GUIImage("test", (self.clipboard_padding, 283), self.draw_signature(self.name.text), self.default_group)
                 self.instructions.kill()
-                saves.write_save_data(self.save_index, {"name": self.name.text})
+                # saves.write_save_data(self.save_index, {"name": self.name.text})
+                save_manager.game_save.name = self.name.text
+                save_manager.game_save.pronoun = self.pronouns[self.pronoun_index]
+                save_manager.game_save.save()
                 self.avatar.save_character()
-                scene_manager.change_scene(self, TestMap(), True)
-
+                scene_manager.change_scene(self, TestMap("playershouse"), True)

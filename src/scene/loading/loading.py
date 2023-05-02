@@ -13,8 +13,8 @@ from src.components.animation import Animation
 from src.scene.cables.order import OrderCable
 from src.scene.subnetting.subnetting import Subnetting
 from src.scene.map.test_map import TestMap
-from src.custom_scenes.animation import AnimationScene
 from src.scene.character_creation.character_creation import CharacterCreation
+from src.scene.core.transition import FadeTransition
 
 
 class Intro(Sprite, Animation):
@@ -37,12 +37,16 @@ class Point(Sprite):
 
 
 class Loading(Scene):
-    def __init__(self, loading_function: callable, scene: type[Scene]):
+    def __init__(self, loading_function: callable, scene: type[Scene], thread_args: tuple = None,
+                 scene_args: tuple = None):
         super().__init__("loading_scene")
+        print(f"transitioning to {scene.__class__.__name__} loading {loading_function}")
+        self.thread_args = thread_args if thread_args is not None else ()
+        self.scene_args = scene_args if scene_args is not None else ()
         self.next_scene = scene
         self.loading = Event()
         self.loading.set()
-        Thread(name="loading_assets", target=loading_function, args=[self.loading]).start()
+        Thread(name="loading_assets", target=loading_function, args=[self.loading, *self.thread_args]).start()
         self.transitionPosition = 440, 180
         pygame.mouse.set_visible(False)
         self.sprites = SpriteGroup()
@@ -53,11 +57,7 @@ class Loading(Scene):
         for i in range(3):
             Point((160 + i * 40, 220), self.sprites)
         self.animation = Intro((440, 180), assets.animations["loading"]["intro"], self.sprites)
-
-    def load(self):
-        self.loading.set()
-        assets.load()
-        self.loading.clear()
+        self.swap = False
 
     def render(self) -> None:
         self.display.fill(DARK_BLACK_MOTION)
@@ -65,5 +65,6 @@ class Loading(Scene):
 
     def update(self) -> None:
         self.sprites.update()
-        if not self.loading.is_set():
-            scene_manager.change_scene(self, self.next_scene(), swap=True)
+        if not self.loading.is_set() and not self.swap:
+            self.swap = True
+            scene_manager.change_scene(self, self.next_scene(*self.scene_args), swap=True, transition=True)

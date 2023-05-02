@@ -1,1 +1,9 @@
-{"name": "Kat"}
+{
+  "name": "Arian",
+  "pronoun": "el",
+  "time": 0,
+  "money": 0,
+  "cable": 0,
+  "connectors": 0,
+  "inventory": {}
+}

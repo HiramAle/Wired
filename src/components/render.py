@@ -11,8 +11,7 @@ class Render:
         Initializes a new Render object.
         :param image: The image to render.
         """
-        self._source_image = image
-        self._image = self._source_image.copy()
+        self._image = image
         self._opacity = 255
         self._scale = 1
         self._flip = [False, False]
@@ -22,20 +21,19 @@ class Render:
         return self._image
 
     @image.setter
-    def image(self, new_image: pygame.Surface):
-        self._source_image = new_image
-        self._image = self._source_image.copy()
+    def image(self, value: pygame.Surface):
+        self._image = value
 
     @property
     def scale(self) -> int:
         return self._scale
 
     @scale.setter
-    def scale(self, new_scale: int):
-        if new_scale <= 0:
+    def scale(self, value: int):
+        if value <= 0:
             raise ValueError("Scale factor must be greater than zero.")
-        self._scale = new_scale
-        self._image = pygame.transform.scale_by(self._image, new_scale)
+        self._scale = value
+        self._image = pygame.transform.scale_by(self._image, value)
 
     @property
     def flip(self) -> tuple[bool, bool]:
@@ -51,8 +49,8 @@ class Render:
         return self._opacity
 
     @opacity.setter
-    def opacity(self, new_opacity: int):
-        if new_opacity < 0 or new_opacity > 255:
+    def opacity(self, value: int):
+        if value < 0 or value > 255:
             raise ValueError("Opacity factor must be greater than zero and lesser than 255.")
-        self._opacity = new_opacity
-        self._image.set_alpha(new_opacity)
+        self._opacity = value
+        self._image.set_alpha(value)

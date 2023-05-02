@@ -1,0 +1,253 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "TMX/Village.tmx",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "Todos los archivos (*)",
+    "fileStates": {
+        "C:/Users/magic/Desktop/Casa_custom.tmx": {
+            "scale": 0.5422916666666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 481.2908182865925,
+                "y": 480.36880522474075
+            }
+        },
+        "C:/Users/magic/Desktop/Wired/data/Casa/TSX/Camping.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/Wired/data/Casa/TSX/City.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/Wired/data/Casa/TSX/Modern_Exteriors.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/Wired/data/Casa/TSX/Terrains.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/Wired/data/Casa/TSX/Villas.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/Tilesets/Fences.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/Tilesets/Grass.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/Tilesets/Hills.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/Tilesets/House Decoration.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/Tilesets/House.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/Tilesets/Objects.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/Tilesets/Paths.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/Tilesets/Plant Decoration.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/Tilesets/Water.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/Tilesets/interaction.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/map.tmx": {
+            "expandedObjectLayers": [
+                9
+            ],
+            "scale": 0.75,
+            "selectedLayer": 10,
+            "viewCenter": {
+                "x": 1510.6666666666665,
+                "y": 1278
+            }
+        },
+        "C:/Users/magic/TSX/Tileset_Casa.tsx": {
+            "scaleInDock": 1
+        },
+        "TMX/Casa.tmx": {
+            "scale": 3,
+            "selectedLayer": 6,
+            "viewCenter": {
+                "x": 231.16666666666666,
+                "y": 175.33333333333331
+            }
+        },
+        "TMX/Casa_custom.tmx": {
+            "expandedObjectLayers": [
+                13,
+                15,
+                11,
+                12
+            ],
+            "scale": 3,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 480,
+                "y": 479.8333333333333
+            }
+        },
+        "TMX/Casa_custom.tmx#Modern_Exteriors": {
+            "scaleInDock": 1
+        },
+        "TMX/City.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1438.25,
+                "y": 1362.25
+            }
+        },
+        "TMX/Village.tmx": {
+            "expandedGroupLayers": [
+                29,
+                46,
+                47,
+                36
+            ],
+            "expandedObjectLayers": [
+                30,
+                31
+            ],
+            "scale": 1,
+            "selectedLayer": 18,
+            "viewCenter": {
+                "x": 850,
+                "y": 552.5
+            }
+        },
+        "TMX/Village.tmx#Singles": {
+            "scaleInDock": 0.03125
+        },
+        "TSX/Basement.tsx": {
+            "scaleInDock": 1.5
+        },
+        "TSX/Bedroom.tsx": {
+            "scaleInDock": 3
+        },
+        "TSX/Buildings.tsx": {
+            "scaleInDock": 0.33,
+            "scaleInEditor": 1
+        },
+        "TSX/Camping.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TSX/Camping_Village.tsx": {
+            "scaleInDock": 1
+        },
+        "TSX/City.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "TSX/Floors_and_Water.tsx": {
+            "scaleInDock": 1
+        },
+        "TSX/Generic.tsx": {
+            "scaleInDock": 2
+        },
+        "TSX/Japanese_interiors.tsx": {
+            "scaleInDock": 4
+        },
+        "TSX/Kitchen.tsx": {
+            "scaleInDock": 1.5
+        },
+        "TSX/LivingRoom.tsx": {
+            "scaleInDock": 2
+        },
+        "TSX/Modern_Exteriors.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.25,
+            "scaleInEditor": 1
+        },
+        "TSX/Office.tsx": {
+            "scaleInDock": 2
+        },
+        "TSX/Police_Station.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TSX/Room_Builder.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.33
+        },
+        "TSX/Singles.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.03125,
+            "scaleInEditor": 0.0625
+        },
+        "TSX/Terrains.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 2,
+            "scaleInEditor": 3
+        },
+        "TSX/Tileset_Casa.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TSX/Villas.tsx": {
+            "scaleInDock": 0.33,
+            "scaleInEditor": 1
+        },
+        "TSX/buildings_obj.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TSX/house_singles.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TSX/path_custom.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "TSX/singles.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.33,
+            "scaleInEditor": 0.25
+        }
+    },
+    "last.externalTilesetPath": "C:/Users/magic/Desktop/Wired/data/maps/TSX",
+    "last.imagePath": "C:/Users/magic/Desktop/Wired/data/maps/Images/Singles/House",
+    "map.height": 90,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 32,
+    "map.tileWidth": 32,
+    "map.width": 90,
+    "openFiles": [
+        "TMX/Village.tmx",
+        "TSX/Terrains.tsx",
+        "TMX/Casa_custom.tmx",
+        "TSX/house_singles.tsx",
+        "TSX/singles.tsx"
+    ],
+    "project": "Casa.tiled-project",
+    "recentFiles": [
+        "TSX/singles.tsx",
+        "TSX/house_singles.tsx",
+        "TMX/Casa_custom.tmx",
+        "TSX/Terrains.tsx",
+        "TMX/Village.tmx",
+        "C:/Users/magic/Desktop/Casa_custom.tmx",
+        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/map.tmx",
+        "TSX/buildings_obj.tsx",
+        "TSX/Singles.tsx",
+        "TMX/City.tmx",
+        "TSX/Modern_Exteriors.tsx",
+        "TSX/Buildings.tsx"
+    ],
+    "tileset.lastUsedFilter": "Archivos de conjuntos de patrones Tiled (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.type": 1
+}

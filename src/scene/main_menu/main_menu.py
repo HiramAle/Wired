@@ -34,10 +34,10 @@ class MainMenu(StagedScene):
         self.set_stage(MainMenuStage(self))
 
     def update(self) -> None:
+        self.current_stage.update()
         self.clouds.update()
         self.visual.update()
         self.leds.update()
-        self.current_stage.update()
 
     def render(self) -> None:
         self.display.fill(BLACK_MOTION)

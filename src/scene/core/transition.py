@@ -2,7 +2,7 @@ import math
 
 import pygame
 import src.scene.core.scene_manager as scene_manager
-import src.engine.time as time
+import src.engine.time as game_time
 from src.constants.locals import CORNERS
 from src.scene.core.scene import Scene
 from src.constants.colors import *
@@ -24,6 +24,46 @@ class Transition(Scene):
         self.fromScene: Scene = to_scene
         self.toScene: Scene = from_scene
         self.transitionSpeed = 700
+
+
+class FadeTransition(Transition):
+    def __init__(self, to_scene: Scene, from_scene: Scene):
+        super().__init__("fade", to_scene, from_scene)
+        self.transitionSpeed = 500
+        self.alpha = 0
+        self.fade_in = True
+        self.fade_out = False
+        self.fade_surface = pygame.Surface(to_scene.display.get_size(), pygame.SRCALPHA)
+
+    def update(self) -> None:
+        if self.fade_in:
+            self.fromScene.update()
+            self.alpha += self.transitionSpeed * game_time.dt
+            if self.alpha >= 255:
+                self.alpha = 255
+                self.fade_in = False
+                self.fade_out = True
+        if self.fade_out:
+            self.toScene.update()
+            self.alpha -= self.transitionSpeed * game_time.dt
+            if self.alpha <= 0:
+                self.alpha = 0
+                self.fade_out = False
+
+        if not self.fade_in and not self.fade_out:
+            scene_manager.set_scene(self.toScene, swap=True)
+            pygame.mouse.set_visible(True)
+
+    def render(self) -> None:
+        if self.fade_in:
+            self.fromScene.render()
+            self.display.blit(self.fromScene.display, (0, 0))
+        if self.fade_out:
+            self.toScene.render()
+            self.display.blit(self.toScene.display, (0, 0))
+        self.fade_surface.fill(DARK_BLACK_MOTION)
+        self.fade_surface.set_alpha(self.alpha)
+        self.display.blit(self.fade_surface, (0, 0))
 
 
 class CircularTransition(Transition):
@@ -61,13 +101,13 @@ class CircularTransition(Transition):
         Update the circle radius and transition to the next scene if necessary.
         """
         if self.transitioningIn:
-            self.circleRadius -= time.dt * self.transitionSpeed
+            self.circleRadius -= game_time.dt * self.transitionSpeed
             if self.circleRadius <= 0:
                 self.transitioningIn = False
                 self.circlePosition = self.toScene.transitionPosition
 
         else:
-            self.circleRadius += time.dt * self.transitionSpeed
+            self.circleRadius += game_time.dt * self.transitionSpeed
             if self.circleRadius >= self.exitCircleRadius:
                 scene_manager.set_scene(self.toScene, swap=True)
                 pygame.mouse.set_visible(True)

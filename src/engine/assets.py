@@ -18,6 +18,7 @@ images_selector: dict[str, pygame.Surface] = {}
 images_cables: dict[str, pygame.Surface] = {}
 images_subnetting: dict[str, pygame.Surface] = {}
 images_character_creation: dict[str, pygame.Surface] = {}
+images_actors: dict[str, pygame.Surface] = {}
 # Character creation
 # skin_tone/action/direction/frames
 bodies: dict[int, dict[str, list[pygame.Surface]]] = {}
@@ -43,12 +44,13 @@ def prepare() -> None:
 
 def load(event: threading.Event) -> None:
     global images_main_menu, images_selector, images_cables, images_subnetting, images_character_creation
+    global images_actors
     images_main_menu = load_image_directory(IMAGES_MAIN_MENU)
     images_selector = load_image_directory(IMAGES_SELECTOR)
     images_cables = load_image_directory(IMAGES_CABLES)
     images_subnetting = load_image_directory(IMAGES_SUBNETTING)
     images_character_creation = load_image_directory(IMAGES_CHARACTER_CREATION)
-    # load_character_creation_assets()
+    images_actors = load_image_directory(IMAGES_ACTORS)
     event.clear()
 
 
@@ -88,20 +90,5 @@ def load_character_creation_assets(event: threading.Event):
     end_time = time.time()
     elapsed_time = end_time - start_time
     print(f"Tiempo de ejecución: {elapsed_time} segundos")
-
-    # for body, directions in bodies.items():
-    #     print(body, end=": ")
-    #     for direction in directions:
-    #         print(direction, ":", bodies[body][direction])
-
-    # start_time = time.time()
-    # all_animations = import_character_generator()
-    # bodies = all_animations["bodies"]
-    # eyes = all_animations["eyes"]
-    # hairstyles = all_animations["hairstyles"]
-    # outfits = all_animations["outfits"]
-    # end_time = time.time()
-    # elapsed_time = end_time - start_time
-    # print(f"Tiempo de ejecución: {elapsed_time} segundos")
 
     event.clear()

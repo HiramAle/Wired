@@ -1,73 +1,118 @@
-import pygame.draw
+from __future__ import annotations
+
+import pygame
+
 import src.scene.core.scene_manager as scene_manager
 import src.engine.input as game_input
+import src.engine.time as game_time
 import src.engine.data as data
+import src.scene.loading.loading as loading
+import src.engine.assets as assets
 from src.scene.core.scene import Scene
 from src.entities.player import Player
-from src.game_object.sprite import SpriteGroup
+from src.game_object.sprite import SpriteGroup, Sprite
 from src.constants.colors import *
 from src.gui.image import GUIImage
 from src.entities.camera import Camera
 from src.map.tiled_map import TiledMap
 from src.scene.cables.order import OrderCable
 from src.scene.subnetting.subnetting import Subnetting
+from src.dialog.dialog_system import DialogManager
+from src.entities.npc import NPC
+from src.engine.world import instance as world
+from src.constants.locals import *
 
 
-# class CustomGroup(SpriteGroup):
-#     def __init__(self):
-#         super().__init__()
-#
-#     @property
-#     def sprites(self):
-#         return sorted(self.__sprites, key=lambda sprite: sprite.y)
+class CustomGroup(SpriteGroup):
+    def __init__(self):
+        super().__init__()
+
+    def sprites(self):
+        return sorted(self._sprites, key=lambda sprite_: sprite_.y)
+
+
+class Sky:
+    def __init__(self):
+        self.sky_surface = pygame.Surface((CANVAS_WIDTH, CANVAS_HEIGHT))
+        self.start_color = [255, 255, 255]
+        self.end_color = (38, 101, 189)
+
+    def render(self, display: pygame.Surface):
+        for index, value in enumerate(self.end_color):
+            if self.start_color[index] > value:
+                self.start_color[index] -= 2 * game_time.dt
+
+        self.sky_surface.fill(self.start_color)
+        display.blit(self.sky_surface, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
 
 
 class TestMap(Scene):
-    def __init__(self):
-        super().__init__("test_map")
+    def __init__(self, name: str):
+        super().__init__(name)
         self.group = SpriteGroup()
         self.collisions = SpriteGroup()
-        self.tiled_objects = SpriteGroup()
-        self.toppers = SpriteGroup()
-        self.furniture = SpriteGroup()
-        # GUIImage("background", (0, 0), assets.images_misc["space_background"], self.group, centered=False)
-        self.player = Player((169 * 2, 250 * 2), self.collisions, self.tiled_objects)
-        self.camera = Camera()
+        self.tiled_objects = CustomGroup()
+        self.triggers = SpriteGroup()
+        self.map = TiledMap(data.maps[name])
+        self.player = Player(self, self.map.player_position, self.collisions, self.triggers, self.tiled_objects)
+        self.camera = Camera(*self.map.background.get_size())
         self.camera._entity = self.player
-        self.map = TiledMap(data.tiled_map)
-        self.tiled_objects.add(*self.map.objects)
-        # map_image = self.map.make_map()
-        # map_image.set_colorkey((0, 0, 0))
+        self.camera.position = self.player.x - 320, self.player.y - 180
+        self.night_surface = pygame.Surface(self.display.get_size(), pygame.SRCALPHA)
+        self.night_alpha = 0
         GUIImage("map", (0, 0), self.map.background, self.group, layer=1, centered=False)
-        self.tiled_objects.add(*self.map.dynamic)
-        self.collisions.add(*self.map.objects)
-        # self.group.add(*self.map.obstacles)
-        # self.collisions.add(*self.map.obstacles)
-        # self.furniture.add(*self.map.furniture)
-        # self.furniture.add(*self.map.toppers)
-        # self.transitionPosition = self.player.x - self.camera.x, self.player.y - self.camera.y
+        self.tiled_objects.add(*self.map.objects)
+        self.collisions.add(*self.map.collisions)
+        self.triggers.add(*self.map.interactions)
+        self.dialog = DialogManager(self.display)
+        self.npcs = SpriteGroup()
+        for npc in self.map.npcs:
+            NPC(self, npc.name, npc.position, self.collisions, self.player, self.tiled_objects, self.npcs)
+        self.lamps = SpriteGroup()
+        self.lamp = GUIImage("lamp", (0, 0), assets.images_actors["lamp"], self.lamps, scale=0.5)
+        self.sky = Sky()
 
-        self.display.fill(BLACK_MOTION)
-        self.group.render(self.display, self.camera.position)
-        # self.tiled_objects.render(self.display, self.camera.position)
-        # self.furniture.render(self.display, self.camera.position)
-        # self.toppers.render(self.display, self.camera.position)
+        # self.update()
+        # self.render()
 
     def update(self) -> None:
-        self.player.update()
+        # self.player.update()
+        self.tiled_objects.update()
         self.camera.update()
+        self.dialog.update()
 
-        if game_input.keyboard.key_pressed in [1, "1"]:
-            scene_manager.change_scene(self, OrderCable())
-        elif game_input.keyboard.key_pressed in [2, "2"]:
-            scene_manager.change_scene(self, Subnetting())
+        for npc in self.npcs.sprites():
+            npc: NPC
+            if npc.talkable and game_input.keyboard.keys["interact"]:
+                self.dialog.show_dialog(*npc.dialogs)
+
+        self.lamp.position = game_input.mouse.x + self.camera.x, game_input.mouse.y + self.camera.y
+
+    def change_scene(self, name: str):
+        if "playable" in name:
+            scene_name = name.split("_")[2]
+            if scene_manager.stack_scene[-2].name == scene_name:
+                scene_manager.exit_scene()
+            else:
+                scene_manager.change_scene(self,
+                                           loading.Loading(data.load_map, TestMap, (scene_name,), (scene_name,)),
+                                           transition=True)
+        else:
+            scene_name = name.split("_")[1]
+            scene_manager.change_scene(self, scenes[scene_name](), transition=True)
 
     def render(self) -> None:
-        self.display.fill(BLACK_MOTION)
+        self.display.fill(DARK_BLACK_MOTION)
         self.group.render(self.display, self.camera.position)
         self.tiled_objects.render(self.display, self.camera.position)
-        # self.furniture.render(self.display, self.camera.position)
-        # self.toppers.render(self.display, self.camera.position)
+        if world.day_time >= 1140:
+            self.sky.render(self.display)
+            self.lamp.render(self.display, self.camera.position)
+        self.dialog.render()
+        time_surface = assets.fonts["monogram"].render(world.time_string(), 32)
+        self.display.blit(time_surface, (570, 10))
+        alpha_surface = assets.fonts["monogram"].render(str(tuple(int(value) for value in self.sky.start_color)), 32)
+        self.display.blit(alpha_surface, (200, 25))
 
-        # for obstacle in self.map.obstacles:
-        #     pygame.draw.rect(self.display, "cyan", obstacle.rect, 2)
+
+scenes = {"cables": OrderCable, "subnetting": Subnetting, "playable": TestMap}
