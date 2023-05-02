@@ -18,7 +18,7 @@ from src.scene.subnetting.results_stage import Results
 class Subnetting(StagedScene):
     def __init__(self):
         super().__init__("subnetting")
-
+        self.starting_time = pygame.time.get_ticks()
         pygame.mouse.set_visible(True)
         zones = ["Museo", "Hotel", "Hospital", "Escuela", "Oficina", "Supermercado"]
         building_names = {
@@ -42,8 +42,8 @@ class Subnetting(StagedScene):
         self.buildings = SpriteGroup()
         background_image = assets.images_subnetting[f"notebook_{choice(['blue', 'red', 'brown'])}"]
         GUIImage("background", (0, 0), background_image, self.group, centered=False)
-        GUIImage("base_map", (40, 18), assets.images_subnetting["base_map"], self.group, centered=False)
-        GUIImage("map", (57, 29), assets.images_subnetting["map"], self.group, centered=False)
+        self.base_map = GUIImage("base_map", (40, 18), assets.images_subnetting["base_map"], self.group, centered=False)
+        self.map = GUIImage("map", (57, 29), assets.images_subnetting["map"], self.group, centered=False)
         # Fill houses
         selected_buildings = []
         building_positions = []
@@ -78,11 +78,16 @@ class Subnetting(StagedScene):
         self.group.update()
         self.current_stage.update()
 
-        try:
-            if self.current_stage.finished:
-                self.set_stage(Results(self))
-        except:
-            ...
+        if self.current_stage.name == "zone_stage":
+            if not self.current_stage.finished:
+                return
+            elapsed_time = (pygame.time.get_ticks() - self.starting_time) / 1000
+            self.map.deactivate()
+            self.base_map.deactivate()
+            self.set_stage(Results(self, elapsed_time))
+        if self.current_stage.name == "results":
+            if game_input.keyboard.keys["space"]:
+                scene_manager.exit_scene()
 
     def render(self) -> None:
         self.display.fill("#242424")

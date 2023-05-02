@@ -35,3 +35,9 @@ def write_save_data(save_index: int, data: dict):
     write_json(f"{SAVES_FOLDER}/save_{save_index}/save.json", save_data)
     saves = []
     load_saves()
+
+
+def update_value(save_index: int, data: dict):
+    json_data = load_json(f"{SAVES_FOLDER}/save_{save_index}/save.json")
+    json_data.update(data)
+    write_json(f"{SAVES_FOLDER}/save_{save_index}/save.json", json_data)

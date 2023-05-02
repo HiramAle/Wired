@@ -8,7 +8,7 @@ from random import shuffle
 
 class Zone(Stage):
     def __init__(self, scene: StagedScene, data: CustomMaskProblem):
-        super().__init__("subnet_mask", scene)
+        super().__init__("zone_stage", scene)
         self.data = data
         self.group = SpriteGroup()
         self.labels = SpriteGroup()
@@ -39,7 +39,7 @@ class Zone(Stage):
         GUIImage("zone_underscore", (435, 17), underscore_name, self.group, centered=False)
         self.posit_it = GUIImage("post_it", (366, 93), assets.images_subnetting["post_it_class"], self.group,
                                  centered=False, scale=2)
-
+        self.instructions = GUIText("Selecciona en\nel mapa una\nárea para\nconfigurar.", (483, 188), 32, self.group)
         GUIText("Dirección IP:", (45, 188), 32, self.group, font="fool", centered=False, color="#2E2E2E", shadow=False)
         GUIText(self.data.zone, (473.5, 25.5), 16, self.group, font="fool", color="#2E2E2E", shadow=False)
         GUIText(self.data.ip, (276.5, 203), 32, self.group, font="fool", color="#2E2E2E", shadow=False)
@@ -140,12 +140,13 @@ class Zone(Stage):
         self.group.update()
         self.labels.update()
         # if self.tab.clicked:
-            # self.scene.exit_stage()
+        # self.scene.exit_stage()
 
         self.drag()
 
         if self.selected_building and self.posit_it:
             self.posit_it.kill()
+            self.instructions.kill()
             self.posit_it = None
             GUIImage("building", (96, 272), assets.images_subnetting["test_house"], self.group, scale=2)
             GUIImage("building_indicator", (72, 325), assets.images_subnetting["indicator"], self.group, centered=False)

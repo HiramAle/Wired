@@ -38,6 +38,7 @@ class OrderCable(Scene):
         self.cables = []
 
         shuffled_cables = self.cable_order.copy()
+        shuffle(shuffled_cables)
 
         for index, cable_name in enumerate(shuffled_cables):
             cable_position = (int(self.display.get_width() / 2), 40 + (index * 40))
@@ -55,7 +56,7 @@ class OrderCable(Scene):
 
         self.text = GUIText("Presiona Espacio para continuar", (self.center_x, 300), 32, self.group, layer=10)
         self.text.opacity = 0
-        GUIText("Estanard", (562, self.center_y - 10), 32, self.group, layer=10)
+        GUIText("Estandard", (562, self.center_y - 10), 32, self.group, layer=10)
         GUIText(self.standardName, (562, self.center_y + 10), 32, self.group, layer=10)
 
     def check_cable_order(self):

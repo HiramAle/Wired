@@ -1,1 +1,13 @@
-{"name": "Kat"}
+{
+  "name": "MJJ",
+  "pronoun": "elle",
+  "time": 5208907,
+  "money": 0,
+  "cable": 0,
+  "connectors": 0,
+  "inventory": {
+    "cables": {
+      "3": 1
+    }
+  }
+}

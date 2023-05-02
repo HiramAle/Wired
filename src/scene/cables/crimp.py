@@ -10,6 +10,9 @@ from src.game_object.sprite import SpriteGroup
 from src.scene.core.scene import Scene
 from src.gui.image import GUIImage
 from src.gui.text import GUIText
+from src.utils.json_saver import instance as save_manager
+import src.user.saves as saves
+import src.engine.data as data
 
 
 class CrimpCable(Scene):
@@ -50,6 +53,10 @@ class CrimpCable(Scene):
         self.standard_text.deactivate()
         self.final_cable = GUIImage("final", (-150, self.center_y),
                                     assets.images_cables[f"standard_{self.standard.lower()[-1]}"], self.group)
+        self.cable_quality = 0
+        self.qualities = []
+        self.color_values = {(153, 196, 122, 255): "green", (255, 198, 109, 255): "yellow", (222, 84, 81, 255): "red"}
+        self.color_quality = {"green": 3, "yellow": 2, "red": 1}
 
     def drag(self):
         # Start dragging
@@ -105,6 +112,9 @@ class CrimpCable(Scene):
 
             # Play animation if mouse left button pressed
             if input.mouse.buttons["left"]:
+                color_x = int(self.indicator.x - self.color_bar.rect.left)
+                color = self.color_values[tuple(self.color_bar.image.get_at((color_x, 9)))]
+                self.qualities.append(self.color_quality[color])
                 self.crimp_tool.playing = True
                 self.indicator_moving = False
 
@@ -142,6 +152,16 @@ class CrimpCable(Scene):
                 self.continue_text.activate()
 
             if input.keyboard.keys["space"]:
+                cable_quality = random.choice(self.qualities)
+                try:
+                    save_manager.game_save.inventory["cables"][str(cable_quality)] += 1
+                except KeyError as error:
+                    if error.args[0] == "cables":
+                        save_manager.game_save.inventory["cables"] = {}
+                    save_manager.game_save.inventory["cables"][str(cable_quality)] = 1
+                save_manager.game_save.save()
+                # saves.update_value(data.active_save, {"cables": {str(cable_quality): 1}})
+
                 scene_manager.exit_scene()
 
     def start(self):

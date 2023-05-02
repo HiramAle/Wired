@@ -56,12 +56,19 @@ IMAGES_SELECTOR = "assets/images/selector"
 IMAGES_CABLES = "assets/images/cables"
 IMAGES_SUBNETTING = "assets/images/subnetting"
 IMAGES_CHARACTER_CREATION = "assets/images/character_creation"
+IMAGES_ACTORS = "assets/images/actor"
+IMAGES_WORLD = "assets/images/world"
+NPC_SPRITE_SHEETS = "assets/npcs"
+NPC_DATA = "data/npcs"
 # Scene Data
 DATA_CABLES = "data/scenes/cables.json"
 DATA_CHARACTER_CREATION_FRAMES = "data/character_creation/animation_frames_data.json"
 SUBNETTING_EXERCISES = "data/scenes/subnetting"
 # Maps
-TILED_HOUSE = "data/maps/TMX/Players_House.tmx"
+MAPS = {"playershouse": "data/maps/TMX/Casa_custom.tmx",
+        "village": "data/maps/TMX/Village.tmx"}
+TILED_HOUSE = "data/maps/TMX/Casa_custom.tmx"
+VILLAGE = "data/maps/TMX/Village.tmx"
 # Character creation
 BODIES = "assets/character_creation/bodies"
 EYES = "assets/character_creation/eyes"

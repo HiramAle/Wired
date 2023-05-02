@@ -1,6 +1,4 @@
-import json
 import math
-
 import pygame
 import src.engine.assets as assets
 import src.engine.input as game_input
@@ -17,7 +15,9 @@ from src.scene.character_creation.colors import ColorPicker
 from src.constants.colors import *
 from src.scene.character_creation.character_objects import Tab, NameLabel
 from src.scene.map.test_map import TestMap
-import random
+from src.utils.json_saver import instance as save_manager
+import src.scene.loading.loading as loading
+from src.scene.world.world import World
 
 alphabet_dict = {
     'a': [(1, 5), (3, 1), (5, 5), (3, 8), (1, 5), (5, 5)],
@@ -95,16 +95,18 @@ class CharacterCreation(Scene):
         self.info_tab = Tab((94, 71), "data", self.default_group, self.interactive)
         self.selection_tab.state = "opened"
 
-        self.name_label = NameLabel((self.clipboard_padding, 134.5), self.character_info)
+        self.name_label = NameLabel((self.clipboard_padding, 134.5), self.character_info, self.interactive)
 
         self.left_pronoun = GUIImage("left_pronoun", (119 + 3, 244),
                                      assets.images_character_creation["left_button_temp"],
-                                     self.character_info)
+                                     self.character_info, self.interactive)
         self.right_pronoun = GUIImage("right_pronoun", (232 + 3, 244),
-                                      assets.images_character_creation["right_button_temp"], self.character_info)
+                                      assets.images_character_creation["right_button_temp"], self.character_info,
+                                      self.interactive)
         self.pronoun_index = 0
         self.pronoun_icons = [assets.images_character_creation["el"], assets.images_character_creation["ella"],
                               assets.images_character_creation["elle"]]
+        self.pronouns = ["el", "ella", "elle"]
         self.pronoun_icon = GUIImage("pronoun_icon", (self.clipboard_padding, 244),
                                      self.pronoun_icons[self.pronoun_index], self.character_info)
 
@@ -116,7 +118,6 @@ class CharacterCreation(Scene):
         self.name = GUIText("", (175, 305.5), 16, self.character_info, shadow=False, color=BLACK_SPRITE)
 
         self.active_tab = "selection"
-
         window.set_cursor("arrow")
 
     def draw_signature(self, name: str):
@@ -149,12 +150,18 @@ class CharacterCreation(Scene):
 
     def update(self) -> None:
         self.default_group.update()
-
         self.avatar.play()
         self.avatar.body = self.skin_picker.selected_color
         self.avatar.eyes = self.eyes_picker.selected_color
         self.avatar.outfit_color = self.outfit_picker.selected_color
         self.avatar.hairstyle_color = self.hair_picker.selected_color
+
+        if any([sprite.hovered for sprite in self.interactive.sprites()]):
+            window.set_cursor("hand")
+            if game_input.mouse.buttons["left_hold"]:
+                window.set_cursor("grab")
+        else:
+            window.set_cursor("arrow")
 
         if self.selection_tab.clicked and self.active_tab == "info":
             self.active_tab = "selection"
@@ -257,7 +264,9 @@ class CharacterCreation(Scene):
             if self.name.text != "" and game_input.keyboard.key_pressed in ["F", "f"] and not self.name_label.writing:
                 GUIImage("test", (self.clipboard_padding, 283), self.draw_signature(self.name.text), self.default_group)
                 self.instructions.kill()
-                saves.write_save_data(self.save_index, {"name": self.name.text})
+                save_manager.game_save.name = self.name.text
+                save_manager.game_save.pronoun = self.pronouns[self.pronoun_index]
+                save_manager.game_save.save()
                 self.avatar.save_character()
-                scene_manager.change_scene(self, TestMap(), True)
-
+                scene_manager.change_scene(self, loading.Loading(data.load_map, TestMap, ("playershouse",),
+                                                                 ("playershouse",)), True)

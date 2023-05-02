@@ -1,1 +1,13 @@
-{"name": "sdf"}
+{
+  "name": "Letty",
+  "pronoun": "ella",
+  "time": 0,
+  "money": 0,
+  "cable": 0,
+  "connectors": 0,
+  "inventory": {
+    "cables": {
+      "2": 1
+    }
+  }
+}

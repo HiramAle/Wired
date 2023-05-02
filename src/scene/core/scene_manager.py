@@ -1,7 +1,7 @@
 import pygame
 from src.scene.core.scene import Scene
 from src.scene.loading.loading import Loading
-from src.scene.core.transition import CircularTransition
+from src.scene.core.transition import CircularTransition, FadeTransition
 from src.scene.main_menu.main_menu import MainMenu
 import src.engine.assets as assets
 import src.engine.window as window
@@ -47,7 +47,7 @@ def change_scene(from_scene: Scene, to_scene: Scene, transition=False, swap=Fals
     :param swap: If True, removes the current scene from the stack before adding the new scene. Defaults to False.
     """
     if transition:
-        set_scene(CircularTransition(from_scene, to_scene), swap)
+        set_scene(FadeTransition(from_scene, to_scene), swap)
     else:
         set_scene(to_scene, swap)
 

@@ -6,10 +6,10 @@ import src.engine.window as window
 import src.engine.input as input
 import src.engine.time as game_time
 import src.user.preferences as preferences
-import src.user.saves as saves
 import src.engine.assets as assets
 import src.scene.core.scene_manager as scene_manager
 import src.engine.data as data
+from src.engine.world import instance as world
 
 
 class Game:
@@ -18,7 +18,7 @@ class Game:
         data.init()
         assets.prepare()
         preferences.init()
-        saves.init()
+        # saves.init()
         window.init()
         scene_manager.init()
 
@@ -28,15 +28,17 @@ class Game:
 
             # update = threading.Thread(target=scene_manager.update)
             # render = threading.Thread(target=scene_manager.render)
-
+            #
             # update.start()
             # render.start()
-
+            #
             # update.join()
             # render.join()
 
             scene_manager.update()
             scene_manager.render()
+
+            world.update()
 
             game_time.update()
             window.update()
