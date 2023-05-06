@@ -21,7 +21,7 @@ class OptionsStage(Stage):
         window.set_cursor("arrow")
         self.descriptions = {"RESOLUCIÓN": "Cambia el tamaño de la ventana del juego.",
                              "VOLÚMEN": "Cambia el volúmen de los efectos y la música.",
-                             "GUARDAR": "Guarda las preferencias.",
+                             "APLICAR": "Guarda las preferencias.",
                              "SALIR": "Regresa al menú principal."}
         self.option = ""
         self.group = SpriteGroup()
@@ -60,7 +60,7 @@ class OptionsStage(Stage):
                 sprite.opacity = 0
             self.music_icons.append(sprite)
 
-        self.apply_button = TextButton("- GUARDAR -", (197, 210), self.group, self.interactive)
+        self.apply_button = TextButton("- APLICAR -", (197, 210), self.group, self.interactive)
 
     def update(self):
         self.group.update()
@@ -70,7 +70,7 @@ class OptionsStage(Stage):
         elif any([sprite.hovered for sprite in self.volume_group.sprites()]):
             self.option = "VOLÚMEN"
         elif self.apply_button.hovered:
-            self.option = "GUARDAR"
+            self.option = "APLICAR"
         elif self.exit_button.hovered:
             self.option = "SALIR"
         else:

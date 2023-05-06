@@ -1,1 +1,24 @@
-{"ip": "101.0.0.0", "class": "A", "default_mask": "255.0.0.0", "subnets_needed": 2, "custom_mask": "255.128.0.0", "subnets": {"subnet_1": {"id": "101.0.0.0", "broadcast": "101.127.255.255", "first": "101.0.0.1"}, "subnet_2": {"id": "101.128.0.0", "broadcast": "101.255.255.255", "first": "101.128.0.1"}}}
+{
+  "ip": "175.15.0.0",
+  "class": "B",
+  "default_mask": "255.255.0.0",
+  "subnets_needed": 3,
+  "custom_mask": "255.255.224.0",
+  "subnets": {
+    "subnet_1": {
+      "id": "175.15.32.0",
+      "broadcast": "175.15.63.255",
+      "first": "175.15.32.1"
+    },
+    "subnet_2": {
+      "id": "175.15.64.0",
+      "broadcast": "175.15.95.255",
+      "first": "175.15.64.1"
+    },
+    "subnet_3": {
+      "id": "175.15.96.0",
+      "broadcast": "175.15.127.255",
+      "first": "175.15.96.1"
+    }
+  }
+}

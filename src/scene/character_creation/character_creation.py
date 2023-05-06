@@ -268,5 +268,6 @@ class CharacterCreation(Scene):
                 save_manager.game_save.pronoun = self.pronouns[self.pronoun_index]
                 save_manager.game_save.save()
                 self.avatar.save_character()
-                scene_manager.change_scene(self, loading.Loading(data.load_map, TestMap, ("playershouse",),
-                                                                 ("playershouse",)), True)
+                # scene_manager.change_scene(self, loading.Loading(data.load_map, TestMap, ("playershouse",),
+                #                                                  ("playershouse",)), True)
+                scene_manager.change_scene(self, loading.Loading(data.load_maps, World), True)

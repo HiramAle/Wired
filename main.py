@@ -35,7 +35,6 @@ class Game:
             # update.join()
             # render.join()
 
-
             scene_manager.update()
             scene_manager.render()
 

@@ -1,13 +1,9 @@
 {
-  "name": "Letty",
-  "pronoun": "ella",
+  "name": "Zazu",
+  "pronoun": "el",
   "time": 0,
   "money": 0,
   "cable": 0,
   "connectors": 0,
-  "inventory": {
-    "cables": {
-      "2": 1
-    }
-  }
+  "inventory": {}
 }
