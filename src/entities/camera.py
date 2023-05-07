@@ -29,7 +29,6 @@ class Camera(GameObject):
     @tracked_entity.setter
     def tracked_entity(self, value: Entity):
         self._entity = value
-        # self.position = value.position
 
     @property
     def target_position(self) -> tuple:

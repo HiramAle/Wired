@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="87">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="92">
  <tileset firstgid="1" source="../TSX/Tileset_Casa.tsx"/>
  <tileset firstgid="181" name="Modern_Exteriors" tilewidth="32" tileheight="32" tilecount="36432" columns="176">
   <image source="../Images/Modern_Exteriors_Complete_Tileset_32x32.png" width="5632" height="6624"/>
@@ -289,7 +289,7 @@
   <object id="42" x="480" y="736" width="32" height="12"/>
  </objectgroup>
  <objectgroup id="12" name="interactions" class="dinamic">
-  <object id="43" name="scene_playable_village" x="480" y="704" width="32" height="32"/>
+  <object id="43" name="zone_village" x="480" y="704" width="32" height="32"/>
   <object id="47" name="sleep" x="278" y="224" width="27" height="32"/>
   <object id="51" name="scene_cables" x="608" y="434" width="96" height="24"/>
   <object id="74" name="stairs" x="352" y="381" width="64" height="125"/>
@@ -297,17 +297,23 @@
  </objectgroup>
  <objectgroup id="15" name="positions">
   <object id="75" name="player_village" x="496" y="712">
+   <properties>
+    <property name="direction" value="up"/>
+   </properties>
    <point/>
   </object>
   <object id="76" name="kat" type="npc_spawn" x="400" y="589">
    <point/>
   </object>
   <object id="77" name="player_" x="300" y="240">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="16" name="nodes" visible="0">
-  <object id="81" x="330" y="240">
+ <objectgroup id="16" name="nodes">
+  <object id="81" name="A" x="330" y="240">
    <point/>
   </object>
   <object id="82" x="330" y="336">
@@ -319,10 +325,19 @@
   <object id="84" x="384" y="524">
    <point/>
   </object>
-  <object id="85" x="384" y="585">
+  <object id="85" x="384" y="592">
    <point/>
   </object>
   <object id="86" x="256" y="216">
+   <point/>
+  </object>
+  <object id="89" x="496" y="592">
+   <point/>
+  </object>
+  <object id="90" x="496" y="662">
+   <point/>
+  </object>
+  <object id="91" x="496" y="729">
    <point/>
   </object>
  </objectgroup>

@@ -88,17 +88,17 @@
         },
         "TMX/Casa_custom.tmx": {
             "expandedObjectLayers": [
-                13,
-                12,
-                16,
                 11,
-                15
+                16,
+                15,
+                12,
+                13
             ],
-            "scale": 1.5,
-            "selectedLayer": 11,
+            "scale": 2,
+            "selectedLayer": 9,
             "viewCenter": {
-                "x": 387.33333333333337,
-                "y": 495.66666666666663
+                "x": 610.75,
+                "y": 637.5
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -115,21 +115,23 @@
         },
         "TMX/Village.tmx": {
             "expandedGroupLayers": [
-                36,
                 46,
-                47,
-                29
+                36,
+                29,
+                47
             ],
             "expandedObjectLayers": [
+                29,
                 31,
-                30,
-                29
+                17,
+                13,
+                30
             ],
-            "scale": 3,
-            "selectedLayer": 20,
+            "scale": 0.33,
+            "selectedLayer": 15,
             "viewCenter": {
-                "x": 960,
-                "y": 1039.8333333333333
+                "x": 1231.8181818181815,
+                "y": 827.2727272727273
             }
         },
         "TMX/Village.tmx#Singles": {
@@ -239,18 +241,17 @@
     "map.width": 90,
     "openFiles": [
         "TMX/Village.tmx",
-        "TSX/house_singles.tsx",
         "TMX/Casa_custom.tmx",
-        "TSX/Tileset_Casa.tsx",
-        "TSX/singles.tsx"
+        "TSX/house_singles.tsx"
     ],
     "project": "Casa.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
         "TMX/Village.tmx",
         "TSX/house_singles.tsx",
+        "TMX/Casa_custom.tmx",
         "TSX/singles.tsx",
         "TSX/Tileset_Casa.tsx",
-        "TMX/Casa_custom.tmx",
         "TSX/Terrains.tsx",
         "TSX/fontain.tsx",
         "C:/Users/magic/Desktop/Casa_custom.tmx",

@@ -924,12 +924,32 @@
   <object id="2111" gid="63252" x="1664" y="384" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="13" name="buildings">
-  <object id="1" gid="63264" x="288" y="864" width="160" height="256"/>
-  <object id="63" gid="63215" x="640" y="896" width="256" height="384"/>
-  <object id="98" gid="63267" x="64" y="1888" width="320" height="192"/>
-  <object id="138" gid="63262" x="1568" y="1888" width="320" height="384"/>
+  <object id="1" gid="63264" x="288" y="864" width="160" height="256">
+   <properties>
+    <property name="centered" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="63" gid="63215" x="640" y="896" width="256" height="384">
+   <properties>
+    <property name="centered" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="98" gid="63267" x="64" y="1888" width="320" height="192">
+   <properties>
+    <property name="centered" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="138" gid="63262" x="1568" y="1888" width="320" height="384">
+   <properties>
+    <property name="centered" type="bool" value="false"/>
+   </properties>
+  </object>
   <object id="317" gid="63284" x="1792" y="1856" width="32" height="64"/>
-  <object id="2121" gid="63289" x="1344" y="544" width="256" height="416"/>
+  <object id="2121" gid="63289" x="1344" y="544" width="256" height="416">
+   <properties>
+    <property name="centered" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="17" name="street objects">
   <object id="3" gid="63237" x="64" y="960" width="96" height="64"/>
@@ -1361,7 +1381,7 @@
   <object id="2141" x="1647.33" y="1252" width="214.667" height="83.3333"/>
  </objectgroup>
  <objectgroup id="30" name="interactions">
-  <object id="2130" name="scene_playable_playershouse" x="1406.25" y="468" width="35.25" height="19"/>
+  <object id="2130" name="zone_playershouse" x="1406.25" y="468" width="35.25" height="19"/>
   <object id="2135" name="scene_playable_store" x="313.75" y="847.25" width="41" height="24.75"/>
   <object id="2136" name="scene_playable_npcshouse" x="122.182" y="1863.45" width="44" height="23.4545"/>
   <object id="2139" name="scene_playable_city" x="1517.5" y="1229" width="117.75" height="37.75"/>
@@ -1370,7 +1390,10 @@
   <object id="2162" name="amy" type="npc_spawn" x="1347" y="1136">
    <point/>
   </object>
-  <object id="2163" name="player_" x="1423" y="503">
+  <object id="2163" name="player_playershouse" x="1423" y="503">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>

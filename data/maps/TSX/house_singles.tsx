@@ -40,7 +40,7 @@
  <tile id="6">
   <image width="64" height="96" source="../Images/Singles/House/couch.png"/>
   <objectgroup draworder="index" id="2">
-   <object id="1" x="2" y="28" width="44" height="66"/>
+   <object id="2" x="2" y="30" width="44" height="64"/>
   </objectgroup>
  </tile>
  <tile id="7">
@@ -173,6 +173,7 @@
   <image width="96" height="64" source="../Images/Singles/House/desktop.png"/>
   <objectgroup draworder="index" id="2">
    <object id="1" x="2" y="28" width="92" height="30"/>
+   <object id="2" name="trigger" x="-14" y="6" width="124" height="74"/>
   </objectgroup>
  </tile>
  <tile id="39">

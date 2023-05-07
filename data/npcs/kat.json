@@ -2,5 +2,6 @@
   "dialogs": [
     "Hola @, Por que no\npruebas a interactuar ...",
     "con las mesas de \ntrabajo?"
-  ]
+  ],
+  "start_zone": "playershouse"
 }
