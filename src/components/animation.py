@@ -29,6 +29,9 @@ class Animation:
         self.loop = True
         self.done = False
 
+    def __repr__(self):
+        return f"Animation({self.frames}, {self.data}, {self.speed}, {self.loop}, {self.done})"
+
     def rewind(self):
         self._frame_index = 0
         self.done = False

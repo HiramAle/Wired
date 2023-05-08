@@ -9,7 +9,7 @@ pygame.init()
 categories = ["profile", "inventory", "equipment", "tasks", "save", "settings"]
 
 window = pygame.display.set_mode((1280, 720))
-canvas = pygame.Surface((640, 320))
+canvas = pygame.Surface((640, 360))
 clock = pygame.time.Clock()
 dt = 0.2
 mouse_x, mouse_y = 0, 0
@@ -63,12 +63,10 @@ class Tab:
     def selected(self, value: bool):
         if value == self._selected:
             return
-
         if value:
             self.image = self.tab_selected
         else:
             self.image = self.tab_idle
-
         self._selected = value
 
     @property
@@ -107,7 +105,7 @@ class Tab:
 class Book:
     def __init__(self, index: int):
         self.initial_tab = categories[index]
-        self.position = (47, 0)
+        self.position = (47, 20)
         self.categories: dict[str, Category] = {category: Category(category) for category in categories}
         self.actual_category: Category = self.categories[list(self.categories.keys())[index]]
         self.tabs: dict[str, Tab] = {category: Tab(category) for category in categories}

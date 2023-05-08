@@ -58,6 +58,7 @@ IMAGES_SUBNETTING = "assets/images/subnetting"
 IMAGES_CHARACTER_CREATION = "assets/images/character_creation"
 IMAGES_ACTORS = "assets/images/actor"
 IMAGES_WORLD = "assets/images/world"
+IMAGES_BOOK = "assets/images/book"
 NPC_SPRITE_SHEETS = "assets/npcs"
 NPC_DATA = "data/npcs"
 # Scene Data

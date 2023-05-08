@@ -20,6 +20,7 @@ images_subnetting: dict[str, pygame.Surface] = {}
 images_character_creation: dict[str, pygame.Surface] = {}
 images_actors: dict[str, pygame.Surface] = {}
 images_world: dict[str, pygame.Surface] = {}
+images_book: dict[str, pygame.Surface] = {}
 # Character creation
 # skin_tone/action/direction/frames
 bodies: dict[int, dict[str, list[pygame.Surface]]] = {}
@@ -45,7 +46,7 @@ def prepare() -> None:
 
 def load(event: threading.Event) -> None:
     global images_main_menu, images_selector, images_cables, images_subnetting, images_character_creation
-    global images_actors, images_world
+    global images_actors, images_world, images_book
     images_main_menu = load_image_directory(IMAGES_MAIN_MENU)
     images_selector = load_image_directory(IMAGES_SELECTOR)
     images_cables = load_image_directory(IMAGES_CABLES)
@@ -53,6 +54,8 @@ def load(event: threading.Event) -> None:
     images_character_creation = load_image_directory(IMAGES_CHARACTER_CREATION)
     images_actors = load_image_directory(IMAGES_ACTORS)
     images_world = load_image_directory(IMAGES_WORLD)
+    images_book = load_image_directory(IMAGES_BOOK)
+    print(images_book)
     event.clear()
 
 

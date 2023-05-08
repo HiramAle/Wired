@@ -151,10 +151,6 @@ def crop_image(image: pygame.Surface, x_crop: int, y_crop: int, crop_width: int,
     return new_image
 
 
-def get_idle_frames(category: str):
-    ...
-
-
 # Load animation data
 animation_data = load_json(DATA_CHARACTER_CREATION_FRAMES)
 

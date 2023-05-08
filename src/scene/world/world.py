@@ -19,6 +19,7 @@ from src.scene.world.sprite import Sprite
 from src.scene.world.zone import Zone
 from src.scene.world.player import Player
 from src.constants.colors import DARK_BLACK_MOTION
+from src.scene.pause_menu.pause import Pause
 
 
 class World(Scene):
@@ -92,6 +93,9 @@ class World(Scene):
             npc.pathing(self.day_time)
         self.update_zone_transition()
         self.zone.update()
+
+        if game_input.keyboard.keys["esc"]:
+            scene_manager.change_scene(self, Pause(0))
 
     def render(self) -> None:
         # Render zone

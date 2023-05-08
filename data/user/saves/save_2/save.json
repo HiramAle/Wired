@@ -2,7 +2,7 @@
   "name": "Kat",
   "pronoun": "ella",
   "time": 0,
-  "money": 0,
+  "money": 99999,
   "cable": 0,
   "connectors": 0,
   "inventory": {}
