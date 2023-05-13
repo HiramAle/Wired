@@ -18,13 +18,14 @@ class Loader:
 
     @staticmethod
     def save_json(path: str, data: dict) -> bool:
-        try:
-            with open(path, "w") as file:
-                json.dump(data, file, indent=2)
-            return True
-        except:
-            print("Unable to save JSON file")
-            return False
+        # try:
+        #
+        # except:
+        #     print("Unable to save JSON file")
+        #     return False
+        with open(path, "w") as file:
+            json.dump(data, file, indent=2)
+        return True
 
     @staticmethod
     def load_image(path: str) -> pygame.Surface:

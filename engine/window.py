@@ -34,7 +34,9 @@ class Window:
     @classmethod
     def set_window_size(cls, size: tuple):
         cls.width, cls.height = size
+        cls.size = size
         Preferences.window_width, Preferences.window_height = size
+        Preferences.save()
         pygame.display.set_mode(size)
 
     @staticmethod

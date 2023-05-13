@@ -135,12 +135,16 @@ class Sprite(GameObject):
 
     @property
     def hovered(self) -> bool:
+        if not self.active:
+            return False
         if self.rect.collidepoint(Input.mouse.position):
             return True
         return False
 
     @property
     def clicked(self) -> bool:
+        if not self.active:
+            return False
         if not self.hovered:
             return False
         if Input.mouse.buttons["left"]:

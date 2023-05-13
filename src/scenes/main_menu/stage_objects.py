@@ -58,18 +58,19 @@ class ExitButton(Sprite):
 class DescriptionTitle(Text):
     def __init__(self, position: tuple, text: str, *groups: SpriteGroup):
         super().__init__(position, text, 16, WHITE_MOTION, *groups)
-        self.text = text
+        self.__text = text
         self.shadow = False
+        self.textSurface = Assets.fonts["monogram"].render(self.__text, 16, WHITE_MOTION)
 
     @property
     def text(self) -> str:
-        return self._text
+        return self.__text
 
     @text.setter
     def text(self, value: str) -> None:
-        if value != self.text:
-            self._text = value
-            self.textSurface = Assets.fonts["monogram"].render(self._text, 16, WHITE_MOTION)
+        if value != self.__text:
+            self.__text = value
+            self.textSurface = Assets.fonts["monogram"].render(self.__text, 16, WHITE_MOTION)
             self.image = pygame.Surface(
                 (self.textSurface.get_width() + 6, self.textSurface.get_height() + 4))
             self.image.fill(BLACK_MOTION)

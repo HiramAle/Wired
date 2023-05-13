@@ -1,19 +1,27 @@
 from engine.loader import Loader
 from ctypes import windll
+from engine.constants import Paths
 
 
 class Preferences:
-    filename = "preferences.json"
+    filename = Paths.USER_PREFERENCES
     window_width = 0
     window_height = 0
     fullscreen = True
     borderless = False
     windowed = False
-    volume = 10
+    volume = 4
 
     @classmethod
-    def __dict(cls) -> dict:
-        return {key: value for key, value in vars(cls).items() if key != "filename"}
+    def to_dict(cls) -> dict:
+        return {
+            "window_width": cls.window_width,
+            "window_height": cls.window_height,
+            "fullscreen": cls.fullscreen,
+            "borderless": cls.borderless,
+            "windowed": cls.windowed,
+            "volume": cls.volume
+        }
 
     @classmethod
     def load(cls):
@@ -34,7 +42,7 @@ class Preferences:
 
     @classmethod
     def save(cls):
-        if Loader.save_json(cls.filename, cls.__dict__):
-            print("Preferences saved.")
+        if Loader.save_json(cls.filename, cls.to_dict()):
+            print("Preferences saved")
             return
         print("Can't load preferences")

@@ -10,4 +10,6 @@ class Colors:
     SPRITE = "#3A3A50"
 
 
-
+class Paths:
+    USER_PREFERENCES = "data/user/preferences.json"
+    USER_SAVES_FOLDER = "data/user/saves"

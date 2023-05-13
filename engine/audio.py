@@ -1,6 +1,5 @@
 import pygame.mixer
-
-import src.user.preferences as preferences
+from engine.preferences import Preferences
 
 
 class AudioManager:
@@ -13,7 +12,7 @@ class AudioManager:
 
     @staticmethod
     def set_volume(volume: int):
-        if 0 > volume > 5:
-            raise ValueError("Volume cannot be greater than 5 and lesser than 0.")
-        preferences.volume = volume
-        preferences.set_preferences({"volume": volume})
+        if 0 > volume > 20:
+            raise ValueError("Volume cannot be greater than 20 and lesser than 0.")
+        Preferences.volume = volume * 5
+        Preferences.save()

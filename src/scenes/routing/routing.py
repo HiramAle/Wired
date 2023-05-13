@@ -4,6 +4,7 @@ import pygame
 import time
 from engine.input import Input
 from engine.time import Time, Timer
+from engine.window import Window
 from engine.scene.scene import Scene
 from engine.assets import Assets
 from engine.ui.text import Text
@@ -12,6 +13,9 @@ from engine.objects.sprite import Sprite, SpriteGroup
 from engine.constants import Colors
 from enum import Enum
 from engine.loader import Loader
+
+interactions = SpriteGroup()
+hide = SpriteGroup()
 
 
 class Notification(Sprite):
@@ -42,7 +46,7 @@ class Notification(Sprite):
     def __init__(self, *groups, **kwargs):
         super().__init__((344, 240), Assets.images_routing["notification"], *groups, **kwargs)
         self.pivot = self.Pivot.TOP_LEFT
-        self.close_button = Sprite((166 + self.x, 6 + self.y), pygame.Surface((14, 14), pygame.SRCALPHA),
+        self.close_button = Sprite((166 + self.x, 6 + self.y), pygame.Surface((14, 14), pygame.SRCALPHA), interactions,
                                    centered=False)
         self.icon = Sprite((354, self.y + 6), Assets.images_routing["alert"], centered=False)
         self.title = Text((372, self.y + 7), "Advertencia", 16, Colors.SPRITE, centered=False)
@@ -108,8 +112,8 @@ class ArrowButton(Button):
         LEFT = 0
         RIGHT = 1
 
-    def __init__(self, position: tuple, side: Side):
-        super().__init__(position, "arrow")
+    def __init__(self, position: tuple, side: Side, *groups):
+        super().__init__(position, "arrow", *groups)
         self.side = side
         if side == self.Side.LEFT:
             self.flip = True, False
@@ -122,8 +126,8 @@ class Answer(Sprite):
         self.__index = 0
         self.options = options
         self.text = Text(position, self.current_option, 32, Colors.SPRITE)
-        self.left_button = ArrowButton((self.x - 130, self.y), ArrowButton.Side.LEFT)
-        self.right_button = ArrowButton((self.x + 130, self.y), ArrowButton.Side.RIGHT)
+        self.left_button = ArrowButton((self.x - 130, self.y), ArrowButton.Side.LEFT, interactions, hide)
+        self.right_button = ArrowButton((self.x + 130, self.y), ArrowButton.Side.RIGHT, interactions, hide)
         self.container = Sprite(position, Assets.images_routing["answer"])
 
     @property
@@ -354,7 +358,8 @@ class Router(Sprite):
 class Topology(Sprite):
     def __init__(self, *groups, **kwargs):
         super().__init__((320, 180), Assets.images_routing["topology"], *groups, **kwargs)
-        self.min_button = Sprite((self.rect.x + 451, self.rect.y + 4), pygame.Surface((18, 18), pygame.SRCALPHA))
+        self.min_button = Sprite((self.rect.x + 451, self.rect.y + 4), pygame.Surface((18, 18), pygame.SRCALPHA),
+                                 interactions)
         self.min_button.pivot = self.min_button.Pivot.TOP_LEFT
         self.min_button.image.fill("red")
         self.minimized = False
@@ -366,7 +371,7 @@ class TaskBar(Sprite):
         self.pivot = self.Pivot.TOP_LEFT
         self.text_time = Text((574, 331), self.get_time(), 32, Colors.WHITE)
         self.text_time.pivot = self.text_time.Pivot.TOP_LEFT
-        self.topology_button = Sprite((121, 334), Assets.images_routing["xp_button_notactive"])
+        self.topology_button = Sprite((121, 334), Assets.images_routing["xp_button_notactive"], interactions)
         self.topology_button.pivot = self.topology_button.Pivot.TOP_LEFT
         self.topology_active = False
         self.change = False
@@ -589,7 +594,7 @@ class Routing(Scene):
         Answer((225, 263), ["S0/1/0", "10.0.0.0", ""] + self.exercise.get_answers()[2], self.answers)
         # Routers
         for i in range(len(self.exercise.routers)):
-            router = Router(i, self.routers)
+            router = Router(i, self.routers, interactions, hide)
             router.correct_config = RouterConfig(self.exercise.get_router_config(i), self.exercise.type)
 
         padding = 10
@@ -608,11 +613,11 @@ class Routing(Scene):
         # Console
         self.console = Console(self.static)
         # Buttons
-        self.enter = Button((377, 289), "enter", self.buttons)
+        self.enter = Button((377, 289), "enter", self.buttons, interactions, hide)
         self.enter.pivot = self.enter.Pivot.TOP_LEFT
-        self.write = Button((434, 289), "write", self.buttons)
+        self.write = Button((434, 289), "write", self.buttons, interactions, hide)
         self.write.pivot = self.enter.Pivot.TOP_LEFT
-        self.erase = Button((531, 289), "erase", self.buttons)
+        self.erase = Button((531, 289), "erase", self.buttons, interactions, hide)
         self.erase.pivot = self.enter.Pivot.TOP_LEFT
 
     def update(self) -> None:
@@ -620,6 +625,14 @@ class Routing(Scene):
         self.static.update()
         self.taskbar.update()
         self.buttons.update()
+
+        if any([sprite.hovered for sprite in interactions.sprites()]):
+            if Input.mouse.buttons["left_hold"]:
+                Window.set_cursor("grab")
+            else:
+                Window.set_cursor("hand")
+        else:
+            Window.set_cursor("arrow")
 
         for router in self.routers.sprites():
             router: Router
