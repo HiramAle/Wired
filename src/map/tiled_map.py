@@ -1,6 +1,6 @@
 import pygame
 import pytmx
-from src.game_object.sprite import Sprite
+from engine.objects.sprite import Sprite
 
 
 class Obstacle(Sprite):

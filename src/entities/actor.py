@@ -2,12 +2,10 @@ import random
 
 import pygame
 from src.entities.entity import Entity
-from src.game_object.sprite import SpriteGroup
-from src.constants.paths import *
+from engine.objects.sprite import SpriteGroup
 import src.utils.load as load
-import src.engine.data as data
-import src.engine.time as game_time
-import src.engine.assets as assets
+import engine.time as game_time
+import engine.assets as assets
 
 
 class Actor(Entity):

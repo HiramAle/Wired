@@ -1,15 +1,11 @@
 import pygame
-import src.engine.time as game_time
-import src.engine.input as input
-import src.engine.data as data
-import src.engine.assets as assets
-from src.entities.entity import Entity
-from src.game_object.sprite import SpriteGroup
-import src.utils.load as load
+import engine.input as input
+import engine.assets as assets
+from engine.objects.sprite import SpriteGroup
 from src.constants.paths import *
 from src.entities.actor import Actor
 from src.map.tiled_map import Trigger
-from src.game_object.sprite import Sprite
+from engine.objects.sprite import Sprite
 from src.components.animation import Animation
 from src.utils.json_saver import instance as save_manager
 
@@ -81,7 +77,7 @@ class Player(Actor):
     def render(self, display: pygame.Surface, offset=(0, 0)):
         super().render(display, offset)
         if self.active_trigger and input.keyboard.keys["interact"]:
-            if "scene" in self.active_trigger.name:
+            if "scenes" in self.active_trigger.name:
                 self.scene.change_scene(self.active_trigger.name)
             if "sleep" in self.active_trigger.name:
                 save_manager.game_save.time += pygame.time.get_ticks()

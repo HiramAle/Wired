@@ -1,7 +1,7 @@
 import pygame
-import src.engine.time as time
+import engine.time as time
 from src.constants.locals import CANVAS_WIDTH, CANVAS_HEIGHT
-from src.game_object.game_object import GameObject
+from engine.objects.game_object import GameObject
 from src.entities.entity import Entity
 from typing import Optional
 

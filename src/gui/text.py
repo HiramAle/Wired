@@ -1,13 +1,13 @@
 import pygame
-import src.engine.assets as assets
+from engine.assets import Assets
 from src.constants.colors import WHITE_MOTION, DARK_BLACK_MOTION
-from src.game_object.sprite import Sprite
+from engine.objects.sprite import Sprite
 from typing import Literal
 
 
 class GUIText(Sprite):
     def __init__(self, text: str, position: tuple, size: Literal[16, 32, 48, 64], *groups, **kwargs):
-        text_surface = assets.fonts["monogram"].render(text, size)
+        text_surface = Assets.fonts["monogram"].render(text, size)
         super().__init__(f"text_{text}", position, text_surface, *groups, **kwargs)
         self._text = text
         self._size = size
@@ -29,13 +29,13 @@ class GUIText(Sprite):
         self.text = text
 
     def _update_text(self):
-        text_surface = assets.fonts[self.font].render(self._text, self._size, self._color)
+        text_surface = Assets.fonts[self.font].render(self._text, self._size, self._color)
         self.image = pygame.Surface(
             (text_surface.get_width(), text_surface.get_height() + self._shadow_padding)).convert_alpha()
         self.image.set_alpha(self.opacity)
 
         if self.shadow:
-            shadow_surface = assets.fonts[self.font].render(self._text, self._size, self._shadow_color)
+            shadow_surface = Assets.fonts[self.font].render(self._text, self._size, self._shadow_color)
             self.image.blit(shadow_surface, (0, self._shadow_padding))
             # self.image.blit(text_surface, (0, 0))
 
