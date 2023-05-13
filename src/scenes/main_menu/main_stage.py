@@ -9,6 +9,7 @@ from engine.objects.sprite import SpriteGroup
 from src.scenes.main_menu.options_stage import OptionsStage
 from src.scenes.main_menu.play_stage import NewGame
 from engine.ui.image import Image
+from engine.audio import AudioManager
 
 
 class MainMenuStage(Stage):
@@ -19,14 +20,32 @@ class MainMenuStage(Stage):
         self.play = Option("- JUGAR -", (96, 167), self.group)
         self.options = Option("- OPCIONES -", (96, 197), self.group)
         self.exit = Option("- SALIR -", (96, 227), self.group)
+        self.hoveredOption = None
+        AudioManager.play_music("menu")
 
     def update(self):
         self.group.update()
         self.logo.y = sin_wave(115, 5, 200)
 
+        hovered = []
+        for option in [option for option in self.group.sprites() if isinstance(option, Option)]:
+            if option.hovered:
+                hovered.append(True)
+                if not self.hoveredOption:
+                    self.hoveredOption = option
+                    AudioManager.play_random_from("keyboard")
+                elif option != self.hoveredOption:
+                    self.hoveredOption = option
+                    AudioManager.play_random_from("keyboard")
+            else:
+                hovered.append(False)
+        if not any(hovered):
+            self.hoveredOption = None
+
         if any([option.hovered for option in self.group.sprites() if isinstance(option, Option)]):
             Window.set_cursor("hand")
             if Input.mouse.buttons["left_hold"]:
+                AudioManager.play_random_from("keyboard")
                 Window.set_cursor("grab")
         else:
             Window.set_cursor("arrow")

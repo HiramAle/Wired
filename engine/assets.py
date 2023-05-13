@@ -1,18 +1,18 @@
-import os
 import threading
-from threading import Thread
-
 import pygame
-
+from threading import Thread
 from src.utils.load import *
 from engine.ui.font import Font
 from src.constants.paths import *
 from engine.animation.animation import Animation
 from engine.loader import Loader
+from engine.constants import Paths
 
 
 class Assets:
     cursors: dict[str, pygame.cursors.Cursor] = {}
+    music: dict[str, str] = {}
+    sounds: dict[str, list[pygame.mixer.Sound]] = {}
     fonts: dict[str, Font] = {}
     images_misc: dict[str, pygame.Surface] = {}
     animations: dict[str, dict[str, Animation]] = {}
@@ -57,6 +57,8 @@ class Assets:
         cls.images_world = load_image_directory(IMAGES_WORLD)
         cls.images_book = load_image_directory(IMAGES_BOOK)
         cls.images_routing = load_image_directory(IMAGES_ROUTING)
+        cls.load_sounds()
+        cls.load_music_paths()
         event.clear()
 
     @classmethod
@@ -66,6 +68,19 @@ class Assets:
             for animation in listdir(f"{ANIMATIONS}/{folder}"):
                 print(f"{ANIMATIONS}/{folder}/{animation}")
                 cls.animations[folder][animation] = Loader.load_animation(f"{ANIMATIONS}/{folder}/{animation}")
+
+    @classmethod
+    def load_sounds(cls):
+        for folder in listdir(Paths.SOUNDS_FOLDER):
+            cls.sounds[folder] = []
+            for sound in listdir(f"{Paths.SOUNDS_FOLDER}/{folder}"):
+                cls.sounds[folder].append(Loader.load_sound(f"{Paths.SOUNDS_FOLDER}/{folder}/{sound}"))
+
+    @classmethod
+    def load_music_paths(cls):
+        for song in listdir(Paths.MUSIC_FOLDER):
+            name = song.split(".")[0]
+            cls.music[name] = f"{Paths.MUSIC_FOLDER}/{song}"
 
     @classmethod
     def load_character_creation_assets(cls, event: threading.Event):

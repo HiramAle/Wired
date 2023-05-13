@@ -39,17 +39,17 @@ class Cloud(Sprite):
 
 class CloudGenerator(GameObject):
     def __init__(self, position: tuple, group: SpriteGroup):
-        super().__init__(position)
+        super().__init__(position=position)
         self.group = group
         self.centered = False
         self.timer = Timer(6)
         self.timer.start()
+        Cloud((self.x, randint(0, 140)), self.group)
 
     def update(self):
         if self.timer.update():
             self.timer.start()
             Cloud((self.x, randint(0, 140)), self.group)
-            print("cloud generated")
 
 
 class Option(UIElement):

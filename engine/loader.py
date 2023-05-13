@@ -38,6 +38,10 @@ class Loader:
             return image
 
     @staticmethod
+    def load_sound(path: str) -> pygame.mixer.Sound:
+        return pygame.mixer.Sound(path)
+
+    @staticmethod
     def load_cursor(path: str) -> pygame.Cursor:
         return pygame.Cursor((0, 0), pygame.transform.scale_by(Loader.load_image(path), 3))
 

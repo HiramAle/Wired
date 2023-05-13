@@ -49,7 +49,7 @@ class OptionsStage(Stage):
         self.volume_left = ArrowButton((96 + 70, 170), "right", self.group, self.volume_group, self.interactive)
         self.volume_right = ArrowButton((96 + 310 - 70, 170), "left", self.group, self.volume_group, self.interactive)
         self.description_title = DescriptionTitle((256, 245), "Pantalla", self.group)
-        self.hidden_index = Preferences.volume // 5
+        self.hidden_index = (Preferences.volume // 5) - 1
         self.music_icons: list[Image] = []
         for i in range(5):
             sprite = Image((190 + (i * 30), 170), Assets.images_main_menu["note_music"], self.group, self.volume_group)
@@ -102,7 +102,7 @@ class OptionsStage(Stage):
         # Apply button
         if self.apply_button.clicked:
             Window.set_window_size(self.selected_size)
-            AudioManager.set_volume(self.hidden_index)
+            AudioManager.set_volume((self.hidden_index + 1))
 
         # Change cursor
         if any([sprite.hovered for sprite in self.interactive.sprites()]):

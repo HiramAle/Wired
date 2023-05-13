@@ -1,3 +1,5 @@
+import time
+
 import pygame
 # New Imports
 from engine.preferences import Preferences

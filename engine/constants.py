@@ -13,3 +13,5 @@ class Colors:
 class Paths:
     USER_PREFERENCES = "data/user/preferences.json"
     USER_SAVES_FOLDER = "data/user/saves"
+    SOUNDS_FOLDER = "assets/audio/sounds"
+    MUSIC_FOLDER = "assets/audio/music"
