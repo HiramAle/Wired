@@ -1,6 +1,6 @@
 import pygame
 
-from src.game_object.sprite import Sprite
+from engine.objects.sprite import Sprite
 
 
 class GUIImage(Sprite):

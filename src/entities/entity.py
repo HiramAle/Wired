@@ -1,7 +1,6 @@
 import pygame
 from src.constants.colors import WHITE_MOTION
-from src.game_object.sprite import Sprite
-from src.components.animation import Animation
+from engine.objects.sprite import Sprite
 
 
 class Entity(Sprite):

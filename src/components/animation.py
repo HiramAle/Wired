@@ -1,5 +1,5 @@
 import pygame
-import src.engine.time as time
+from engine.time import Time
 
 
 class AnimationData:
@@ -52,7 +52,7 @@ class Animation:
         actual_frame attribute exceeds the number of frames, it is reset to 0.
         """
         if not self.done:
-            self._frame_index += self.speed * time.dt
+            self._frame_index += self.speed * Time.dt
             if self._frame_index >= len(self.frames):
                 if self.loop:
                     self._frame_index = 0

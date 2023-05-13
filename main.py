@@ -1,47 +1,31 @@
-import threading
-import time
-
 import pygame
-import src.engine.window as window
-import src.engine.input as input
-import src.engine.time as game_time
-import src.user.preferences as preferences
-import src.engine.assets as assets
-import src.scene.core.scene_manager as scene_manager
-import src.engine.data as data
-from src.engine.world import instance as world
+# New Imports
+from engine.preferences import Preferences
+from engine.window import Window
+from engine.data import Data
+from engine.input import Input
+from engine.time import Time
+from engine.assets import Assets
+from engine.scene.scene_manager import SceneManager
 
 
 class Game:
     def __init__(self):
         pygame.init()
-        data.init()
-        assets.prepare()
-        preferences.init()
-        # saves.init()
-        window.init()
-        scene_manager.init()
+        Preferences.load()
+        Window.init()
+        Data.init()
+        Assets.prepare()
+        SceneManager.init()
 
-    def run(self):
+    @staticmethod
+    def run():
         while True:
-            input.update()
-
-            # update = threading.Thread(target=scene_manager.update)
-            # render = threading.Thread(target=scene_manager.render)
-            #
-            # update.start()
-            # render.start()
-            #
-            # update.join()
-            # render.join()
-
-            scene_manager.update()
-            scene_manager.render()
-
-            world.update()
-
-            game_time.update()
-            window.update()
+            Input.update()
+            SceneManager.update()
+            SceneManager.render()
+            Time.update()
+            Window.update()
 
 
 if __name__ == '__main__':

@@ -1,8 +1,8 @@
 import pygame
-import src.engine.assets as assets
-import src.engine.input as game_input
-import src.engine.time as game_time
-from src.game_object.sprite import Sprite
+import engine.assets as assets
+import engine.input as game_input
+import engine.time as game_time
+from engine.objects.sprite import Sprite
 
 
 class DialogBox(Sprite):

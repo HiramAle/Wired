@@ -1,1 +1,0 @@
-estoy creando un creador de personajes en pygame para un juego top down, tengo 4 categorias, cuerpo, ojos, peinados y disfraces,

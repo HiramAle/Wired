@@ -59,8 +59,10 @@ IMAGES_CHARACTER_CREATION = "assets/images/character_creation"
 IMAGES_ACTORS = "assets/images/actor"
 IMAGES_WORLD = "assets/images/world"
 IMAGES_BOOK = "assets/images/book"
+IMAGES_ROUTING = "assets/images/routing"
 NPC_SPRITE_SHEETS = "assets/npcs"
 NPC_DATA = "data/npcs"
+
 # Scene Data
 DATA_CABLES = "data/scenes/cables.json"
 DATA_CHARACTER_CREATION_FRAMES = "data/character_creation/animation_frames_data.json"

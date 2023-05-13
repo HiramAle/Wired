@@ -8,7 +8,7 @@ class Position:
 
     def __init__(self, position: tuple[int | float, int | float]):
         """
-        Initializes a new Position game_object.
+        Initializes a new Position objects.
         :param position: The (x, y) coordinates of the position.
         """
         self._position = pygame.math.Vector2(position)

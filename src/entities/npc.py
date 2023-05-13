@@ -1,20 +1,10 @@
 import pygame
-import src.engine.time as time
-import src.engine.input as input
-import src.engine.data as data
-import src.engine.assets as assets
-from src.entities.entity import Entity
-from src.game_object.sprite import SpriteGroup
-import src.utils.load as load
+import engine.assets as assets
+from engine.objects.sprite import SpriteGroup
 from src.constants.paths import *
 from src.entities.actor import Actor
-from src.map.tiled_map import Trigger
-from src.game_object.sprite import Sprite
+from engine.objects.sprite import Sprite
 from src.components.animation import Animation
-import src.scene.core.scene_manager as scene_manager
-from src.scene.cables.order import OrderCable
-from src.scene.subnetting.subnetting import Subnetting
-import src.scene.map.test_map as map_scene
 from src.utils.load import load_json
 from src.utils.json_saver import instance as save_manager
 
