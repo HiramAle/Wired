@@ -30,6 +30,12 @@ class Data:
         cls.subnetting = {int(file.split(".")[0]): load.load_json(f"{SUBNETTING_EXERCISES}/{file}") for file in
                           os.listdir(SUBNETTING_EXERCISES)}
 
+    @classmethod
+    def load_maps(cls, event: threading.Event):
+        for map_name in cls.maps.keys():
+            cls.maps[map_name] = pytmx.load_pygame(MAPS[map_name], pixelalpha=True)
+        event.clear()
+
     @staticmethod
     def convert_dictionary(dictionary: dict):
         new_dictionary = {}

@@ -66,7 +66,6 @@ class Assets:
         for folder in listdir(ANIMATIONS):
             cls.animations[folder] = {}
             for animation in listdir(f"{ANIMATIONS}/{folder}"):
-                print(f"{ANIMATIONS}/{folder}/{animation}")
                 cls.animations[folder][animation] = Loader.load_animation(f"{ANIMATIONS}/{folder}/{animation}")
 
     @classmethod
@@ -84,6 +83,7 @@ class Assets:
 
     @classmethod
     def load_character_creation_assets(cls, event: threading.Event):
+        pygame.display.init()
         def load_bodies():
             cls.bodies = import_category_animations("bodies")
 

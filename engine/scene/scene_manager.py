@@ -9,6 +9,8 @@ from engine.assets import Assets
 from engine.window import Window
 from src.scenes.test_scene import TestScene
 from src.scenes.routing.routing import Routing
+from src.scenes.cables.order import OrderCable
+from src.scenes.subnetting.subnetting import Subnetting
 
 
 class SceneManager:
@@ -20,7 +22,8 @@ class SceneManager:
         Initializes the scenes stack by setting the current scenes to a Loading Scene.
         """
         # cls.set_active_scene(Loading(Assets.load, Routing))
-        cls.set_active_scene(Loading(Assets.load, MainMenu))
+        # cls.set_active_scene(Loading(Assets.load, MainMenu))
+        cls.set_active_scene(Loading(Assets.load, Subnetting))
         # Assets.load(threading.Event())
         # cls.set_active_scene(TestScene())
 

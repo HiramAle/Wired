@@ -1,8 +1,10 @@
 from engine.scene.scene import Stage, StagedScene
 from engine.objects.sprite import SpriteGroup
-from src.gui.image import GUIImage
+from engine.ui.image import Image
 from src.scenes.subnetting.subnetting_objects import *
 from random import shuffle
+from engine.assets import Assets
+from engine.ui.text import Text
 
 
 class Zone(Stage):
@@ -25,26 +27,26 @@ class Zone(Stage):
         shuffle(self.possible_answers)
 
         tab_image = pygame.Surface((19, 54), pygame.SRCALPHA)
-        self.tab = GUIImage("tab", (606, 19), tab_image, centered=False)
+        self.tab = Image((606, 19), tab_image, centered=False)
         self.finished = False
 
-        GUIImage("tab", (0, 0), assets.images_subnetting["zone_tab"], self.group, centered=False)
-        GUIImage("underscore", (47, 181), assets.images_subnetting["underscore_yellow"], self.group, centered=False)
-        GUIImage("underscore", (210, 180), assets.images_subnetting["undescoreyellow"], self.group, centered=False)
-        GUIImage("dotted_line", (357, 25.25), assets.images_subnetting["dotted_line"], self.group, centered=False)
-        underscore_name = assets.images_subnetting["name_underscore"].copy()
+        Image((0, 0), Assets.images_subnetting["zone_tab"], self.group, centered=False)
+        Image((47, 181), Assets.images_subnetting["underscore_yellow"], self.group, centered=False)
+        Image((210, 180), Assets.images_subnetting["undescoreyellow"], self.group, centered=False)
+        Image((357, 25.25), Assets.images_subnetting["dotted_line"], self.group, centered=False)
+        underscore_name = Assets.images_subnetting["name_underscore"].copy()
         underscore_name.fill("#FDFFEA")
-        underscore_name.blit(assets.images_subnetting["name_underscore"], (0, 0))
-        GUIImage("zone_underscore", (435, 17), underscore_name, self.group, centered=False)
-        self.posit_it = GUIImage("post_it", (366, 93), assets.images_subnetting["post_it_class"], self.group,
-                                 centered=False, scale=2)
-        self.instructions = GUIText("Selecciona en\nel mapa una\nárea para\nconfigurar.", (483, 188), 32, self.group)
-        GUIText("Dirección IP:", (45, 188), 32, self.group, font="fool", centered=False, color="#2E2E2E", shadow=False)
-        GUIText(self.data.zone, (473.5, 25.5), 16, self.group, font="fool", color="#2E2E2E", shadow=False)
-        GUIText(self.data.ip, (276.5, 203), 32, self.group, font="fool", color="#2E2E2E", shadow=False)
-        self.building_name = GUIText("", (112, 338.5), 16, font="fool", color="#2E2E2E", shadow=False)
-        self.continue_message = GUIText("Selecciona un lugar en el mapa para configurar", (369.5, 339.5), 16,
-                                        shadow=False, color="#2E2E2E")
+        underscore_name.blit(Assets.images_subnetting["name_underscore"], (0, 0))
+        Image((435, 17), underscore_name, self.group, centered=False)
+        self.posit_it = Image((366, 93), Assets.images_subnetting["post_it_class"], self.group, centered=False, scale=2)
+        self.instructions = Text((483, 188), "Selecciona en\nel mapa una\nárea para\nconfigurar.", 32, Colors.WHITE,
+                                 self.group)
+        Text((45, 188), "Dirección IP:", 32, "#2E2E2E", self.group, font="fool", centered=False, shadow=False)
+        Text((473.5, 25.5), self.data.zone, 16, "#2E2E2E", self.group, font="fool", shadow=False)
+        Text((276.5, 203), self.data.ip, 32, "#2E2E2E", self.group, font="fool", shadow=False)
+        self.building_name = Text((112, 338.5), "", 16, "#2E2E2E", font="fool", shadow=False)
+        self.continue_message = Text((369.5, 339.5), "Selecciona un lugar en el mapa para configurar", 16, "#2E2E2E",
+                                     shadow=False)
 
         self.group.add(*self.data.buildings)
         self.buildings.add(*self.data.buildings)
@@ -56,9 +58,9 @@ class Zone(Stage):
 
     def drag(self):
         # Start dragging
-        if not self.dragging and game_input.mouse.buttons["left_hold"]:
+        if not self.dragging and Input.mouse.buttons["left_hold"]:
             for label in self.labels.sprites():
-                if label.rect.collidepoint(game_input.mouse.position):
+                if label.rect.collidepoint(Input.mouse.position):
                     self.dragging = True
                     self.selected_label = label
                     self.selected_label.state = LabelStates.FULL
@@ -68,14 +70,14 @@ class Zone(Stage):
 
         # On dragging
         if self.dragging:
-            self.selected_label.y -= (self.selected_label.y - game_input.mouse.y) / (0.01 / game_time.dt)
-            self.selected_label.x -= (self.selected_label.x - game_input.mouse.x) / (0.01 / game_time.dt)
+            self.selected_label.y -= (self.selected_label.y - Input.mouse.y) / (0.01 / Time.dt)
+            self.selected_label.x -= (self.selected_label.x - Input.mouse.x) / (0.01 / Time.dt)
 
         # End dragging
-        if self.dragging and not game_input.mouse.buttons["left_hold"]:
+        if self.dragging and not Input.mouse.buttons["left_hold"]:
             for holder in self.holders.sprites():
                 holder: LabelHolder
-                if holder.rect.collidepoint(game_input.mouse.position):
+                if holder.rect.collidepoint(Input.mouse.position):
                     self.selected_label.holder = holder
             if not self.selected_label.holder:
                 self.selected_label.position = self.selected_label.default_position
@@ -147,13 +149,13 @@ class Zone(Stage):
             self.posit_it.kill()
             self.instructions.kill()
             self.posit_it = None
-            GUIImage("building", (96, 272), assets.images_subnetting["test_house"], self.group, scale=2)
-            GUIImage("building_indicator", (72, 325), assets.images_subnetting["indicator"], self.group, centered=False)
+            Image((96, 272), Assets.images_subnetting["test_house"], self.group, scale=2)
+            Image((72, 325), Assets.images_subnetting["indicator"], self.group, centered=False)
             self.building_name.add(self.group)
-            GUIImage("zone_answers", (360, 42), assets.images_subnetting["zone_answers"], self.group,
-                     centered=False)
-            GUIText("ID de red:", (182, 253), 32, self.group, centered=False, shadow=False, color=DARK_BLACK_MOTION)
-            GUIText("Broadcast", (177, 295), 32, self.group, centered=False, shadow=False, color=DARK_BLACK_MOTION)
+            Image((360, 42), Assets.images_subnetting["zone_answers"], self.group,
+                  centered=False)
+            Text((182, 253), "ID de red:", 32, Colors.DARK, self.group, centered=False, shadow=False)
+            Text((177, 295), "Broadcast", 32, Colors.DARK, self.group, centered=False, shadow=False)
 
             default_labels_number = 4 - self.data.ip.split(".").count("0")
             for index in range(default_labels_number):
@@ -165,10 +167,8 @@ class Zone(Stage):
                 broadcast_label.state = LabelStates.FULL
 
             for index in range(3):
-                GUIText(".", (370 + 6 + (index * 73), 246 + 13.5), 32, self.group, font="fool",
-                        shadow=False, color=DARK_BLACK_MOTION)
-                GUIText(".", (370 + 6 + (index * 73), 292 + 13.5), 32, self.group, font="fool",
-                        shadow=False, color=DARK_BLACK_MOTION)
+                Text((370 + 6 + (index * 73), 246 + 13.5), ".", 32, Colors.DARK, self.group, font="fool", shadow=False)
+                Text((370 + 6 + (index * 73), 292 + 13.5), ".", 32, Colors.DARK, self.group, font="fool", shadow=False)
 
             for index in range(self.data.ip.split(".").count("0")):
                 x_padding = (3 - self.data.ip.split(".").count("0")) * 73

@@ -1,6 +1,6 @@
 from engine.scene.scene import Stage, StagedScene
 from engine.objects.sprite import SpriteGroup
-from src.gui.image import GUIImage
+from engine.ui.image import Image
 from src.scenes.subnetting.zone_stage import Zone
 from src.scenes.subnetting.subnetting_objects import *
 from random import randint, shuffle
@@ -30,29 +30,29 @@ class SubnetMask(Stage):
         self.holders = SpriteGroup()
         self.cm_labels = SpriteGroup()
         # Images
-        GUIImage("tab", (0, 0), assets.images_subnetting["subnet_mask_tab"], self.group, centered=False)
-        GUIImage("sticker_holder", (362, 19), assets.images_subnetting["subnet_mask_holder"], self.group,
-                 centered=False)
-        GUIImage("post_it", (40, 251), assets.images_subnetting["post_it_class"], self.group, centered=False)
+        Image((0, 0), Assets.images_subnetting["subnet_mask_tab"], self.group, centered=False)
+        Image((362, 19), Assets.images_subnetting["subnet_mask_holder"], self.group,
+              centered=False)
+        Image((40, 251), Assets.images_subnetting["post_it_class"], self.group, centered=False)
         # Underscore
-        GUIImage("underscore_orange", (120, 176), assets.images_subnetting["underscore_orange"], self.group,
-                 centered=False)
-        GUIImage("underscore_yellow", (48, 208), assets.images_subnetting["underscore_yellow"], self.group,
-                 centered=False)
-        GUIImage("undescoreyellow", (220, 208), assets.images_subnetting["undescoreyellow"], self.group, centered=False)
-        self.class_holder = GUIImage("class_holder", (67, 287), assets.images_subnetting["class_holder"], self.group,
-                                     centered=False)
+        Image((120, 176), Assets.images_subnetting["underscore_orange"], self.group,
+              centered=False)
+        Image((48, 208), Assets.images_subnetting["underscore_yellow"], self.group,
+              centered=False)
+        Image((220, 208), Assets.images_subnetting["undescoreyellow"], self.group, centered=False)
+        self.class_holder = Image((67, 287), Assets.images_subnetting["class_holder"], self.group,
+                                  centered=False)
 
         # Texts
-        GUIText(self.zone, (120, 185), 32, self.group, font="fool", centered=False, color="#2E2E2E", shadow=False)
-        GUIText("Dirección IP:", (46, 215), 32, self.group, font="fool", centered=False, color="#2E2E2E", shadow=False)
-        GUIText(self.ip, (287, 229), 32, self.group, font="fool", color="#2E2E2E", shadow=False)
-        GUIText("Default mask:", (161, 260), 32, self.group, font="fool", color="#2E2E2E", shadow=False, centered=False)
-        GUIText("Custom mask:", (157, 306), 32, self.group, font="fool", color="#2E2E2E", shadow=False, centered=False)
-        GUIText("Clase", (62, 254), 32, self.group, font="fool", color="#2E2E2E", shadow=False, centered=False)
+        Text((120, 185), self.zone, 32, "#2E2E2E", self.group, font="fool", centered=False, shadow=False)
+        Text((46, 215), "Dirección IP:", 32, "#2E2E2E", self.group, font="fool", centered=False, shadow=False)
+        Text((287, 229), self.ip, 32, "#2E2E2E", self.group, font="fool", shadow=False)
+        Text((161, 260), "Default mask:", 32, "#2E2E2E", self.group, font="fool", shadow=False, centered=False)
+        Text((157, 306), "Custom mask:", 32, "#2E2E2E", self.group, font="fool", shadow=False, centered=False)
+        Text((62, 254), "Clase", 32, "#2E2E2E", self.group, font="fool", shadow=False, centered=False)
 
-        self.continue_message = GUIText("Presiona la siguiente pestaña para\ncontinuar :-)", (478, 237), 16,
-                                        shadow=False, color="#2E2E2E")
+        self.continue_message = Text((478, 237), "Presiona la siguiente pestaña para\ncontinuar :-)", 16, "#2E2E2E",
+                                     shadow=False)
 
         for network_class, position in self.class_positions.items():
             ClassLabel(position, network_class, self.group, self.class_labels)
@@ -63,11 +63,11 @@ class SubnetMask(Stage):
         for index in range(4):
             Label((340 + 25 + (index * 65), 262 + 13.5), "", True, self.group, self.df_labels)
             if index < 3:
-                GUIText(".", (340 + 50 + 7.5 + (index * 65), 262 + 13.5), 32, self.group, font="fool", shadow=False,
-                        color=DARK_BLACK_MOTION)
+                Text((340 + 50 + 7.5 + (index * 65), 262 + 13.5), ".", 32, Colors.DARK, self.group, font="fool",
+                     shadow=False)
 
         tab_image = pygame.Surface((19, 54), pygame.SRCALPHA)
-        self.tab = GUIImage("tab", (608, 77), tab_image, centered=False)
+        self.tab = Image((608, 77), tab_image, centered=False)
 
         self.dragging = False
         self.selected_label: ClassLabel | Label | None = None
@@ -81,9 +81,9 @@ class SubnetMask(Stage):
 
     def drag(self):
         # Start dragging
-        if not self.dragging and game_input.mouse.buttons["left_hold"]:
+        if not self.dragging and Input.mouse.buttons["left_hold"]:
             for label in self.class_labels.sprites() + self.labels.sprites():
-                if label.rect.collidepoint(game_input.mouse.position):
+                if label.rect.collidepoint(Input.mouse.position):
                     if isinstance(label, ClassLabel) and not self.drag_class:
                         continue
 
@@ -103,13 +103,13 @@ class SubnetMask(Stage):
 
         # On dragging
         if self.dragging:
-            self.selected_label.y -= (self.selected_label.y - game_input.mouse.y) / (0.01 / game_time.dt)
-            self.selected_label.x -= (self.selected_label.x - game_input.mouse.x) / (0.01 / game_time.dt)
+            self.selected_label.y -= (self.selected_label.y - Input.mouse.y) / (0.01 / Time.dt)
+            self.selected_label.x -= (self.selected_label.x - Input.mouse.x) / (0.01 / Time.dt)
 
         # End dragging
-        if self.dragging and not game_input.mouse.buttons["left_hold"]:
+        if self.dragging and not Input.mouse.buttons["left_hold"]:
             if isinstance(self.selected_label, ClassLabel):
-                if self.class_holder.rect.collidepoint(game_input.mouse.position):
+                if self.class_holder.rect.collidepoint(Input.mouse.position):
 
                     self.selected_label.position = self.class_holder.rect.center
                     self.class_answer = self.selected_label
@@ -127,9 +127,8 @@ class SubnetMask(Stage):
                             LabelHolder((400 + x_padding + (index * 65), 301), self.group, self.holders)
 
                     for index in range(3):
-                        GUIText(".", (340 + 50 + 7.5 + (index * 65), 308 + 13.5), 32, self.group, font="fool",
-                                shadow=False,
-                                color=DARK_BLACK_MOTION)
+                        Text((340 + 50 + 7.5 + (index * 65), 308 + 13.5), ".", 32, Colors.DARK, self.group, font="fool",
+                             shadow=False)
 
                     if self.class_answer.network_class == self.data.ipClass.lower():
                         self.class_holder.deactivate()
@@ -160,7 +159,7 @@ class SubnetMask(Stage):
             elif isinstance(self.selected_label, Label):
                 for holder in self.holders.sprites():
                     holder: LabelHolder
-                    if holder.rect.collidepoint(game_input.mouse.position) and holder.active:
+                    if holder.rect.collidepoint(Input.mouse.position) and holder.active:
                         self.selected_label.holder = holder
                 if not self.selected_label.holder:
                     self.selected_label.position = self.selected_label.default_position
@@ -218,7 +217,7 @@ class SubnetMask(Stage):
         # Get answers
         class_answer = ""
         label_answers = []
-        if game_input.keyboard.keys["space"]:
+        if Input.keyboard.keys["space"]:
             print(self.class_answer.network_class)
             class_answer = self.class_answer.network_class
             for holder in self.holders.sprites():

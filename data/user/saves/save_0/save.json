@@ -5,5 +5,10 @@
   "money": 0,
   "cable": 0,
   "connectors": 0,
-  "inventory": {}
+  "inventory": {
+    "cables": {
+      "3": 5,
+      "2": 1
+    }
+  }
 }

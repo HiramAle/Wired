@@ -1,7 +1,6 @@
 import random
-
 import pygame
-import engine.assets as assets
+from engine.assets import Assets
 from engine.objects.sprite import Sprite, SpriteGroup
 from src.constants.colors import *
 
@@ -10,8 +9,8 @@ class Color(Sprite):
     def __init__(self, position: tuple, index: int, color: tuple | str, *groups, **kwargs):
         image = pygame.Surface((22, 22), pygame.SRCALPHA)
         image.fill(color)
-        image.blit(assets.images_character_creation["color_selection"], (0, 0))
-        super().__init__("color", position, image, *groups, **kwargs)
+        image.blit(Assets.images_character_creation["color_selection"], (0, 0))
+        super().__init__(position, image, *groups, **kwargs)
         self.index = index
         self.color = color
 
@@ -30,7 +29,7 @@ class Color(Sprite):
 class ColorPicker(Sprite):
     def __init__(self, position: tuple, colors: dict[int, tuple], *groups, **kwargs):
         image = pygame.Surface((274, 30), pygame.SRCALPHA)
-        super().__init__("color_picker", position, image, *groups, **kwargs)
+        super().__init__(position, image, *groups, **kwargs)
         self._colors: dict[int, tuple] = {}
         self.color_group = SpriteGroup()
         self.color_spacing = 5
@@ -55,11 +54,11 @@ class ColorPicker(Sprite):
         self.color_group = SpriteGroup()
         self.selected_color = 0
         self.total_width = len(value) * 22 + (len(value) - 1) * self.color_spacing
-        self.remaining_space = self.width - self.total_width
+        self.remaining_space = self.rect.width - self.total_width
         self.starting_position = self.remaining_space / 2 + 11
         for index, color in enumerate(value.values()):
             x = self.rect.left + self.starting_position + (index * (22 + self.color_spacing))
-            y = self.rect.top + self.height / 2
+            y = self.rect.top + self.rect.height / 2
             Color((x, y), index, color, self.color_group, self.interactive_group)
         self._colors = value
 
@@ -69,6 +68,7 @@ class ColorPicker(Sprite):
             if color.clicked:
                 self.selected_color = color.index
 
-    def render(self, display: pygame.Surface, offset=(0, 0)):
-        super().render(display, offset)
+    def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
+        super().render(display)
         self.color_group.render(display)
+

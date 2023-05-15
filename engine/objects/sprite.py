@@ -29,7 +29,7 @@ class Sprite(GameObject):
         """
         super().__init__(self.__class__.__name__, position)
         self.__groups: list[SpriteGroup] = []
-        self.__image: pygame.Surface | None = image
+        self._image: pygame.Surface | None = image
         self.__opacity = 255
         self.__flip = [False, False]
         self.flags = 0
@@ -59,7 +59,7 @@ class Sprite(GameObject):
 
     @property
     def image(self) -> pygame.Surface:
-        return self.__image
+        return self._image
 
     @image.setter
     def image(self, value: pygame.Surface):
@@ -70,7 +70,7 @@ class Sprite(GameObject):
             image.set_alpha(self.__opacity)
         if any(self.__flip):
             image = pygame.transform.flip(image, *self.__flip)
-        self.__image = image
+        self._image = image
 
     def __repr__(self):
         return f"Sprite({self.name},{self.position} ,{self.image})"
@@ -229,7 +229,7 @@ class Sprite(GameObject):
         if value <= 0:
             raise ValueError("Scale factor must be greater than zero.")
         self.__scale = value
-        self.image = pygame.transform.scale_by(self.image, value)
+        self._image = pygame.transform.scale_by(self._image, value)
 
 
 class SpriteGroup:

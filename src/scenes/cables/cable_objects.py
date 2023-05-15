@@ -1,49 +1,49 @@
 import pygame
-import engine.assets as assets
-import engine.time as time
+from engine.assets import Assets
+from engine.time import Time
 from engine.objects.sprite import Sprite
-from src.components.animation import Animation
-from src.constants.colors import DARK_BLACK_MOTION, WHITE_MOTION, GREEN_MOTION, RED_MOTION
+from engine.constants import Colors
 
 
 class Cable(Sprite):
     def __init__(self, position: tuple, color: str, name: str, *groups, **kwargs):
-        image = assets.images_cables[f"{name.split('_')[0].lower()}_{color.lower()}"]
-        super().__init__(name, position, image, *groups, **kwargs)
+        image = Assets.images_cables[f"{name.split('_')[0].lower()}_{color.lower()}"]
+        super().__init__(position, image, *groups, **kwargs)
+        self.name = name
         self.color = color
         self.scale = 2
         shadow_mask = pygame.mask.from_surface(self.image)
-        self.shadow = shadow_mask.to_surface(setcolor=DARK_BLACK_MOTION, unsetcolor=(0, 0, 0))
+        self.shadow = shadow_mask.to_surface(setcolor=Colors.DARK, unsetcolor=(0, 0, 0))
         self.shadow.set_colorkey((0, 0, 0))
         self.shadow.set_alpha(60)
         self.shadowActive = True
         self.swapping = False
         self.new_position = 0
         self.dragging = False
-        self.outline_color = WHITE_MOTION
+        self.outline_color = Colors.WHITE
         self.right_order = False
         self.colored_outline = False
 
     def update(self):
         if self.swapping:
-            self.y -= (self.y - self.new_position) / (0.1 / time.dt)
+            self.y -= (self.y - self.new_position) / (0.1 / Time.dt)
             if abs(self.y - self.new_position) <= 0.5:
                 self.y = self.new_position
                 self.swapping = False
 
         if self.right_order:
-            self.outline_color = GREEN_MOTION
+            self.outline_color = Colors.GREEN
         elif not self.dragging:
-            self.outline_color = RED_MOTION
+            self.outline_color = Colors.RED
 
     def swap(self, position: int | float):
         self.new_position = position
         self.swapping = True
 
-    def render(self, display: pygame.Surface, offset=(0, 0)):
+    def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
         if self.dragging or self.colored_outline:
             if self.dragging:
-                self.outline_color = WHITE_MOTION
+                self.outline_color = Colors.WHITE
             mask = pygame.mask.from_surface(self.image)
             mask_surface = mask.to_surface(setcolor=self.outline_color, unsetcolor=(0, 0, 0))
             mask_surface.set_colorkey((0, 0, 0))
@@ -59,11 +59,12 @@ class Cable(Sprite):
         return str(self.name)
 
 
-class CrimpTool(Sprite, Animation):
-    def __init__(self, position: tuple, data: list, *groups, **kwargs):
-        Animation.__init__(self, data)
-        Sprite.__init__(self, "crimp_tool", position, self.frame, *groups, **kwargs)
-        self.default_image = assets.images_cables["crimp_tool"]
+class CrimpTool(Sprite):
+    def __init__(self, position: tuple, *groups, **kwargs):
+        super().__init__(position, Assets.animations["cables"]["crimp"].current_frame, *groups, **kwargs)
+        self.animation = Assets.animations["cables"]["crimp"]
+        self.animation.loop = False
+        self.default_image = Assets.images_cables["crimp_tool"]
         self.image = self.default_image
         self.set = False
         self.loop = False
@@ -74,13 +75,14 @@ class CrimpTool(Sprite, Animation):
         return pygame.Rect(self.x - 130, self.rect.centery - 25, 50, 50)
 
     def move(self, position: tuple):
-        self.x -= (self.x - position[0]) / (0.1 / time.dt)
-        self.y -= (self.y - position[1]) / (0.1 / time.dt)
+        self.x -= (self.x - position[0]) / (0.1 / Time.dt)
+        self.y -= (self.y - position[1]) / (0.1 / Time.dt)
 
     def update(self):
         if self.set:
-            self.image = self.frame
+            self.image = self.animation.current_frame
             if self.playing:
-                self.play()
+                self.animation.update()
+                self.image = self.animation.current_frame
         else:
             self.image = self.default_image

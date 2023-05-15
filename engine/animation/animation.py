@@ -14,6 +14,7 @@ class Animation:
         self.is_playing = True
         self.loop = True
         self.length = sum(frame.duration for frame in self.frames)
+        self.done = False
 
     def stop(self):
         if not self.is_playing:
@@ -27,6 +28,7 @@ class Animation:
 
     def rewind(self):
         self.__frame_index = 0
+        self.done = False
 
     def update(self):
         if not self.is_playing:
@@ -41,6 +43,7 @@ class Animation:
                 self.__frame_index = 0
             else:
                 self.__frame_index = len(self.frames) - 1
+                self.done = True
                 self.is_playing = False
 
     @property

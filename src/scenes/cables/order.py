@@ -1,17 +1,17 @@
 import pygame
-import engine.assets as assets
-import engine.input as input
-import engine.data as data
-import engine.time as time
-import engine.window as window
-import engine.scene.scene_manager as scene_manager
+from engine.assets import Assets
+from engine.input import Input
+from engine.data import Data
+from engine.time import Time
+from engine.window import Window
 from src.scenes.cables.crimp import CrimpCable
 from random import choice, shuffle
 from engine.scene.scene import Scene
-from src.gui.image import GUIImage
+from engine.ui.image import Image
 from engine.objects.sprite import SpriteGroup
 from src.scenes.cables.cable_objects import Cable
-from src.gui.text import GUIText
+from engine.ui.text import Text
+from engine.constants import Colors
 
 
 class OrderCable(Scene):
@@ -19,24 +19,24 @@ class OrderCable(Scene):
         super().__init__("order_cable")
         self.group = SpriteGroup()
         # Cable Cover
-        GUIImage("background", (0, 0), assets.images_cables["table"], self.group, layer=0, centered=False, scale=2)
+        Image((0, 0), Assets.images_cables["table"], self.group, layer=0, centered=False, scale=2)
 
-        self.cable2 = GUIImage("cable_background", (222, 180), assets.images_cables["cable_cover_background"],
-                               self.group, scale=2, layer=1)
-        self.cable = GUIImage("cable_foreground", (60, 180), assets.images_cables["cable_cover_foreground"],
-                              self.group, layer=4, scale=2)
+        self.cable2 = Image((222, 180), Assets.images_cables["cable_cover_background"],
+                            self.group, scale=2, layer=1)
+        self.cable = Image((60, 180), Assets.images_cables["cable_cover_foreground"],
+                           self.group, layer=4, scale=2)
         # Cables
         self.can_drag = True
         self.ordered = False
         self.cable_positions = []
         self.selected_cable = None
         self.dragging = False
-        self.standardName = choice(list(data.cable_data["standards"].keys()))
-        self.cable_order = data.cable_data["standards"][self.standardName]
+        self.standardName = choice(list(Data.cable_data["standards"].keys()))
+        self.cable_order = Data.cable_data["standards"][self.standardName]
         self.cables = []
 
         shuffled_cables = self.cable_order.copy()
-        shuffle(shuffled_cables)
+        # shuffle(shuffled_cables)
 
         for index, cable_name in enumerate(shuffled_cables):
             cable_position = (int(self.display.get_width() / 2), 40 + (index * 40))
@@ -52,10 +52,11 @@ class OrderCable(Scene):
 
         self.tutorial = False
 
-        self.text = GUIText("Presiona Espacio para continuar", (self.center_x, 300), 32, self.group, layer=10)
+        self.text = Text((self.center_x, 300), "Presiona Espacio para continuar", 32, Colors.WHITE, self.group,
+                         layer=10)
         self.text.opacity = 0
-        GUIText("Estandard", (562, self.center_y - 10), 32, self.group, layer=10)
-        GUIText(self.standardName, (562, self.center_y + 10), 32, self.group, layer=10)
+        Text((562, self.center_y - 10), "Estandard", 32, Colors.WHITE, self.group, layer=10)
+        Text((562, self.center_y + 10), self.standardName, 32, Colors.WHITE, self.group, layer=10)
 
     def check_cable_order(self):
         if self.tutorial:
@@ -71,9 +72,9 @@ class OrderCable(Scene):
         if not self.can_drag:
             return
             # Start dragging
-        if not self.dragging and input.mouse.buttons["left_hold"]:
+        if not self.dragging and Input.mouse.buttons["left_hold"]:
             for cable in self.cables:
-                if cable.rect.collidepoint(input.mouse.position):
+                if cable.rect.collidepoint(Input.mouse.position):
                     self.dragging = True
                     self.selected_cable = cable
                     self.selected_cable.shadowActive = False
@@ -84,19 +85,19 @@ class OrderCable(Scene):
         # On dragging
         if self.dragging:
             # TODO: Limit the height of the drag
-            self.selected_cable.y -= (self.selected_cable.y - input.mouse.y) / (0.05 / time.dt)
+            self.selected_cable.y -= (self.selected_cable.y - Input.mouse.y) / (0.05 / Time.dt)
             selected_index = self.cables.index(self.selected_cable)
             for cable in self.cables:
                 if cable == self.selected_cable or cable.swapping:
                     continue
-                if cable.rect.collidepoint(input.mouse.position):
+                if cable.rect.collidepoint(Input.mouse.position):
                     swap_index = self.cables.index(cable)
                     cable.swap(self.cable_positions[selected_index])
                     self.cables[selected_index], self.cables[swap_index] = \
                         self.cables[swap_index], self.cables[selected_index]
 
         # End dragging
-        if self.dragging and not input.mouse.buttons["left_hold"]:
+        if self.dragging and not Input.mouse.buttons["left_hold"]:
             self.selected_cable.swap(self.cable_positions[self.cables.index(self.selected_cable)])
             self.selected_cable.shadowActive = True
             self.selected_cable.layer = 2
@@ -114,18 +115,19 @@ class OrderCable(Scene):
 
         # Change cursor while the cables are not ordered
         if any([cable.hovered for cable in self.cables]) and not self.ordered:
-            if input.mouse.buttons["left_hold"]:
-                window.set_cursor("grab")
+            if Input.mouse.buttons["left_hold"]:
+                Window.set_cursor("grab")
             else:
-                window.set_cursor("hand")
+                Window.set_cursor("hand")
         else:
-            window.set_cursor("arrow")
+            Window.set_cursor("arrow")
 
         if self.ordered:
             self.text.opacity = 255
             self.can_drag = False
-            if input.keyboard.keys["space"]:
-                scene_manager.change_scene(self, CrimpCable(self.standardName), swap=True, transition=True)
+            if Input.keyboard.keys["space"]:
+                from engine.scene.scene_manager import SceneManager
+                SceneManager.change_scene(CrimpCable(self.standardName), swap=True, transition=True)
 
     def render(self) -> None:
         self.group.render(self.display)

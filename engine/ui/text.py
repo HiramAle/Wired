@@ -7,8 +7,8 @@ from typing import Literal
 
 
 class Text(UIElement):
-    def __init__(self, position: tuple, text: str, size: Literal[16, 32, 48, 64], color: str | tuple | pygame.Color,
-                 *groups, **kwargs):
+    def __init__(self, position: tuple, text: str, size: Literal[16, 32, 48, 64],
+                 color: str | tuple | pygame.Color = Colors.WHITE, *groups, **kwargs):
         text_surface = Assets.fonts["monogram"].render(text, size, color, kwargs.get("max_width", 0),
                                                        kwargs.get("italic", False))
         super().__init__(position, text_surface, *groups, **kwargs)

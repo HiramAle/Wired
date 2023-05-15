@@ -1,9 +1,9 @@
 import pygame
-import engine.assets as assets
-import engine.input as game_input
+from engine.assets import Assets
+from engine.input import Input
 from engine.objects.sprite import Sprite
-from src.gui.text import GUIText
-from src.constants.colors import *
+from engine.ui.text import Text
+from engine.constants import Colors
 
 letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U",
            "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "ñ", "o", "p",
@@ -12,8 +12,7 @@ letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
 
 class Tab(Sprite):
     def __init__(self, position: tuple, icon: str, *groups, **kwargs):
-        super().__init__(f"tab_{icon}", position, assets.images_character_creation[f"tab_{icon}_hidden"], *groups,
-                         **kwargs)
+        super().__init__(position, Assets.images_character_creation[f"tab_{icon}_hidden"], *groups, **kwargs)
         self._state = "hidden"
         self.icon = icon
         new_rect = self.rect.copy()
@@ -29,7 +28,7 @@ class Tab(Sprite):
         if self._state == value:
             return
         self._state = value
-        self.image = assets.images_character_creation[f"tab_{self.icon}_{value}"]
+        self.image = Assets.images_character_creation[f"tab_{self.icon}_{value}"]
         new_rect = self.rect.copy()
         new_rect.bottom = 71
         self.y = new_rect.centery
@@ -37,9 +36,9 @@ class Tab(Sprite):
 
 class NameLabel(Sprite):
     def __init__(self, position: tuple, *groups, **kwargs):
-        super().__init__("name_label", position, assets.images_character_creation["name_label"], *groups, **kwargs)
-        self._text = GUIText("", (self.rect.centerx, self.rect.centery + 10), 32, color=BLACK_SPRITE, shadow=False,
-                             font="fool")
+        super().__init__(position, Assets.images_character_creation["name_label"], *groups, **kwargs)
+        self._text = Text((self.rect.centerx, self.rect.centery + 10), "", 32, Colors.SPRITE, shadow=False,
+                          font="fool")
         self.writing = False
 
     def update(self, *args, **kwargs):
@@ -47,17 +46,17 @@ class NameLabel(Sprite):
             self.writing = True
 
         if self.writing and len(self.text) <= 6:
-            if game_input.keyboard.key_pressed in letters:
-                self.text += game_input.keyboard.key_pressed
+            if Input.keyboard.key_pressed in letters:
+                self.text += Input.keyboard.key_pressed
 
-        if game_input.keyboard.keys["backspace"]:
+        if Input.keyboard.keys["backspace"]:
             self.text = self.text[:-1]
-        elif game_input.keyboard.keys["enter"] or game_input.keyboard.keys["esc"]:
+        elif Input.keyboard.keys["enter"] or Input.keyboard.keys["esc"]:
             self.writing = False
 
     def draw_outline(self, display: pygame.Surface):
         mask = pygame.mask.from_surface(self.image)
-        surface = mask.to_surface(setcolor=WHITE_MOTION, unsetcolor=(0, 0, 0))
+        surface = mask.to_surface(setcolor=Colors.WHITE, unsetcolor=(0, 0, 0))
         surface.set_colorkey((0, 0, 0))
         if self.centered:
             rect = surface.get_rect(center=self.position)

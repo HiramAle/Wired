@@ -1,16 +1,15 @@
 import random
-
 import pygame.mouse
-import engine.assets as assets
-import engine.input as input
-import engine.scene.scene_manager as scene_manager
-import engine.time as time
+from engine.assets import Assets
+from engine.input import Input
+from engine.time import Time
 from src.scenes.cables.cable_objects import CrimpTool
 from engine.objects.sprite import SpriteGroup
 from engine.scene.scene import Scene
-from src.gui.image import GUIImage
-from src.gui.text import GUIText
+from engine.ui.text import Text
+from engine.ui.image import Image
 from src.utils.json_saver import instance as save_manager
+from engine.constants import Colors
 
 
 class CrimpCable(Scene):
@@ -19,24 +18,22 @@ class CrimpCable(Scene):
         self.standard = standard
         self.group = SpriteGroup()
         # Cable Cover
-        GUIImage("background", (0, 0), assets.images_cables["table"], self.group, layer=0, centered=False, scale=2)
-        self.crimp_tool = CrimpTool((600, 180), assets.animations["cables"]["crimp"], self.group, layer=1)
+        Image((0, 0), Assets.images_cables["table"], self.group, layer=0, centered=False, scale=2)
+        self.crimp_tool = CrimpTool((600, 180), self.group, layer=1)
         self.dragging = False
         self.mouse_offset = 0
         self.cable_rect = pygame.Rect(0, 0, 20, 20)
         self.cable_rect.center = (185, 180)
         self.magnetic_rect = pygame.Rect(0, 0, 100, 100)
         self.magnetic_rect.center = self.cable_rect.center
-        self.cable_crimp = GUIImage("crimp_cable", (0, self.center_y - 9), assets.images_cables["crimp_cable"],
-                                    self.group,
-                                    centered=False)
+        self.cable_crimp = Image((0, self.center_y - 9), Assets.images_cables["crimp_cable"], self.group,
+                                 centered=False)
         self.index = 1
-        self.cable1 = GUIImage("crimp_cable", (320 - 30, 400), assets.images_cables["cable_icon"], self.group)
-        self.cable2 = GUIImage("crimp_cable", (320 + 30, 400), assets.images_cables["cable_icon"], self.group)
+        self.cable1 = Image((320 - 30, 400), Assets.images_cables["cable_icon"], self.group)
+        self.cable2 = Image((320 + 30, 400), Assets.images_cables["cable_icon"], self.group)
 
-        self.color_bar = GUIImage("color_bar", (320, 40), assets.images_cables["colorBar"], self.group)
-        self.indicator = GUIImage("indicator", (self.color_bar.rect.right, 37), assets.images_cables["indicator"],
-                                  self.group)
+        self.color_bar = Image((320, 40), Assets.images_cables["colorBar"], self.group)
+        self.indicator = Image((self.color_bar.rect.right, 37), Assets.images_cables["indicator"], self.group)
         self.color_bar.deactivate()
         self.indicator.deactivate()
         self.movement = 200
@@ -45,12 +42,13 @@ class CrimpCable(Scene):
         self.adding_cable = False
 
         self.crimp_done = False
-        self.continue_text = GUIText("Presiona Espacio para continuar", (self.center_x, 300), 32, self.group, layer=10)
+        self.continue_text = Text((self.center_x, 300), "Presiona Espacio para continuar", 32, Colors.WHITE, self.group,
+                                  layer=10)
         self.continue_text.deactivate()
-        self.standard_text = GUIText(self.standard, self.center, 32, self.group, layer=10)
+        self.standard_text = Text(self.center, self.standard, 32, Colors.WHITE, self.group, layer=10)
         self.standard_text.deactivate()
-        self.final_cable = GUIImage("final", (-150, self.center_y),
-                                    assets.images_cables[f"standard_{self.standard.lower()[-1]}"], self.group)
+        self.final_cable = Image((-150, self.center_y), Assets.images_cables[f"standard_{self.standard.lower()[-1]}"],
+                                 self.group)
         self.cable_quality = 0
         self.qualities = []
         self.color_values = {(153, 196, 122, 255): "green", (255, 198, 109, 255): "yellow", (222, 84, 81, 255): "red"}
@@ -59,7 +57,7 @@ class CrimpCable(Scene):
     def drag(self):
         # Start dragging
         if not self.dragging and not self.repositioning_tool and not self.crimp_done:
-            if self.crimp_tool.rect.collidepoint(input.mouse.position) and input.mouse.buttons["left"]:
+            if self.crimp_tool.rect.collidepoint(Input.mouse.position) and Input.mouse.buttons["left"]:
                 self.dragging = True
                 pygame.mouse.set_visible(False)
 
@@ -68,10 +66,10 @@ class CrimpCable(Scene):
             if self.crimp_tool.set:
                 self.crimp_tool.move((self.cable_rect.centerx + 105, self.cable_rect.centery))
             else:
-                self.crimp_tool.move((input.mouse.x + 105, input.mouse.y))
+                self.crimp_tool.move((Input.mouse.x + 105, Input.mouse.y))
 
             if self.cable_rect.colliderect(self.crimp_tool.crimp_area) and not self.crimp_tool.playing:
-                if self.magnetic_rect.collidepoint(input.mouse.position):
+                if self.magnetic_rect.collidepoint(Input.mouse.position):
                     self.crimp_tool.set = True
                     self.indicator_moving = True
                 else:
@@ -82,14 +80,15 @@ class CrimpCable(Scene):
         self.group.update()
 
         if self.index == 2:
-            self.cable1.y -= (self.cable1.y - 330) / (0.1 / time.dt)
+            self.cable1.y -= (self.cable1.y - 330) / (0.1 / Time.dt)
         elif self.index == 3 and not self.crimp_done:
-            self.cable2.y -= (self.cable2.y - 330) / (0.1 / time.dt)
+            self.cable2.y -= (self.cable2.y - 330) / (0.1 / Time.dt)
             if self.cable2.y - 330 < 1:
                 self.crimp_done = True
 
         # Repositions tool
         if self.repositioning_tool:
+            self.crimp_tool.animation.rewind()
             self.crimp_tool.move((600, 180))
             if abs(600 - self.crimp_tool.x) <= 1 and abs(180 - self.crimp_tool.y) <= 1:
                 self.crimp_tool.x = 600
@@ -109,7 +108,7 @@ class CrimpCable(Scene):
             self.color_bar.activate()
 
             # Play animation if mouse left button pressed
-            if input.mouse.buttons["left"]:
+            if Input.mouse.buttons["left"]:
                 color_x = int(self.indicator.x - self.color_bar.rect.left)
                 color = self.color_values[tuple(self.color_bar.image.get_at((color_x, 9)))]
                 self.qualities.append(self.color_quality[color])
@@ -117,11 +116,12 @@ class CrimpCable(Scene):
                 self.indicator_moving = False
 
             # Reset
-            if self.crimp_tool.playing and self.crimp_tool.done:
+            if self.crimp_tool.playing and self.crimp_tool.animation.done:
                 self.crimp_tool.set = False
                 self.dragging = False
                 self.repositioning_tool = True
-                self.crimp_tool.rewind()
+                self.crimp_tool.animation.rewind()
+                self.crimp_tool.animation.play()
                 self.crimp_tool.playing = False
                 self.index += 1
                 if self.index == 3:
@@ -130,7 +130,7 @@ class CrimpCable(Scene):
 
             # Updates Indicator position
             if self.indicator_moving:
-                self.indicator.x += time.dt * self.movement
+                self.indicator.x += Time.dt * self.movement
                 if self.indicator.x > self.color_bar.rect.right:
                     self.indicator.x = self.color_bar.rect.right
                     self.movement *= -1
@@ -141,15 +141,15 @@ class CrimpCable(Scene):
 
         if self.crimp_done:
             self.crimp_tool.move((self.crimp_tool.x + 50, self.crimp_tool.y))
-            self.cable1.y -= (self.cable1.y - 400) / (0.1 / time.dt)
-            self.cable2.y -= (self.cable2.y - 400) / (0.1 / time.dt)
+            self.cable1.y -= (self.cable1.y - 400) / (0.1 / Time.dt)
+            self.cable2.y -= (self.cable2.y - 400) / (0.1 / Time.dt)
 
-            self.final_cable.x -= (self.final_cable.x - 122) / (0.1 / time.dt)
+            self.final_cable.x -= (self.final_cable.x - 122) / (0.1 / Time.dt)
             if self.final_cable.x - 122 < 1:
                 self.standard_text.activate()
                 self.continue_text.activate()
 
-            if input.keyboard.keys["space"]:
+            if Input.keyboard.keys["space"]:
                 cable_quality = random.choice(self.qualities)
                 try:
                     save_manager.game_save.inventory["cables"][str(cable_quality)] += 1
@@ -159,8 +159,8 @@ class CrimpCable(Scene):
                     save_manager.game_save.inventory["cables"][str(cable_quality)] = 1
                 save_manager.game_save.save()
                 # saves.update_value(data.active_save, {"cables": {str(cable_quality): 1}})
-
-                scene_manager.exit_scene()
+                from engine.scene.scene_manager import SceneManager
+                SceneManager.exit_scene()
 
     def start(self):
         pygame.mouse.set_visible(True)

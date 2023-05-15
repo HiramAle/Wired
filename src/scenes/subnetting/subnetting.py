@@ -2,7 +2,7 @@ import engine.scene.scene_manager as scene_manager
 from engine.scene.scene import StagedScene
 from src.scenes.subnetting.subnetting_objects import *
 from engine.objects.sprite import SpriteGroup
-from src.gui.image import GUIImage
+from engine.ui.image import Image
 from random import choice
 from src.scenes.subnetting.subnet_mask_stage import SubnetMask
 from src.scenes.subnetting.results_stage import Results
@@ -33,10 +33,10 @@ class Subnetting(StagedScene):
         self.problemData = CustomMaskProblem(zone)
         self.group = SpriteGroup()
         self.buildings = SpriteGroup()
-        background_image = assets.images_subnetting[f"notebook_{choice(['blue', 'red', 'brown'])}"]
-        GUIImage("background", (0, 0), background_image, self.group, centered=False)
-        self.base_map = GUIImage("base_map", (40, 18), assets.images_subnetting["base_map"], self.group, centered=False)
-        self.map = GUIImage("map", (57, 29), assets.images_subnetting["map"], self.group, centered=False)
+        background_image = Assets.images_subnetting[f"notebook_{choice(['blue', 'red', 'brown'])}"]
+        Image((0, 0), background_image, self.group, centered=False)
+        self.base_map = Image((40, 18), Assets.images_subnetting["base_map"], self.group, centered=False)
+        self.map = Image((57, 29), Assets.images_subnetting["map"], self.group, centered=False)
         # Fill houses
         selected_buildings = []
         building_positions = []
@@ -79,8 +79,9 @@ class Subnetting(StagedScene):
             self.base_map.deactivate()
             self.set_stage(Results(self, elapsed_time))
         if self.current_stage.name == "results":
-            if game_input.keyboard.keys["space"]:
-                scene_manager.exit_scene()
+            if Input.keyboard.keys["space"]:
+                from engine.scene.scene_manager import SceneManager
+                SceneManager.exit_scene()
 
     def render(self) -> None:
         self.display.fill("#242424")
