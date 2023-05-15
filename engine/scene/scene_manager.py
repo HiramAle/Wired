@@ -22,8 +22,8 @@ class SceneManager:
         Initializes the scenes stack by setting the current scenes to a Loading Scene.
         """
         # cls.set_active_scene(Loading(Assets.load, Routing))
-        # cls.set_active_scene(Loading(Assets.load, MainMenu))
-        cls.set_active_scene(Loading(Assets.load, Subnetting))
+        cls.set_active_scene(Loading(Assets.load, MainMenu))
+        # cls.set_active_scene(Loading(Assets.load, Subnetting))
         # Assets.load(threading.Event())
         # cls.set_active_scene(TestScene())
 

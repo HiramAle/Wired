@@ -1,3 +1,5 @@
+import pygame.mixer
+
 from engine.window import Window
 from engine.data import Data
 from engine.input import Input
@@ -14,6 +16,7 @@ import src.scenes.loading.loading as loading
 from src.utils.json_saver import instance as save_manager
 from src.scenes.main_menu.stage_objects import DescriptionTitle
 from src.scenes.world.world import World
+from engine.audio import AudioManager
 
 description_text = "Archivo de guardado de @, con tt horas\nde juego."
 
@@ -59,12 +62,14 @@ class NewGame(Stage):
                     self.description_title.deactivate()
                     self.description.deactivate()
             if save_button.clicked:
+                pygame.mixer.music.fadeout(1000)
                 self.transitionPosition = save_button.rect.center
                 save_manager.index = index
                 if save_button.text.text == "- VACIO -":
                     from engine.scene.scene_manager import SceneManager
                     SceneManager.change_scene(loading.Loading(Assets.load_character_creation_assets,
                                                               CharacterCreation))
+
                 else:
                     from engine.scene.scene_manager import SceneManager
                     SceneManager.change_scene(loading.Loading(Data.load_maps, World), True)

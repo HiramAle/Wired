@@ -1,5 +1,5 @@
 import pygame
-import engine.time as game_time
+from engine.time import Time
 from src.constants.locals import CANVAS_WIDTH, CANVAS_HEIGHT
 from src.scenes.world.actor import Actor
 from src.scenes.world.game_object import GameObject
@@ -38,7 +38,7 @@ class Camera(GameObject):
             self.target_position = distance_x, distance_y
 
         if (self._target - self._position).magnitude() > 1:
-            self._position += (self._target - self._position) / (self._rate / game_time.dt)
+            self._position += (self._target - self._position) / (self._rate / Time.dt)
 
         if self.x < 0:
             self.x = 0

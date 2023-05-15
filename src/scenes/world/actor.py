@@ -1,20 +1,20 @@
 import pygame
 import src.utils.load as load
-import engine.assets as game_assets
-import engine.time as game_time
+from engine.assets import Assets
+from engine.time import Time
 from src.scenes.world.sprite import Sprite
-from src.components.animation import Animation
+from engine.animation.animation import Animation
 
 
-class Emote(Sprite, Animation):
-    def __init__(self, position: tuple, anim_data: list):
-        Animation.__init__(self, anim_data)
-        Sprite.__init__(self, position, self.frame)
-        self.loop = False
+class Emote(Sprite):
+    def __init__(self, position: tuple, animation: Animation):
+        super().__init__(position, animation.current_frame)
+        self.animation = animation
+        self.animation.loop = False
 
     def update(self):
-        self.play()
-        self.image = self.frame
+        self.animation.update()
+        self.image = self.animation.current_frame
 
 
 class Actor(Sprite):
@@ -34,7 +34,7 @@ class Actor(Sprite):
         self.frame_index = 0
         self.animation_speed = 10
         # Extra attributes
-        self.shadow = game_assets.images_actors["actor_shadow"]
+        self.shadow = Assets.images_actors["actor_shadow"]
         self.collider = pygame.Rect(0, 0, 28, 20)
         self.emote: Emote | None = None
 
@@ -56,15 +56,15 @@ class Actor(Sprite):
     def move(self):
         if self.movement.magnitude() > 1:
             self.movement = self.movement.normalize()
-        self.x += self.movement.x * self.speed * game_time.dt
+        self.x += self.movement.x * self.speed * Time.dt
         self.collider.centerx = self.x
         self.collision("x")
-        self.y += self.movement.y * self.speed * game_time.dt
+        self.y += self.movement.y * self.speed * Time.dt
         self.collider.bottom = self.rect.bottom
         self.collision("y")
 
     def animate(self):
-        self.frame_index += game_time.dt * self.animation_speed
+        self.frame_index += Time.dt * self.animation_speed
         if self.frame_index >= len(self.animations[self.action][self.direction]):
             self.frame_index = 0
 

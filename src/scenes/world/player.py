@@ -1,7 +1,6 @@
 import pygame
-import engine.input as game_input
-import engine.assets as game_assets
-import engine.scene.scene_manager as scene_manager
+from engine.input import Input
+from engine.assets import Assets
 from src.utils.json_saver import instance as save_manager
 from src.scenes.world.trigger import Trigger
 from src.constants.paths import USER_DATA
@@ -29,20 +28,21 @@ class Player(Actor):
     def input(self):
         # Movement input
         self.movement.x, self.movement.y = 0, 0
-        if game_input.keyboard.keys["left"]:
+        if Input.keyboard.keys["left"]:
             self.movement.x = - 1
-        if game_input.keyboard.keys["right"]:
+        if Input.keyboard.keys["right"]:
             self.movement.x = 1
-        if game_input.keyboard.keys["up"]:
+        if Input.keyboard.keys["up"]:
             self.movement.y = - 1
-        if game_input.keyboard.keys["down"]:
+        if Input.keyboard.keys["down"]:
             self.movement.y = 1
 
-        if game_input.keyboard.keys["interact"]:
+        if Input.keyboard.keys["interact"]:
             if self.active_trigger:
                 if "zone" in self.active_trigger.name:
                     to_zone = self.active_trigger.name.split("_")[1]
-                    world = scene_manager.current_scene()
+                    from engine.scene.scene_manager import SceneManager
+                    world = SceneManager.get_active_scene()
                     world.change_zone(to_zone)
                 elif "sleep" in self.active_trigger.name:
                     save_manager.game_save.save()
@@ -60,7 +60,7 @@ class Player(Actor):
                 if trigger.name == "stairs":
                     self.speed = 100
                     return
-                self.emote = Emote((self.rect.centerx, self.rect.top + 24), game_assets.animations["emotes"]["alert"])
+                self.emote = Emote((self.rect.centerx, self.rect.top + 24), Assets.animations["emotes"]["alert"])
                 return
 
     def update(self):

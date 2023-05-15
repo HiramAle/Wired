@@ -1,7 +1,6 @@
 import pygame
 import src.utils.load as load
-import engine.assets as game_assets
-import engine.scene.scene_manager as scene_manager
+from engine.assets import Assets
 from src.scenes.world.actor import Actor, Emote
 from src.constants.paths import NPC_SPRITE_SHEETS, NPC_DATA
 
@@ -55,12 +54,13 @@ class NPC(Actor):
         return pygame.Vector2(self.current_node)
 
     def close_to_player(self):
-        scene = scene_manager.current_scene()
+        from engine.scene.scene_manager import SceneManager
+        scene = SceneManager.get_active_scene()
         if scene.name != "world":
             return
         player = scene.zone.player
         if (player.position - self.position).magnitude() <= 50:
-            self.emote = Emote((self.rect.centerx, self.rect.top - 24), game_assets.animations["emotes"]["ask"])
+            self.emote = Emote((self.rect.centerx, self.rect.top - 24), Assets.animations["emotes"]["ask"])
             if self.active_route and not self.paused:
                 self.paused_route = self.active_route
                 self.active_route = None
