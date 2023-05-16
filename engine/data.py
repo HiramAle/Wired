@@ -1,6 +1,6 @@
 import os
 import threading
-
+from engine.loader import Loader
 import pytmx
 import src.utils.load as load
 from src.constants.paths import *
@@ -16,6 +16,7 @@ class Data:
     outfit_colors: dict[int, dict[int, tuple]] = {}
     subnetting: dict[int, dict] = {}
     active_save: int = 0
+    tutorials: {str, dict} = {}
 
     @classmethod
     def init(cls):
@@ -29,6 +30,7 @@ class Data:
 
         cls.subnetting = {int(file.split(".")[0]): load.load_json(f"{SUBNETTING_EXERCISES}/{file}") for file in
                           os.listdir(SUBNETTING_EXERCISES)}
+        cls.tutorials = {file.split(".")[0]: Loader.load_json(f"{TUTORIALS}/{file}") for file in os.listdir(TUTORIALS)}
 
     @classmethod
     def load_maps(cls, event: threading.Event):

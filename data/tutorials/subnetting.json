@@ -1,0 +1,25 @@
+{
+  "title": "Subneteo máscara de subred fija",
+  "steps": [
+    {
+      "title": "Zonas",
+      "description": "Para saber con que direcciones trabajarás, primero deberás identificar la cantidad de zonas en la red, la cual está indicada por la cantidad de edificios del mapa de la parte superior.\n\nTambién deberás identificar la clase de la red y calcular la máscara personalizada correspondiente."
+    },
+    {
+      "title": "Respuestas",
+      "description": "En la plantilla de stickers a la derecha, encontrarás las posibles respuestas para llenar los espacios delimitados por una línea punteada.\nPuedes desprender el sticker dando click sobre él, después arrastralo a la casilla que consideres correcta.\n\nUna vez que todo sea correcto, da click en la siguiente pestaña."
+    },
+    {
+      "title": "Direcciones",
+      "description": "Con la máscara personalizada ya definida, da click izquierdo en alguno de los edificios para seleccionar el área y configurarle su dirección de red y dirección de broadcast. \n\nPara esto deberás calcular el salto de red correspondiente y arrastrar de la plantilla de stickers la respuesta correcta a cada casilla."
+    },
+    {
+      "title": "Guía",
+      "description": "Si en algún momento del ejercicio tienes duda del proceso de subneteo con mascara fija, puedes consultarlo el glosario para apoyarte a realizar esté proceso. \n\nPuedes abrirlo presionando la tecla <<G>> o con la tecla <<Tab>> y luego seleccionando la pestaña correspondiente en la libreta."
+    },
+    {
+      "title": "Resultados",
+      "description": "Al final, podrás ver un resumen del trabajo realizado, con información sobre el tiempo, los cables usados, el dinero ganado y una calificación general de tu desempeño al hacer el trabajo.\n\nS es la calificación más alta, seguida después de A, B y C."
+    }
+  ]
+}

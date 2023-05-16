@@ -11,6 +11,7 @@ from src.scenes.test_scene import TestScene
 from src.scenes.routing.routing import Routing
 from src.scenes.cables.order import OrderCable
 from src.scenes.subnetting.subnetting import Subnetting
+from src.scenes.tutorial.tutorial import Tutorial
 
 
 class SceneManager:
@@ -26,6 +27,7 @@ class SceneManager:
         """
         # cls.set_active_scene(Loading(Assets.load, Routing))
         cls.set_active_scene(Loading(Assets.load, MainMenu))
+        # cls.set_active_scene(Loading(Assets.load, Tutorial, None, ("subnetting",)))
         # cls.set_active_scene(Loading(Assets.load, Subnetting))
         # Assets.load(threading.Event())
         # cls.set_active_scene(TestScene())

@@ -9,6 +9,7 @@ from src.scenes.world.tiled_object import TiledObject
 from src.constants.colors import BLACK_SPRITE
 from src.scenes.world.player import Player
 from src.scenes.dialog_scene.dialog_scene import DialogScene
+from src.scenes.tutorial.tutorial import Tutorial
 
 
 class Zone(Scene):
@@ -42,6 +43,7 @@ class Zone(Scene):
                     SceneManager.get_active_scene().change_zone(trigger.zone)
                 if trigger.type == "scene":
                     SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene]())
+                    SceneManager.change_scene(Tutorial(trigger.scene), True)
 
     def move_objects(self):
         if any([obj.hovered(self.camera.offset) for obj in self.map.objects]):
@@ -90,4 +92,3 @@ class Zone(Scene):
 
         if self.obj:
             self.obj.render(self.display)
-

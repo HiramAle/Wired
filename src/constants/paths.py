@@ -60,6 +60,7 @@ IMAGES_ACTORS = "assets/images/actor"
 IMAGES_WORLD = "assets/images/world"
 IMAGES_BOOK = "assets/images/book"
 IMAGES_ROUTING = "assets/images/routing"
+IMAGES_TUTORIALS = "assets/images/tutorial"
 NPC_SPRITE_SHEETS = "assets/npcs"
 NPC_DATA = "data/npcs"
 
@@ -67,6 +68,7 @@ NPC_DATA = "data/npcs"
 DATA_CABLES = "data/scenes/cables.json"
 DATA_CHARACTER_CREATION_FRAMES = "data/character_creation/animation_frames_data.json"
 SUBNETTING_EXERCISES = "data/scenes/subnetting"
+TUTORIALS = "data/tutorials"
 # Maps
 MAPS = {"players_house": "data/maps/TMX/Casa_custom.tmx",
         "village": "data/maps/TMX/Village.tmx"}

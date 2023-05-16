@@ -25,6 +25,7 @@ class Assets:
     images_world: dict[str, pygame.Surface] = {}
     images_book: dict[str, pygame.Surface] = {}
     images_routing: dict[str, pygame.Surface] = {}
+    images_tutorials: dict[str, pygame.Surface] = {}
     # Character creation
     # skin_tone/action/direction/frames
     bodies: dict[int, dict[str, list[pygame.Surface]]] = {}
@@ -57,6 +58,7 @@ class Assets:
         cls.images_world = load_image_directory(IMAGES_WORLD)
         cls.images_book = load_image_directory(IMAGES_BOOK)
         cls.images_routing = load_image_directory(IMAGES_ROUTING)
+        cls.images_tutorials = load_image_directory(IMAGES_TUTORIALS)
         cls.load_sounds()
         cls.load_music_paths()
         event.clear()
@@ -84,6 +86,7 @@ class Assets:
     @classmethod
     def load_character_creation_assets(cls, event: threading.Event):
         pygame.display.init()
+
         def load_bodies():
             cls.bodies = import_category_animations("bodies")
 

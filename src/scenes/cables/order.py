@@ -12,6 +12,7 @@ from engine.objects.sprite import SpriteGroup
 from src.scenes.cables.cable_objects import Cable
 from engine.ui.text import Text
 from engine.constants import Colors
+from src.scenes.tutorial.tutorial import Tutorial
 
 
 class OrderCable(Scene):
@@ -57,6 +58,7 @@ class OrderCable(Scene):
         self.text.opacity = 0
         Text((562, self.center_y - 10), "Estandard", 32, Colors.WHITE, self.group, layer=10)
         Text((562, self.center_y + 10), self.standardName, 32, Colors.WHITE, self.group, layer=10)
+
 
     def check_cable_order(self):
         if self.tutorial:

@@ -1,0 +1,25 @@
+{
+  "title": "Enrutamiento estático y dinámico",
+  "steps": [
+    {
+      "title": "Tipo",
+      "description": "Lo primero: identifica el tipo de enrutamiento requerido.\n \nPara el estático hay 3 tipos: por defecto, por interfaz de salida y por siguiente salto.\n \nPara  el enrutamiento dinámico tendrás que trabajar con RIP v2. \n\nFácil, ¿no?."
+    },
+    {
+      "title": "Topología",
+      "description": "La topología a configurar se encuentra en una ventana la cual puedes minimizar y maximizar cuando quieras.\n\n¡A configurar! Una vez que hayas identificado los componentes de la red, selecciona un router de la parte superior para comenzar a configurarlo."
+    },
+    {
+      "title": "Comandos",
+      "description": "Los comandos se encuentran divididos en cuatro partes:\n1. [comandos]\n2. [direcciones]\n3. [mascaras]\n4. [direcciones/\ninterfaces]\nCambia la estructura del comando usando los botones a los lados de cada contenedor.\n\nPara validar el comando presiona el botón de Enter."
+    },
+    {
+      "title": "Guardar",
+      "description": "Una vez que hayas introducido todos los comandos necesarios, guarda la configuración del router usando el botón <<write>>. \n\nEl router te notificará si la configuración es correcta o incorrecta. \n\nEn caso de ser correcta, el router se iluminará de amarillo, si no, te indicará en donde se requiere una corrección."
+    },
+    {
+      "title": "Corregir",
+      "description": "Si deseas cambiar los comandos introducidos, puedes usar el botón <<erase>> para borrar el ultimo comando introducido hasta donde consideres necesario. \n\nUna vez terminada la configuración de ese router, ¡selecciona otro y configúralo!"
+    }
+  ]
+}
