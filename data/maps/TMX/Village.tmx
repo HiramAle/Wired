@@ -1390,7 +1390,7 @@
   <object id="2162" name="amy" type="npc_spawn" x="1347" y="1136">
    <point/>
   </object>
-  <object id="2163" name="player_playershouse" x="1423" y="503">
+  <object id="2163" name="player_players_house" x="1423" y="503">
    <properties>
     <property name="direction" value="down"/>
    </properties>

@@ -68,7 +68,7 @@ DATA_CABLES = "data/scenes/cables.json"
 DATA_CHARACTER_CREATION_FRAMES = "data/character_creation/animation_frames_data.json"
 SUBNETTING_EXERCISES = "data/scenes/subnetting"
 # Maps
-MAPS = {"playershouse": "data/maps/TMX/Casa_custom.tmx",
+MAPS = {"players_house": "data/maps/TMX/Casa_custom.tmx",
         "village": "data/maps/TMX/Village.tmx"}
 TILED_HOUSE = "data/maps/TMX/Casa_custom.tmx"
 VILLAGE = "data/maps/TMX/Village.tmx"

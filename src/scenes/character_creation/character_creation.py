@@ -14,7 +14,7 @@ from src.scenes.character_creation.avatar import Avatar
 from src.scenes.character_creation.colors import ColorPicker
 from src.constants.colors import *
 from src.scenes.character_creation.character_objects import Tab, NameLabel
-from src.utils.json_saver import instance as save_manager
+from engine.save_manager import instance as save_manager
 from src.scenes.loading.loading import Loading
 from src.scenes.world.world import World
 from engine.constants import Colors
@@ -261,11 +261,11 @@ class CharacterCreation(Scene):
             if self.name.text != "" and Input.keyboard.key_pressed in ["F", "f"] and not self.name_label.writing:
                 Image((self.clipboard_padding, 283), self.draw_signature(self.name.text), self.default_group)
                 self.instructions.kill()
-                save_manager.game_save.name = self.name.text
-                save_manager.game_save.pronoun = self.pronouns[self.pronoun_index]
-                save_manager.game_save.save()
+                save_manager.active_save.name = self.name.text
+                save_manager.active_save.pronoun = self.pronouns[self.pronoun_index]
+                save_manager.active_save.save()
                 self.avatar.save_character()
                 # scene_manager.change_scene(self, loading.Loading(data.load_map, TestMap, ("playershouse",),
                 #                                                  ("playershouse",)), True)
                 from engine.scene.scene_manager import SceneManager
-                SceneManager.change_scene(self, Loading(Data.load_maps, World), True)
+                SceneManager.change_scene(Loading(Data.load_maps, World), True)

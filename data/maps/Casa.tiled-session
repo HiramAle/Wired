@@ -88,17 +88,17 @@
         },
         "TMX/Casa_custom.tmx": {
             "expandedObjectLayers": [
+                13,
                 11,
-                16,
                 15,
-                12,
-                13
+                16,
+                12
             ],
-            "scale": 2,
-            "selectedLayer": 9,
+            "scale": 1.5,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 610.75,
-                "y": 637.5
+                "x": 489.99999999999994,
+                "y": 484.99999999999994
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -115,23 +115,23 @@
         },
         "TMX/Village.tmx": {
             "expandedGroupLayers": [
-                46,
-                36,
+                47,
                 29,
-                47
+                36,
+                46
             ],
             "expandedObjectLayers": [
-                29,
-                31,
                 17,
+                30,
+                29,
                 13,
-                30
+                31
             ],
-            "scale": 0.33,
-            "selectedLayer": 15,
+            "scale": 2,
+            "selectedLayer": 20,
             "viewCenter": {
-                "x": 1231.8181818181815,
-                "y": 827.2727272727273
+                "x": 960,
+                "y": 1039.75
             }
         },
         "TMX/Village.tmx#Singles": {
@@ -245,7 +245,7 @@
         "TSX/house_singles.tsx"
     ],
     "project": "Casa.tiled-project",
-    "property.type": "bool",
+    "property.type": "string",
     "recentFiles": [
         "TMX/Village.tmx",
         "TSX/house_singles.tsx",

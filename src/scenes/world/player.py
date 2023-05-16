@@ -1,7 +1,7 @@
 import pygame
 from engine.input import Input
 from engine.assets import Assets
-from src.utils.json_saver import instance as save_manager
+from engine.save_manager import instance as save_manager
 from src.scenes.world.trigger import Trigger
 from src.constants.paths import USER_DATA
 from src.scenes.world.actor import Actor, Emote
@@ -14,8 +14,7 @@ class Player(Actor):
                  collisions: list[pygame.Rect],
                  objects: list[TiledObject],
                  interactions: list[Trigger]):
-        path = f"{USER_DATA}/saves/save_{save_manager.index}/sprite_sheet.png"
-        super().__init__(position, path, collisions)
+        super().__init__(position, save_manager.active_save.sprite_sheet, collisions)
         self.interactions = interactions
         self.objects = objects
         self.active_trigger: None | Trigger = None

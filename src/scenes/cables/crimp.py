@@ -8,7 +8,7 @@ from engine.objects.sprite import SpriteGroup
 from engine.scene.scene import Scene
 from engine.ui.text import Text
 from engine.ui.image import Image
-from src.utils.json_saver import instance as save_manager
+from engine.save_manager import instance as save_manager
 from engine.constants import Colors
 
 
@@ -152,12 +152,12 @@ class CrimpCable(Scene):
             if Input.keyboard.keys["space"]:
                 cable_quality = random.choice(self.qualities)
                 try:
-                    save_manager.game_save.inventory["cables"][str(cable_quality)] += 1
+                    save_manager.active_save.inventory["cables"][str(cable_quality)] += 1
                 except KeyError as error:
                     if error.args[0] == "cables":
-                        save_manager.game_save.inventory["cables"] = {}
-                    save_manager.game_save.inventory["cables"][str(cable_quality)] = 1
-                save_manager.game_save.save()
+                        save_manager.active_save.inventory["cables"] = {}
+                    save_manager.active_save.inventory["cables"][str(cable_quality)] = 1
+                save_manager.active_save.save()
                 # saves.update_value(data.active_save, {"cables": {str(cable_quality): 1}})
                 from engine.scene.scene_manager import SceneManager
                 SceneManager.exit_scene()

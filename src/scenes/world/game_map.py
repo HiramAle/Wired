@@ -3,11 +3,12 @@ import pygame
 from src.scenes.world.trigger import Trigger
 from src.scenes.world.tiled_object import TiledObject
 from src.scenes.world.position import Position
+from engine.data import Data
 
 
 class GameMap:
-    def __init__(self, map_data: pytmx.TiledMap):
-        self.data = map_data
+    def __init__(self, name: str):
+        self.data = Data.maps.get(name)
         # Map dimensions
         self.width = self.data.width * self.data.tilewidth
         self.height = self.data.height * self.data.tileheight
@@ -19,10 +20,9 @@ class GameMap:
         self.objects_layers = [layer for layer in self.data.layers if isinstance(layer, pytmx.TiledObjectGroup)]
         self.tiled_layers = [layer for layer in self.data.layers if isinstance(layer, pytmx.TiledTileLayer)]
         self.colliders: list[pygame.Rect] = []
-        self.interact: list[Trigger] = []
+        self.triggers: list[Trigger] = []
         self.objects: list[TiledObject] = []
         self._positions: dict[str, Position] = {}
-
         self.setup()
 
     def get_position(self, name: str) -> Position:
@@ -44,10 +44,8 @@ class GameMap:
                     collider = pygame.Rect(tiled_object.x, tiled_object.y, tiled_object.width, tiled_object.height)
                     self.colliders.append(collider)
                     continue
-                if layer.name == "interactions":
-                    interact = Trigger(tiled_object.name, tiled_object.x, tiled_object.y, tiled_object.width,
-                                       tiled_object.height)
-                    self.interact.append(interact)
+                if layer.name == "triggers":
+                    self.triggers.append(Trigger(tiled_object))
                     continue
                 if layer.name == "positions":
                     position = Position(tiled_object.name, (tiled_object.x, tiled_object.y), tiled_object.properties)
@@ -66,7 +64,8 @@ class GameMap:
                 for collider_object in collider_objects:
                     if collider_object.name == "trigger":
                         continue
-                    collider = pygame.Rect(collider_object.x, collider_object.y, collider_object.width, collider_object.height)
+                    collider = pygame.Rect(collider_object.x, collider_object.y, collider_object.width,
+                                           collider_object.height)
                     collider_list.append(collider)
                 sorted_by_center = "center" if "centered" in properties else "bottom"
                 self.objects.append(TiledObject(position, image, collider_list, sorted_by_center))

@@ -5,7 +5,6 @@ from os.path import isdir
 from os import listdir
 from engine.ui.font import Font
 from src.constants.paths import *
-from src.utils.json_saver import instance as save_manager
 
 
 def load_json(path: str) -> dict:
@@ -199,7 +198,7 @@ def import_category_animations(category: str) -> dict[int, dict]:
     return category_animations
 
 
-def save_sprite_sheet(body: int, eyes: int, hairstyle: tuple[int, int], outfit: tuple[int, int]):
+def save_sprite_sheet(path: str, body: int, eyes: int, hairstyle: tuple[int, int], outfit: tuple[int, int]):
     body_path = f"{BODIES}/body_{body}.png"
     eyes_path = f"{EYES}/eyes_{eyes}.png"
     hairstyle_path = f"{HAIRSTYLES}/hairstyle_{hairstyle[0]}_{hairstyle[1]}.png"
@@ -220,7 +219,7 @@ def save_sprite_sheet(body: int, eyes: int, hairstyle: tuple[int, int], outfit: 
         sprite_sheet.blit(hairstyle_image, (0, 0))
         sprite_sheet.blit(eyes_image, (0, 0))
 
-        pygame.image.save(sprite_sheet, f"{USER_DATA}/saves/save_{save_manager.index}/sprite_sheet.png")
+        pygame.image.save(sprite_sheet, path)
 
 
 def import_character_generator():

@@ -9,12 +9,14 @@ from engine.input import Input
 from engine.time import Time
 from engine.assets import Assets
 from engine.scene.scene_manager import SceneManager
+from engine.save_manager import instance as save_manager
 
 
 class Game:
     def __init__(self):
         pygame.init()
         Preferences.load()
+        save_manager.load()
         Window.init()
         Data.init()
         Assets.prepare()

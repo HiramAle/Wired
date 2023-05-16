@@ -4,6 +4,7 @@ from engine.time import Time
 from engine.assets import Assets
 from engine.objects.sprite import Sprite
 from src.utils.load import save_sprite_sheet
+from engine.save_manager import instance as save_manager
 
 
 class Avatar(Sprite):
@@ -74,8 +75,8 @@ class Avatar(Sprite):
         return Assets.hairstyles[self.hairstyle][self.hairstyle_color][self.direction][self.frame_index]
 
     def save_character(self):
-        save_sprite_sheet(self.body, self.eyes, (self.hairstyle, self.hairstyle_color),
-                          (self.outfit, self.outfit_color))
+        save_sprite_sheet(save_manager.active_save.sprite_sheet, self.body, self.eyes,
+                          (self.hairstyle, self.hairstyle_color), (self.outfit, self.outfit_color))
 
     def update_image(self):
         self.image = pygame.Surface((64, 128), pygame.SRCALPHA)

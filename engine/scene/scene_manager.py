@@ -15,6 +15,9 @@ from src.scenes.subnetting.subnetting import Subnetting
 
 class SceneManager:
     stack_scene: list[Scene] = []
+    scenes_by_name = {"cables": OrderCable,
+                      "routing": Routing,
+                      "subnetting": Subnetting}
 
     @classmethod
     def init(cls):

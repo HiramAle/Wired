@@ -1,9 +1,14 @@
+import os
+
 from engine.loader import Loader
+from engine.constants import Paths
 
 
 class GameSave:
-    def __init__(self, filename: str):
-        save_data = Loader.load_json(filename)
+    def __init__(self, folder_path: str):
+        self.filename = f"{folder_path}/save.json"
+        self.sprite_sheet = f"{folder_path}/sprite_sheet.png"
+        save_data = Loader.load_json(f"{folder_path}/save.json")
         if not save_data:
             save_data = {"name": "",
                          "pronoun": "",
@@ -12,8 +17,7 @@ class GameSave:
                          "cable": 0,
                          "connectors": 0,
                          "inventory": {}}
-            Loader.save_json(filename, save_data)
-        self.filename = filename
+            Loader.save_json(self.filename, save_data)
         self.name = save_data["name"]
         self.pronoun = save_data["pronoun"]
         self.time = save_data["time"]
@@ -34,24 +38,24 @@ class GameSave:
 
 class SaveManager:
     def __init__(self):
-        self.__saves: list[GameSave] = []
+        self.saves: list[GameSave] = []
         self.__slot = 0
 
     def load(self):
-        for index in range(3):
-            print(self.__slot)
+        for index, folder in enumerate(os.listdir(Paths.USER_SAVES_FOLDER)):
+            self.saves.append(GameSave(f"{Paths.USER_SAVES_FOLDER}/{folder}"))
 
     @property
     def active_save(self) -> GameSave | None:
         try:
-            return self.__saves[self.__slot]
+            return self.saves[self.__slot]
         except IndexError:
             print("Saves aren't loaded yet")
             return None
 
     @active_save.setter
     def active_save(self, slot: int):
-        if slot >= len(self.__saves):
+        if slot >= len(self.saves):
             print("Slot index must be between 0 and 2")
             return
         self.__slot = slot

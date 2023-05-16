@@ -1,4 +1,5 @@
 {
+  "sprite_sheet": "data/user/saves/save_0/sprite_sheet.png",
   "name": "Zazu",
   "pronoun": "el",
   "time": 0,
@@ -7,8 +8,8 @@
   "connectors": 0,
   "inventory": {
     "cables": {
-      "3": 5,
-      "2": 1
+      "3": 7,
+      "2": 2
     }
   }
 }
