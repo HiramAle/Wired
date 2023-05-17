@@ -88,17 +88,17 @@
         },
         "TMX/Casa_custom.tmx": {
             "expandedObjectLayers": [
-                15,
-                13,
                 11,
+                15,
                 16,
+                13,
                 12
             ],
             "scale": 1.5,
-            "selectedLayer": 9,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 479,
-                "y": 479.3333333333333
+                "x": 477.66666666666663,
+                "y": 478
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -113,25 +113,39 @@
                 "y": 1362.25
             }
         },
+        "TMX/Tienda_prueba.tmx": {
+            "expandedObjectLayers": [
+                16,
+                12,
+                14
+            ],
+            "scale": 2,
+            "selectedLayer": 8,
+            "viewCenter": {
+                "x": 437.75,
+                "y": 185.5
+            }
+        },
         "TMX/Village.tmx": {
             "expandedGroupLayers": [
-                29,
-                36,
                 46,
-                47
+                47,
+                36,
+                29
             ],
             "expandedObjectLayers": [
-                13,
                 31,
+                17,
+                13,
                 29,
                 30,
-                17
+                32
             ],
-            "scale": 5.5,
-            "selectedLayer": 21,
+            "scale": 1.5,
+            "selectedLayer": 20,
             "viewCenter": {
-                "x": 1443.7272727272727,
-                "y": 483.0909090909091
+                "x": 537,
+                "y": 870
             }
         },
         "TMX/Village.tmx#Singles": {
@@ -185,6 +199,10 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "TSX/RoomBuilder.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
         "TSX/Room_Builder.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 0.33
@@ -230,6 +248,9 @@
             "dynamicWrapping": false,
             "scaleInDock": 0.33,
             "scaleInEditor": 0.5
+        },
+        "TSX/store_singles.tsx": {
+            "scaleInDock": 1
         }
     },
     "last.externalTilesetPath": "C:/Users/magic/Desktop/Wired/data/maps/TSX",
@@ -242,14 +263,15 @@
     "openFiles": [
         "TMX/Village.tmx",
         "TMX/Casa_custom.tmx",
-        "TSX/house_singles.tsx"
+        "TMX/Tienda_prueba.tmx"
     ],
     "project": "Casa.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "TSX/house_singles.tsx",
+        "TMX/Tienda_prueba.tmx",
         "TMX/Casa_custom.tmx",
         "TMX/Village.tmx",
+        "TSX/house_singles.tsx",
         "TSX/singles.tsx",
         "TSX/Tileset_Casa.tsx",
         "TSX/Terrains.tsx",
@@ -257,8 +279,7 @@
         "C:/Users/magic/Desktop/Casa_custom.tmx",
         "C:/Users/magic/Desktop/s23 - Audio & fixes/data/map.tmx",
         "TSX/buildings_obj.tsx",
-        "TSX/Singles.tsx",
-        "TMX/City.tmx"
+        "TSX/Singles.tsx"
     ],
     "tileset.lastUsedFilter": "Archivos de conjuntos de patrones Tiled (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

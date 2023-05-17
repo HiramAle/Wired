@@ -331,7 +331,10 @@
    </properties>
    <point/>
   </object>
-  <object id="76" name="kat" type="npc_spawn" x="400" y="589">
+  <object id="76" name="Kat" type="npc_spawn" x="400" y="589">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
    <point/>
   </object>
   <object id="77" name="player_" x="300" y="240">

@@ -1,3 +1,5 @@
+import random
+
 import pygame
 import src.utils.load as load
 from engine.assets import Assets
@@ -32,7 +34,7 @@ class Actor(Sprite):
         self.direction = "down"
         self.action = "idle"
         self.frame_index = 0
-        self.animation_speed = 10
+        self.animation_speed = random.randint(9, 11)
         # Extra attributes
         self.shadow = Assets.images_actors["actor_shadow"]
         self.collider = pygame.Rect(0, 0, 28, 20)

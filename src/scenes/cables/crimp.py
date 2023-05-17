@@ -154,7 +154,9 @@ class CrimpCable(Scene):
             if Input.keyboard.keys["space"]:
                 cable_quality = random.choice(self.qualities)
                 save_manager.active_save.inventory["cables"][self.standard[-1].lower()][cable_quality] += 1
-                save_manager.active_save.save()
+                # save_manager.active_save.save()
+                save_manager.active_save.cable -= 1
+                save_manager.active_save.connectors -= 2
                 from engine.scene.scene_manager import SceneManager
                 SceneManager.exit_scene()
 

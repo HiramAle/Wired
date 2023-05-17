@@ -1,7 +1,10 @@
+import pygame
 from engine.window import Window
 from engine.input import Input
 from engine.scene.scene import Scene
 # from src.entities.camera import Camera
+from engine.time import Timer
+from engine.assets import Assets
 from src.scenes.world.camera import Camera
 from src.scenes.world.npc import NPC
 from src.scenes.world.game_map import GameMap
@@ -10,13 +13,31 @@ from src.constants.colors import BLACK_SPRITE
 from src.scenes.world.player import Player
 from src.scenes.dialog_scene.dialog_scene import DialogScene
 from src.scenes.tutorial.tutorial import Tutorial
+from engine.objects.sprite import Sprite, SpriteGroup
+from engine.ui.text import Text
+
+
+class Notification(Sprite):
+    def __init__(self, position: tuple, text: str, *groups):
+        super().__init__(position, Assets.images_misc["notification"], *groups)
+        self.pivot = self.Pivot.TOP_LEFT
+        self.text = Text((self.x + 11, self.y + 15), text, 16, BLACK_SPRITE, centered=False)
+        self.timer = Timer(3)
+        self.timer.start()
+
+    def update(self, *args, **kwargs):
+        if self.timer.update():
+            self.kill()
+
+    def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
+        super().render(display)
+        self.text.render(display)
 
 
 class Zone(Scene):
     def __init__(self, name: str, npc_list: list[NPC], player: Player, before=""):
         super().__init__(name)
         self.map = GameMap(name)
-        print(name)
         self.npc_list = npc_list
         self.debug = False
         self.map_colliders = self.map.colliders
@@ -25,28 +46,42 @@ class Zone(Scene):
         self.player = player
         self.player.position = self.map.get_position(f"player_{before}").tuple
         self.player.direction = self.map.get_position(f"player_{before}").properties["direction"]
+        self.player.collisions = []
         self.player.collisions = self.map_colliders
         self.camera = Camera(self.map.width, self.map.height)
         self.camera.actor_tracking = self.player
         self.camera.position = self.player.x - 320, self.player.y - 180
+        self.notification = SpriteGroup()
         self.obj: TiledObject | None = None
+        for obj in self.map_objects:
+            self.player.collisions.extend(obj.colliders)
+        for npc in self.npcs:
+            print(npc.name)
+            npc.position = self.map.get_position(npc.name).position
+            npc.direction = self.map.get_position(npc.name).properties["direction"]
 
     @property
     def npcs(self) -> list[NPC]:
         return [npc for npc in self.npc_list if npc.current_zone == self.name]
 
     def update_triggers(self):
+        from engine.save_manager import instance as save_manager
         for trigger in self.map_triggers:
             if trigger.colliderect(self.player.collider) and trigger.interact():
                 from engine.scene.scene_manager import SceneManager
                 if trigger.type == "zone":
                     SceneManager.get_active_scene().change_zone(trigger.zone)
                 if trigger.type == "scene":
+                    if trigger.name == "cables":
+                        if save_manager.active_save.connectors < 2 or save_manager.active_save.cable < 1:
+                            Notification((30, 280), "Necesitas mas cable y\nconectorespara crear un\ncable de Red",
+                                         self.notification)
+                            return
                     SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene]())
                     if trigger.name != "store":
                         SceneManager.change_scene(Tutorial(trigger.scene), True)
-                if trigger.type == "sleep":
-                    from engine.save_manager import instance as save_manager
+
+                if trigger.type == "save":
                     save_manager.active_save.save()
 
     def move_objects(self):
@@ -78,6 +113,7 @@ class Zone(Scene):
         self.camera.update()
 
         self.update_triggers()
+        self.notification.update()
 
         for npc in self.npcs:
             npc.update()
@@ -96,3 +132,5 @@ class Zone(Scene):
 
         if self.obj:
             self.obj.render(self.display)
+
+        self.notification.render(self.display)

@@ -42,12 +42,14 @@ class World(Scene):
         self.night = NightEffect()
         # ----------
         self.player = Player((0, 0), [], [], [])
-        self.npc_list = [NPC("kat", (0, 0), self.player)]
+        self.npc_list = [NPC("Kat", (0, 0), self.player), NPC("Arian", (0, 0), self.player),
+                         NPC("Chencho", (0, 0), self.player), NPC("Altair", (0, 0), self.player),
+                         NPC("Kike", (0, 0), self.player), NPC("Jordi", (0, 0), self.player)]
         self.zone = Zone("players_house", self.npc_list, self.player)
         # ----------
         self.overlay = Assets.images_world["overlay"]
         self.hour = Sprite((78 + 16, 32), pygame.Surface((1, 1)))
-        self.zone.npc_list[0].position = self.zone.map.get_position("kat").tuple
+        # self.zone.npc_list[0].position = self.zone.map.get_position("kat").tuple
         self.next_zone = None
 
         # Zone transition

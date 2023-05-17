@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="2166">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="2172">
  <tileset firstgid="1" source="../TSX/City.tsx"/>
  <tileset firstgid="7585" source="../TSX/Terrains.tsx"/>
  <tileset firstgid="10145" source="../TSX/Modern_Exteriors.tsx"/>
@@ -1382,7 +1382,6 @@
  </objectgroup>
  <objectgroup id="30" name="interactions">
   <object id="2130" name="zone_playershouse" x="1406.25" y="468" width="35.25" height="19"/>
-  <object id="2135" name="scene_playable_store" x="313.75" y="847.25" width="41" height="24.75"/>
   <object id="2136" name="scene_playable_npcshouse" x="122.182" y="1863.45" width="44" height="23.4545"/>
   <object id="2139" name="scene_playable_city" x="1517.5" y="1229" width="117.75" height="37.75"/>
  </objectgroup>
@@ -1396,18 +1395,48 @@
    </properties>
    <point/>
   </object>
+  <object id="2167" name="player_store" x="334" y="865">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2168" name="Chencho" type="npc_spawn" x="1201" y="561">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2169" name="Altair" type="npc_spawn" x="1066" y="665">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2170" name="Kike" type="npc_spawn" x="464" y="1016">
+   <properties>
+    <property name="direction" value="up"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2171" name="Jordi" type="npc_spawn" x="463" y="984">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup id="32" name="triggers">
-  <object id="2164" name="store" type="scene" x="314" y="860" width="41" height="12">
-   <properties>
-    <property name="interaction_type" value="keypress"/>
-    <property name="scene" value="store"/>
-   </properties>
-  </object>
   <object id="2165" name="zone_players_house" type="zone" x="1406" y="468" width="36" height="19">
    <properties>
     <property name="interaction_type" value="keypress"/>
     <property name="zone" value="players_house"/>
+   </properties>
+  </object>
+  <object id="2166" name="zone_store" type="zone" x="315" y="848" width="40" height="31">
+   <properties>
+    <property name="interaction_type" value="keypress"/>
+    <property name="zone" value="store"/>
    </properties>
   </object>
  </objectgroup>

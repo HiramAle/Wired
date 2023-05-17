@@ -1,0 +1,16 @@
+{
+  "dialogs": {
+    "0": [
+      "Hola @, Por que no pruebas a interactuar",
+      "con las mesas de trabajo? Seguro tienen",
+      "algo interesante que probar."
+    ],
+    "1": [
+      "Hola de nuevo @"
+    ],
+    "2": [
+      "Así que ya probaste a crear un cable de red?"
+    ]
+  },
+  "start_zone": "village"
+}

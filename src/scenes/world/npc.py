@@ -44,6 +44,9 @@ class NPC(Actor):
         self.talkable = False
         self.player = player
 
+    def __repr__(self):
+        return f"NPC({self.name}, {self.position})"
+
     @property
     def player_distance(self) -> float:
         return (self.position - self.player.position).magnitude()
