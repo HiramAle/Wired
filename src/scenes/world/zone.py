@@ -43,7 +43,11 @@ class Zone(Scene):
                     SceneManager.get_active_scene().change_zone(trigger.zone)
                 if trigger.type == "scene":
                     SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene]())
-                    SceneManager.change_scene(Tutorial(trigger.scene), True)
+                    if trigger.name != "store":
+                        SceneManager.change_scene(Tutorial(trigger.scene), True)
+                if trigger.type == "sleep":
+                    from engine.save_manager import instance as save_manager
+                    save_manager.active_save.save()
 
     def move_objects(self):
         if any([obj.hovered(self.camera.offset) for obj in self.map.objects]):

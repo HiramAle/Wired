@@ -61,6 +61,7 @@ IMAGES_WORLD = "assets/images/world"
 IMAGES_BOOK = "assets/images/book"
 IMAGES_ROUTING = "assets/images/routing"
 IMAGES_TUTORIALS = "assets/images/tutorial"
+IMAGES_STORE = "assets/images/store"
 NPC_SPRITE_SHEETS = "assets/npcs"
 NPC_DATA = "data/npcs"
 

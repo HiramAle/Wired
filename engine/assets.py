@@ -26,6 +26,7 @@ class Assets:
     images_book: dict[str, pygame.Surface] = {}
     images_routing: dict[str, pygame.Surface] = {}
     images_tutorials: dict[str, pygame.Surface] = {}
+    images_store: dict[str, pygame.Surface] = {}
     # Character creation
     # skin_tone/action/direction/frames
     bodies: dict[int, dict[str, list[pygame.Surface]]] = {}
@@ -59,6 +60,7 @@ class Assets:
         cls.images_book = load_image_directory(IMAGES_BOOK)
         cls.images_routing = load_image_directory(IMAGES_ROUTING)
         cls.images_tutorials = load_image_directory(IMAGES_TUTORIALS)
+        cls.images_store = load_image_directory(IMAGES_STORE)
         cls.load_sounds()
         cls.load_music_paths()
         event.clear()

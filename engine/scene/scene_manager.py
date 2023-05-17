@@ -12,13 +12,15 @@ from src.scenes.routing.routing import Routing
 from src.scenes.cables.order import OrderCable
 from src.scenes.subnetting.subnetting import Subnetting
 from src.scenes.tutorial.tutorial import Tutorial
+from src.scenes.store.store import Store
 
 
 class SceneManager:
     stack_scene: list[Scene] = []
     scenes_by_name = {"cables": OrderCable,
                       "routing": Routing,
-                      "subnetting": Subnetting}
+                      "subnetting": Subnetting,
+                      "store": Store}
 
     @classmethod
     def init(cls):
@@ -30,6 +32,7 @@ class SceneManager:
         # cls.set_active_scene(Loading(Assets.load, Tutorial, None, ("subnetting",)))
         # cls.set_active_scene(Loading(Assets.load, Subnetting))
         # Assets.load(threading.Event())
+        # cls.set_active_scene(Store())
         # cls.set_active_scene(TestScene())
 
     @classmethod

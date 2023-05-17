@@ -3,13 +3,13 @@
   "name": "Zazu",
   "pronoun": "el",
   "time": 0,
-  "money": 0,
+  "money": 25,
   "cable": 0,
   "connectors": 0,
   "inventory": {
     "cables": {
       "a": {
-        "green": 9,
+        "green": 10,
         "yellow": 2,
         "red": 1
       },

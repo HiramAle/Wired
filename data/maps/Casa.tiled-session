@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TMX/Casa_custom.tmx",
+    "activeFile": "TMX/Village.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "Todos los archivos (*)",
@@ -89,16 +89,16 @@
         "TMX/Casa_custom.tmx": {
             "expandedObjectLayers": [
                 15,
-                16,
-                12,
+                13,
                 11,
-                13
+                16,
+                12
             ],
             "scale": 1.5,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 477.33333333333337,
-                "y": 470.99999999999994
+                "x": 479,
+                "y": 479.3333333333333
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -115,23 +115,23 @@
         },
         "TMX/Village.tmx": {
             "expandedGroupLayers": [
-                46,
                 29,
                 36,
+                46,
                 47
             ],
             "expandedObjectLayers": [
                 13,
+                31,
                 29,
                 30,
-                17,
-                31
+                17
             ],
-            "scale": 2,
-            "selectedLayer": 20,
+            "scale": 5.5,
+            "selectedLayer": 21,
             "viewCenter": {
-                "x": 960,
-                "y": 1039.5
+                "x": 1443.7272727272727,
+                "y": 483.0909090909091
             }
         },
         "TMX/Village.tmx#Singles": {
@@ -247,9 +247,9 @@
     "project": "Casa.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "TMX/Village.tmx",
         "TSX/house_singles.tsx",
         "TMX/Casa_custom.tmx",
+        "TMX/Village.tmx",
         "TSX/singles.tsx",
         "TSX/Tileset_Casa.tsx",
         "TSX/Terrains.tsx",

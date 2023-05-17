@@ -16,7 +16,20 @@ class GameSave:
                          "money": 0,
                          "cable": 0,
                          "connectors": 0,
-                         "inventory": {}}
+                         "inventory": {
+                             "cables": {
+                                 "a": {
+                                     "green": 0,
+                                     "yellow": 0,
+                                     "red": 0
+                                 },
+                                 "b": {
+                                     "green": 0,
+                                     "yellow": 0,
+                                     "red": 0
+                                 }
+                             }
+                         }}
             Loader.save_json(self.filename, save_data)
         self.name = save_data["name"]
         self.pronoun = save_data["pronoun"]

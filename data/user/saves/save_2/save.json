@@ -5,5 +5,18 @@
   "money": 99999,
   "cable": 0,
   "connectors": 0,
-  "inventory": {}
+  "inventory": {
+    "cables": {
+      "a": {
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      },
+      "b": {
+        "green": 0,
+        "yellow": 0,
+        "red": 0
+      }
+    }
+  }
 }
