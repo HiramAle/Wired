@@ -5,6 +5,7 @@ from engine.animation.frame import Frame
 
 class Animation:
     def __init__(self, sprite_sheet: Surface, data: dict):
+        self.data = data
         self.sprite_sheet = sprite_sheet
         self.frames: list[Frame] = []
         for frame_data in data["frames"].values():
@@ -15,6 +16,14 @@ class Animation:
         self.loop = True
         self.length = sum(frame.duration for frame in self.frames)
         self.done = False
+
+    def copy(self) -> "Animation":
+        return Animation(self.sprite_sheet, self.data)
+
+    def invert_order(self):
+        self.frames: list[Frame] = []
+        for frame_data in reversed(self.data["frames"].values()):
+            self.frames.append(Frame(self.sprite_sheet, frame_data))
 
     def stop(self):
         if not self.is_playing:

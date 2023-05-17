@@ -88,17 +88,17 @@
         },
         "TMX/Casa_custom.tmx": {
             "expandedObjectLayers": [
-                13,
-                11,
                 15,
                 16,
-                12
+                12,
+                11,
+                13
             ],
             "scale": 1.5,
-            "selectedLayer": 10,
+            "selectedLayer": 9,
             "viewCenter": {
-                "x": 489.99999999999994,
-                "y": 484.99999999999994
+                "x": 477.33333333333337,
+                "y": 470.99999999999994
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -115,23 +115,23 @@
         },
         "TMX/Village.tmx": {
             "expandedGroupLayers": [
-                47,
+                46,
                 29,
                 36,
-                46
+                47
             ],
             "expandedObjectLayers": [
-                17,
-                30,
-                29,
                 13,
+                29,
+                30,
+                17,
                 31
             ],
             "scale": 2,
             "selectedLayer": 20,
             "viewCenter": {
                 "x": 960,
-                "y": 1039.75
+                "y": 1039.5
             }
         },
         "TMX/Village.tmx#Singles": {

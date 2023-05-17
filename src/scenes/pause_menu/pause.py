@@ -1,6 +1,5 @@
 from engine.scene.scene import Scene
-import engine.scene.scene_manager as scene_manager
-import engine.input as game_input
+from engine.input import Input
 from src.scenes.pause_menu.book import Book
 from src.scenes.pause_menu.inventory_category import Inventory
 from src.scenes.pause_menu.jobs_category import Jobs
@@ -18,12 +17,14 @@ class Pause(Scene):
 
     def update(self) -> None:
         self.book.update()
-        if game_input.keyboard.keys["esc"]:
+        if Input.keyboard.keys["esc"]:
             self.book.exiting = True
 
         if self.book.close:
-            scene_manager.exit_scene()
+            from engine.scene.scene_manager import SceneManager
+            SceneManager.exit_scene()
 
     def render(self) -> None:
-        self.display.blit(scene_manager.stack_scene[-2].display, (0, 0))
+        from engine.scene.scene_manager import SceneManager
+        self.display.blit(SceneManager.stack_scene[-2].display, (0, 0))
         self.book.render(self.display)

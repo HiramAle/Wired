@@ -16,6 +16,7 @@ class CrimpCable(Scene):
     def __init__(self, standard: str):
         super().__init__("crimp_cable")
         self.standard = standard
+        print(standard)
         self.group = SpriteGroup()
         # Cable Cover
         Image((0, 0), Assets.images_cables["table"], self.group, layer=0, centered=False, scale=2)
@@ -111,7 +112,8 @@ class CrimpCable(Scene):
             if Input.mouse.buttons["left"]:
                 color_x = int(self.indicator.x - self.color_bar.rect.left)
                 color = self.color_values[tuple(self.color_bar.image.get_at((color_x, 9)))]
-                self.qualities.append(self.color_quality[color])
+                self.qualities.append(color)
+                # self.qualities.append(self.color_quality[color])
                 self.crimp_tool.playing = True
                 self.indicator_moving = False
 

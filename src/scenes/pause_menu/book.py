@@ -1,60 +1,39 @@
 import pygame
-import engine.assets as game_assets
+from engine.assets import Assets
 from engine.objects.sprite import Sprite
-from src.components.animation import Animation
-from src.constants.colors import *
-from src.gui.text import GUIText
+from engine.animation.animation import Animation
+from engine.constants import Colors
+from engine.ui.text import Text
 
 categories = ["Inventario", "Trabajos", "Mapa", "Glosario", "Opciones", "Salir"]
-
-
-class Page:
-    def __init__(self, side: str):
-        self.position = (29 + 47, 20) if side == "left" else (290 + 47, 0)
-        self.canvas = pygame.Surface((256, 320), pygame.SRCALPHA)
-        self.x = self.position[0]
-        self.y = self.position[1]
-        self.center_x = self.canvas.get_width() / 2
-        self.center_y = self.canvas.get_height() / 2
-        self.true_center_x = self.x + self.center_x
-        self.true_center_y = self.y + self.center_y
-
-    def update(self):
-        ...
-
-    def render(self, display: pygame.Surface):
-        display.blit(self.canvas, self.position)
 
 
 class Category:
     def __init__(self, name: str):
         self.name = name
-        self.left_page = Page("left")
-        self.right_page = Page("right")
-        mid_canvas = self.left_page.canvas.get_rect().centerx
-        self.title = GUIText(name, (mid_canvas, 24), 32, color=BLACK_SPRITE, shadow=False)
+        self.page = pygame.Surface((640, 360), pygame.SRCALPHA)
+        self.title = Text((185, 24), name, 32, Colors.SPRITE, shadow=False)
 
     def render(self, display: pygame.Surface):
-        self.title.render(self.left_page.canvas)
-        self.left_page.render(display)
-        self.right_page.render(display)
+        self.title.render(self.page)
+        self.title.render(display)
 
 
 class Tab(Sprite):
     def __init__(self, name: str, *groups):
-        super().__init__(name, (28 + 47, 30 + (27 * categories.index(name))), pygame.Surface((29, 20), pygame.SRCALPHA),
+        super().__init__((28 + 47, 30 + (27 * categories.index(name))), pygame.Surface((29, 20), pygame.SRCALPHA),
                          *groups)
         # Icon
-        self.icon = Sprite("icon", (self.x - 10, self.rect.centery), game_assets.images_book[name.lower()])
+        self.icon = Sprite((self.x - 10, self.rect.centery), Assets.images_book[name.lower()])
         # Animations
-        animation_data = game_assets.animations["book"]["tab"]
-        self.tab_enter = Animation(animation_data)
+        self.tab_enter = Assets.animations["book"]["tab"]
         self.tab_enter.loop = False
-        self.tab_exit = Animation([list(reversed(animation_data[0])), animation_data[1]])
+        self.tab_exit = Assets.animations["book"]["tab"]
+        self.tab_exit.reversed = True
         self.tab_exit.loop = False
         # self.tab_idle = self.tab_enter[-1]
-        self.tab_selected = game_assets.images_book["tab_selected"]
-        self.tab_idle = game_assets.images_book["tab_idle"]
+        self.tab_selected = Assets.images_book["tab_selected"]
+        self.tab_idle = Assets.images_book["tab_idle"]
         self.entered = False
         self.exited = False
         self._selected = False
@@ -80,10 +59,10 @@ class Tab(Sprite):
             self.image = self.tab_idle
         self._selected = value
 
-    def play(self):
+    def update(self):
         if not self.animation.done:
-            self.animation.play()
-            self.image = self.animation.frame
+            self.animation.update()
+            self.image = self.animation.current_frame
             return
         # Animation ended
         if self.animation == self.tab_enter:
@@ -94,9 +73,9 @@ class Tab(Sprite):
             self.exited = True
             self.image = pygame.Surface((29, 20), pygame.SRCALPHA)
 
-    def render(self, display: pygame.Surface, offset=(0, 0)):
+    def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
         shadow = pygame.mask.from_surface(self.image.copy())
-        shadow = shadow.to_surface(setcolor=BLACK_MOTION, unsetcolor=(0, 0, 0))
+        shadow = shadow.to_surface(setcolor=Colors.BLACK, unsetcolor=(0, 0, 0))
         shadow.set_colorkey((0, 0, 0))
         shadow_rect = self.rect
         shadow_rect.x += 2
@@ -114,7 +93,7 @@ class Tab(Sprite):
 
 class Book(Sprite):
     def __init__(self, index: int, categories_objects: list[Category], *groups):
-        super().__init__("book", (47, 20), game_assets.images_book["book_background"], *groups)
+        super().__init__((47, 20), Assets.images_book["book_background"], *groups)
         # Categories and tabs
         self._index = index
         self.categories = categories_objects
@@ -127,15 +106,15 @@ class Book(Sprite):
         self.selected_tab = self.tabs[index]
         # Shadow
         self.shadow = pygame.mask.from_surface(self.image.copy())
-        self.shadow = self.shadow.to_surface(setcolor=BLACK_MOTION, unsetcolor=(0, 0, 0))
+        self.shadow = self.shadow.to_surface(setcolor=Colors.BLACK, unsetcolor=(0, 0, 0))
         self.shadow.set_colorkey((0, 0, 0))
         self.shadow.set_alpha(120)
         self.shadow_rect = self.rect
         self.shadow_rect.topleft = self.position
         self.shadow_rect.x += 2
         self.shadow_rect.y += 2
-        self.bookmark = Sprite("bookmark", (103, 21),
-                               game_assets.images_book[f"bookmark_{self.current_category.name.lower()}"],
+        self.bookmark = Sprite((103, 21),
+                               Assets.images_book[f"bookmark_{self.current_category.name.lower()}"],
                                centered=False)
 
     @property
@@ -168,7 +147,7 @@ class Book(Sprite):
                 self.selected_tab.selected = False
                 self.selected_tab = tab
                 self.current_category = self.categories[index]
-                self.bookmark.image = game_assets.images_book[f"bookmark_{self.current_category.name.lower()}"]
+                self.bookmark.image = Assets.images_book[f"bookmark_{self.current_category.name.lower()}"]
                 tab.selected = True
 
     def render(self, display: pygame.Surface, offset=(0, 0)):

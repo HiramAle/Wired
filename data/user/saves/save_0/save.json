@@ -8,8 +8,16 @@
   "connectors": 0,
   "inventory": {
     "cables": {
-      "3": 9,
-      "2": 2
+      "a": {
+        "green": 9,
+        "yellow": 2,
+        "red": 1
+      },
+      "b": {
+        "green": 1,
+        "yellow": 2,
+        "red": 0
+      }
     }
   }
 }
