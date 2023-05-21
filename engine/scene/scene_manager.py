@@ -7,7 +7,6 @@ from engine.scene.fade import FadeTransition
 from src.scenes.main_menu.main_menu import MainMenu
 from engine.assets import Assets
 from engine.window import Window
-from src.scenes.test_scene import TestScene
 from src.scenes.routing.routing import Routing
 from src.scenes.cables.order import OrderCable
 from src.scenes.subnetting.subnetting import Subnetting

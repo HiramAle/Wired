@@ -9,7 +9,7 @@ from src.scenes.world.npc import NPC
 from src.scenes.world.sprite import Sprite
 from src.scenes.world.zone import Zone
 from engine.constants import Colors
-from src.scenes.test_scene import TestScene
+from src.scenes.pause_menu.pause import Pause
 from engine.audio import AudioManager
 from src.scenes.world.player import Player
 from src.scenes.world.time_manager import TimeManager
@@ -87,7 +87,7 @@ class World(Scene):
 
         if Input.keyboard.keys["esc"]:
             from engine.scene.scene_manager import SceneManager
-            SceneManager.change_scene(TestScene())
+            SceneManager.change_scene(Pause())
 
     def render(self) -> None:
         # Render zone
