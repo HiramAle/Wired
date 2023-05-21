@@ -107,7 +107,7 @@ def load_animations(path: str) -> dict[str, dict[str, list]]:
 
 
 def export_animation_frames(sprite_sheet: pygame.Surface) -> dict:
-    sprite_height = 48
+    sprite_height = 64
     sprite_width = 32
     crop_height = 64
     crop_width = 32
@@ -119,7 +119,7 @@ def export_animation_frames(sprite_sheet: pygame.Surface) -> dict:
         for direction, frames in directions.items():
             for frame in range(frames):
                 x_crop = column * crop_width
-                y_crop = 16 + (row * crop_height)
+                y_crop = (row * crop_height)
                 image = pygame.Surface((sprite_width, sprite_height), pygame.SRCALPHA)
                 image.blit(sprite_sheet, (0, 0), (x_crop, y_crop, crop_width, crop_height))
                 animations[animation][direction].append(image)
@@ -196,6 +196,8 @@ def import_category_animations(category: str) -> dict[int, dict]:
             category_animations[variation][color] = get_animation_by_name(sprite_sheet, "idle")
 
     return category_animations
+
+
 
 
 def save_sprite_sheet(path: str, body: int, eyes: int, hairstyle: tuple[int, int], outfit: tuple[int, int]):
