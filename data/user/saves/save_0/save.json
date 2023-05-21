@@ -3,9 +3,9 @@
   "name": "Zazu",
   "pronoun": "el",
   "time": 0,
-  "money": 15,
-  "cable": 0,
-  "connectors": 0,
+  "money": 999,
+  "cable": 99,
+  "connectors": 99,
   "inventory": {
     "cables": {
       "a": {

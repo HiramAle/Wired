@@ -82,6 +82,10 @@ class Subnetting(StagedScene):
             if Input.keyboard.keys["space"]:
                 from engine.scene.scene_manager import SceneManager
                 SceneManager.exit_scene()
+        if Input.keyboard.keys["esc"]:
+            from engine.scene.scene_manager import SceneManager
+            from src.scenes.pause_menu.pause import Pause
+            SceneManager.change_scene(Pause())
 
     def render(self) -> None:
         self.display.fill("#242424")

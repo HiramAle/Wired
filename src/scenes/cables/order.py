@@ -130,6 +130,10 @@ class OrderCable(Scene):
             if Input.keyboard.keys["space"]:
                 from engine.scene.scene_manager import SceneManager
                 SceneManager.change_scene(CrimpCable(self.standardName), swap=True, transition=True)
+        if Input.keyboard.keys["esc"]:
+            from engine.scene.scene_manager import SceneManager
+            from src.scenes.pause_menu.pause import Pause
+            SceneManager.change_scene(Pause())
 
     def render(self) -> None:
         self.group.render(self.display)

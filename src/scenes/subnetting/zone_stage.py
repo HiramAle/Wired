@@ -140,8 +140,6 @@ class Zone(Stage):
     def update(self) -> None:
         self.group.update()
         self.labels.update()
-        # if self.tab.clicked:
-        # self.scenes.exit_stage()
 
         self.drag()
 
@@ -193,6 +191,11 @@ class Zone(Stage):
             if self.continue_message in self.group.sprites():
                 self.continue_message.remove(self.group)
             self.generate_answers()
+
+        if Input.keyboard.keys["esc"]:
+            from engine.scene.scene_manager import SceneManager
+            from src.scenes.pause_menu.pause import Pause
+            SceneManager.change_scene(Pause())
 
     def render(self) -> None:
         self.group.render(self.display)

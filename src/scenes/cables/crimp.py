@@ -159,6 +159,10 @@ class CrimpCable(Scene):
                 save_manager.active_save.connectors -= 2
                 from engine.scene.scene_manager import SceneManager
                 SceneManager.exit_scene()
+        if Input.keyboard.keys["esc"]:
+            from engine.scene.scene_manager import SceneManager
+            from src.scenes.pause_menu.pause import Pause
+            SceneManager.change_scene(Pause())
 
     def start(self):
         pygame.mouse.set_visible(True)

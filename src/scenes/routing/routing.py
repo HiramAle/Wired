@@ -58,10 +58,10 @@ class Notification(Sprite):
         if self.close_button.clicked:
             self.deactivate()
 
-        # if Input.keyboard.keys["esc"]:
-        #     from engine.scene.scene_manager import SceneManager
-        #     from src.scenes.test_scene import TestScene
-        #     SceneManager.change_scene(TestScene())
+        if Input.keyboard.keys["esc"]:
+            from engine.scene.scene_manager import SceneManager
+            from src.scenes.pause_menu.pause import Pause
+            SceneManager.change_scene(Pause())
 
     def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
         if not self.active:
