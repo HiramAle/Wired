@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TMX/Village.tmx",
+    "activeFile": "TMX/Casa_custom.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "Todos los archivos (*)",
@@ -24,6 +24,9 @@
         },
         "C:/Users/magic/Desktop/Wired/data/Casa/TSX/City.tsx": {
             "scaleInDock": 1
+        },
+        "C:/Users/magic/Desktop/Wired/data/Casa/TSX/City_Props.tsx": {
+            "dynamicWrapping": true
         },
         "C:/Users/magic/Desktop/Wired/data/Casa/TSX/Modern_Exteriors.tsx": {
             "scaleInDock": 1
@@ -88,17 +91,17 @@
         },
         "TMX/Casa_custom.tmx": {
             "expandedObjectLayers": [
+                13,
+                15,
                 11,
                 16,
-                15,
-                13,
                 12
             ],
-            "scale": 1.5,
+            "scale": 5.5,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 480,
-                "y": 480
+                "x": 627.5454545454545,
+                "y": 684.3636363636364
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -106,11 +109,17 @@
             "scaleInDock": 1
         },
         "TMX/City.tmx": {
+            "expandedObjectLayers": [
+                21,
+                34,
+                18,
+                35
+            ],
             "scale": 2,
-            "selectedLayer": 0,
+            "selectedLayer": 24,
             "viewCenter": {
-                "x": 1438.25,
-                "y": 1362.25
+                "x": 545.25,
+                "y": 1680
             }
         },
         "TMX/Tienda_prueba.tmx": {
@@ -120,32 +129,32 @@
                 12
             ],
             "scale": 2,
-            "selectedLayer": 8,
+            "selectedLayer": 9,
             "viewCenter": {
-                "x": 480,
-                "y": 320
+                "x": 478.75,
+                "y": 319
             }
         },
         "TMX/Village.tmx": {
             "expandedGroupLayers": [
-                36,
-                46,
                 47,
-                29
+                29,
+                36,
+                46
             ],
             "expandedObjectLayers": [
-                31,
-                30,
-                32,
                 13,
+                29,
+                32,
                 17,
-                29
+                31,
+                30
             ],
             "scale": 1.5,
             "selectedLayer": 20,
             "viewCenter": {
-                "x": 868.3333333333333,
-                "y": 897.3333333333333
+                "x": 960,
+                "y": 1039.3333333333333
             }
         },
         "TMX/Village.tmx#Singles": {
@@ -166,6 +175,7 @@
             "scaleInEditor": 1
         },
         "TSX/Camping_Village.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "TSX/City.tsx": {
@@ -249,6 +259,10 @@
             "scaleInDock": 0.33,
             "scaleInEditor": 0.5
         },
+        "TSX/singles_city.tsx": {
+            "dynamicWrapping": true,
+            "scaleInEditor": 1
+        },
         "TSX/store_singles.tsx": {
             "scaleInDock": 1
         }
@@ -268,9 +282,10 @@
     "project": "Casa.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "TSX/singles_city.tsx",
+        "TMX/Village.tmx",
         "TMX/Tienda_prueba.tmx",
         "TMX/Casa_custom.tmx",
-        "TMX/Village.tmx",
         "TSX/house_singles.tsx",
         "TSX/singles.tsx",
         "TSX/Tileset_Casa.tsx",
@@ -278,8 +293,7 @@
         "TSX/fontain.tsx",
         "C:/Users/magic/Desktop/Casa_custom.tmx",
         "C:/Users/magic/Desktop/s23 - Audio & fixes/data/map.tmx",
-        "TSX/buildings_obj.tsx",
-        "TSX/Singles.tsx"
+        "TSX/buildings_obj.tsx"
     ],
     "tileset.lastUsedFilter": "Archivos de conjuntos de patrones Tiled (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

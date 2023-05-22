@@ -35,8 +35,9 @@ class Notification(Sprite):
 
 
 class Zone(Scene):
-    def __init__(self, name: str, npc_list: list[NPC], player: Player, before=""):
+    def __init__(self, name: str, npc_list: list[NPC], player: Player, change_zone: callable, before=""):
         super().__init__(name)
+        self.zone_before = before
         self.map = GameMap(name)
         self.npc_list = npc_list
         self.debug = False
@@ -44,8 +45,8 @@ class Zone(Scene):
         self.map_objects = self.map.objects
         self.map_triggers = self.map.triggers
         self.player = player
-        self.player.position = self.map.get_position(f"player_{before}").tuple
-        self.player.direction = self.map.get_position(f"player_{before}").properties["direction"]
+        # self.player.position = self.map.get_position(f"player_{before}").tuple
+        # self.player.direction = self.map.get_position(f"player_{before}").properties["direction"]
         self.player.collisions = []
         self.player.collisions = self.map_colliders
         self.camera = Camera(self.map.width, self.map.height)
@@ -56,9 +57,14 @@ class Zone(Scene):
         for obj in self.map_objects:
             self.player.collisions.extend(obj.colliders)
         for npc in self.npcs:
-            print(npc.name)
             npc.position = self.map.get_position(npc.name).position
             npc.direction = self.map.get_position(npc.name).properties["direction"]
+        self.change_zone = change_zone
+
+    def start_zone(self):
+        self.player.position = self.map.get_position(f"player_{self.zone_before}").tuple
+        self.player.direction = self.map.get_position(f"player_{self.zone_before}").properties["direction"]
+        self.camera.position = self.player.x - 320, self.player.y - 180
 
     @property
     def npcs(self) -> list[NPC]:
@@ -70,7 +76,7 @@ class Zone(Scene):
             if trigger.colliderect(self.player.collider) and trigger.interact():
                 from engine.scene.scene_manager import SceneManager
                 if trigger.type == "zone":
-                    SceneManager.get_active_scene().change_zone(trigger.zone)
+                    self.change_zone(trigger.zone)
                 if trigger.type == "scene":
                     if trigger.name == "cables":
                         from engine.inventory import Inventory

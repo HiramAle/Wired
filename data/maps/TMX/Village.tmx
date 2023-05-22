@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="2172">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="2174">
  <tileset firstgid="1" source="../TSX/City.tsx"/>
  <tileset firstgid="7585" source="../TSX/Terrains.tsx"/>
  <tileset firstgid="10145" source="../TSX/Modern_Exteriors.tsx"/>
@@ -1383,13 +1383,12 @@
  <objectgroup id="30" name="interactions">
   <object id="2130" name="zone_playershouse" x="1406.25" y="468" width="35.25" height="19"/>
   <object id="2136" name="scene_playable_npcshouse" x="122.182" y="1863.45" width="44" height="23.4545"/>
-  <object id="2139" name="scene_playable_city" x="1517.5" y="1229" width="117.75" height="37.75"/>
  </objectgroup>
  <objectgroup id="31" name="positions">
   <object id="2162" name="amy" type="npc_spawn" x="1347" y="1136">
    <point/>
   </object>
-  <object id="2163" name="player_players_house" x="1423" y="503">
+  <object id="2163" name="player_players_house" x="1424" y="492">
    <properties>
     <property name="direction" value="down"/>
    </properties>
@@ -1437,6 +1436,12 @@
    <properties>
     <property name="interaction_type" value="keypress"/>
     <property name="zone" value="store"/>
+   </properties>
+  </object>
+  <object id="2173" name="zone_city" type="zone" x="1472" y="1228" width="109" height="52">
+   <properties>
+    <property name="interaction_type" value="keypress"/>
+    <property name="zone" value="city"/>
    </properties>
   </object>
  </objectgroup>

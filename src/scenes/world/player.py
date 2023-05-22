@@ -20,6 +20,7 @@ class Player(Actor):
         self.active_trigger: None | Trigger = None
         for obj in objects:
             self.collisions.extend(obj.colliders)
+        self.can_move = True
 
     def __repr__(self):
         return f"Player {self.position}"
@@ -63,9 +64,10 @@ class Player(Actor):
                 return
 
     def update(self):
-        self.input()
-        self.move()
-        self.update_status()
+        if self.can_move:
+            self.input()
+            self.move()
+            self.update_status()
         self.animate()
         self.check_triggers()
         if self.emote:
