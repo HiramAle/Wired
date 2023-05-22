@@ -13,10 +13,9 @@ from engine.constants import Colors
 
 
 class CrimpCable(Scene):
-    def __init__(self, standard: str):
+    def __init__(self, cable_type: str):
         super().__init__("crimp_cable")
-        self.standard = standard
-        print(standard)
+        self.standard = cable_type
         self.group = SpriteGroup()
         # Cable Cover
         Image((0, 0), Assets.images_cables["table"], self.group, layer=0, centered=False, scale=2)
@@ -37,7 +36,7 @@ class CrimpCable(Scene):
         self.indicator = Image((self.color_bar.rect.right, 37), Assets.images_cables["indicator"], self.group)
         self.color_bar.deactivate()
         self.indicator.deactivate()
-        self.movement = 200
+        self.movement = 300
         self.indicator_moving = True
         self.repositioning_tool = False
         self.adding_cable = False
@@ -48,11 +47,10 @@ class CrimpCable(Scene):
         self.continue_text.deactivate()
         self.standard_text = Text(self.center, self.standard, 32, Colors.WHITE, self.group, layer=10)
         self.standard_text.deactivate()
-        self.final_cable = Image((-150, self.center_y), Assets.images_cables[f"standard_{self.standard.lower()[-1]}"],
-                                 self.group)
+        self.final_cable = Image((-150, self.center_y), Assets.images_cables[f"standard_a"], self.group)
         self.cable_quality = 0
         self.qualities = []
-        self.color_values = {(153, 196, 122, 255): "green", (255, 198, 109, 255): "yellow", (222, 84, 81, 255): "red"}
+        self.color_values = {(101, 191, 110, 255): "green", (254, 202, 32, 255): "yellow", (222, 84, 81, 255): "red"}
         self.color_quality = {"green": 3, "yellow": 2, "red": 1}
 
     def drag(self):
@@ -111,8 +109,9 @@ class CrimpCable(Scene):
             # Play animation if mouse left button pressed
             if Input.mouse.buttons["left"]:
                 color_x = int(self.indicator.x - self.color_bar.rect.left)
+                # print(self.color_bar.image.get_at((color_x, self.color_bar.rect.centery)))
                 color = self.color_values[tuple(self.color_bar.image.get_at((color_x, 9)))]
-                self.qualities.append(color)
+                self.qualities.append(self.color_quality[color])
                 # self.qualities.append(self.color_quality[color])
                 self.crimp_tool.playing = True
                 self.indicator_moving = False
@@ -153,10 +152,10 @@ class CrimpCable(Scene):
 
             if Input.keyboard.keys["space"]:
                 cable_quality = random.choice(self.qualities)
-                save_manager.active_save.inventory["cables"][self.standard[-1].lower()][cable_quality] += 1
-                # save_manager.active_save.save()
-                save_manager.active_save.cable -= 1
-                save_manager.active_save.connectors -= 2
+                from engine.inventory import Inventory
+                Inventory.add_item(f"cable_{self.standard}_{cable_quality}")
+                Inventory.remove_item("cable", 1)
+                Inventory.remove_item("connector", 2)
                 from engine.scene.scene_manager import SceneManager
                 SceneManager.exit_scene()
         if Input.keyboard.keys["esc"]:

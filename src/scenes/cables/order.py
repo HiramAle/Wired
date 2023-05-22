@@ -16,9 +16,16 @@ from src.scenes.tutorial.tutorial import Tutorial
 
 
 class OrderCable(Scene):
-    def __init__(self):
+    def __init__(self, prev_order="?"):
         super().__init__("order_cable")
+        print(f"Previous order: {prev_order}")
         self.group = SpriteGroup()
+        # ----- PARAMS -----
+        # straight or crossover
+        self.previous_order = prev_order
+        self.current_order = ""
+        self.last_cable = True if prev_order != "?" else False
+
         # Cable Cover
         Image((0, 0), Assets.images_cables["table"], self.group, layer=0, centered=False, scale=2)
 
@@ -26,17 +33,19 @@ class OrderCable(Scene):
                             self.group, scale=2, layer=1)
         self.cable = Image((60, 180), Assets.images_cables["cable_cover_foreground"],
                            self.group, layer=4, scale=2)
+        self.cable_a = Data.cable_data["A"]
+        self.cable_b = Data.cable_data["B"]
         # Cables
         self.can_drag = True
         self.ordered = False
         self.cable_positions = []
         self.selected_cable = None
         self.dragging = False
-        self.standardName = choice(list(Data.cable_data["standards"].keys()))
-        self.cable_order = Data.cable_data["standards"][self.standardName]
+        # self.standardName = choice(list(Data.cable_data["standards"].keys()))
+        # self.cable_order = Data.cable_data[self.required_order]
         self.cables = []
 
-        shuffled_cables = self.cable_order.copy()
+        shuffled_cables = Data.cable_data["A"].copy()
         # shuffle(shuffled_cables)
 
         for index, cable_name in enumerate(shuffled_cables):
@@ -53,22 +62,32 @@ class OrderCable(Scene):
 
         self.tutorial = False
 
-        self.text = Text((self.center_x, 300), "Presiona Espacio para continuar", 32, Colors.WHITE, self.group,
-                         layer=10)
-        self.text.opacity = 0
+        self.instructions_text = Text((self.center_x, 300), "Presiona Espacio para continuar", 32, Colors.WHITE,
+                                      self.group, layer=10)
+        self.instructions_text.deactivate()
         Text((562, self.center_y - 10), "Estandard", 32, Colors.WHITE, self.group, layer=10)
-        Text((562, self.center_y + 10), self.standardName, 32, Colors.WHITE, self.group, layer=10)
-
+        self.standard_text = Text((562, self.center_y + 10), "?", 32, Colors.WHITE, self.group, layer=10)
 
     def check_cable_order(self):
-        if self.tutorial:
-            for index, cable in enumerate(self.cables):
-                if cable.name == self.cable_order[index]:
-                    cable.right_order = True
-                else:
-                    cable.right_order = False
+        # if self.tutorial:
+        #     for index, cable in enumerate(self.cables):
+        #         if cable.name == self.cable_order[index]:
+        #             cable.right_order = True
+        #         else:
+        #             cable.right_order = False
+
         actual_order = [cable.name for cable in self.cables]
-        self.ordered = (actual_order == self.cable_order)
+        if actual_order == self.cable_a:
+            self.ordered = True
+            self.current_order = "A"
+        elif actual_order == self.cable_b:
+            self.ordered = True
+            self.current_order = "B"
+        else:
+            self.current_order = "?"
+            self.ordered = False
+            self.instructions_text.deactivate()
+        self.standard_text.text = self.current_order
 
     def drag(self):
         if not self.can_drag:
@@ -116,7 +135,7 @@ class OrderCable(Scene):
         self.drag()
 
         # Change cursor while the cables are not ordered
-        if any([cable.hovered for cable in self.cables]) and not self.ordered:
+        if any([cable.hovered for cable in self.cables]):
             if Input.mouse.buttons["left_hold"]:
                 Window.set_cursor("grab")
             else:
@@ -125,11 +144,20 @@ class OrderCable(Scene):
             Window.set_cursor("arrow")
 
         if self.ordered:
-            self.text.opacity = 255
-            self.can_drag = False
+            self.instructions_text.activate()
+            # self.can_drag = False
             if Input.keyboard.keys["space"]:
                 from engine.scene.scene_manager import SceneManager
-                SceneManager.change_scene(CrimpCable(self.standardName), swap=True, transition=True)
+                if self.last_cable:
+                    combination = f"{self.previous_order}{self.current_order}"
+                    cable_type = "crossover" if combination in ["AB", "BA"] else "straight"
+                    SceneManager.change_scene(CrimpCable(cable_type), swap=True, transition=True)
+                else:
+                    if self.current_order == "A":
+                        SceneManager.change_scene(OrderCable("A"), swap=True, transition=True)
+                    elif self.current_order == "B":
+                        SceneManager.change_scene(OrderCable("B"), swap=True, transition=True)
+
         if Input.keyboard.keys["esc"]:
             from engine.scene.scene_manager import SceneManager
             from src.scenes.pause_menu.pause import Pause

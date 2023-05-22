@@ -70,6 +70,7 @@ class Step(Sprite):
 class Tutorial(Scene):
     def __init__(self, name: str):
         super().__init__("tutorial")
+        self.module = name
         # ---------- Data ----------
         self.data = TutorialData(name)
         # ---------- Background ----------
@@ -116,6 +117,8 @@ class Tutorial(Scene):
 
         if self.button.clicked:
             SceneManager.exit_scene()
+            from engine.save_manager import instance as save_manager
+            save_manager.active_save.tutorials[self.module] = True
 
     def render(self) -> None:
         from engine.scene.scene_manager import SceneManager

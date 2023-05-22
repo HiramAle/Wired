@@ -1,23 +1,12 @@
 {
-  "sprite_sheet": "data/user/saves/save_1/sprite_sheet.png",
-  "name": "Liz",
-  "pronoun": "elle",
+  "name": "",
+  "pronoun": "",
   "time": 0,
-  "money": 999,
-  "cable": 5,
-  "connectors": 10,
-  "inventory": {
-    "cables": {
-      "a": {
-        "green": 0,
-        "yellow": 0,
-        "red": 0
-      },
-      "b": {
-        "green": 0,
-        "yellow": 0,
-        "red": 0
-      }
-    }
+  "money": 200,
+  "inventory": {},
+  "tutorials": {
+    "cables": false,
+    "subnetting": false,
+    "routing": false
   }
 }

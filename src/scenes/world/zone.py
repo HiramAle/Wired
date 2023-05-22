@@ -73,12 +73,13 @@ class Zone(Scene):
                     SceneManager.get_active_scene().change_zone(trigger.zone)
                 if trigger.type == "scene":
                     if trigger.name == "cables":
-                        if save_manager.active_save.connectors < 2 or save_manager.active_save.cable < 1:
+                        from engine.inventory import Inventory
+                        if not Inventory.has_enough("connector", 2) or not Inventory.has_enough("cable", 1):
                             Notification((30, 280), "Necesitas mas cable y\nconectorespara crear un\ncable de Red",
                                          self.notification)
                             return
                     SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene]())
-                    if trigger.name != "store":
+                    if trigger.name != "store" and not save_manager.active_save.tutorials[trigger.scene]:
                         SceneManager.change_scene(Tutorial(trigger.scene), True)
 
                 if trigger.type == "save":

@@ -6,6 +6,7 @@ from engine.objects.sprite import Sprite, SpriteGroup
 from engine.ui.text import Text
 from engine.save_manager import instance as save_manager
 from engine.constants import Colors
+from engine.inventory import Inventory
 
 
 class Item:
@@ -52,10 +53,10 @@ class Store(Scene):
         self.store_ui = SpriteGroup()
         Sprite((69, 52), Assets.images_store["background"], self.store_ui, centered=False)
         Sprite((14, 18), Assets.images_store["inventory_own"], self.store_ui, centered=False)
-        self.cables = Text((68, 43), str(save_manager.active_save.cable), 32, Colors.SPRITE, self.store_ui)
+        self.cables = Text((68, 43), str(Inventory.items["cable"]), 32, Colors.SPRITE, self.store_ui)
         Sprite((20, 29), Assets.images_store["cable_icon"], self.store_ui, centered=False)
         Sprite((99, 18), Assets.images_store["inventory_own"], self.store_ui, centered=False)
-        self.connectors = Text((150, 43), str(save_manager.active_save.connectors), 32, Colors.SPRITE, self.store_ui)
+        self.connectors = Text((150, 43), str(Inventory.items["connector"]), 32, Colors.SPRITE, self.store_ui)
         Sprite((110, 27), Assets.images_store["connector_icon"], self.store_ui, centered=False)
         Sprite((477, 14), Assets.images_store["money"], self.store_ui, centered=False)
         self.money = Text((571, 43), f"{save_manager.active_save.money}G", 32, Colors.SPRITE, self.store_ui)
@@ -86,11 +87,11 @@ class Store(Scene):
                 save_manager.active_save.money -= item.item.price
                 self.money.text = f"{save_manager.active_save.money}G"
                 if index == 0:
-                    save_manager.active_save.connectors += 1
-                    self.connectors.text = str(save_manager.active_save.connectors)
+                    Inventory.add_item("connector", 1)
+                    self.connectors.text = str(Inventory.how_much("connector"))
                 elif index == 1:
-                    save_manager.active_save.cable += 1
-                    self.cables.text = str(save_manager.active_save.cable)
+                    Inventory.add_item("cable", 1)
+                    self.cables.text = str(Inventory.how_much("cable"))
         if Input.keyboard.keys["esc"]:
             from engine.scene.scene_manager import SceneManager
             SceneManager.exit_scene()

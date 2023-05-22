@@ -3,21 +3,16 @@
   "name": "Zazu",
   "pronoun": "el",
   "time": 0,
-  "money": 999,
-  "cable": 99,
-  "connectors": 99,
+  "money": 200,
   "inventory": {
-    "cables": {
-      "a": {
-        "green": 11,
-        "yellow": 2,
-        "red": 1
-      },
-      "b": {
-        "green": 3,
-        "yellow": 2,
-        "red": 0
-      }
-    }
+    "cable": 9,
+    "connector": 8,
+    "cable_straight_3": 2,
+    "cable_straight_2": 1
+  },
+  "tutorials": {
+    "cables": true,
+    "subnetting": false,
+    "routing": false
   }
 }

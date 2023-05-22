@@ -1,24 +1,22 @@
 {
-  "standards": {
-    "568A": [
-      "STRIP_GREEN",
-      "PLAIN_GREEN",
-      "STRIP_ORANGE",
-      "PLAIN_BLUE",
-      "STRIP_BLUE",
-      "PLAIN_ORANGE",
-      "STRIP_BROWN",
-      "PLAIN_BROWN"
-    ],
-    "568B": [
-      "STRIP_ORANGE",
-      "PLAIN_ORANGE",
-      "STRIP_GREEN",
-      "PLAIN_BLUE",
-      "STRIP_BLUE",
-      "PLAIN_GREEN",
-      "STRIP_BROWN",
-      "PLAIN_BROWN"
-    ]
-  }
+  "A": [
+    "STRIP_GREEN",
+    "PLAIN_GREEN",
+    "STRIP_ORANGE",
+    "PLAIN_BLUE",
+    "STRIP_BLUE",
+    "PLAIN_ORANGE",
+    "STRIP_BROWN",
+    "PLAIN_BROWN"
+  ],
+  "B": [
+    "STRIP_ORANGE",
+    "PLAIN_ORANGE",
+    "STRIP_GREEN",
+    "PLAIN_BLUE",
+    "STRIP_BLUE",
+    "PLAIN_GREEN",
+    "STRIP_BROWN",
+    "PLAIN_BROWN"
+  ]
 }

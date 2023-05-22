@@ -89,16 +89,16 @@
         "TMX/Casa_custom.tmx": {
             "expandedObjectLayers": [
                 11,
-                15,
                 16,
+                15,
                 13,
                 12
             ],
             "scale": 1.5,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 477.66666666666663,
-                "y": 478
+                "x": 480,
+                "y": 480
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -115,37 +115,37 @@
         },
         "TMX/Tienda_prueba.tmx": {
             "expandedObjectLayers": [
+                14,
                 16,
-                12,
-                14
+                12
             ],
             "scale": 2,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 437.75,
-                "y": 185.5
+                "x": 480,
+                "y": 320
             }
         },
         "TMX/Village.tmx": {
             "expandedGroupLayers": [
+                36,
                 46,
                 47,
-                36,
                 29
             ],
             "expandedObjectLayers": [
                 31,
-                17,
-                13,
-                29,
                 30,
-                32
+                32,
+                13,
+                17,
+                29
             ],
             "scale": 1.5,
             "selectedLayer": 20,
             "viewCenter": {
-                "x": 537,
-                "y": 870
+                "x": 868.3333333333333,
+                "y": 897.3333333333333
             }
         },
         "TMX/Village.tmx#Singles": {

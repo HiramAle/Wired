@@ -10,11 +10,13 @@ from engine.time import Time
 from engine.assets import Assets
 from engine.scene.scene_manager import SceneManager
 from engine.save_manager import instance as save_manager
+from engine.inventory import Inventory
 
 
 class Game:
     def __init__(self):
         pygame.init()
+        Inventory.load_items()
         Preferences.load()
         save_manager.load()
         Window.init()

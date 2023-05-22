@@ -1,7 +1,7 @@
 import os
-
 from engine.loader import Loader
 from engine.constants import Paths
+from engine.inventory import Inventory
 
 
 class GameSave:
@@ -13,36 +13,28 @@ class GameSave:
             save_data = {"name": "",
                          "pronoun": "",
                          "time": 0,
-                         "money": 0,
-                         "cable": 0,
-                         "connectors": 0,
+                         "money": 200,
                          "inventory": {
-                             "cables": {
-                                 "a": {
-                                     "green": 0,
-                                     "yellow": 0,
-                                     "red": 0
-                                 },
-                                 "b": {
-                                     "green": 0,
-                                     "yellow": 0,
-                                     "red": 0
-                                 }
-                             }
-                         }}
+                         },
+                         "tutorials": {
+                             "cables": False,
+                             "subnetting": False,
+                             "routing": False
+                         }
+                         }
             Loader.save_json(self.filename, save_data)
         self.name = save_data["name"]
         self.pronoun = save_data["pronoun"]
         self.time = save_data["time"]
         self.money = save_data["money"]
-        self.cable = save_data["cable"]
-        self.connectors = save_data["connectors"]
         self.inventory = save_data["inventory"]
+        self.tutorials = save_data["tutorials"]
 
     def __dict(self) -> dict:
         return {key: value for key, value in vars(self).items() if key != "filename"}
 
     def save(self):
+        self.inventory = Inventory.items
         if Loader.save_json(self.filename, self.__dict()):
             print("File saved")
             return
@@ -72,6 +64,7 @@ class SaveManager:
             print("Slot index must be between 0 and 2")
             return
         self.__slot = slot
+        Inventory.load_inventory(self.active_save.inventory)
 
 
 instance = SaveManager()
