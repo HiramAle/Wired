@@ -17,10 +17,10 @@ class Game:
     def __init__(self):
         pygame.init()
         Inventory.load_items()
+        Data.init()
         Preferences.load()
         save_manager.load()
         Window.init()
-        Data.init()
         Assets.prepare()
         SceneManager.init()
 

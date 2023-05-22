@@ -15,3 +15,7 @@ class Paths:
     USER_SAVES_FOLDER = "data/user/saves"
     SOUNDS_FOLDER = "assets/audio/sounds"
     MUSIC_FOLDER = "assets/audio/music"
+
+
+class Locals:
+    GAME_NAME = "Wired"

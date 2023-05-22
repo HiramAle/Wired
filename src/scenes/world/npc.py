@@ -65,29 +65,6 @@ class NPC(Actor):
         if self.player_distance <= 50 and Input.keyboard.keys["interact"]:
             return True
 
-    def close_to_player(self):
-        from engine.scene.scene_manager import SceneManager
-        scene = SceneManager.get_active_scene()
-        if scene.name != "world":
-            return
-        player = scene.zone.player
-        if (player.position - self.position).magnitude() <= 50:
-            self.emote = Emote((self.rect.centerx, self.rect.top - 24), Assets.animations["emotes"]["ask"])
-            if self.active_route and not self.paused:
-                self.paused_route = self.active_route
-                self.active_route = None
-                self.start_pause = pygame.time.get_ticks()
-                self.paused = True
-                print("paused")
-                print(self.active_route)
-                print(self.paused_route)
-            elif self.paused_route and pygame.time.get_ticks() - self.start_pause > 3000:
-                self.active_route = self.paused_route
-                self.paused_route = None
-                print("resumed")
-        else:
-            self.emote = False
-
     def pathing(self, daytime: int):
         ...
         # for route in self.routes:

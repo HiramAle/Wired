@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TMX/Casa_custom.tmx",
+    "activeFile": "TMX/City.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "Todos los archivos (*)",
@@ -26,7 +26,8 @@
             "scaleInDock": 1
         },
         "C:/Users/magic/Desktop/Wired/data/Casa/TSX/City_Props.tsx": {
-            "dynamicWrapping": true
+            "dynamicWrapping": true,
+            "scaleInDock": 1
         },
         "C:/Users/magic/Desktop/Wired/data/Casa/TSX/Modern_Exteriors.tsx": {
             "scaleInDock": 1
@@ -92,16 +93,16 @@
         "TMX/Casa_custom.tmx": {
             "expandedObjectLayers": [
                 13,
-                15,
                 11,
-                16,
-                12
+                15,
+                12,
+                16
             ],
             "scale": 5.5,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 627.5454545454545,
-                "y": 684.3636363636364
+                "x": 480,
+                "y": 480
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -112,49 +113,50 @@
             "expandedObjectLayers": [
                 21,
                 34,
-                18,
-                35
+                31,
+                35,
+                18
             ],
-            "scale": 2,
-            "selectedLayer": 24,
+            "scale": 0.5,
+            "selectedLayer": 14,
             "viewCenter": {
-                "x": 545.25,
-                "y": 1680
+                "x": 639,
+                "y": 976
             }
         },
         "TMX/Tienda_prueba.tmx": {
             "expandedObjectLayers": [
                 14,
-                16,
-                12
+                12,
+                16
             ],
             "scale": 2,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 478.75,
-                "y": 319
+                "x": 478.25,
+                "y": 318.5
             }
         },
         "TMX/Village.tmx": {
             "expandedGroupLayers": [
+                46,
                 47,
-                29,
                 36,
-                46
+                29
             ],
             "expandedObjectLayers": [
                 13,
-                29,
                 32,
-                17,
                 31,
-                30
+                17,
+                30,
+                29
             ],
-            "scale": 1.5,
+            "scale": 0.5,
             "selectedLayer": 20,
             "viewCenter": {
-                "x": 960,
-                "y": 1039.3333333333333
+                "x": 1937,
+                "y": 1026
             }
         },
         "TMX/Village.tmx#Singles": {
@@ -261,9 +263,11 @@
         },
         "TSX/singles_city.tsx": {
             "dynamicWrapping": true,
-            "scaleInEditor": 1
+            "scaleInDock": 0.125,
+            "scaleInEditor": 0.0625
         },
         "TSX/store_singles.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         }
     },
@@ -277,23 +281,25 @@
     "openFiles": [
         "TMX/Village.tmx",
         "TMX/Casa_custom.tmx",
-        "TMX/Tienda_prueba.tmx"
+        "TMX/Tienda_prueba.tmx",
+        "TMX/City.tmx",
+        "TSX/singles_city.tsx"
     ],
     "project": "Casa.tiled-project",
-    "property.type": "string",
+    "property.type": "bool",
     "recentFiles": [
-        "TSX/singles_city.tsx",
         "TMX/Village.tmx",
-        "TMX/Tienda_prueba.tmx",
         "TMX/Casa_custom.tmx",
+        "TMX/Tienda_prueba.tmx",
+        "TSX/singles_city.tsx",
+        "TMX/City.tmx",
         "TSX/house_singles.tsx",
         "TSX/singles.tsx",
         "TSX/Tileset_Casa.tsx",
         "TSX/Terrains.tsx",
         "TSX/fontain.tsx",
         "C:/Users/magic/Desktop/Casa_custom.tmx",
-        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/map.tmx",
-        "TSX/buildings_obj.tsx"
+        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/map.tmx"
     ],
     "tileset.lastUsedFilter": "Archivos de conjuntos de patrones Tiled (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

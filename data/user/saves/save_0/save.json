@@ -8,7 +8,8 @@
     "cable": 9,
     "connector": 8,
     "cable_straight_3": 2,
-    "cable_straight_2": 1
+    "cable_straight_2": 1,
+    "usb_double_cable": 1
   },
   "tutorials": {
     "cables": true,

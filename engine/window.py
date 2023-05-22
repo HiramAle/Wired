@@ -3,6 +3,8 @@ from ctypes import windll
 from os import environ
 from engine.preferences import Preferences
 from engine.assets import Assets
+from engine.constants import Locals
+from engine.loader import Loader
 
 
 class Window:
@@ -24,6 +26,8 @@ class Window:
         cls.height = Preferences.window_height
         cls.size = cls.width, cls.height
         cls.screen = pygame.display.set_mode(cls.size)
+        pygame.display.set_caption(Locals.GAME_NAME)
+        pygame.display.set_icon(Loader.load_image("assets/images/misc/icon.png"))
 
     @staticmethod
     def set_cursor(cursor: str):

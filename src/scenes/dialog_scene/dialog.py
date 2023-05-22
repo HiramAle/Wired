@@ -34,10 +34,9 @@ class DialogBox(Sprite):
         self.dialogs = [Dialog(dialog_id, dialog_list) for dialog_id, dialog_list in npc.data["dialogs"].items()]
         self.dialog_index = 0
         self.npc = npc
-        self.actor_name = Text((157, 325), npc.name, 32, Colors.SPRITE)
-        self.actor_name.pivot = self.actor_name.Pivot.TOP_LEFT
-        self.dialog_text = Text((222, 262), "", 32, Colors.SPRITE)
-        self.dialog_text.max_width = 300
+        self.actor_name = Text((175, 336), npc.name, 32, Colors.SPRITE, shadow=True, shadow_opacity=50)
+        self.dialog_text = Text((222, 262), "", 32, Colors.SPRITE, shadow=True, shadow_opacity=50)
+        self.dialog_text.max_width = 280
         self.dialog_text.pivot = self.dialog_text.Pivot.TOP_LEFT
         self.continue_indicator = Sprite((496, 316), Assets.images_world["continue"])
         self.continue_indicator.pivot = self.continue_indicator.Pivot.TOP_LEFT
@@ -52,7 +51,7 @@ class DialogBox(Sprite):
 
     def skip_render(self):
         self.char_index = len(self.current_dialog.current_sentence) - 1
-        self.dialog_text.text = self.current_dialog.current_sentence[:int(self.char_index)]
+        self.dialog_text.text = self.current_dialog.current_sentence
         self.end_render = True
 
     def render_text(self):

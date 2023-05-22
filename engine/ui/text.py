@@ -16,12 +16,14 @@ class Text(UIElement):
         self.__text = text
         self.color = color
         self.shadow_color = Colors.DARK
+        self.shadow_opacity = kwargs.get("shadow_opacity", 255)
         self.max_width = kwargs.get("max_width", 0)
         self.shadow = False
         self._shadow_padding = (size // 16) * 1.25
         self.font = "monogram"
         self.italic = kwargs.get("italic", False)
         self.shadow_image = Assets.fonts["monogram"].render(text, size, self.shadow_color, self.max_width)
+        self.shadow_image.set_alpha(self.shadow_opacity)
         for key, val in kwargs.items():
             if key in ["shadow", "shadow_color", "font"] and hasattr(self, key):
                 setattr(self, key, val)
@@ -32,6 +34,7 @@ class Text(UIElement):
         if self.shadow:
             self.shadow_image = Assets.fonts["monogram"].render(self.__text, self.__size, self.shadow_color,
                                                                 self.max_width, self.italic)
+            self.shadow_image.set_alpha(self.shadow_opacity)
 
     def __copy__(self):
         copy = Text(self.position, self.text, self.__size, self.color)

@@ -21,7 +21,7 @@ class Notification(Sprite):
     def __init__(self, position: tuple, text: str, *groups):
         super().__init__(position, Assets.images_misc["notification"], *groups)
         self.pivot = self.Pivot.TOP_LEFT
-        self.text = Text((self.x + 11, self.y + 15), text, 16, BLACK_SPRITE, centered=False)
+        self.text = Text((self.x + 11, self.y + 15), text, 16, BLACK_SPRITE, centered=False, shadow=True)
         self.timer = Timer(3)
         self.timer.start()
 
@@ -39,6 +39,7 @@ class Zone(Scene):
         super().__init__(name)
         self.zone_before = before
         self.map = GameMap(name)
+        self.location_type = "outside" if name in ["village", "city"] else "inside"
         self.npc_list = npc_list
         self.debug = False
         self.map_colliders = self.map.colliders
@@ -48,7 +49,7 @@ class Zone(Scene):
         # self.player.position = self.map.get_position(f"player_{before}").tuple
         # self.player.direction = self.map.get_position(f"player_{before}").properties["direction"]
         self.player.collisions = []
-        self.player.collisions = self.map_colliders
+        self.player.collisions = self.map_colliders + [npc.collider for npc in self.npcs]
         self.camera = Camera(self.map.width, self.map.height)
         self.camera.actor_tracking = self.player
         self.camera.position = self.player.x - 320, self.player.y - 180
@@ -60,6 +61,10 @@ class Zone(Scene):
             npc.position = self.map.get_position(npc.name).position
             npc.direction = self.map.get_position(npc.name).properties["direction"]
         self.change_zone = change_zone
+        self.zone_objets = []
+        self.zone_objets.append(self.player)
+        self.zone_objets.extend(self.map_objects)
+        self.zone_objets.extend(self.npcs)
 
     def start_zone(self):
         self.player.position = self.map.get_position(f"player_{self.zone_before}").tuple
@@ -115,27 +120,35 @@ class Zone(Scene):
                     self.map.objects.remove(self.obj)
                     break
 
+    @property
+    def closest_npc(self) -> NPC | None:
+        if not self.npcs:
+            return None
+        return min(self.npcs, key=lambda npc: npc.player_distance)
+
+    def update_npcs(self):
+        if not self.npcs:
+            return
+        for npc in self.npcs:
+            npc.update()
+
+        if self.closest_npc.interact():
+            from engine.scene.scene_manager import SceneManager
+            SceneManager.change_scene(DialogScene(self.closest_npc))
+
     def update(self) -> None:
         self.player.update()
         self.camera.update()
 
         self.update_triggers()
         self.notification.update()
-
-        for npc in self.npcs:
-            npc.update()
-            if npc.interact():
-                from engine.scene.scene_manager import SceneManager
-                SceneManager.change_scene(DialogScene(npc))
-            # print(f"{npc.name} is at {npc.player_distance}px from player")
+        self.update_npcs()
 
     def render(self) -> None:
         self.display.fill(BLACK_SPRITE)
         self.display.blit(self.map.ground, -self.camera.offset)
-        for obj in sorted(
-                [self.player] + self.map_objects + [npc for npc in self.npc_list if npc.current_zone == self.name],
-                key=lambda sprite: sprite.sort_point):
-            obj.render(self.display, self.camera.offset)
+        for zone_object in sorted(self.zone_objets, key=lambda sprite: sprite.sort_point):
+            zone_object.render(self.display, self.camera.offset)
 
         if self.obj:
             self.obj.render(self.display)

@@ -1,5 +1,5 @@
 import pygame
-import engine.input as game_input
+from engine.input import Input
 from src.scenes.world.game_object import GameObject
 
 
@@ -30,13 +30,13 @@ class Sprite(GameObject):
         return self.image.get_rect(center=self._position)
 
     def hovered(self, offset: pygame.Vector2) -> bool:
-        mouse = pygame.Vector2(game_input.mouse.position) + offset
+        mouse = pygame.Vector2(Input.mouse.position) + offset
         if self.rect.collidepoint(mouse):
             return True
         return False
 
     def clicked(self, offset: pygame.Vector2) -> bool:
-        mouse = pygame.Vector2(game_input.mouse.position) + offset
-        if self.rect.collidepoint(mouse) and game_input.mouse.buttons["left"]:
+        mouse = pygame.Vector2(Input.mouse.position) + offset
+        if self.rect.collidepoint(mouse) and Input.mouse.buttons["left"]:
             return True
         return False

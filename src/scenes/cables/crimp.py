@@ -45,13 +45,19 @@ class CrimpCable(Scene):
         self.continue_text = Text((self.center_x, 300), "Presiona Espacio para continuar", 32, Colors.WHITE, self.group,
                                   layer=10)
         self.continue_text.deactivate()
-        self.standard_text = Text(self.center, self.standard, 32, Colors.WHITE, self.group, layer=10)
-        self.standard_text.deactivate()
+        cable_types = {"straight": "directo", "crossover": "cruzado"}
+        self.result_cable_text = Text(self.center, f"Felicidades!\nObtuviste un cable {cable_types[self.standard]}.",
+                                      32,
+                                      Colors.WHITE, self.group, layer=10)
+        self.result_cable_text.deactivate()
         self.final_cable = Image((-150, self.center_y), Assets.images_cables[f"standard_a"], self.group)
         self.cable_quality = 0
         self.qualities = []
         self.color_values = {(101, 191, 110, 255): "green", (254, 202, 32, 255): "yellow", (222, 84, 81, 255): "red"}
         self.color_quality = {"green": 3, "yellow": 2, "red": 1}
+        from engine.inventory import Inventory
+        self.cable_multiplier = random.choice([2] * 8 + [3] * 2) if Inventory.has("usb_double_cable") else 1
+        print(self.cable_multiplier)
 
     def drag(self):
         # Start dragging
@@ -147,13 +153,13 @@ class CrimpCable(Scene):
 
             self.final_cable.x -= (self.final_cable.x - 122) / (0.1 / Time.dt)
             if self.final_cable.x - 122 < 1:
-                self.standard_text.activate()
+                self.result_cable_text.activate()
                 self.continue_text.activate()
 
             if Input.keyboard.keys["space"]:
                 cable_quality = random.choice(self.qualities)
                 from engine.inventory import Inventory
-                Inventory.add_item(f"cable_{self.standard}_{cable_quality}")
+                Inventory.add_item(f"cable_{self.standard}_{cable_quality}", self.cable_multiplier)
                 Inventory.remove_item("cable", 1)
                 Inventory.remove_item("connector", 2)
                 from engine.scene.scene_manager import SceneManager

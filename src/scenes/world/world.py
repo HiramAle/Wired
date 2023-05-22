@@ -18,7 +18,7 @@ from src.scenes.world.zone_manager import ZoneManager
 
 class NightEffect(Sprite):
     def __init__(self):
-        super().__init__((0, 0), pygame.Surface((640, 320)))
+        super().__init__((0, 0), pygame.Surface((640, 360)))
         self.day_color = [255, 255, 255]
         self.night_color = (38, 101, 189)
 
@@ -49,8 +49,7 @@ class World(Scene):
         # ----------
         self.overlay = Assets.images_world["overlay"]
         self.hour = Sprite((78 + 16, 32), pygame.Surface((1, 1)))
-        # self.zone.npc_list[0].position = self.zone.map.get_position("kat").tuple
-        self.next_zone = None
+        self.next_zone: Zone | None = None
 
         # Zone transition
         self.transitionSpeed = 500
@@ -82,7 +81,6 @@ class World(Scene):
                 self.next_zone = None
                 self.zone.player.can_move = True
 
-
     def change_zone(self, zone: str):
         self.zone.player.can_move = False
         self.zone.player.action = "idle"
@@ -91,6 +89,8 @@ class World(Scene):
     def update(self):
         self.update_zone_transition()
         self.zone.update()
+        TimeManager.update()
+        self.night.update()
 
         if Input.keyboard.keys["esc"]:
             from engine.scene.scene_manager import SceneManager
@@ -109,7 +109,11 @@ class World(Scene):
                 self.display.blit(self.zone.display, (0, 0))
             if self.fade_out:
                 self.next_zone.render()
+                if self.next_zone.location_type == "outside":
+                    self.night.render(self.display)
                 self.display.blit(self.next_zone.display, (0, 0))
             self.fade_surface.fill(Colors.DARK)
             self.fade_surface.set_alpha(self.alpha)
             self.display.blit(self.fade_surface, (0, 0))
+        if self.zone.location_type == "outside":
+            self.night.render(self.display)

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="36" nextobjectid="1069">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="36" nextobjectid="1070">
  <tileset firstgid="1" source="../TSX/City.tsx"/>
  <tileset firstgid="7585" source="../TSX/Floors_and_Water.tsx"/>
  <tileset firstgid="11581" source="../TSX/Terrains.tsx"/>
- <tileset firstgid="14141" source="../../Casa/TSX/City_Props.tsx"/>
  <tileset firstgid="14141" source="../TSX/Modern_Exteriors.tsx"/>
  <tileset firstgid="50573" source="../TSX/singles_city.tsx"/>
  <layer id="1" name="street floor" width="100" height="96">
@@ -1349,7 +1348,11 @@
  <objectgroup id="18" name="buildings">
   <object id="172" gid="50593" x="992" y="832" width="512" height="384"/>
   <object id="174" gid="50581" x="1344" y="2688" width="576" height="736"/>
-  <object id="175" gid="50589" x="2208" y="2720" width="768" height="736"/>
+  <object id="175" gid="50589" x="2208" y="2720" width="768" height="736">
+   <properties>
+    <property name="centered" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="176" gid="50585" x="160" y="2784" width="928" height="736"/>
   <object id="177" gid="50583" x="224" y="2016" width="320" height="352"/>
   <object id="178" gid="50582" x="608" y="2016" width="448" height="384"/>
@@ -1414,6 +1417,12 @@
   <object id="1067" name="player_village" x="479" y="1613">
    <properties>
     <property name="direction" value="up"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1069" name="Chencho" type="npc_spawn" x="592" y="1597">
+   <properties>
+    <property name="direction" value="down"/>
    </properties>
    <point/>
   </object>
