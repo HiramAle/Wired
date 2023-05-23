@@ -74,7 +74,8 @@ TUTORIALS = "data/tutorials"
 MAPS = {"players_house": "data/maps/TMX/Casa_custom.tmx",
         "village": "data/maps/TMX/Village.tmx",
         "store": "data/maps/TMX/Tienda_prueba.tmx",
-        "city": "data/maps/TMX/City.tmx"}
+        "city": "data/maps/TMX/City.tmx",
+        "reception":"data/maps/TMX/reception.tmx"}
 TILED_HOUSE = "data/maps/TMX/Casa_custom.tmx"
 VILLAGE = "data/maps/TMX/Village.tmx"
 # Character creation

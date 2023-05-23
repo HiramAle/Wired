@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TMX/City.tmx",
+    "activeFile": "TMX/Village.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "Todos los archivos (*)",
@@ -92,17 +92,17 @@
         },
         "TMX/Casa_custom.tmx": {
             "expandedObjectLayers": [
-                13,
                 11,
-                15,
+                16,
+                13,
                 12,
-                16
+                15
             ],
-            "scale": 5.5,
-            "selectedLayer": 10,
+            "scale": 2,
+            "selectedLayer": 8,
             "viewCenter": {
-                "x": 480,
-                "y": 480
+                "x": 481.25,
+                "y": 619
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -110,31 +110,34 @@
             "scaleInDock": 1
         },
         "TMX/City.tmx": {
-            "expandedObjectLayers": [
-                21,
-                34,
-                31,
-                35,
-                18
+            "expandedGroupLayers": [
+                15
             ],
-            "scale": 0.5,
-            "selectedLayer": 14,
+            "expandedObjectLayers": [
+                18,
+                35,
+                31,
+                21,
+                34
+            ],
+            "scale": 0.33,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 639,
-                "y": 976
+                "x": 1392.4242424242425,
+                "y": 1424.2424242424242
             }
         },
         "TMX/Tienda_prueba.tmx": {
             "expandedObjectLayers": [
+                16,
                 14,
-                12,
-                16
+                12
             ],
             "scale": 2,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 478.25,
-                "y": 318.5
+                "x": 477.25,
+                "y": 317.5
             }
         },
         "TMX/Village.tmx": {
@@ -145,22 +148,36 @@
                 29
             ],
             "expandedObjectLayers": [
-                13,
+                17,
                 32,
                 31,
-                17,
-                30,
-                29
+                13,
+                29,
+                30
             ],
-            "scale": 0.5,
-            "selectedLayer": 20,
+            "scale": 0.33,
+            "selectedLayer": 19,
             "viewCenter": {
-                "x": 1937,
-                "y": 1026
+                "x": 889.3939393939395,
+                "y": 1372.7272727272727
             }
         },
         "TMX/Village.tmx#Singles": {
             "scaleInDock": 0.03125
+        },
+        "TMX/reception.tmx": {
+            "expandedObjectLayers": [
+                5,
+                10,
+                6,
+                9
+            ],
+            "scale": 1.5,
+            "selectedLayer": 9,
+            "viewCenter": {
+                "x": 273,
+                "y": 420
+            }
         },
         "TSX/Basement.tsx": {
             "scaleInDock": 1.5
@@ -288,11 +305,11 @@
     "project": "Casa.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "TMX/Village.tmx",
-        "TMX/Casa_custom.tmx",
-        "TMX/Tienda_prueba.tmx",
         "TSX/singles_city.tsx",
         "TMX/City.tmx",
+        "TMX/Tienda_prueba.tmx",
+        "TMX/Casa_custom.tmx",
+        "TMX/Village.tmx",
         "TSX/house_singles.tsx",
         "TSX/singles.tsx",
         "TSX/Tileset_Casa.tsx",

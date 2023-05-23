@@ -45,7 +45,7 @@ class World(Scene):
         self.npc_list = [NPC("Kat", (0, 0), self.player), NPC("Arian", (0, 0), self.player),
                          NPC("Chencho", (0, 0), self.player), NPC("Altair", (0, 0), self.player),
                          NPC("Kike", (0, 0), self.player), NPC("Jordi", (0, 0), self.player)]
-        self.zone = Zone("players_house", self.npc_list, self.player, self.change_zone)
+        self.zone = Zone("players_house", self.npc_list, self.player, self.new_zone)
         # ----------
         self.overlay = Assets.images_world["overlay"]
         self.hour = Sprite((78 + 16, 32), pygame.Surface((1, 1)))
@@ -69,7 +69,8 @@ class World(Scene):
                 self.alpha = 255
                 self.fade_in = False
                 self.fade_out = True
-                self.next_zone.start_zone()
+                self.zone = self.next_zone
+                self.zone.start_zone()
         if self.fade_out:
             self.next_zone.update()
             self.alpha -= self.transitionSpeed * Time.dt
@@ -77,14 +78,25 @@ class World(Scene):
                 self.alpha = 0
                 self.fade_out = False
                 self.fade_in = True
-                self.zone = self.next_zone
                 self.next_zone = None
                 self.zone.player.can_move = True
 
-    def change_zone(self, zone: str):
+    def render_zone_transition(self):
+        if not self.next_zone:
+            return
+        if self.fade_in:
+            self.display.blit(self.zone.display, (0, 0))
+        if self.fade_out:
+            self.next_zone.render()
+            self.display.blit(self.next_zone.display, (0, 0))
+        self.fade_surface.fill(Colors.DARK)
+        self.fade_surface.set_alpha(self.alpha)
+        self.display.blit(self.fade_surface, (0, 0))
+
+    def new_zone(self, zone: str):
         self.zone.player.can_move = False
         self.zone.player.action = "idle"
-        self.next_zone = Zone(zone, self.npc_list, self.player, self.change_zone, self.zone.name)
+        self.next_zone = Zone(zone, self.npc_list, self.player, self.new_zone, self.zone.name)
 
     def update(self):
         self.update_zone_transition()
@@ -103,17 +115,7 @@ class World(Scene):
         self.display.blit(self.overlay, (16, 16))
         self.hour.image = Assets.fonts["monogram"].render(TimeManager.formatted_time(), 16, BLACK_SPRITE)
         self.hour.render(self.display)
-
-        if self.next_zone:
-            if self.fade_in:
-                self.display.blit(self.zone.display, (0, 0))
-            if self.fade_out:
-                self.next_zone.render()
-                if self.next_zone.location_type == "outside":
-                    self.night.render(self.display)
-                self.display.blit(self.next_zone.display, (0, 0))
-            self.fade_surface.fill(Colors.DARK)
-            self.fade_surface.set_alpha(self.alpha)
-            self.display.blit(self.fade_surface, (0, 0))
+        self.render_zone_transition()
         if self.zone.location_type == "outside":
             self.night.render(self.display)
+
