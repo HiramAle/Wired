@@ -25,9 +25,11 @@ class Item:
 class Inventory:
     __all_items: dict[str, Item] = {}
     items: dict[str, int] = {}
+    money = 0
 
     @classmethod
-    def load_inventory(cls, inventory: dict):
+    def load_inventory(cls, inventory: dict, money: int):
+        cls.money = money
         for id_item, quantity in inventory.items():
             cls.items[id_item] = quantity
 

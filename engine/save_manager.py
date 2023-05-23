@@ -1,4 +1,7 @@
 import os
+
+import pygame.time
+
 from engine.loader import Loader
 from engine.constants import Paths
 from engine.inventory import Inventory
@@ -29,12 +32,15 @@ class GameSave:
         self.money = save_data["money"]
         self.inventory = save_data["inventory"]
         self.tutorials = save_data["tutorials"]
+        self.starting_time = 0
 
     def __dict(self) -> dict:
-        return {key: value for key, value in vars(self).items() if key != "filename"}
+        return {key: value for key, value in vars(self).items() if key not in ["filename", "current_time_player"]}
 
     def save(self):
         self.inventory = Inventory.items
+        self.money = Inventory.money
+        # self.time += (pygame.time.get_ticks() - self.starting_time) // 1000
         if Loader.save_json(self.filename, self.__dict()):
             print("File saved")
             return
@@ -64,7 +70,8 @@ class SaveManager:
             print("Slot index must be between 0 and 2")
             return
         self.__slot = slot
-        Inventory.load_inventory(self.active_save.inventory)
+        self.active_save.starting_time = pygame.time.get_ticks()
+        Inventory.load_inventory(self.active_save.inventory, self.active_save.money)
 
 
 instance = SaveManager()

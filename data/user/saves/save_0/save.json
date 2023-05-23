@@ -2,8 +2,8 @@
   "sprite_sheet": "data/user/saves/save_0/sprite_sheet.png",
   "name": "Zazu",
   "pronoun": "el",
-  "time": 0,
-  "money": 200,
+  "time": 741,
+  "money": 1100,
   "inventory": {
     "cable": 9,
     "connector": 8,
@@ -15,5 +15,6 @@
     "cables": true,
     "subnetting": false,
     "routing": false
-  }
+  },
+  "starting_time": 18926
 }

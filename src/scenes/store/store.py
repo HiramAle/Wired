@@ -4,7 +4,6 @@ from engine.input import Input
 from engine.scene.scene import Scene
 from engine.objects.sprite import Sprite, SpriteGroup
 from engine.ui.text import Text
-from engine.save_manager import instance as save_manager
 from engine.constants import Colors
 from engine.inventory import Inventory
 
@@ -59,7 +58,7 @@ class Store(Scene):
         self.connectors = Text((150, 43), str(Inventory.items["connector"]), 32, Colors.SPRITE, self.store_ui)
         Sprite((110, 27), Assets.images_store["connector_icon"], self.store_ui, centered=False)
         Sprite((477, 14), Assets.images_store["money"], self.store_ui, centered=False)
-        self.money = Text((571, 43), f"{save_manager.active_save.money}G", 32, Colors.SPRITE, self.store_ui)
+        self.money = Text((571, 43), f"{Inventory.money}G", 32, Colors.SPRITE, self.store_ui)
         Sprite((104, 111), Assets.images_store["items_background"], self.store_ui, centered=False)
         Sprite((434, 111), Assets.images_store["icon_frame"], self.store_ui, centered=False)
         Sprite((434, 246), Assets.images_store["price_frame"], self.store_ui, centered=False)
@@ -82,10 +81,10 @@ class Store(Scene):
                 self.item_icon.image = pygame.transform.scale_by(item.icon.image, 2)
                 self.item_price.text = str(item.item.price)
             if item.buy.clicked and index in [0, 1]:
-                if save_manager.active_save.money < item.item.price:
+                if Inventory.money < item.item.price:
                     break
-                save_manager.active_save.money -= item.item.price
-                self.money.text = f"{save_manager.active_save.money}G"
+                Inventory.money -= item.item.price
+                self.money.text = f"{Inventory.money}G"
                 if index == 0:
                     Inventory.add_item("connector", 1)
                     self.connectors.text = str(Inventory.how_much("connector"))

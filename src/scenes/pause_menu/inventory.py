@@ -17,7 +17,7 @@ class Inventory(Scene):
         Text((125 + self.x_padding, 38), "Inventario", 32, Colors.SPRITE, self.inventory, centered=False)
         Text((109 + self.x_padding, 74), save_manager.active_save.name, 32, Colors.SPRITE, self.inventory,
              centered=False)
-        Text((241 + self.x_padding, 74), f"{save_manager.active_save.money}G", 32, Colors.SPRITE, self.inventory,
+        Text((241 + self.x_padding, 74), f"{inventory.money}G", 32, Colors.SPRITE, self.inventory,
              centered=False)
         Sprite((86 + self.x_padding, 80), Assets.images_book["character"], self.inventory, centered=False)
         Sprite((217 + self.x_padding, 80), Assets.images_book["money"], self.inventory, centered=False)

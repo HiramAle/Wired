@@ -25,6 +25,13 @@ class GameMap:
         self._positions: dict[str, Position] = {}
         self.setup()
 
+    @property
+    def instant(self) -> pygame.Surface:
+        surface = self.ground.copy()
+        for tiled_object in self.objects:
+            tiled_object.render(surface)
+        return surface
+
     def get_position(self, name: str) -> Position:
         return self._positions.get(name)
 

@@ -94,7 +94,7 @@ class Zone(Scene):
                         SceneManager.change_scene(Tutorial(trigger.scene), True)
 
                 if trigger.type == "save":
-                    save_manager.active_save.save()
+                    SceneManager.change_scene(SceneManager.scenes_by_name["sleep"](), True, True)
 
     def move_objects(self):
         if any([obj.hovered(self.camera.offset) for obj in self.map.objects]):

@@ -37,7 +37,7 @@ class NightEffect(Sprite):
 class World(Scene):
     def __init__(self):
         super().__init__("world")
-        AudioManager.play_music("exploration")
+        # AudioManager.play_music("exploration")
         # pygame.mixer.music.set_volume(1)
         self.night = NightEffect()
         # ----------
@@ -59,6 +59,16 @@ class World(Scene):
         self.fade_surface = pygame.Surface(self.display.get_size(), pygame.SRCALPHA)
         self.zone.player.can_move = True
         self.zone.start_zone()
+        self.transitioning = False
+
+    def check_for_end_day(self):
+        if not TimeManager.day_ended or self.transitioning:
+            return
+        print("changing scene from world")
+        from engine.scene.scene_manager import SceneManager
+        from src.scenes.world.sleep import Sleep
+        SceneManager.change_scene(Sleep(), True, True)
+        self.transitioning = True
 
     def update_zone_transition(self):
         if not self.next_zone:
@@ -108,6 +118,13 @@ class World(Scene):
             from engine.scene.scene_manager import SceneManager
             SceneManager.change_scene(Pause())
 
+        self.check_for_end_day()
+
+        if Input.keyboard.keys["backspace"]:
+            print(f"Player position ({self.player.x}, {self.player.y})")
+            from engine.inventory import Inventory
+            Inventory.money += 100
+
     def render(self) -> None:
         # Render zone
         self.zone.render()
@@ -118,4 +135,3 @@ class World(Scene):
         self.render_zone_transition()
         if self.zone.location_type == "outside":
             self.night.render(self.display)
-

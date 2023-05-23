@@ -18,7 +18,7 @@ from src.scenes.world.world import World
 from engine.audio import AudioManager
 from engine.save_manager import instance as save_manager
 
-description_text = "Archivo de guardado de @, con tt horas\nde juego."
+description_text = "Archivo de guardado de @, con tt minutos\nde juego."
 
 
 class NewGame(Stage):
@@ -56,13 +56,13 @@ class NewGame(Stage):
                     players_name = save_manager.saves[index].name
                     time_played = save_manager.saves[index].time
                     self.description_title.text = players_name
-                    self.description.text = description_text[:].replace("@", players_name).replace("tt",
-                                                                                                   str(time_played))
+                    self.description.text = \
+                        description_text[:].replace("@", players_name).replace("tt", str(time_played % 60))
                 else:
                     self.description_title.deactivate()
                     self.description.deactivate()
             if save_button.clicked:
-                pygame.mixer.music.fadeout(1000)
+                # pygame.mixer.music.fadeout(1000)
                 self.transitionPosition = save_button.rect.center
                 save_manager.active_save = index
                 if save_button.text.text == "- VACIO -":
@@ -72,6 +72,7 @@ class NewGame(Stage):
 
                 else:
                     from engine.scene.scene_manager import SceneManager
+                    AudioManager.play_music("exploration")
                     SceneManager.change_scene(loading.Loading(Data.load_maps, World), True)
                     # scene_manager.change_scene(self.scenes, loading.Loading(data.load_map, TestMap, ("playershouse",),
                     #                                                        ("playershouse",)), True)

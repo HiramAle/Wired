@@ -2,9 +2,11 @@ from engine.time import Time
 
 
 class TimeManager:
-    current_time_minutes = 1180
+    current_time_minutes = 1300
     time_speed_factor = 1.4
     current_day_of_week = 0
+    day_ended = False
+    day_close_to_end = False
 
     @classmethod
     def formatted_time(cls) -> str:
@@ -14,10 +16,26 @@ class TimeManager:
         return time_string
 
     @classmethod
+    def restart(cls):
+        cls.day_ended = False
+        cls.current_time_minutes = 360
+        cls.current_day_of_week += 1
+        if cls.current_day_of_week > 6:
+            cls.current_day_of_week = 0
+
+    @classmethod
     def update(cls) -> None:
+        if cls.day_ended:
+            return
         cls.current_time_minutes += cls.time_speed_factor * Time.dt
+        # Tells if the day is close to end
+        if not cls.day_close_to_end and cls.current_time_minutes >= 1000:
+            cls.day_close_to_end = True
+        # Tells if the day is ended
         if cls.current_time_minutes >= 1320:
-            cls.current_time_minutes = 360
-            cls.current_day_of_week += 1
-            if cls.current_day_of_week > 6:
-                cls.current_day_of_week = 0
+            cls.day_ended = True
+            print("Day ended")
+            # cls.current_time_minutes = 360
+            # cls.current_day_of_week += 1
+            # if cls.current_day_of_week > 6:
+            #     cls.current_day_of_week = 0

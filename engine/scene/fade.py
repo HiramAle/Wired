@@ -31,6 +31,7 @@ class FadeTransition(Transition):
 
         if not self.fade_in and not self.fade_out:
             from engine.scene.scene_manager import SceneManager
+            SceneManager.transitioning = False
             SceneManager.set_active_scene(self.toScene, swap=True)
             pygame.mouse.set_visible(True)
 

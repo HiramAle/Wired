@@ -32,6 +32,7 @@ class Game:
             SceneManager.render()
             Time.update()
             Window.update()
+            SceneManager.print_stack()
 
 
 if __name__ == '__main__':

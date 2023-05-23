@@ -12,6 +12,7 @@ from src.scenes.cables.order import OrderCable
 from src.scenes.subnetting.subnetting import Subnetting
 from src.scenes.tutorial.tutorial import Tutorial
 from src.scenes.store.store import Store
+from src.scenes.world.sleep import Sleep
 
 
 class SceneManager:
@@ -19,7 +20,9 @@ class SceneManager:
     scenes_by_name = {"cables": OrderCable,
                       "routing": Routing,
                       "subnetting": Subnetting,
-                      "store": Store}
+                      "store": Store,
+                      "sleep": Sleep}
+    transitioning = False
 
     @classmethod
     def init(cls):
@@ -66,6 +69,7 @@ class SceneManager:
         """
         print(f"Transitioning from {cls.get_active_scene().name} to {to_scene.name}")
         if transition:
+            cls.transitioning = True
             cls.set_active_scene(FadeTransition(cls.get_active_scene(), to_scene), swap)
         else:
             cls.set_active_scene(to_scene, swap)

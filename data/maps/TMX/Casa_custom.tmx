@@ -325,7 +325,7 @@
   </object>
  </objectgroup>
  <objectgroup id="15" name="positions">
-  <object id="75" name="player_village" x="495" y="701">
+  <object id="75" name="player_village" x="495" y="699">
    <properties>
     <property name="direction" value="up"/>
    </properties>
@@ -337,7 +337,7 @@
    </properties>
    <point/>
   </object>
-  <object id="77" name="player_" x="300" y="240">
+  <object id="77" name="player_" x="295" y="212">
    <properties>
     <property name="direction" value="right"/>
    </properties>

@@ -98,11 +98,11 @@
                 12,
                 15
             ],
-            "scale": 2,
-            "selectedLayer": 8,
+            "scale": 4,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 481.25,
-                "y": 619
+                "x": 330.125,
+                "y": 230.25
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -155,11 +155,11 @@
                 29,
                 30
             ],
-            "scale": 0.33,
-            "selectedLayer": 19,
+            "scale": 2,
+            "selectedLayer": 21,
             "viewCenter": {
-                "x": 889.3939393939395,
-                "y": 1372.7272727272727
+                "x": 1391.75,
+                "y": 540
             }
         },
         "TMX/Village.tmx#Singles": {

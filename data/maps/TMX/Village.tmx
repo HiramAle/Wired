@@ -1384,17 +1384,43 @@
   <object id="2130" name="zone_playershouse" x="1406.25" y="468" width="35.25" height="19"/>
   <object id="2136" name="scene_playable_npcshouse" x="122.182" y="1863.45" width="44" height="23.4545"/>
  </objectgroup>
+ <objectgroup id="32" name="triggers">
+  <object id="2165" name="zone_players_house" type="zone" x="1406" y="468" width="36" height="19">
+   <properties>
+    <property name="interaction_type" value="keypress"/>
+    <property name="zone" value="players_house"/>
+   </properties>
+  </object>
+  <object id="2166" name="zone_store" type="zone" x="315" y="848" width="40" height="31">
+   <properties>
+    <property name="interaction_type" value="keypress"/>
+    <property name="zone" value="store"/>
+   </properties>
+  </object>
+  <object id="2173" name="zone_city" type="zone" x="1472" y="1228" width="109" height="52">
+   <properties>
+    <property name="interaction_type" value="keypress"/>
+    <property name="zone" value="city"/>
+   </properties>
+  </object>
+  <object id="2177" name="zone_reception" type="zone" x="713" y="849" width="45" height="21">
+   <properties>
+    <property name="interaction_type" value="keypress"/>
+    <property name="zone" value="reception"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup id="31" name="positions">
   <object id="2162" name="amy" type="npc_spawn" x="1347" y="1136">
    <point/>
   </object>
-  <object id="2163" name="player_players_house" x="1424" y="492">
+  <object id="2163" name="player_players_house" x="1424" y="461">
    <properties>
     <property name="direction" value="down"/>
    </properties>
    <point/>
   </object>
-  <object id="2167" name="player_store" x="334" y="865">
+  <object id="2167" name="player_store" x="334" y="835">
    <properties>
     <property name="direction" value="down"/>
    </properties>
@@ -1429,32 +1455,6 @@
     <property name="direction" value="down"/>
    </properties>
    <point/>
-  </object>
- </objectgroup>
- <objectgroup id="32" name="triggers">
-  <object id="2165" name="zone_players_house" type="zone" x="1406" y="468" width="36" height="19">
-   <properties>
-    <property name="interaction_type" value="keypress"/>
-    <property name="zone" value="players_house"/>
-   </properties>
-  </object>
-  <object id="2166" name="zone_store" type="zone" x="315" y="848" width="40" height="31">
-   <properties>
-    <property name="interaction_type" value="keypress"/>
-    <property name="zone" value="store"/>
-   </properties>
-  </object>
-  <object id="2173" name="zone_city" type="zone" x="1472" y="1228" width="109" height="52">
-   <properties>
-    <property name="interaction_type" value="keypress"/>
-    <property name="zone" value="city"/>
-   </properties>
-  </object>
-  <object id="2177" name="zone_reception" type="zone" x="713" y="849" width="45" height="21">
-   <properties>
-    <property name="interaction_type" value="keypress"/>
-    <property name="zone" value="reception"/>
-   </properties>
   </object>
  </objectgroup>
 </map>
