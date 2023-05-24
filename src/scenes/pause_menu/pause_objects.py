@@ -6,6 +6,8 @@ from engine.ui.text import Text
 from engine.constants import Colors
 from enum import Enum
 from src.scenes.world.player import Player
+from engine.item import Item
+from engine.inventory import Inventory
 
 
 class Tab(Sprite):
@@ -80,17 +82,22 @@ class PlayerAvatar(Sprite):
 
 
 class ItemSlot(Sprite):
-    def __init__(self, position: tuple, quality: str, standard: str, quantity: int, *groups, **kwargs):
-        super().__init__(position, Assets.images_book[f"cable_{quality}"], *groups, **kwargs)
+    def __init__(self, position: tuple, item: Item, *groups, **kwargs):
+        print(f"cable_{item.name[-1]}")
+        super().__init__(position, Assets.images_book[f"cable_{item.id[-1]}"], *groups, **kwargs)
+        self.item = item
         self.pivot = self.Pivot.TOP_LEFT
-        self.standard = standard
-        self.quality = Text((self.x + 11, self.y + 9.5), standard, 16, Colors.WHITE)
-        self.quantity = Text((self.x + 31, self.y + 32.5), str(quantity), 16, Colors.WHITE)
+        self.quantity = Text((self.x + 31, self.y + 32.5), str(Inventory.how_much(item.id)), 16, Colors.WHITE)
 
     def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
         super().render(display)
-        self.quality.render(display)
         self.quantity.render(display)
+
+
+class SpecialItemSlot(Sprite):
+    def __init__(self, position: tuple, item: str, *groups, **kwargs):
+        super().__init__(position, Assets.images_book["special_item"], *groups)
+        self.pivot = self.Pivot.TOP_LEFT
 
 
 class Button(Sprite):

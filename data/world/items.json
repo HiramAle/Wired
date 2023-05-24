@@ -1,47 +1,47 @@
 {
   "cable": {
-    "name": "'Cable UTP'",
-    "description": "'Cable de red, útil para la transmisión de voz y datos. Se utiliza para crear cables ethernet.'",
-    "price": "10.0"
+    "name": "Cable UTP",
+    "description": "Cable de red, útil para la transmisión de voz y datos. Se utiliza para crear cables ethernet.",
+    "price": 10.0
   },
   "connector": {
-    "name": "'Plug RJ45'",
-    "description": "'Conector de 8 contactos, sirve para armar cables Ethernet y realizar instalaciones de red. Se usa al subnetear.'",
-    "price": "20.0"
+    "name": "Conector RJ45",
+    "description": "Conector de 8 contactos, sirve para armar cables Ethernet y realizar instalaciones de red. Se usa al subnetear.",
+    "price": 20.0
   },
   "cable_crossover_3": {
-    "name": "'Cable cruzado'",
-    "description": "'Tipo de cable de par trenzado que utilizan dos estándares de cableado diferentes, conecta dos dispositivos del mismo tipo.'",
-    "quality": "3.0"
+    "name": "Cable cruzado",
+    "description": "Tipo de cable de par trenzado que utilizan dos estándares de cableado diferentes, conecta dos dispositivos del mismo tipo.",
+    "quality": 3.0
   },
   "cable_crossover_2": {
-    "name": "'Cable cruzado'",
-    "description": "'Tipo de cable de par trenzado que utilizan dos estándares de cableado diferentes, conecta dos dispositivos del mismo tipo.'",
-    "quality": "2.0"
+    "name": "Cable cruzado",
+    "description": "Tipo de cable de par trenzado que utilizan dos estándares de cableado diferentes, conecta dos dispositivos del mismo tipo.",
+    "quality": 2.0
   },
   "cable_crossover_1": {
-    "name": "'Cable cruzado'",
-    "description": "'Tipo de cable de par trenzado que utilizan dos estándares de cableado diferentes, conecta dos dispositivos del mismo tipo.'",
-    "quality": "1.0"
+    "name": "Cable cruzado",
+    "description": "Tipo de cable de par trenzado que utilizan dos estándares de cableado diferentes, conecta dos dispositivos del mismo tipo.",
+    "quality": 1.0
   },
   "cable_straight_3": {
-    "name": "'Cable directo'",
-    "description": "'Tipo de cable de par trenzado donde los colores de cada par de cable coinciden, conecta dos dispositivos diferentes.'",
-    "quality": "3.0"
+    "name": "Cable directo",
+    "description": "Tipo de cable de par trenzado donde los colores de cada par de cable coinciden, conecta dos dispositivos diferentes.",
+    "quality": 3.0
   },
   "cable_straight_2": {
-    "name": "'Cable directo'",
-    "description": "'Tipo de cable de par trenzado donde los colores de cada par de cable coinciden, conecta dos dispositivos diferentes.'",
-    "quality": "2.0"
+    "name": "Cable directo",
+    "description": "Tipo de cable de par trenzado donde los colores de cada par de cable coinciden, conecta dos dispositivos diferentes.",
+    "quality": 2.0
   },
   "cable_straight_1": {
-    "name": "'Cable directo'",
-    "description": "'Tipo de cable de par trenzado donde los colores de cada par de cable coinciden, conecta dos dispositivos diferentes.'",
-    "quality": "1.0"
+    "name": "Cable directo",
+    "description": "Tipo de cable de par trenzado donde los colores de cada par de cable coinciden, conecta dos dispositivos diferentes.",
+    "quality": 1.0
   },
   "usb_double_cable": {
-    "name": "'UBS-Doble Cable'",
-    "description": "'Otorga la habilidad de crear de 1 a 2 cables extra.'"
+    "name": "UBS-Doble Cable",
+    "description": "Otorga la habilidad de crear de 1 a 2 cables extra."
   },
   "9": {},
   "10": {},

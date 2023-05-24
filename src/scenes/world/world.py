@@ -14,6 +14,8 @@ from engine.audio import AudioManager
 from src.scenes.world.player import Player
 from src.scenes.world.time_manager import TimeManager
 from src.scenes.world.zone_manager import ZoneManager
+from src.scenes.world.tasks import TaskManager, Task
+from engine.save_manager import instance as save_manager
 
 
 class NightEffect(Sprite):
@@ -40,6 +42,17 @@ class World(Scene):
         # AudioManager.play_music("exploration")
         # pygame.mixer.music.set_volume(1)
         self.night = NightEffect()
+        # TaskManager.create_task(0, {"name": "Conoce a Kat",
+        #                             "description": "Explora el pueblo y la ciudad para conocer a tus amigos.",
+        #                             "type": "talk",
+        #                             "objective": "kat",
+        #                             "consequence": "kat_known"})
+        # TaskManager.create_task(1, {"name": "Conoce a Chencho",
+        #                             "description": "Explora el pueblo y la ciudad para conocer a tus amigos.",
+        #                             "type": "talk",
+        #                             "objective": "chencho",
+        #                             "consequence": "chencho_known"})
+        TaskManager.add_task(0)
         # ----------
         self.player = Player((0, 0), [], [], [])
         self.npc_list = [NPC("Kat", (0, 0), self.player), NPC("Arian", (0, 0), self.player),
@@ -121,9 +134,7 @@ class World(Scene):
         self.check_for_end_day()
 
         if Input.keyboard.keys["backspace"]:
-            print(f"Player position ({self.player.x}, {self.player.y})")
-            from engine.inventory import Inventory
-            Inventory.money += 100
+            print(save_manager.active_save.objectives)
 
     def render(self) -> None:
         # Render zone
@@ -135,3 +146,4 @@ class World(Scene):
         self.render_zone_transition()
         if self.zone.location_type == "outside":
             self.night.render(self.display)
+

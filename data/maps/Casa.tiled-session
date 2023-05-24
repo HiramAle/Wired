@@ -155,11 +155,11 @@
                 29,
                 30
             ],
-            "scale": 2,
+            "scale": 0.5,
             "selectedLayer": 21,
             "viewCenter": {
-                "x": 1391.75,
-                "y": 540
+                "x": 695,
+                "y": 324
             }
         },
         "TMX/Village.tmx#Singles": {
@@ -273,6 +273,9 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "TSX/reception_singles.tsx": {
+            "scaleInDock": 1
+        },
         "TSX/singles.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 0.33,
@@ -300,11 +303,13 @@
         "TMX/Casa_custom.tmx",
         "TMX/Tienda_prueba.tmx",
         "TMX/City.tmx",
-        "TSX/singles_city.tsx"
+        "TSX/singles_city.tsx",
+        "TMX/reception.tmx"
     ],
     "project": "Casa.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "TMX/reception.tmx",
         "TSX/singles_city.tsx",
         "TMX/City.tmx",
         "TMX/Tienda_prueba.tmx",
@@ -315,8 +320,7 @@
         "TSX/Tileset_Casa.tsx",
         "TSX/Terrains.tsx",
         "TSX/fontain.tsx",
-        "C:/Users/magic/Desktop/Casa_custom.tmx",
-        "C:/Users/magic/Desktop/s23 - Audio & fixes/data/map.tmx"
+        "C:/Users/magic/Desktop/Casa_custom.tmx"
     ],
     "tileset.lastUsedFilter": "Archivos de conjuntos de patrones Tiled (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

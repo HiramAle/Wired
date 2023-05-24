@@ -22,6 +22,7 @@ class Emote(Sprite):
 class Actor(Sprite):
     def __init__(self, position: tuple, sprite_sheet_path: str, collisions: list[pygame.Rect]):
         sprite_sheet = pygame.image.load(sprite_sheet_path).convert_alpha()
+        # TODO: Investigate why I put this where?
         animations = load.export_animation_frames(sprite_sheet)
         super().__init__(position, animations["idle"]["down"][0])
         self.collisions = collisions if collisions else []

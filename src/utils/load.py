@@ -198,8 +198,6 @@ def import_category_animations(category: str) -> dict[int, dict]:
     return category_animations
 
 
-
-
 def save_sprite_sheet(path: str, body: int, eyes: int, hairstyle: tuple[int, int], outfit: tuple[int, int]):
     body_path = f"{BODIES}/body_{body}.png"
     eyes_path = f"{EYES}/eyes_{eyes}.png"

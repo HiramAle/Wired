@@ -1,0 +1,162 @@
+{
+  "0": {
+    "id": 0,
+    "name": "Conoce a Kat",
+    "description": "Conoce a Kat",
+    "type": "talk",
+    "objective": "kat",
+    "consequence": "kat_known"
+  },
+  "1": {
+    "id": 1,
+    "name": "Conoce a Chencho",
+    "description": "Conoce a Chencho",
+    "type": "talk",
+    "objective": "chencho",
+    "consequence": "chencho_known"
+  },
+  "2": {
+    "id": 2,
+    "name": "Habla con Roy",
+    "description": "Habla con Roy",
+    "type": "talk",
+    "objective": "roy",
+    "consequence": "roy_known"
+  },
+  "3": {
+    "id": 3,
+    "name": "Crea un cable directo",
+    "description": "Crea un cable directo",
+    "type": "cables",
+    "objective": "direct_1",
+    "consequence": "direct_cable_tutorial"
+  },
+  "4": {
+    "id": 4,
+    "name": "Crea dos cables cruzados",
+    "description": "Crea dos cables cruzados",
+    "type": "cables",
+    "objective": "crossover_2",
+    "consequence": "crossover_cable_tutorial"
+  },
+  "5": {
+    "id": 5,
+    "name": "Realiza tu primer trabajo de subneteo",
+    "description": "Dirigete al Hotel y realiza tu primer trabajo de Subneteo.",
+    "type": "subnetting",
+    "objective": "hotel",
+    "consequence": "subnetting_hotel_done"
+  },
+  "6": {
+    "id": 6,
+    "name": "Regresa con Roy",
+    "description": NaN,
+    "type": "talk",
+    "objective": "roy",
+    "consequence": "roy_talk_1"
+  },
+  "7": {
+    "id": 7,
+    "name": "Realiza tu primer trabajo de enrutamiento",
+    "description": "Dirigete al Supermercado y realiza tu primer trabajo de Enrutamiento",
+    "type": "routing",
+    "objective": "supermarket",
+    "consequence": "routing_supermarket_done"
+  },
+  "8": {
+    "id": 8,
+    "name": "Regresa con Roy",
+    "description": "Habla con Roy",
+    "type": "talk",
+    "objective": "roy",
+    "consequence": "roy_talk_2"
+  },
+  "9": {
+    "id": 9,
+    "name": NaN,
+    "description": NaN,
+    "type": NaN,
+    "objective": NaN,
+    "consequence": NaN
+  },
+  "10": {
+    "id": 10,
+    "name": NaN,
+    "description": NaN,
+    "type": NaN,
+    "objective": NaN,
+    "consequence": NaN
+  },
+  "11": {
+    "id": 11,
+    "name": NaN,
+    "description": NaN,
+    "type": NaN,
+    "objective": NaN,
+    "consequence": NaN
+  },
+  "12": {
+    "id": 12,
+    "name": NaN,
+    "description": NaN,
+    "type": NaN,
+    "objective": NaN,
+    "consequence": NaN
+  },
+  "13": {
+    "id": 13,
+    "name": NaN,
+    "description": NaN,
+    "type": NaN,
+    "objective": NaN,
+    "consequence": NaN
+  },
+  "14": {
+    "id": 14,
+    "name": NaN,
+    "description": NaN,
+    "type": NaN,
+    "objective": NaN,
+    "consequence": NaN
+  },
+  "15": {
+    "id": 15,
+    "name": NaN,
+    "description": NaN,
+    "type": NaN,
+    "objective": NaN,
+    "consequence": NaN
+  },
+  "16": {
+    "id": 16,
+    "name": NaN,
+    "description": NaN,
+    "type": NaN,
+    "objective": NaN,
+    "consequence": NaN
+  },
+  "17": {
+    "id": 17,
+    "name": NaN,
+    "description": NaN,
+    "type": NaN,
+    "objective": NaN,
+    "consequence": NaN
+  },
+  "18": {
+    "id": 18,
+    "name": NaN,
+    "description": NaN,
+    "type": NaN,
+    "objective": NaN,
+    "consequence": NaN
+  },
+  "19": {
+    "id": 19,
+    "name": NaN,
+    "description": NaN,
+    "type": NaN,
+    "objective": NaN,
+    "consequence": NaN
+  }
+}

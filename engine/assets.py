@@ -27,6 +27,8 @@ class Assets:
     images_routing: dict[str, pygame.Surface] = {}
     images_tutorials: dict[str, pygame.Surface] = {}
     images_store: dict[str, pygame.Surface] = {}
+    # NPCS
+    portrait_frames: dict[str, [list[pygame.Surface]]] = {}
     # Character creation
     # skin_tone/action/direction/frames
     bodies: dict[int, dict[str, list[pygame.Surface]]] = {}
@@ -63,6 +65,7 @@ class Assets:
         cls.images_store = load_image_directory(IMAGES_STORE)
         cls.load_sounds()
         cls.load_music_paths()
+        cls.load_portraits()
         event.clear()
 
     @classmethod
@@ -71,6 +74,14 @@ class Assets:
             cls.animations[folder] = {}
             for animation in listdir(f"{ANIMATIONS}/{folder}"):
                 cls.animations[folder][animation] = Loader.load_animation(f"{ANIMATIONS}/{folder}/{animation}")
+
+    @classmethod
+    def load_portraits(cls):
+        for file in listdir(NPC_PORTRAITS):
+            print(file)
+            npc_name = file.split(".")[0].split("_")[0]
+            cls.portrait_frames[npc_name] = Loader.load_portrait_frames(f"{NPC_PORTRAITS}/{file}")
+        print(cls.portrait_frames)
 
     @classmethod
     def load_sounds(cls):

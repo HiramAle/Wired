@@ -1,29 +1,9 @@
 from engine.loader import Loader
-from typing import Any
-
-
-class Item:
-    def __init__(self, data: dict):
-        self.__data = data
-        self.name = data.get("name")
-        self.description = data.get("description")
-
-    def set(self, key: str, value: Any) -> bool:
-        if key not in self.__data:
-            print(f"{self.name} doesn't have {key} attribute")
-            return False
-        self.__data[key] = value
-        return True
-
-    def get(self, key: str) -> Any:
-        if key not in self.__data:
-            print(f"{self.name} doesn't have {key} attribute")
-            return None
-        return self.__data[key]
+from engine.item import Item
+from engine.item_manager import ItemManager
 
 
 class Inventory:
-    __all_items: dict[str, Item] = {}
     items: dict[str, int] = {}
     money = 0
 
@@ -34,14 +14,8 @@ class Inventory:
             cls.items[id_item] = quantity
 
     @classmethod
-    def load_items(cls):
-        all_items = Loader.load_json("data/world/items.json")
-        for id_item, item_data in all_items.items():
-            cls.__all_items[id_item] = Item(item_data)
-
-    @classmethod
     def add_item(cls, item_id: str, quantity: int = 1):
-        if not cls.exists(item_id):
+        if not ItemManager.exists(item_id):
             print(f"Item {item_id} doesn't exists.")
             return
         if cls.has(item_id):
@@ -63,10 +37,6 @@ class Inventory:
         return item_id in cls.items.keys()
 
     @classmethod
-    def exists(cls, item_id: str) -> bool:
-        return item_id in cls.__all_items.keys()
-
-    @classmethod
     def has_enough(cls, item_id: str, quantity: int) -> bool:
         if not cls.has(item_id):
             return False
@@ -77,8 +47,3 @@ class Inventory:
         if not cls.has(item_id):
             return 0
         return cls.items[item_id]
-
-    @classmethod
-    def print_inventory(cls):
-        for item, quantity in cls.items.items():
-            print(f"{cls.__all_items[item].name} ({quantity})")

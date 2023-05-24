@@ -10,13 +10,15 @@ from engine.time import Time
 from engine.assets import Assets
 from engine.scene.scene_manager import SceneManager
 from engine.save_manager import instance as save_manager
-from engine.inventory import Inventory
+from engine.item_manager import ItemManager
+from src.scenes.world.tasks import TaskManager
 
 
 class Game:
     def __init__(self):
         pygame.init()
-        Inventory.load_items()
+        ItemManager.load_items()
+        TaskManager.load_tasks()
         Data.init()
         Preferences.load()
         save_manager.load()
@@ -32,7 +34,6 @@ class Game:
             SceneManager.render()
             Time.update()
             Window.update()
-            SceneManager.print_stack()
 
 
 if __name__ == '__main__':

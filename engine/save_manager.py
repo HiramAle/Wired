@@ -5,6 +5,7 @@ import pygame.time
 from engine.loader import Loader
 from engine.constants import Paths
 from engine.inventory import Inventory
+from src.scenes.world.tasks import TaskManager
 
 
 class GameSave:
@@ -23,6 +24,11 @@ class GameSave:
                              "cables": False,
                              "subnetting": False,
                              "routing": False
+                         },
+                         "tasks": {
+                         },
+                         "status": {
+
                          }
                          }
             Loader.save_json(self.filename, save_data)
@@ -32,15 +38,16 @@ class GameSave:
         self.money = save_data["money"]
         self.inventory = save_data["inventory"]
         self.tutorials = save_data["tutorials"]
-        self.starting_time = 0
+        self.tasks = save_data["tasks"]
+        self.status = save_data["status"]
 
     def __dict(self) -> dict:
-        return {key: value for key, value in vars(self).items() if key not in ["filename", "current_time_player"]}
+        return {key: value for key, value in vars(self).items() if key not in ["filename"]}
 
     def save(self):
         self.inventory = Inventory.items
         self.money = Inventory.money
-        # self.time += (pygame.time.get_ticks() - self.starting_time) // 1000
+        print(f"Saving tasks {[task for task in self.tasks]}")
         if Loader.save_json(self.filename, self.__dict()):
             print("File saved")
             return
@@ -72,6 +79,7 @@ class SaveManager:
         self.__slot = slot
         self.active_save.starting_time = pygame.time.get_ticks()
         Inventory.load_inventory(self.active_save.inventory, self.active_save.money)
+        TaskManager.load_player_tasks(self.active_save.tasks)
 
 
 instance = SaveManager()

@@ -2,7 +2,7 @@ from engine.time import Time
 
 
 class TimeManager:
-    current_time_minutes = 1300
+    current_time_minutes = 360
     time_speed_factor = 1.4
     current_day_of_week = 0
     day_ended = False

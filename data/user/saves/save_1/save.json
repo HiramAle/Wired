@@ -8,5 +8,7 @@
     "cables": false,
     "subnetting": false,
     "routing": false
-  }
+  },
+  "tasks": {},
+  "status": {}
 }

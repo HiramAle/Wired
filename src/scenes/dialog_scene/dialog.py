@@ -34,7 +34,7 @@ class DialogBox(Sprite):
         self.dialogs = [Dialog(dialog_id, dialog_list) for dialog_id, dialog_list in npc.data["dialogs"].items()]
         self.dialog_index = 0
         self.npc = npc
-        self.actor_name = Text((175, 336), npc.name, 32, Colors.SPRITE, shadow=True, shadow_opacity=50)
+        self.actor_name = Text((197, 336), npc.name, 32, Colors.SPRITE, shadow=True, shadow_opacity=50)
         self.dialog_text = Text((222, 262), "", 32, Colors.SPRITE, shadow=True, shadow_opacity=50)
         self.dialog_text.max_width = 280
         self.dialog_text.pivot = self.dialog_text.Pivot.TOP_LEFT

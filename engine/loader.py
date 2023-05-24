@@ -61,3 +61,18 @@ class Loader:
         if not sprite_sheet and not animation_data:
             assert "Sprite sheet or JSON file not found in folder"
         return Animation(sprite_sheet, animation_data)
+
+    @staticmethod
+    def load_portrait_frames(sprite_sheet_path: str) -> dict:
+        sprite_sheet = Loader.load_image(sprite_sheet_path)
+        sprite_height = 96
+        sprite_width = 96
+        animations = {"talk": [], "nod": [], "shake": []}
+        for row, animation in enumerate(animations.keys()):
+            for column in range(10):
+                x_crop = column * sprite_width
+                y_crop = row * sprite_height
+                image = pygame.Surface((sprite_width, sprite_height), pygame.SRCALPHA)
+                image.blit(sprite_sheet, (0, 0), (x_crop, y_crop, sprite_width, sprite_height))
+                animations[animation].append(image)
+        return animations

@@ -16,5 +16,11 @@
     "subnetting": false,
     "routing": false
   },
-  "starting_time": 18926
+  "tasks": {
+    "0": true
+  },
+  "status": {
+    "kat_known": true
+  },
+  "starting_time": 1566
 }

@@ -135,6 +135,22 @@ class Zone(Scene):
         if self.closest_npc.interact():
             from engine.scene.scene_manager import SceneManager
             SceneManager.change_scene(DialogScene(self.closest_npc))
+            self.update_interact_tasks(self.closest_npc.name)
+
+    def update_interact_tasks(self, actor: str):
+        from src.scenes.world.tasks import TaskManager
+        from engine.save_manager import instance as save_manager
+
+        tasks = TaskManager.get_tasks_from_type("talk")
+        print(f"interaction tasks {tasks}")
+        for task_id in tasks:
+            task = TaskManager.get_task(task_id)
+            if actor.lower() == task.objective:
+                TaskManager.complete_task(task_id)
+            # for objective in save_manager.active_save.objectives.keys():
+            #     if self.closest_npc.name.lower() in objective:
+            #         if TaskManager.check_task_completion(0):
+            #             TaskManager.complete_task(0)
 
     def update(self) -> None:
         self.player.update()
