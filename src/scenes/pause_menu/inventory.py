@@ -27,8 +27,8 @@ class Inventory(Scene):
                                  centered=False)
         self.connector_slot = Sprite((205 + self.x_padding, 251), Assets.images_book["connectors"], self.inventory,
                                      centered=False)
-        Text((143 + self.x_padding, 293.5), f"{inventory.items['cable']}m", 16, Colors.SPRITE, self.inventory)
-        Text((227 + self.x_padding, 293.5), f"{inventory.items['connector']}p", 16, Colors.SPRITE,
+        Text((143 + self.x_padding, 293.5), f"{inventory.how_much('cable')}m", 16, Colors.SPRITE, self.inventory)
+        Text((227 + self.x_padding, 293.5), f"{inventory.how_much('connector')}p", 16, Colors.SPRITE,
              self.inventory)
         Text((449 + self.x_padding, 52.5), "Cable Directo", 16, Colors.SPRITE, self.inventory, shadow=True,
              shadow_opacity=50, shado_color="#A3A7C2")

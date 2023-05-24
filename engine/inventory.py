@@ -12,6 +12,7 @@ class Inventory:
         cls.money = money
         for id_item, quantity in inventory.items():
             cls.items[id_item] = quantity
+        print("loaded inventory as ", cls.items)
 
     @classmethod
     def add_item(cls, item_id: str, quantity: int = 1):

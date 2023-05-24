@@ -42,11 +42,16 @@ class GameMap:
                 if not gid:
                     continue
                 tile_image = self.data.get_tile_image_by_gid(gid)
+                if not tile_image:
+                    continue
                 self.ground.blit(tile_image, (x * self.tile_width, y * self.tile_height))
         # Get objects
         for layer in self.objects_layers:
             for tiled_object in layer:
                 tiled_object: pytmx.TiledObject
+                if tiled_object.id == 691:
+                    print(tiled_object.__dict__)
+                    print(tiled_object.image)
                 if layer.name == "collision":
                     collider = pygame.Rect(tiled_object.x, tiled_object.y, tiled_object.width, tiled_object.height)
                     self.colliders.append(collider)

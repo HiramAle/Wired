@@ -57,6 +57,8 @@ class Notification(Sprite):
     def update(self, *args, **kwargs):
         if self.close_button.clicked:
             self.deactivate()
+            self.title.text = "Advertencia"
+            self.icon.image = Assets.images_routing["alert"]
 
         if Input.keyboard.keys["esc"]:
             from engine.scene.scene_manager import SceneManager

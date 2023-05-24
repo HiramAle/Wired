@@ -65,6 +65,7 @@ class NewGame(Stage):
                 # pygame.mixer.music.fadeout(1000)
                 self.transitionPosition = save_button.rect.center
                 save_manager.active_save = index
+                print(index)
                 if save_button.text.text == "- VACIO -":
                     from engine.scene.scene_manager import SceneManager
                     SceneManager.change_scene(loading.Loading(Assets.load_character_creation_assets,

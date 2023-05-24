@@ -46,9 +46,9 @@ class CrimpCable(Scene):
                                   layer=10)
         self.continue_text.deactivate()
         cable_types = {"straight": "directo", "crossover": "cruzado"}
-        self.result_cable_text = Text(self.center, f"Felicidades!\nObtuviste un cable {cable_types[self.standard]}.",
-                                      32,
-                                      Colors.WHITE, self.group, layer=10)
+        self.result_cable_text = Text((self.center_x, 80),
+                                      f"Felicidades!\nObtuviste un cable {cable_types[self.standard]}.",
+                                      32, Colors.WHITE, self.group, layer=10)
         self.result_cable_text.deactivate()
         self.final_cable = Image((-150, self.center_y), Assets.images_cables[f"standard_a"], self.group)
         self.cable_quality = 0
@@ -56,6 +56,9 @@ class CrimpCable(Scene):
         self.color_values = {(101, 191, 110, 255): "green", (254, 202, 32, 255): "yellow", (222, 84, 81, 255): "red"}
         self.color_quality = {"green": 3, "yellow": 2, "red": 1}
         from engine.inventory import Inventory
+        print(f"player has usb? {Inventory.has('usb_double_cable')}")
+        from engine.item_manager import ItemManager
+        print([ItemManager.get_item_by_id(item) for item in Inventory.items])
         self.cable_multiplier = random.choice([2] * 8 + [3] * 2) if Inventory.has("usb_double_cable") else 1
         print(self.cable_multiplier)
 

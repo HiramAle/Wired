@@ -9,7 +9,7 @@ from src.constants.paths import *
 class Data:
     cable_data = {}
     maps: dict[str, pytmx.TiledMap | None] = {"players_house": None, "village": None, "store": None, "city": None,
-                                              "reception": None}
+                                              "reception": None, "company": None}
     character_creation_frames: dict[str, dict[str, int]] = {}
     body_colors: dict[int, tuple] = {}
     eyes_colors: dict[int, tuple] = {}

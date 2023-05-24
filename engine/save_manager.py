@@ -77,9 +77,8 @@ class SaveManager:
             print("Slot index must be between 0 and 2")
             return
         self.__slot = slot
-        self.active_save.starting_time = pygame.time.get_ticks()
-        Inventory.load_inventory(self.active_save.inventory, self.active_save.money)
-        TaskManager.load_player_tasks(self.active_save.tasks)
+        Inventory.load_inventory(self.saves[self.__slot].inventory, self.saves[self.__slot].money)
+        TaskManager.load_player_tasks(self.saves[self.__slot].tasks)
 
 
 instance = SaveManager()

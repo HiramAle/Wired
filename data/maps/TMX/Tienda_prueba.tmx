@@ -146,7 +146,7 @@
    </properties>
    <point/>
   </object>
-  <object id="69" name="Arian" type="npc_spawn" x="480" y="160">
+  <object id="69" name="Arian" type="npc_spawn" x="480" y="149">
    <properties>
     <property name="direction" value="down"/>
    </properties>

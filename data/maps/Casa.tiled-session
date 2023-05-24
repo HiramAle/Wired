@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TMX/Village.tmx",
+    "activeFile": "TMX/Tienda_prueba.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "Todos los archivos (*)",
@@ -92,17 +92,17 @@
         },
         "TMX/Casa_custom.tmx": {
             "expandedObjectLayers": [
-                11,
-                16,
                 13,
-                12,
-                15
+                16,
+                11,
+                15,
+                12
             ],
-            "scale": 4,
+            "scale": 8,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 330.125,
-                "y": 230.25
+                "x": 496.3125,
+                "y": 692.75
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -114,17 +114,29 @@
                 15
             ],
             "expandedObjectLayers": [
-                18,
-                35,
                 31,
                 21,
-                34
+                34,
+                35,
+                18
             ],
-            "scale": 0.33,
-            "selectedLayer": 6,
+            "scale": 2,
+            "selectedLayer": 24,
             "viewCenter": {
-                "x": 1392.4242424242425,
-                "y": 1424.2424242424242
+                "x": 1208.25,
+                "y": 898
+            }
+        },
+        "TMX/Company.tmx": {
+            "expandedObjectLayers": [
+                15,
+                14
+            ],
+            "scale": 1,
+            "selectedLayer": 10,
+            "viewCenter": {
+                "x": 574.5,
+                "y": 420
             }
         },
         "TMX/Tienda_prueba.tmx": {
@@ -133,11 +145,11 @@
                 14,
                 12
             ],
-            "scale": 2,
-            "selectedLayer": 9,
+            "scale": 3,
+            "selectedLayer": 8,
             "viewCenter": {
-                "x": 477.25,
-                "y": 317.5
+                "x": 474.8333333333333,
+                "y": 118
             }
         },
         "TMX/Village.tmx": {
@@ -148,18 +160,18 @@
                 29
             ],
             "expandedObjectLayers": [
-                17,
-                32,
-                31,
                 13,
+                17,
+                31,
                 29,
+                32,
                 30
             ],
-            "scale": 0.5,
+            "scale": 5.5,
             "selectedLayer": 21,
             "viewCenter": {
-                "x": 695,
-                "y": 324
+                "x": 1448.2727272727273,
+                "y": 507.4545454545455
             }
         },
         "TMX/Village.tmx#Singles": {
@@ -167,16 +179,16 @@
         },
         "TMX/reception.tmx": {
             "expandedObjectLayers": [
-                5,
                 10,
-                6,
-                9
+                5,
+                9,
+                6
             ],
             "scale": 1.5,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 273,
-                "y": 420
+                "x": 272.3333333333333,
+                "y": 418
             }
         },
         "TSX/Basement.tsx": {
@@ -198,6 +210,7 @@
             "scaleInDock": 1
         },
         "TSX/City.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 0.75,
             "scaleInEditor": 1
         },
@@ -259,6 +272,14 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "TSX/company_singles.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.25,
+            "scaleInEditor": 1
+        },
+        "TSX/company_tiles.tsx": {
+            "scaleInDock": 1
+        },
         "TSX/fontain.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 1,
@@ -303,24 +324,24 @@
         "TMX/Casa_custom.tmx",
         "TMX/Tienda_prueba.tmx",
         "TMX/City.tmx",
-        "TSX/singles_city.tsx",
-        "TMX/reception.tmx"
+        "TMX/reception.tmx",
+        "TMX/Company.tmx"
     ],
     "project": "Casa.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "TMX/Village.tmx",
+        "TMX/Casa_custom.tmx",
+        "TMX/Company.tmx",
         "TMX/reception.tmx",
-        "TSX/singles_city.tsx",
         "TMX/City.tmx",
         "TMX/Tienda_prueba.tmx",
-        "TMX/Casa_custom.tmx",
-        "TMX/Village.tmx",
+        "TSX/singles_city.tsx",
+        "TSX/company_singles.tsx",
         "TSX/house_singles.tsx",
         "TSX/singles.tsx",
         "TSX/Tileset_Casa.tsx",
-        "TSX/Terrains.tsx",
-        "TSX/fontain.tsx",
-        "C:/Users/magic/Desktop/Casa_custom.tmx"
+        "TSX/Terrains.tsx"
     ],
     "tileset.lastUsedFilter": "Archivos de conjuntos de patrones Tiled (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

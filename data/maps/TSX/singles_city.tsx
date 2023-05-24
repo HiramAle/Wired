@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.9" tiledversion="1.9.2" name="singles_city" tilewidth="928" tileheight="736" tilecount="139" columns="0">
+<tileset version="1.10" tiledversion="1.10.1" name="singles_city" tilewidth="928" tileheight="736" tilecount="139" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="32" height="96" source="../Images/singles_city/bench_left.png"/>
@@ -888,7 +888,10 @@
  <tile id="138">
   <image width="608" height="576" source="../Images/singles_city/building_corp.png"/>
   <objectgroup draworder="index" id="2">
-   <object id="1" x="0" y="289" width="608" height="286.667"/>
+   <object id="1" x="0" y="289" width="608" height="224"/>
+   <object id="2" x="0" y="514" width="172" height="62"/>
+   <object id="3" x="248" y="514" width="200" height="62"/>
+   <object id="4" x="448" y="513" width="159" height="32"/>
   </objectgroup>
  </tile>
 </tileset>

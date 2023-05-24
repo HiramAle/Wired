@@ -8,6 +8,9 @@ class Item:
         self.name = data.get("name")
         self.description = data.get("description")
 
+    def __repr__(self):
+        return f"Item ({self.id}, {self.name}, {self.description})"
+
     def set(self, key: str, value: Any) -> bool:
         if key not in self.__data:
             print(f"{self.name} doesn't have {key} attribute")

@@ -16,6 +16,8 @@ from src.scenes.world.time_manager import TimeManager
 from src.scenes.world.zone_manager import ZoneManager
 from src.scenes.world.tasks import TaskManager, Task
 from engine.save_manager import instance as save_manager
+from engine.ui.text import Text
+from engine.inventory import Inventory
 
 
 class NightEffect(Sprite):
@@ -57,11 +59,13 @@ class World(Scene):
         self.player = Player((0, 0), [], [], [])
         self.npc_list = [NPC("Kat", (0, 0), self.player), NPC("Arian", (0, 0), self.player),
                          NPC("Chencho", (0, 0), self.player), NPC("Altair", (0, 0), self.player),
-                         NPC("Kike", (0, 0), self.player), NPC("Jordi", (0, 0), self.player)]
+                         NPC("Kike", (0, 0), self.player), NPC("Jordi", (0, 0), self.player),
+                         NPC("Letty", (0, 0), self.player)]
         self.zone = Zone("players_house", self.npc_list, self.player, self.new_zone)
         # ----------
         self.overlay = Assets.images_world["overlay"]
-        self.hour = Sprite((78 + 16, 32), pygame.Surface((1, 1)))
+        self.hour = Text((93, 32), TimeManager.formatted_time(), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
+        self.money = Text((93, 50), str(Inventory.money), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
         self.next_zone: Zone | None = None
 
         # Zone transition
@@ -141,9 +145,10 @@ class World(Scene):
         self.zone.render()
         self.display.blit(self.zone.display, (0, 0))
         self.display.blit(self.overlay, (16, 16))
-        self.hour.image = Assets.fonts["monogram"].render(TimeManager.formatted_time(), 16, BLACK_SPRITE)
+        self.hour.text = TimeManager.formatted_time()
+        self.money.text = str(Inventory.money)
         self.hour.render(self.display)
+        self.money.render(self.display)
         self.render_zone_transition()
         if self.zone.location_type == "outside":
             self.night.render(self.display)
-
