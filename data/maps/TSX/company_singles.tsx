@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.9" tiledversion="1.9.2" name="company_singles" tilewidth="224" tileheight="96" tilecount="49" columns="0">
+<tileset version="1.9" tiledversion="1.9.2" name="company_singles" tilewidth="224" tileheight="96" tilecount="77" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="160" height="96" source="../Images/company_singles/reception_desk.png"/>
@@ -227,15 +227,13 @@
  <tile id="43">
   <image width="32" height="96" source="../Images/company_singles/security_2.png"/>
   <objectgroup draworder="index" id="2">
-   <object id="1" x="2" y="42" width="30" height="22"/>
-   <object id="2" x="20" y="64" width="12" height="20"/>
+   <object id="1" x="2" y="28" width="30" height="56"/>
   </objectgroup>
  </tile>
  <tile id="44">
   <image width="32" height="96" source="../Images/company_singles/security_1.png"/>
   <objectgroup draworder="index" id="2">
-   <object id="1" x="0" y="42" width="30" height="22"/>
-   <object id="2" x="0" y="64" width="12" height="20"/>
+   <object id="3" x="0" y="28" width="30" height="56"/>
   </objectgroup>
  </tile>
  <tile id="45">
@@ -267,5 +265,140 @@
   <objectgroup draworder="index" id="2">
    <object id="1" x="2" y="68" width="26" height="12"/>
   </objectgroup>
+ </tile>
+ <tile id="55">
+  <image width="64" height="96" source="../Images/company_singles/couch_2.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="18" y="28" width="44" height="68"/>
+  </objectgroup>
+ </tile>
+ <tile id="56">
+  <image width="32" height="64" source="../Images/company_singles/chair_7.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="12" y="16" width="20" height="28"/>
+  </objectgroup>
+ </tile>
+ <tile id="58">
+  <image width="32" height="64" source="../Images/company_singles/wall_14.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="32" height="64"/>
+  </objectgroup>
+ </tile>
+ <tile id="59">
+  <image width="32" height="64" source="../Images/company_singles/wall_13.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="2" x="0" y="32" width="32" height="32"/>
+  </objectgroup>
+ </tile>
+ <tile id="60">
+  <image width="32" height="64" source="../Images/company_singles/wall_12.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="32" height="64"/>
+  </objectgroup>
+ </tile>
+ <tile id="61">
+  <image width="32" height="64" source="../Images/company_singles/wall_11.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="32" width="32" height="32"/>
+  </objectgroup>
+ </tile>
+ <tile id="62">
+  <image width="32" height="64" source="../Images/company_singles/wall_10.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="32" width="32" height="32"/>
+  </objectgroup>
+ </tile>
+ <tile id="63">
+  <image width="32" height="64" source="../Images/company_singles/wall_9.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="2" x="0" y="32" width="32" height="32"/>
+  </objectgroup>
+ </tile>
+ <tile id="64">
+  <image width="32" height="32" source="../Images/company_singles/wall_8.png"/>
+ </tile>
+ <tile id="65">
+  <image width="32" height="64" source="../Images/company_singles/wall_7.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="32" height="64"/>
+  </objectgroup>
+ </tile>
+ <tile id="66">
+  <image width="32" height="64" source="../Images/company_singles/wall_6.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="32" height="64"/>
+  </objectgroup>
+ </tile>
+ <tile id="67">
+  <image width="32" height="32" source="../Images/company_singles/wall_5.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="32" height="32"/>
+  </objectgroup>
+ </tile>
+ <tile id="68">
+  <image width="32" height="32" source="../Images/company_singles/wall_4.png"/>
+ </tile>
+ <tile id="69">
+  <image width="32" height="64" source="../Images/company_singles/wall_3.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="2" x="0" y="32" width="32" height="32"/>
+  </objectgroup>
+ </tile>
+ <tile id="70">
+  <image width="32" height="64" source="../Images/company_singles/wall_2.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="2" x="0" y="32" width="32" height="32"/>
+  </objectgroup>
+ </tile>
+ <tile id="71">
+  <image width="32" height="64" source="../Images/company_singles/wall_1.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="2" x="0" y="32" width="32" height="32"/>
+  </objectgroup>
+ </tile>
+ <tile id="57">
+  <image width="32" height="64" source="../Images/company_singles/wall_15.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="2" x="0" y="32" width="32" height="32"/>
+  </objectgroup>
+ </tile>
+ <tile id="72">
+  <image width="32" height="64" source="../Images/company_singles/wall_16.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="2" x="0" y="32" width="32" height="32"/>
+  </objectgroup>
+ </tile>
+ <tile id="73">
+  <image width="32" height="64" source="../Images/company_singles/wall_17.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="2" x="0" y="32" width="32" height="32"/>
+  </objectgroup>
+ </tile>
+ <tile id="74">
+  <image width="32" height="32" source="../Images/company_singles/baseboard_9.png"/>
+ </tile>
+ <tile id="75">
+  <image width="32" height="32" source="../Images/company_singles/baseboard_8.png"/>
+ </tile>
+ <tile id="76">
+  <image width="32" height="32" source="../Images/company_singles/baseboard_7.png"/>
+ </tile>
+ <tile id="77">
+  <image width="32" height="32" source="../Images/company_singles/baseboard_6.png"/>
+ </tile>
+ <tile id="78">
+  <image width="32" height="32" source="../Images/company_singles/baseboard_5.png"/>
+ </tile>
+ <tile id="79">
+  <image width="32" height="32" source="../Images/company_singles/baseboard_4.png"/>
+ </tile>
+ <tile id="80">
+  <image width="32" height="32" source="../Images/company_singles/baseboard_3.png"/>
+ </tile>
+ <tile id="81">
+  <image width="32" height="32" source="../Images/company_singles/baseboard_2.png"/>
+ </tile>
+ <tile id="82">
+  <image width="32" height="32" source="../Images/company_singles/baseboard_1.png"/>
  </tile>
 </tileset>

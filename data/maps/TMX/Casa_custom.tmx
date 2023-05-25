@@ -311,18 +311,6 @@
     <property name="interaction_type" value="collide"/>
    </properties>
   </object>
-  <object id="78" name="subnetting" type="scene" x="702" y="552" width="35" height="89">
-   <properties>
-    <property name="interaction_type" value="keypress"/>
-    <property name="scene" value="subnetting"/>
-   </properties>
-  </object>
-  <object id="92" name="routing" type="scene" x="473" y="533" width="105" height="18">
-   <properties>
-    <property name="interaction_type" value="keypress"/>
-    <property name="scene" value="routing"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup id="15" name="positions">
   <object id="75" name="player_village" x="495" y="699">

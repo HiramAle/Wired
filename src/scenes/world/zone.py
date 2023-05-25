@@ -9,7 +9,7 @@ from src.scenes.world.camera import Camera
 from src.scenes.world.npc import NPC
 from src.scenes.world.game_map import GameMap
 from src.scenes.world.tiled_object import TiledObject
-from src.constants.colors import BLACK_SPRITE
+from engine.constants import Colors
 from src.scenes.world.player import Player
 from src.scenes.dialog_scene.dialog_scene import DialogScene
 from src.scenes.tutorial.tutorial import Tutorial
@@ -21,7 +21,7 @@ class Notification(Sprite):
     def __init__(self, position: tuple, text: str, *groups):
         super().__init__(position, Assets.images_misc["notification"], *groups)
         self.pivot = self.Pivot.TOP_LEFT
-        self.text = Text((self.x + 11, self.y + 15), text, 16, BLACK_SPRITE, centered=False, shadow=True)
+        self.text = Text((self.x + 11, self.y + 15), text, 16, Colors.SPRITE, centered=False, shadow=True)
         self.timer = Timer(3)
         self.timer.start()
 
@@ -67,6 +67,7 @@ class Zone(Scene):
         self.zone_objets.extend(self.npcs)
 
     def start_zone(self):
+        print(f"player_{self.zone_before}")
         self.player.position = self.map.get_position(f"player_{self.zone_before}").tuple
         self.player.direction = self.map.get_position(f"player_{self.zone_before}").properties["direction"]
         self.camera.position = self.player.x - 320, self.player.y - 180
@@ -161,7 +162,7 @@ class Zone(Scene):
         self.update_npcs()
 
     def render(self) -> None:
-        self.display.fill(BLACK_SPRITE)
+        self.display.fill(Colors.BLACK)
         self.display.blit(self.map.ground, -self.camera.offset)
         for zone_object in sorted(self.zone_objets, key=lambda sprite: sprite.sort_point):
             zone_object.render(self.display, self.camera.offset)

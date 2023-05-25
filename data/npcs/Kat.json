@@ -1,9 +1,13 @@
 {
   "dialogs": {
     "0": [
-      "Hola @, Por que no pruebas a interactuar",
-      "con las mesas de trabajo? Seguro tienen",
-      "algo interesante que probar."
+      "Hola @, bienvenido a Celestia",
+      "eres el nuevo trabajador de Routed Inc?",
+      "Yo soy Kat, he vivido aqui toda mi vida",
+      "Es bueno ver una cara nueva.",
+      "Por que no tomas el autobus a la ciudad?",
+      "Chencho te está esperando ahi.",
+      "Cuidate"
     ],
     "1": [
       "Hola de nuevo @"

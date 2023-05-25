@@ -139,20 +139,6 @@
  <objectgroup id="13" name="interactions">
   <object id="62" name="buy" x="385" y="219" width="156" height="40"/>
  </objectgroup>
- <objectgroup id="14" name="positions">
-  <object id="63" name="player_village" x="447" y="479">
-   <properties>
-    <property name="direction" value="up"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="69" name="Arian" type="npc_spawn" x="480" y="149">
-   <properties>
-    <property name="direction" value="down"/>
-   </properties>
-   <point/>
-  </object>
- </objectgroup>
  <objectgroup id="16" name="triggers">
   <object id="65" name="store" type="scene" x="446" y="220" width="93" height="37">
    <properties>
@@ -168,4 +154,18 @@
   </object>
  </objectgroup>
  <objectgroup id="15" name="nodes"/>
+ <objectgroup id="14" name="positions">
+  <object id="63" name="player_village" x="447" y="479">
+   <properties>
+    <property name="direction" value="up"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="69" name="Arian" type="npc_spawn" x="480" y="149">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
 </map>

@@ -1,15 +1,22 @@
 {
   "sprite_sheet": "data/user/saves/save_1/sprite_sheet.png",
-  "name": "f",
-  "pronoun": "el",
+  "name": "Gris",
+  "pronoun": "ella",
   "time": 0,
-  "money": 200,
-  "inventory": {},
+  "money": 60,
+  "inventory": {
+    "connector": 8,
+    "cable": 4
+  },
   "tutorials": {
     "cables": false,
     "subnetting": false,
     "routing": false
   },
-  "tasks": {},
-  "status": {}
+  "tasks": {
+    "0": false
+  },
+  "status": {
+    "kat_known": false
+  }
 }

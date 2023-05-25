@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TMX/Tienda_prueba.tmx",
+    "activeFile": "TMX/reception.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "Todos los archivos (*)",
@@ -94,15 +94,15 @@
             "expandedObjectLayers": [
                 13,
                 16,
-                11,
+                12,
                 15,
-                12
+                11
             ],
-            "scale": 8,
-            "selectedLayer": 10,
+            "scale": 1.5,
+            "selectedLayer": 9,
             "viewCenter": {
-                "x": 496.3125,
-                "y": 692.75
+                "x": 478.3333333333333,
+                "y": 478.66666666666663
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -114,64 +114,67 @@
                 15
             ],
             "expandedObjectLayers": [
+                18,
                 31,
                 21,
-                34,
                 35,
-                18
+                34
             ],
             "scale": 2,
             "selectedLayer": 24,
             "viewCenter": {
-                "x": 1208.25,
-                "y": 898
+                "x": 1599.25,
+                "y": 1535.5
             }
         },
         "TMX/Company.tmx": {
             "expandedObjectLayers": [
+                13,
+                16,
+                17,
                 15,
                 14
             ],
-            "scale": 1,
-            "selectedLayer": 10,
+            "scale": 1.5,
+            "selectedLayer": 9,
             "viewCenter": {
-                "x": 574.5,
-                "y": 420
+                "x": 632.3333333333333,
+                "y": 512
             }
         },
         "TMX/Tienda_prueba.tmx": {
             "expandedObjectLayers": [
                 16,
-                14,
-                12
+                12,
+                14
             ],
             "scale": 3,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 474.8333333333333,
-                "y": 118
+                "x": 438.5,
+                "y": 434.33333333333326
             }
         },
         "TMX/Village.tmx": {
             "expandedGroupLayers": [
-                46,
                 47,
                 36,
+                46,
                 29
             ],
             "expandedObjectLayers": [
                 13,
-                17,
                 31,
-                29,
+                17,
                 32,
-                30
+                30,
+                29
             ],
             "scale": 5.5,
             "selectedLayer": 21,
             "viewCenter": {
-                "x": 1448.2727272727273,
-                "y": 507.4545454545455
+                "x": 959.7272727272727,
+                "y": 1039.6363636363635
             }
         },
         "TMX/Village.tmx#Singles": {
@@ -179,16 +182,16 @@
         },
         "TMX/reception.tmx": {
             "expandedObjectLayers": [
-                10,
-                5,
-                9,
-                6
+                6,
+                13,
+                12,
+                9
             ],
-            "scale": 1.5,
-            "selectedLayer": 9,
+            "scale": 1,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 272.3333333333333,
-                "y": 418
+                "x": 174.5,
+                "y": 312
             }
         },
         "TSX/Basement.tsx": {
@@ -240,6 +243,9 @@
         "TSX/Police_Station.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "TSX/Reception_tiles.tsx": {
+            "scaleInDock": 1
         },
         "TSX/RoomBuilder.tsx": {
             "dynamicWrapping": false,
@@ -332,10 +338,10 @@
     "recentFiles": [
         "TMX/Village.tmx",
         "TMX/Casa_custom.tmx",
+        "TMX/Tienda_prueba.tmx",
+        "TMX/City.tmx",
         "TMX/Company.tmx",
         "TMX/reception.tmx",
-        "TMX/City.tmx",
-        "TMX/Tienda_prueba.tmx",
         "TSX/singles_city.tsx",
         "TSX/company_singles.tsx",
         "TSX/house_singles.tsx",
