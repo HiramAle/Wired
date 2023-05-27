@@ -1,22 +1,16 @@
 {
   "sprite_sheet": "data/user/saves/save_1/sprite_sheet.png",
-  "name": "Gris",
-  "pronoun": "ella",
+  "portrait": "data/user/saves/save_1/portrait.png",
+  "name": "Maus",
+  "pronoun": "el",
   "time": 0,
-  "money": 60,
-  "inventory": {
-    "connector": 8,
-    "cable": 4
-  },
+  "money": 200,
+  "inventory": {},
   "tutorials": {
     "cables": false,
     "subnetting": false,
     "routing": false
   },
-  "tasks": {
-    "0": false
-  },
-  "status": {
-    "kat_known": false
-  }
+  "tasks": {},
+  "status": {}
 }

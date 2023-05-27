@@ -1,24 +1,24 @@
 {
   "sprite_sheet": "data/user/saves/save_0/sprite_sheet.png",
-  "name": "Zazu",
-  "pronoun": "el",
-  "time": 741,
-  "money": 1100,
+  "portrait": "data/user/saves/save_0/portrait.png",
+  "name": "Gris",
+  "pronoun": "ella",
+  "time": 0,
+  "money": 200,
   "inventory": {
-    "cable": 9,
-    "connector": 8,
-    "cable_straight_3": 2,
-    "cable_straight_2": 1
+    "cable": 5,
+    "connector": 10,
+    "cable_crossover_3": 5,
+    "cable_straight_3": 5
   },
   "tutorials": {
-    "cables": true,
+    "cables": false,
     "subnetting": false,
     "routing": false
   },
   "tasks": {
-    "0": true
+    "meet_kat": false,
+    "mysteries_of_celestia": false
   },
-  "status": {
-    "kat_known": true
-  }
+  "status": {}
 }

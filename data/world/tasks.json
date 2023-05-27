@@ -1,56 +1,56 @@
 {
-  "0": {
-    "id": 0,
-    "name": "Conoce a Kat",
-    "description": "Conoce a Kat",
+  "meet_kat": {
+    "id": "meet_kat",
+    "name": "Bienvenido a Celestia",
+    "description": "Has llegado a Celestia, tu nuevo hogar y lugar de trabajo. Te han hablado de Kat, una chica del lugar que te ayudara a comenzar tu nueva vida.",
     "type": "talk",
     "objective": "kat",
     "consequence": "kat_known"
   },
-  "1": {
-    "id": 1,
-    "name": "Conoce a Chencho",
-    "description": "Conoce a Chencho",
+  "meet_chencho": {
+    "id": "meet_chencho",
+    "name": "Tu viejo amigo",
+    "description": "Kat ha mencionado a Chencho, un amigo de tu antigua vida que ahora vive tambien en Celestia. Toma el autobus y reunete con el en la ciudad.",
     "type": "talk",
     "objective": "chencho",
     "consequence": "chencho_known"
   },
-  "2": {
-    "id": 2,
-    "name": "Habla con Roy",
-    "description": "Habla con Roy",
+  "meet_roy": {
+    "id": "meet_roy",
+    "name": "Routed Inc",
+    "description": "Te han hablado e Roy, uno de los empleados de Routed Inc, con quien ahora trabajaras, ve que tiene para decirte.",
     "type": "talk",
     "objective": "roy",
     "consequence": "roy_known"
   },
-  "3": {
-    "id": 3,
+  "create_straight_cable": {
+    "id": "create_straight_cable",
     "name": "Crea un cable directo",
     "description": "Crea un cable directo",
-    "type": "cables",
+    "type": "has",
     "objective": "direct_1",
     "consequence": "direct_cable_tutorial"
   },
-  "4": {
-    "id": 4,
+  "create_crossover_cable": {
+    "id": "create_crossover_cable",
     "name": "Crea dos cables cruzados",
     "description": "Crea dos cables cruzados",
-    "type": "cables",
+    "type": "has",
     "objective": "crossover_2",
     "consequence": "crossover_cable_tutorial"
   },
-  "5": {
-    "id": 5,
-    "name": "Realiza tu primer trabajo de subneteo",
-    "description": "Dirigete al Hotel y realiza tu primer trabajo de Subneteo.",
+  "subnetting_reception": {
+    "id": "subnetting_reception",
+    "name": "El primer trabajo",
+    "description": "Has hablado con Roy y te ha dado tu primer trabajo en Routed Inc. Dirigete a la recepción de los edificios de la empresa, cerca de tu casa, y habla con Ale la encargada de la recepción.",
     "type": "subnetting",
-    "objective": "hotel",
-    "consequence": "subnetting_hotel_done"
+    "objective": "reception",
+    "consequence": "subnetting_reception"
   },
-  "6": {
-    "id": 6,
-    "name": "Regresa con Roy",
-    "description": NaN,
+  "mysteries_of_celestia": {
+    "id": "mysteries_of_celestia",
+    "name": "Los misterios de Celestia",
+    "description": "En multiples ocasiones has oido hablar de Celestia, y algunas cosas parecen envolver al pueblo en misterio. Habla con los habitantes del pueblo para conocer mas acerca del lugar y lo que puede haber detrás de el.",
     "type": "talk",
     "objective": "roy",
     "consequence": "roy_talk_1"

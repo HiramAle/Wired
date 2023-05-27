@@ -67,7 +67,7 @@ class SceneManager:
         :param transition: If True, transitions between the scenes using a CircularTransition object. Defaults to False.
         :param swap: If True, removes the current scenes from the stack before adding the new scenes. Defaults to False.
         """
-        print(f"Transitioning from {cls.get_active_scene().name} to {to_scene.name}")
+        # print(f"Transitioning from {cls.get_active_scene().name} to {to_scene.name}")
         if transition:
             cls.transitioning = True
             cls.set_active_scene(FadeTransition(cls.get_active_scene(), to_scene), swap)

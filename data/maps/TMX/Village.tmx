@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="2179">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="2180">
  <tileset firstgid="1" source="../TSX/City.tsx"/>
  <tileset firstgid="7585" source="../TSX/Terrains.tsx"/>
  <tileset firstgid="10145" source="../TSX/Modern_Exteriors.tsx"/>
@@ -1453,6 +1453,12 @@
   <object id="2178" name="player_reception" x="736" y="865">
    <properties>
     <property name="direction" value="down"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2179" name="player_" x="729" y="941">
+   <properties>
+    <property name="direction" value="right"/>
    </properties>
    <point/>
   </object>

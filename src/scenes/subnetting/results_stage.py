@@ -17,6 +17,10 @@ class Results(Stage):
         Text((163, 84), "Tiempo:...", 32, "#2E2E2E", self.group, centered=False, shadow=False)
         Text((336, 84), self.time_string(), 32, "#2E2E2E", self.group, centered=False, shadow=False)
         Text((163, 212), "Dinero obtenido......", 32, "#2E2E2E", self.group, centered=False, shadow=False)
+        Text((426, 212), f"+ ${3 * 10}", 32, "#2E2E2E", self.group, centered=False, shadow=False)
+        Text((163, 232), "Cables usados.....", 32, "#2E2E2E", self.group, centered=False, shadow=False)
+        Text((436, 232), "3", 32, "#2E2E2E", self.group, centered=False, shadow=False)
+
         self.instructions = Text((320, 334), "Presiona espacio para continuar", 16, "#2E2E2E", self.group, shadow=False)
         self.instructions.image.set_alpha(int(255 * .75))
 

@@ -37,8 +37,8 @@ class Task:
 
 
 class TaskManager:
-    __tasks: dict[int, Task] = {}
-    tasks: dict[int, Task] = {}
+    __tasks: dict[str, Task] = {}
+    tasks: dict[str, Task] = {}
 
     @classmethod
     def get_current_tasks(cls) -> list[Task]:
@@ -53,18 +53,18 @@ class TaskManager:
     def load_tasks(cls):
         all_tasks = Loader.load_json("data/world/tasks.json")
         for id_task, task_data in all_tasks.items():
-            cls.__tasks[int(id_task)] = Task(task_data)
+            cls.__tasks[id_task] = Task(task_data)
         print("Loaded tasks: ", cls.__tasks)
 
     @classmethod
     def load_player_tasks(cls, tasks: dict):
         for id_task in tasks:
-            cls.tasks[int(id_task)] = cls.__tasks[int(id_task)]
-            cls.tasks[int(id_task)].completed = tasks[id_task]
+            cls.tasks[id_task] = cls.__tasks[id_task]
+            cls.tasks[id_task].completed = tasks[id_task]
         print("Player tasks: ", cls.tasks)
 
     @classmethod
-    def get_tasks_from_type(cls, task_type: str) -> list[int]:
+    def get_tasks_from_type(cls, task_type: str) -> list[str]:
         filtered_tasks = []
         for task_id in cls.tasks:
             task = cls.get_task(task_id)
@@ -76,12 +76,12 @@ class TaskManager:
 
     @classmethod
     def get_task(cls, task_id) -> Task | None:
-        if not cls.has(task_id):
+        if not cls.exists(task_id):
             return None
-        return cls.tasks[task_id]
+        return cls.__tasks[task_id]
 
     @classmethod
-    def exists(cls, task_id: int) -> bool:
+    def exists(cls, task_id: str) -> bool:
         print(f"{task_id} in {cls.__tasks.keys()}?")
         if task_id in cls.__tasks.keys():
             return True
@@ -89,7 +89,7 @@ class TaskManager:
         return False
 
     @classmethod
-    def has(cls, task_id: int) -> bool:
+    def has(cls, task_id: str) -> bool:
         print(f"{task_id} in {cls.tasks.keys()}?")
         if task_id in cls.tasks.keys():
             return True
@@ -97,7 +97,7 @@ class TaskManager:
         return False
 
     @classmethod
-    def create_task(cls, task_id: int, data: dict):
+    def create_task(cls, task_id: str, data: dict):
         if cls.exists(task_id):
             print(f"Task {task_id} already exists")
             return
@@ -105,7 +105,7 @@ class TaskManager:
         cls.__tasks[task_id] = Task(data)
 
     @classmethod
-    def add_task(cls, task_id: int):
+    def add_task(cls, task_id: str):
         if not cls.exists(task_id):
             return
         if cls.has(task_id):
@@ -118,7 +118,7 @@ class TaskManager:
         save_manager.active_save.status[new_task.consequence] = False
 
     @classmethod
-    def complete_task(cls, task_id: int):
+    def complete_task(cls, task_id: str):
         if not cls.has(task_id):
             return
 

@@ -38,7 +38,6 @@ class Inventory(Scene):
              shadow_opacity=50, shado_color="#A3A7C2")
         self.slots = []
         for index in range(3):
-            print(f"cable_straight_{index + 1}")
             slot = ItemSlot((365 + (index * 64) + self.x_padding, 64),
                             ItemManager.get_item_by_id(f"cable_straight_{index + 1}"), self.inventory)
             self.slots.append(slot)

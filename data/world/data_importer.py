@@ -31,4 +31,4 @@ def import_tasks():
 
 
 if __name__ == '__main__':
-    import_items()
+    import_tasks()

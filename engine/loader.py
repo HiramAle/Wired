@@ -63,10 +63,10 @@ class Loader:
         return Animation(sprite_sheet, animation_data)
 
     @staticmethod
-    def load_portrait_frames(sprite_sheet_path: str) -> dict:
+    def load_portrait_frames(sprite_sheet_path: str, sprite_size: int) -> dict:
         sprite_sheet = Loader.load_image(sprite_sheet_path)
-        sprite_height = 96
-        sprite_width = 96
+        sprite_height = sprite_size
+        sprite_width = sprite_size
         animations = {"talk": [], "nod": [], "shake": []}
         for row, animation in enumerate(animations.keys()):
             for column in range(10):

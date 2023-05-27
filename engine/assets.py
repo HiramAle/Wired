@@ -38,6 +38,10 @@ class Assets:
     hairstyles: dict[int, dict[int, dict[str, list[pygame.Surface]]]] = {}
     # outfit/color/action/direction/frames
     outfits: dict[int, dict[int, dict[str, list[pygame.Surface]]]] = {}
+    # portrait
+    bodies_portrait : dict[int, dict[str, list[pygame.Surface]]] = {}
+    eyes_portrait: dict[int, dict[str, list[pygame.Surface]]] = {}
+    hairstyles_portrait: dict[int, dict[int, dict[str, list[pygame.Surface]]]] = {}
 
     @classmethod
     def prepare(cls) -> None:
@@ -78,9 +82,8 @@ class Assets:
     @classmethod
     def load_portraits(cls):
         for file in listdir(NPC_PORTRAITS):
-            print(file)
             npc_name = file.split(".")[0].split("_")[0]
-            cls.portrait_frames[npc_name] = Loader.load_portrait_frames(f"{NPC_PORTRAITS}/{file}")
+            cls.portrait_frames[npc_name] = Loader.load_portrait_frames(f"{NPC_PORTRAITS}/{file}", 96)
         print(cls.portrait_frames)
 
     @classmethod
@@ -95,6 +98,27 @@ class Assets:
         for song in listdir(Paths.MUSIC_FOLDER):
             name = song.split(".")[0]
             cls.music[name] = f"{Paths.MUSIC_FOLDER}/{song}"
+
+    @classmethod
+    def load_portrait_assets(cls):
+        body_path = "assets/portrait_generator/bodies"
+        eyes_path = "assets/portrait_generator/eyes"
+        hair_styles_path = "assets/portrait_generator/hairstyles"
+
+        for file in listdir(body_path):
+            body_type = int(file.split(".")[0].split("_")[1])
+            cls.bodies_portrait[body_type] = Loader.load_portrait_frames(f"{body_path}/{file}", 64)
+
+        for file in listdir(eyes_path):
+            eyes_type = int(file.split(".")[0].split("_")[1])
+            cls.eyes_portrait[eyes_type] = Loader.load_portrait_frames(f"{eyes_path}/{file}", 64)
+
+        for file in listdir(hair_styles_path):
+            variation = int(file.split("_")[1])
+            color = int(file.split("_")[2].split(".")[0])
+            if variation not in cls.hairstyles_portrait:
+                cls.hairstyles_portrait[variation] = {}
+            cls.hairstyles_portrait[variation][color] = Loader.load_portrait_frames(f"{hair_styles_path}/{file}", 64)
 
     @classmethod
     def load_character_creation_assets(cls, event: threading.Event):
@@ -116,15 +140,18 @@ class Assets:
         eyes_thread = Thread(target=load_eyes)
         hairstyles_thread = Thread(target=load_hairstyles)
         outfits_thread = Thread(target=load_outfits)
+        # portraits_thread = Thread(target=cls.load_portrait_assets())
 
         bodies_thread.start()
         eyes_thread.start()
         hairstyles_thread.start()
         outfits_thread.start()
+        # portraits_thread.start()
 
         bodies_thread.join()
         eyes_thread.join()
         hairstyles_thread.join()
         outfits_thread.join()
+        # portraits_thread.join()
 
         event.clear()

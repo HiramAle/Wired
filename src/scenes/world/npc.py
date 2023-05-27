@@ -92,4 +92,3 @@ class NPC(Actor):
         self.update_status()
         self.animate()
         self.move()
-        self.interact()

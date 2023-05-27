@@ -1,23 +1,14 @@
 {
-  "sprite_sheet": "data/user/saves/save_2/sprite_sheet.png",
-  "name": "nino",
-  "pronoun": "el",
+  "name": "",
+  "pronoun": "",
   "time": 0,
-  "money": 65,
-  "inventory": {
-    "cable": 4,
-    "connector": 4,
-    "cable_straight_1": 1
-  },
+  "money": 200,
+  "inventory": {},
   "tutorials": {
-    "cables": true,
-    "subnetting": true,
-    "routing": true
+    "cables": false,
+    "subnetting": false,
+    "routing": false
   },
-  "tasks": {
-    "0": true
-  },
-  "status": {
-    "kat_known": true
-  }
+  "tasks": {},
+  "status": {}
 }

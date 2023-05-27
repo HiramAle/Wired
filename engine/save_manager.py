@@ -12,6 +12,7 @@ class GameSave:
     def __init__(self, folder_path: str):
         self.filename = f"{folder_path}/save.json"
         self.sprite_sheet = f"{folder_path}/sprite_sheet.png"
+        self.portrait = f"{folder_path}/portrait.png"
         save_data = Loader.load_json(f"{folder_path}/save.json")
         if not save_data:
             save_data = {"name": "",

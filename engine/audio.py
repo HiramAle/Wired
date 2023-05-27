@@ -18,11 +18,11 @@ class AudioManager:
             return
         pygame.mixer.music.load(song)
         pygame.mixer.music.play(-1)
-        pygame.mixer.music.set_volume(Preferences.volume / 250)
+        pygame.mixer.music.set_volume(Preferences.volume / 25)
 
     @classmethod
     def play_sound(cls, sound: pygame.mixer.Sound):
-        sound.set_volume(Preferences.volume / 250)
+        sound.set_volume(Preferences.volume / 25)
         sound.play()
 
     @classmethod

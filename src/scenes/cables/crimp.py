@@ -56,11 +56,11 @@ class CrimpCable(Scene):
         self.color_values = {(101, 191, 110, 255): "green", (254, 202, 32, 255): "yellow", (222, 84, 81, 255): "red"}
         self.color_quality = {"green": 3, "yellow": 2, "red": 1}
         from engine.inventory import Inventory
-        print(f"player has usb? {Inventory.has('usb_double_cable')}")
+        # print(f"player has usb? {Inventory.has('usb_double_cable')}")
         from engine.item_manager import ItemManager
-        print([ItemManager.get_item_by_id(item) for item in Inventory.items])
+        # print([ItemManager.get_item_by_id(item) for item in Inventory.items])
         self.cable_multiplier = random.choice([2] * 8 + [3] * 2) if Inventory.has("usb_double_cable") else 1
-        print(self.cable_multiplier)
+        # print(self.cable_multiplier)
 
     def drag(self):
         # Start dragging

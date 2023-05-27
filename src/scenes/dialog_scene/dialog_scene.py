@@ -6,9 +6,10 @@ from engine.input import Input
 
 
 class DialogScene(Scene):
-    def __init__(self, npc: NPC):
+    def __init__(self, npc: NPC, zone, dialog_index: int):
         super().__init__("dialog")
-        self.dialog_box = DialogBox(npc)
+        # print(f"DialogScene: received {dialog_index}")
+        self.dialog_box = DialogBox(npc, dialog_index)
         self.portrait = Portrait(npc.name)
 
     def update(self) -> None:

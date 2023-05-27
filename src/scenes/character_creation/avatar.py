@@ -77,6 +77,8 @@ class Avatar(Sprite):
     def save_character(self):
         save_sprite_sheet(save_manager.active_save.sprite_sheet, self.body, self.eyes,
                           (self.hairstyle, self.hairstyle_color), (self.outfit, self.outfit_color))
+        from src.scenes.dialog_scene.portrait import save_portrait
+        save_portrait(self.body, self.eyes, self.hairstyle, self.hairstyle_color)
 
     def update_image(self):
         self.image = pygame.Surface((64, 128), pygame.SRCALPHA)

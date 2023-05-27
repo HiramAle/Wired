@@ -36,7 +36,7 @@ class Tab(Sprite):
     def set_state(self, new_state: State):
         if new_state == self.state:
             return
-        print(f"changing state from {self.state} to {new_state}")
+        # print(f"changing state from {self.state} to {new_state}")
         self.state = new_state
         if new_state in self.animations.keys():
             self._current_animation = self.animations[new_state]
@@ -83,7 +83,6 @@ class PlayerAvatar(Sprite):
 
 class ItemSlot(Sprite):
     def __init__(self, position: tuple, item: Item, *groups, **kwargs):
-        print(f"cable_{item.name[-1]}")
         super().__init__(position, Assets.images_book[f"cable_{item.id[-1]}"], *groups, **kwargs)
         self.item = item
         self.pivot = self.Pivot.TOP_LEFT

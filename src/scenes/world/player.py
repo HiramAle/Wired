@@ -36,6 +36,12 @@ class Player(Actor):
         if Input.keyboard.keys["down"]:
             self.movement.y = 1
 
+    def set_emote(self, emote: str):
+        if self.emote:
+            return
+        self.emote = Emote((self.x, self.y - 24), Assets.animations["emotes"][emote])
+        self.emote.animation.play()
+
     def update(self):
         if self.can_move:
             self.input()
@@ -45,3 +51,8 @@ class Player(Actor):
         if self.emote:
             self.emote.update()
             self.emote.position = (self.rect.centerx, self.rect.top - 24)
+
+    def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
+        super().render(display, offset)
+        if self.emote:
+            self.emote.render(display, offset)

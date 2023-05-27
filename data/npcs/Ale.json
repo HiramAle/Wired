@@ -1,7 +1,14 @@
 {
   "dialogs": {
     "0": [
-      "Hola, hay algo que pueda hacer por ti?"
+      "Hola @, vienes de Routed Inc?",
+      "Soy Ale, trabajo aqui, me dijeron que vendrias",
+      "Trabajaras en el subneteo de",
+      "estos departamentos no es asi?",
+      "Aqui hay 2 cuartos por lo que necesitaras:",
+      "1 cable cruzado y 2 directos,",
+      "asegurate de traerlos antes de hacer el subneteo.",
+      "La mesa de trabajo esta a lado de esas cajas."
     ],
     "1": [
       "Hola de nuevo @"

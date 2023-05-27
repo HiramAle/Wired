@@ -9,7 +9,7 @@ from src.scenes.subnetting.results_stage import Results
 
 
 class Subnetting(StagedScene):
-    def __init__(self):
+    def __init__(self, zone="", exercise=0):
         super().__init__("subnetting")
         self.starting_time = pygame.time.get_ticks()
         pygame.mouse.set_visible(True)
@@ -28,9 +28,10 @@ class Subnetting(StagedScene):
             "Supermercado": ["Área de frutas y verduras", "Carnicería", "Panadería", "Lácteos", "Alimentos enlatados",
                              "Productos de limpieza", "Farmacia", "Cajas"]
         }
-        zone = choice(zones)
+        zone = choice(zones) if zone == "" else zone
         buildings = building_names[zone]
-        self.problemData = CustomMaskProblem(zone)
+        exercise_num = exercise if exercise != 0 else randint(1, 10)
+        self.problemData = CustomMaskProblem(zone, exercise_num)
         self.group = SpriteGroup()
         self.buildings = SpriteGroup()
         background_image = Assets.images_subnetting[f"notebook_{choice(['blue', 'red', 'brown'])}"]
@@ -78,6 +79,10 @@ class Subnetting(StagedScene):
             self.map.deactivate()
             self.base_map.deactivate()
             self.set_stage(Results(self, elapsed_time))
+            from engine.inventory import Inventory
+            Inventory.remove_item("cable_crossover_3", 1)
+            Inventory.remove_item("cable_straight_3", 2)
+
         if self.current_stage.name == "results":
             if Input.keyboard.keys["space"]:
                 from engine.scene.scene_manager import SceneManager

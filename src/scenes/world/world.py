@@ -18,6 +18,7 @@ from src.scenes.world.tasks import TaskManager, Task
 from engine.save_manager import instance as save_manager
 from engine.ui.text import Text
 from engine.inventory import Inventory
+from src.scenes.dialog_scene.portrait import PlayerPortrait
 
 
 class NightEffect(Sprite):
@@ -54,19 +55,23 @@ class World(Scene):
         #                             "type": "talk",
         #                             "objective": "chencho",
         #                             "consequence": "chencho_known"})
-        TaskManager.add_task(0)
+        # TaskManager.add_task(0)
         # ----------
         self.player = Player((0, 0), [], [], [])
         self.npc_list = [NPC("Kat", (0, 0), self.player), NPC("Arian", (0, 0), self.player),
                          NPC("Chencho", (0, 0), self.player), NPC("Altair", (0, 0), self.player),
                          NPC("Kike", (0, 0), self.player), NPC("Jordi", (0, 0), self.player),
                          NPC("Letty", (0, 0), self.player), NPC("Ale", (0, 0), self.player),
-                         NPC("Roy", (0, 0), self.player)]
+                         NPC("Roy", (0, 0), self.player), NPC("Liz", (0, 0), self.player),
+                         NPC("Angel", (0, 0), self.player), NPC("Zazu", (0, 0), self.player),
+                         NPC("Juliette", (0, 0), self.player), NPC("Cecy", (0, 0), self.player),
+                         NPC("Juan", (0, 0), self.player)]
         self.zone = Zone("players_house", self.npc_list, self.player, self.new_zone)
         # ----------
         self.overlay = Assets.images_world["overlay"]
         self.hour = Text((93, 32), TimeManager.formatted_time(), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
         self.money = Text((93, 50), str(Inventory.money), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
+        self.portrait = PlayerPortrait()
         self.next_zone: Zone | None = None
 
         # Zone transition
@@ -82,7 +87,6 @@ class World(Scene):
     def check_for_end_day(self):
         if not TimeManager.day_ended or self.transitioning:
             return
-        print("changing scene from world")
         from engine.scene.scene_manager import SceneManager
         from src.scenes.world.sleep import Sleep
         SceneManager.change_scene(Sleep(), True, True)
@@ -131,6 +135,7 @@ class World(Scene):
         self.zone.update()
         TimeManager.update()
         self.night.update()
+        self.portrait.update()
 
         if Input.keyboard.keys["esc"]:
             from engine.scene.scene_manager import SceneManager
@@ -139,7 +144,7 @@ class World(Scene):
         self.check_for_end_day()
 
         if Input.keyboard.keys["backspace"]:
-            print(save_manager.active_save.objectives)
+            self.portrait.status = "talk"
 
     def render(self) -> None:
         # Render zone
@@ -150,6 +155,7 @@ class World(Scene):
         self.money.text = str(Inventory.money)
         self.hour.render(self.display)
         self.money.render(self.display)
+        self.portrait.render(self.display)
         self.render_zone_transition()
         if self.zone.location_type == "outside":
             self.night.render(self.display)

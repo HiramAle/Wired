@@ -28,11 +28,13 @@ class Dialog:
 
 
 class DialogBox(Sprite):
-    def __init__(self, npc: NPC):
+    def __init__(self, npc: NPC, dialog_index: int):
         super().__init__((127, 246), Assets.images_world["dialog_box"])
         self.pivot = self.Pivot.TOP_LEFT
         self.dialogs = [Dialog(dialog_id, dialog_list) for dialog_id, dialog_list in npc.data["dialogs"].items()]
-        self.dialog_index = 0
+        self.dialog_index = dialog_index
+        print(f"DialogBox: received {dialog_index}")
+        print(f"Dialog: {self.dialogs[self.dialog_index]}")
         self.npc = npc
         self.actor_name = Text((197, 336), npc.name, 32, Colors.SPRITE, shadow=True, shadow_opacity=50)
         self.dialog_text = Text((222, 262), "", 32, Colors.SPRITE, shadow=True, shadow_opacity=50)
@@ -66,15 +68,12 @@ class DialogBox(Sprite):
     def update(self):
         if Input.keyboard.keys["space"]:
             if self.end_render and not self.current_dialog.end_dialog:
-                print("End rendering but not end of dialog")
                 self.current_dialog.next_sentence()
                 self.char_index = 0
                 self.end_render = False
             elif self.end_render and self.current_dialog.end_dialog:
-                print("End rendering and end of dialog")
                 self.dialog_end = True
             else:
-                print("Skip dialog render")
                 self.skip_render()
 
         self.render_text()

@@ -8,8 +8,10 @@ from src.constants.paths import *
 
 class Data:
     cable_data = {}
+    # Maps data from Tiled
     maps: dict[str, pytmx.TiledMap | None] = {"players_house": None, "village": None, "store": None, "city": None,
                                               "reception": None, "company": None}
+    # Character creation
     character_creation_frames: dict[str, dict[str, int]] = {}
     body_colors: dict[int, tuple] = {}
     eyes_colors: dict[int, tuple] = {}
