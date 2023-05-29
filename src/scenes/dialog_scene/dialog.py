@@ -6,12 +6,11 @@ from engine.ui.text import Text
 from engine.constants import Colors
 from engine.input import Input
 from engine.time import Time
-from engine.save_manager import instance as save_manager
+from engine.playerdata import PlayerData
 
 
 class Dialog:
-    def __init__(self, dialog_id: int, sentences: list[str]):
-        self.id = dialog_id
+    def __init__(self, sentences: list[str]):
         self.sentences = sentences
         self.sentence_index = 0
 
@@ -21,20 +20,18 @@ class Dialog:
 
     @property
     def current_sentence(self) -> str:
-        return self.sentences[self.sentence_index].replace("@", save_manager.active_save.name)
+        return self.sentences[self.sentence_index].replace("@", PlayerData.name)
 
     def next_sentence(self):
         self.sentence_index += 1
 
 
 class DialogBox(Sprite):
-    def __init__(self, npc: NPC, dialog_index: int):
+    def __init__(self, npc: NPC, text: list[str]):
         super().__init__((127, 246), Assets.images_world["dialog_box"])
         self.pivot = self.Pivot.TOP_LEFT
-        self.dialogs = [Dialog(dialog_id, dialog_list) for dialog_id, dialog_list in npc.data["dialogs"].items()]
-        self.dialog_index = dialog_index
-        print(f"DialogBox: received {dialog_index}")
-        print(f"Dialog: {self.dialogs[self.dialog_index]}")
+        self.dialogs = [Dialog(text)]
+        self.dialog_index = 0
         self.npc = npc
         self.actor_name = Text((197, 336), npc.name, 32, Colors.SPRITE, shadow=True, shadow_opacity=50)
         self.dialog_text = Text((222, 262), "", 32, Colors.SPRITE, shadow=True, shadow_opacity=50)

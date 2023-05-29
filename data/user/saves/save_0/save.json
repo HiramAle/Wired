@@ -17,8 +17,10 @@
     "routing": false
   },
   "tasks": {
-    "meet_kat": false,
-    "mysteries_of_celestia": false
+    "meet_kat": true,
+    "mysteries_of_celestia": false,
+    "meet_chencho": true,
+    "meet_roy": false
   },
   "status": {}
 }

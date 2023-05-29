@@ -4,6 +4,9 @@
     "name": "Bienvenido a Celestia",
     "description": "Has llegado a Celestia, tu nuevo hogar y lugar de trabajo. Te han hablado de Kat, una chica del lugar que te ayudara a comenzar tu nueva vida.",
     "type": "talk",
+    "npcs": [
+      "kat"
+    ],
     "objective": "kat",
     "consequence": "kat_known"
   },
@@ -12,6 +15,10 @@
     "name": "Tu viejo amigo",
     "description": "Kat ha mencionado a Chencho, un amigo de tu antigua vida que ahora vive tambien en Celestia. Toma el autobus y reunete con el en la ciudad.",
     "type": "talk",
+    "npcs": [
+      "chencho",
+      "kat"
+    ],
     "objective": "chencho",
     "consequence": "chencho_known"
   },
@@ -20,6 +27,11 @@
     "name": "Routed Inc",
     "description": "Te han hablado e Roy, uno de los empleados de Routed Inc, con quien ahora trabajaras, ve que tiene para decirte.",
     "type": "talk",
+    "npcs": [
+      "chencho",
+      "kat",
+      "roy"
+    ],
     "objective": "roy",
     "consequence": "roy_known"
   },
@@ -28,7 +40,8 @@
     "name": "Crea un cable directo",
     "description": "Crea un cable directo",
     "type": "has",
-    "objective": "direct_1",
+    "npcs": [],
+    "objective": "cable_straight 1",
     "consequence": "direct_cable_tutorial"
   },
   "create_crossover_cable": {
@@ -36,7 +49,8 @@
     "name": "Crea dos cables cruzados",
     "description": "Crea dos cables cruzados",
     "type": "has",
-    "objective": "crossover_2",
+    "npcs": [],
+    "objective": "cable_crossover 2",
     "consequence": "crossover_cable_tutorial"
   },
   "subnetting_reception": {
@@ -44,6 +58,7 @@
     "name": "El primer trabajo",
     "description": "Has hablado con Roy y te ha dado tu primer trabajo en Routed Inc. Dirigete a la recepción de los edificios de la empresa, cerca de tu casa, y habla con Ale la encargada de la recepción.",
     "type": "subnetting",
+    "npcs": [],
     "objective": "reception",
     "consequence": "subnetting_reception"
   },
@@ -52,14 +67,16 @@
     "name": "Los misterios de Celestia",
     "description": "En multiples ocasiones has oido hablar de Celestia, y algunas cosas parecen envolver al pueblo en misterio. Habla con los habitantes del pueblo para conocer mas acerca del lugar y lo que puede haber detrás de el.",
     "type": "talk",
-    "objective": "roy",
-    "consequence": "roy_talk_1"
+    "npcs": [],
+    "objective": NaN,
+    "consequence": NaN
   },
   "7": {
     "id": 7,
     "name": "Realiza tu primer trabajo de enrutamiento",
     "description": "Dirigete al Supermercado y realiza tu primer trabajo de Enrutamiento",
     "type": "routing",
+    "npcs": [],
     "objective": "supermarket",
     "consequence": "routing_supermarket_done"
   },
@@ -68,6 +85,7 @@
     "name": "Regresa con Roy",
     "description": "Habla con Roy",
     "type": "talk",
+    "npcs": [],
     "objective": "roy",
     "consequence": "roy_talk_2"
   },
@@ -76,6 +94,7 @@
     "name": NaN,
     "description": NaN,
     "type": NaN,
+    "npcs": [],
     "objective": NaN,
     "consequence": NaN
   },
@@ -84,6 +103,7 @@
     "name": NaN,
     "description": NaN,
     "type": NaN,
+    "npcs": [],
     "objective": NaN,
     "consequence": NaN
   },
@@ -92,6 +112,7 @@
     "name": NaN,
     "description": NaN,
     "type": NaN,
+    "npcs": [],
     "objective": NaN,
     "consequence": NaN
   },
@@ -100,6 +121,7 @@
     "name": NaN,
     "description": NaN,
     "type": NaN,
+    "npcs": [],
     "objective": NaN,
     "consequence": NaN
   },
@@ -108,6 +130,7 @@
     "name": NaN,
     "description": NaN,
     "type": NaN,
+    "npcs": [],
     "objective": NaN,
     "consequence": NaN
   },
@@ -116,6 +139,7 @@
     "name": NaN,
     "description": NaN,
     "type": NaN,
+    "npcs": [],
     "objective": NaN,
     "consequence": NaN
   },
@@ -124,6 +148,7 @@
     "name": NaN,
     "description": NaN,
     "type": NaN,
+    "npcs": [],
     "objective": NaN,
     "consequence": NaN
   },
@@ -132,6 +157,7 @@
     "name": NaN,
     "description": NaN,
     "type": NaN,
+    "npcs": [],
     "objective": NaN,
     "consequence": NaN
   },
@@ -140,6 +166,7 @@
     "name": NaN,
     "description": NaN,
     "type": NaN,
+    "npcs": [],
     "objective": NaN,
     "consequence": NaN
   },
@@ -148,6 +175,7 @@
     "name": NaN,
     "description": NaN,
     "type": NaN,
+    "npcs": [],
     "objective": NaN,
     "consequence": NaN
   },
@@ -156,6 +184,7 @@
     "name": NaN,
     "description": NaN,
     "type": NaN,
+    "npcs": [],
     "objective": NaN,
     "consequence": NaN
   }

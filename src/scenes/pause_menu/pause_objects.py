@@ -7,7 +7,7 @@ from engine.constants import Colors
 from enum import Enum
 from src.scenes.world.player import Player
 from engine.item import Item
-from engine.inventory import Inventory
+from engine.playerdata import PlayerData
 
 
 class Tab(Sprite):
@@ -86,7 +86,7 @@ class ItemSlot(Sprite):
         super().__init__(position, Assets.images_book[f"cable_{item.id[-1]}"], *groups, **kwargs)
         self.item = item
         self.pivot = self.Pivot.TOP_LEFT
-        self.quantity = Text((self.x + 31, self.y + 32.5), str(Inventory.how_much(item.id)), 16, Colors.WHITE)
+        self.quantity = Text((self.x + 31, self.y + 32.5), str(PlayerData.inventory.how_much(item.id)), 16, Colors.WHITE)
 
     def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
         super().render(display)

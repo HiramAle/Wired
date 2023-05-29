@@ -4,8 +4,7 @@ import pygame.time
 
 from engine.loader import Loader
 from engine.constants import Paths
-from engine.inventory import Inventory
-from src.scenes.world.tasks import TaskManager
+from engine.playerdata import PlayerData
 
 
 class GameSave:
@@ -42,17 +41,8 @@ class GameSave:
         self.tasks = save_data["tasks"]
         self.status = save_data["status"]
 
-    def __dict(self) -> dict:
+    def to_dict(self) -> dict:
         return {key: value for key, value in vars(self).items() if key not in ["filename"]}
-
-    def save(self):
-        self.inventory = Inventory.items
-        self.money = Inventory.money
-        print(f"Saving tasks {[task for task in self.tasks]}")
-        if Loader.save_json(self.filename, self.__dict()):
-            print("File saved")
-            return
-        print("Can't save file")
 
 
 class SaveManager:
@@ -63,6 +53,15 @@ class SaveManager:
     def load(self):
         for index, folder in enumerate(os.listdir(Paths.USER_SAVES_FOLDER)):
             self.saves.append(GameSave(f"{Paths.USER_SAVES_FOLDER}/{folder}"))
+
+    def save(self):
+        self.active_save.money = PlayerData.inventory.money
+        self.active_save.inventory = PlayerData.inventory.items
+        self.active_save.tasks = PlayerData.tasks.tasks_dict
+        if Loader.save_json(self.active_save.filename, self.active_save.to_dict()):
+            print("File saved")
+            return
+        print("Can't save file")
 
     @property
     def active_save(self) -> GameSave | None:
@@ -78,8 +77,8 @@ class SaveManager:
             print("Slot index must be between 0 and 2")
             return
         self.__slot = slot
-        Inventory.load_inventory(self.saves[self.__slot].inventory, self.saves[self.__slot].money)
-        TaskManager.load_player_tasks(self.saves[self.__slot].tasks)
+        PlayerData.load(self.active_save.money, self.active_save.inventory, self.active_save.tasks)
+        PlayerData.name = self.active_save.name
 
 
 instance = SaveManager()

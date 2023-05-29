@@ -1418,7 +1418,7 @@
   <object id="235" gid="50692" x="1328" y="839" width="32" height="64"/>
  </objectgroup>
  <objectgroup id="35" name="triggers">
-  <object id="1068" name="zone_village" type="zone" x="417" y="1583" width="116" height="48">
+  <object id="1068" name="zone_village" type="zone" x="362" y="1583" width="118" height="48">
    <properties>
     <property name="interaction_type" value="keypress"/>
     <property name="zone" value="village"/>
@@ -1432,7 +1432,7 @@
   </object>
  </objectgroup>
  <objectgroup id="34" name="positions">
-  <object id="1067" name="player_village" x="479" y="1613">
+  <object id="1067" name="player_village" x="431" y="1615">
    <properties>
     <property name="direction" value="up"/>
    </properties>

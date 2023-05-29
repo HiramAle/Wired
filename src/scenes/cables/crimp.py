@@ -8,8 +8,8 @@ from engine.objects.sprite import SpriteGroup
 from engine.scene.scene import Scene
 from engine.ui.text import Text
 from engine.ui.image import Image
-from engine.save_manager import instance as save_manager
 from engine.constants import Colors
+from engine.playerdata import PlayerData
 
 
 class CrimpCable(Scene):
@@ -55,12 +55,7 @@ class CrimpCable(Scene):
         self.qualities = []
         self.color_values = {(101, 191, 110, 255): "green", (254, 202, 32, 255): "yellow", (222, 84, 81, 255): "red"}
         self.color_quality = {"green": 3, "yellow": 2, "red": 1}
-        from engine.inventory import Inventory
-        # print(f"player has usb? {Inventory.has('usb_double_cable')}")
-        from engine.item_manager import ItemManager
-        # print([ItemManager.get_item_by_id(item) for item in Inventory.items])
-        self.cable_multiplier = random.choice([2] * 8 + [3] * 2) if Inventory.has("usb_double_cable") else 1
-        # print(self.cable_multiplier)
+        self.cable_multiplier = random.choice([2] * 8 + [3] * 2) if PlayerData.inventory.has("usb_double_cable") else 1
 
     def drag(self):
         # Start dragging
@@ -161,10 +156,9 @@ class CrimpCable(Scene):
 
             if Input.keyboard.keys["space"]:
                 cable_quality = random.choice(self.qualities)
-                from engine.inventory import Inventory
-                Inventory.add_item(f"cable_{self.standard}_{cable_quality}", self.cable_multiplier)
-                Inventory.remove_item("cable", 1)
-                Inventory.remove_item("connector", 2)
+                PlayerData.add_item(f"cable_{self.standard}_{cable_quality}", self.cable_multiplier)
+                PlayerData.remove_item("cable", 1)
+                PlayerData.remove_item("connector", 2)
                 from engine.scene.scene_manager import SceneManager
                 SceneManager.exit_scene()
         if Input.keyboard.keys["esc"]:

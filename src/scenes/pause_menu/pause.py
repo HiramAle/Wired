@@ -13,10 +13,10 @@ from src.scenes.pause_menu.exit import Exit
 
 
 class Pause(Scene):
-    def __init__(self):
+    def __init__(self, change_zone: callable):
         super().__init__("test")
         index = 0
-        self.categories = {"Inventario": Inventory(), "Trabajos": Jobs(), "Mapa": Map(),
+        self.categories = {"Inventario": Inventory(), "Trabajos": Jobs(), "Mapa": Map(change_zone),
                            "Glosario": Glossary(), "Opciones": Options(), "Salir": Exit()}
         self.book_background = Sprite((39, 16), Assets.images_book["book_background"], centered=False)
         self.tabs = [Tab((39, 50 + (index * 30)), name) for index, name in enumerate(self.categories)]

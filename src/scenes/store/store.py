@@ -5,7 +5,7 @@ from engine.scene.scene import Scene
 from engine.objects.sprite import Sprite, SpriteGroup
 from engine.ui.text import Text
 from engine.constants import Colors
-from engine.inventory import Inventory
+from engine.playerdata import PlayerData
 
 
 class Item:
@@ -52,13 +52,13 @@ class Store(Scene):
         self.store_ui = SpriteGroup()
         Sprite((69, 52), Assets.images_store["background"], self.store_ui, centered=False)
         Sprite((14, 18), Assets.images_store["inventory_own"], self.store_ui, centered=False)
-        self.cables = Text((68, 43), str(Inventory.how_much("cable")), 32, Colors.SPRITE, self.store_ui)
+        self.cables = Text((68, 43), str(PlayerData.inventory.how_much("cable")), 32, Colors.SPRITE, self.store_ui)
         Sprite((20, 29), Assets.images_store["cable_icon"], self.store_ui, centered=False)
         Sprite((99, 18), Assets.images_store["inventory_own"], self.store_ui, centered=False)
-        self.connectors = Text((150, 43), str(Inventory.how_much("connector")), 32, Colors.SPRITE, self.store_ui)
+        self.connectors = Text((150, 43), str(PlayerData.inventory.how_much("connector")), 32, Colors.SPRITE, self.store_ui)
         Sprite((110, 27), Assets.images_store["connector_icon"], self.store_ui, centered=False)
         Sprite((477, 14), Assets.images_store["money"], self.store_ui, centered=False)
-        self.money = Text((571, 43), f"{Inventory.money}G", 32, Colors.SPRITE, self.store_ui)
+        self.money = Text((571, 43), f"{PlayerData.inventory.money}G", 32, Colors.SPRITE, self.store_ui)
         Sprite((104, 111), Assets.images_store["items_background"], self.store_ui, centered=False)
         Sprite((434, 111), Assets.images_store["icon_frame"], self.store_ui, centered=False)
         Sprite((434, 246), Assets.images_store["price_frame"], self.store_ui, centered=False)
@@ -81,16 +81,16 @@ class Store(Scene):
                 self.item_icon.image = pygame.transform.scale_by(item.icon.image, 2)
                 self.item_price.text = str(item.item.price)
             if item.buy.clicked and index in [0, 1]:
-                if Inventory.money < item.item.price:
+                if PlayerData.inventory.money < item.item.price:
                     break
-                Inventory.money -= item.item.price
-                self.money.text = f"{Inventory.money}G"
+                PlayerData.inventory.money -= item.item.price
+                self.money.text = f"{PlayerData.inventory.money}G"
                 if index == 0:
-                    Inventory.add_item("connector", 1)
-                    self.connectors.text = str(Inventory.how_much("connector"))
+                    PlayerData.add_item("connector", 1)
+                    self.connectors.text = str(PlayerData.inventory.how_much("connector"))
                 elif index == 1:
-                    Inventory.add_item("cable", 1)
-                    self.cables.text = str(Inventory.how_much("cable"))
+                    PlayerData.add_item("cable", 1)
+                    self.cables.text = str(PlayerData.inventory.how_much("cable"))
         if Input.keyboard.keys["esc"]:
             from engine.scene.scene_manager import SceneManager
             SceneManager.exit_scene()

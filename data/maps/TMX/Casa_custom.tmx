@@ -306,11 +306,6 @@
     <property name="scene" value="cables"/>
    </properties>
   </object>
-  <object id="74" name="stairs" type="stairs" x="352" y="381" width="64" height="125">
-   <properties>
-    <property name="interaction_type" value="collide"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup id="15" name="positions">
   <object id="75" name="player_village" x="495" y="699">

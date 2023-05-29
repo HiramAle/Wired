@@ -8,6 +8,8 @@ from engine.constants import Colors
 from engine.ui.text import Text
 from engine.objects.sprite import Sprite
 from src.scenes.world.time_manager import TimeManager
+from engine.save_manager import instance as save_manager
+from engine.playerdata import PlayerData
 
 
 class Sleep(Scene):
@@ -22,9 +24,7 @@ class Sleep(Scene):
         self.frame = Sprite((5, 52), Assets.images_world["sleep_overlay"], centered=False)
         self.title = Text((26, 76), "¡Día completado!", 32, Colors.SPRITE, shadow=True, shadow_opacity=50,
                           shado_color=Colors.SPRITE, centered=False)
-        from engine.save_manager import instance as save_manager
-        from engine.inventory import Inventory
-        money_earned = Inventory.money - save_manager.active_save.money
+        money_earned = PlayerData.inventory.money - save_manager.active_save.money
         self.money = Text((32, 122), f"Dinero obtenido       {money_earned}G", 16, Colors.SPRITE, shadow=True,
                           shadow_opacity=50, shado_color=Colors.SPRITE, centered=False)
         self.objets = Text((65, 184), "Objetos conseguidos", 16, Colors.SPRITE, shadow=True,
@@ -40,8 +40,7 @@ class Sleep(Scene):
 
             from src.scenes.world.world import World
             SceneManager.change_scene(World(), True, True)
-            from engine.save_manager import instance as save_manager
-            save_manager.active_save.save()
+            save_manager.save()
             TimeManager.restart()
 
     def render(self) -> None:

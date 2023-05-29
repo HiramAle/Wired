@@ -1,14 +1,13 @@
 import pygame
 
 from engine.assets import Assets
-from engine.save_manager import instance as save_manager
 from engine.scene.scene import Scene
 from engine.objects.sprite import Sprite, SpriteGroup
 from engine.constants import Colors
 from engine.ui.text import Text
 from src.scenes.pause_menu.pause_objects import PlayerAvatar, ItemSlot
-from src.scenes.world.tasks import TaskManager
-from engine.save_manager import instance as save_manager
+from engine.task_manager import TaskManager
+from engine.playerdata import PlayerData
 
 
 class TaskLabel(Sprite):
@@ -29,11 +28,8 @@ class Jobs(Scene):
         self.jobs = SpriteGroup()
         self.ui = SpriteGroup()
         Text((143 + 8, 42), "Trabajos", 32, Colors.SPRITE, self.ui, centered=False)
-        print(f"All tasks {[task for task in save_manager.active_save.tasks]}")
-        for index, (task_id, task_status) in enumerate(
-                [(task, status) for task, status in save_manager.active_save.tasks.items() if not status]):
-            if task_status:
-                continue
+        for index, (task_id, task) in enumerate(
+                [(task_id, task) for task_id, task in PlayerData.tasks.tasks.items() if not task.completed]):
             TaskLabel((85 + 8, 90 + (index * 52)), task_id, self.jobs)
 
         self.task_title_frame = Sprite((346 + 8, 46), Assets.images_book["task_name"], self.ui, centered=False)

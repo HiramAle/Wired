@@ -1,21 +1,50 @@
 {
   "dialogs": {
-    "0": [
-      "Hola @, bienvenido a Celestia",
-      "eres el nuevo trabajador de",
-      "Routed Inc?",
-      "Yo soy Kat, he vivido aqui toda mi vida",
-      "Es bueno ver una cara nueva.",
-      "Por que no tomas el autobus a la ciudad?",
-      "Chencho te esta esperando ahi.",
-      "Cuidate."
-    ],
-    "1": [
-      "Hola de nuevo @"
-    ],
-    "2": [
-      "Así que ya probaste a crear un cable de red?"
-    ]
+    "0": {
+      "text": [
+        "Hola @, bienvenido a Celestia",
+        "eres el nuevo trabajador de",
+        "Routed Inc?",
+        "Yo soy Kat, he vivido aqui toda mi vida",
+        "Es bueno ver una cara nueva.",
+        "Por que no tomas el autobus a la ciudad?",
+        "Chencho te esta esperando ahi.",
+        "Cuidate."
+      ],
+      "type": "mission_complete",
+      "mission_requirement": {
+        "meet_kat": 1
+      },
+      "new_mission": "meet_chencho"
+    },
+    "7": {
+      "text": [
+        "Ya has hablado con Chencho?"
+      ],
+      "type": "generic",
+      "mission_requirement": {
+        "meet_chencho": 0
+      },
+      "new_mission": ""
+    },
+    "8": {
+      "text": [
+        "Espero que te haya ido bien en tu primer dia"
+      ],
+      "type": "generic",
+      "mission_requirement": {
+        "meet_chencho": 1
+      },
+      "new_mission": ""
+    },
+    "9": {
+      "text": [
+        "Hola"
+      ],
+      "type": "generic",
+      "mission_requirement": {},
+      "new_mission": ""
+    }
   },
   "start_zone": "players_house"
 }

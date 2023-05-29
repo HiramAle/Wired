@@ -84,7 +84,7 @@ class Assets:
         for file in listdir(NPC_PORTRAITS):
             npc_name = file.split(".")[0].split("_")[0]
             cls.portrait_frames[npc_name] = Loader.load_portrait_frames(f"{NPC_PORTRAITS}/{file}", 96)
-        print(cls.portrait_frames)
+
 
     @classmethod
     def load_sounds(cls):

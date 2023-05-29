@@ -15,7 +15,10 @@ from src.scenes.dialog_scene.dialog_scene import DialogScene
 from src.scenes.tutorial.tutorial import Tutorial
 from engine.objects.sprite import Sprite, SpriteGroup
 from engine.ui.text import Text
-from engine.save_manager import instance as save_manager
+# from engine.save_manager import instance as save_manager
+from engine.playerdata import PlayerData
+from src.scenes.world.trigger import Trigger
+from engine.dialog_manager import Dialog
 
 
 class Notification(Sprite):
@@ -69,15 +72,14 @@ class Zone(Scene):
         self.zone_objets.extend(self.npcs)
 
     def start_zone(self):
-        print(f"player_{self.zone_before}")
         self.player.position = self.map.get_position(f"player_{self.zone_before}").tuple
         self.player.direction = self.map.get_position(f"player_{self.zone_before}").properties["direction"]
         self.camera.position = self.player.x - 320, self.player.y - 180
-        if self.name == "players_house" and not save_manager.active_save.tasks.get("meet_kat", None):
+        if self.name == "players_house" and not PlayerData.tasks.get("meet_kat"):
             Notification((30, 280), "Nueva mision añadida\nRevisa tu inventario\npara verla", 5,
                          self.notification)
-            save_manager.active_save.tasks["meet_kat"] = False
-            save_manager.active_save.tasks["mysteries_of_celestia"] = False
+            PlayerData.tasks.add_task("meet_kat")
+            PlayerData.tasks.add_task("mysteries_of_celestia")
 
     @property
     def npcs(self) -> list[NPC]:
@@ -99,14 +101,55 @@ class Zone(Scene):
                         Notification((30, 280), "Necesitas mas cable y\nconectorespara crear un\ncable de Red", 3,
                                      self.notification)
                         return
-                if trigger.name == "subnetting" and self.name == "reception":
-                    SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene]("Hotel", 1))
-                else:
-                    SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene]())
+                # if trigger.name == "subnetting" and self.name == "reception":
+                #     SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene]("Hotel", 1))
+                # else:
+
+                if trigger.name == "company" and not PlayerData.tasks.tasks.get("meet_chencho"):
+                    continue
                 if trigger.name != "store" and not save_manager.active_save.tutorials[trigger.scene]:
                     SceneManager.change_scene(Tutorial(trigger.scene), True)
-
+                SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene]())
             if trigger.type == "save":
+                SceneManager.change_scene(SceneManager.scenes_by_name["sleep"](), True, True)
+
+    def get_trigger(self) -> Trigger | None:
+        for trigger in self.map_triggers:
+            if not trigger.colliderect(self.player.collider):
+                continue
+            return trigger
+        return None
+
+    def check_triggers(self):
+        if not Input.keyboard.keys["interact"]:
+            return
+        trigger = self.get_trigger()
+        if not trigger:
+            return
+        # Check Zone and Scene requirements
+        match trigger.name:
+            case "zone_village":
+                if not PlayerData.tasks.completed("meet_kat"):
+                    Notification((30, 280), "Habla con Kat antes\nde salir", 3, self.notification)
+                    return
+            case "zone_company":
+                if not PlayerData.tasks.completed("meet_chencho"):
+                    Notification((30, 280), "Habla con Chencho antes\nde continuar", 3, self.notification)
+                    return
+            case "cables":
+                if not PlayerData.inventory.has_enough("cable", 1) or not PlayerData.inventory.has_enough("connector",
+                                                                                                          2):
+                    Notification((30, 280), "Necesitas mas cable y\nconectorespara crear un\ncable de Red", 3,
+                                 self.notification)
+
+        # Execute code depending on the trigger type
+        from engine.scene.scene_manager import SceneManager
+        match trigger.type:
+            case "scene":
+                SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene]())
+            case "zone":
+                self.change_zone(trigger.zone)
+            case "save":
                 SceneManager.change_scene(SceneManager.scenes_by_name["sleep"](), True, True)
 
     def move_objects(self):
@@ -146,44 +189,48 @@ class Zone(Scene):
             npc.update()
 
         if self.closest_npc.interact():
-            dialog_index = 0
-            if self.closest_npc.name == "Roy":
-                roy_known = save_manager.active_save.status.get("roy_known", None)
-                if roy_known:
-                    dialog_index = 1
-                else:
-                    save_manager.active_save.status["roy_known"] = True
-                if "meet_roy" in save_manager.active_save.tasks.keys():
-                    if not save_manager.active_save.tasks["meet_roy"]:
-                        save_manager.active_save.tasks["meet_roy"] = True
-                        save_manager.active_save.tasks["subnetting_reception"] = False
-                        Notification((30, 280), "Nueva mision añadida\nRevisa tu inventario\npara verla", 3,
-                                     self.notification)
-            elif self.closest_npc.name == "Kat":
-                if "meet_kat" in save_manager.active_save.tasks.keys():
-                    if not save_manager.active_save.tasks["meet_kat"]:
-                        save_manager.active_save.tasks["meet_kat"] = True
-                        save_manager.active_save.tasks["meet_chencho"] = False
-                        Notification((30, 280), "Nueva mision añadida\nRevisa tu inventario\npara verla", 3,
-                                     self.notification)
-            elif self.closest_npc.name == "Chencho":
-                if "meet_chencho" in save_manager.active_save.tasks.keys():
-                    if not save_manager.active_save.tasks["meet_chencho"]:
-                        save_manager.active_save.tasks["meet_chencho"] = True
-                        save_manager.active_save.tasks["meet_roy"] = False
-                        Notification((30, 280), "Nueva mision añadida\nRevisa tu inventario\npara verla", 3,
-                                     self.notification)
-            elif self.closest_npc.name == "Ale":
-                if "subnetting_reception" in save_manager.active_save.tasks.keys():
-                    if not save_manager.active_save.tasks["subnetting_reception"]:
-                        save_manager.active_save.tasks["subnetting_reception"] = True
-                        # save_manager.active_save.tasks["meet_roy"] = False
-                        # Notification((30, 280), "Nueva mision añadida\nRevisa tu inventario\npara verla", 3,
-                        #              self.notification)
+            # dialog_index = 0
+            # if self.closest_npc.name == "Roy":
+            #     roy_known = save_manager.active_save.status.get("roy_known", None)
+            #     if roy_known:
+            #         dialog_index = 1
+            #     else:
+            #         save_manager.active_save.status["roy_known"] = True
+            #     if "meet_roy" in save_manager.active_save.tasks.keys():
+            #         if not save_manager.active_save.tasks["meet_roy"]:
+            #             save_manager.active_save.tasks["meet_roy"] = True
+            #             save_manager.active_save.tasks["subnetting_reception"] = False
+            #             Notification((30, 280), "Nueva mision añadida\nRevisa tu inventario\npara verla", 3,
+            #                          self.notification)
+            # elif self.closest_npc.name == "Kat":
+            #     if "meet_kat" in save_manager.active_save.tasks.keys():
+            #         if not save_manager.active_save.tasks["meet_kat"]:
+            #             save_manager.active_save.tasks["meet_kat"] = True
+            #             save_manager.active_save.tasks["meet_chencho"] = False
+            #             Notification((30, 280), "Nueva mision añadida\nRevisa tu inventario\npara verla", 3,
+            #                          self.notification)
+            # elif self.closest_npc.name == "Chencho":
+            #     if "meet_chencho" in save_manager.active_save.tasks.keys():
+            #         if not save_manager.active_save.tasks["meet_chencho"]:
+            #             save_manager.active_save.tasks["meet_chencho"] = True
+            #             save_manager.active_save.tasks["meet_roy"] = False
+            #             Notification((30, 280), "Nueva mision añadida\nRevisa tu inventario\npara verla", 3,
+            #                          self.notification)
+            # elif self.closest_npc.name == "Ale":
+            #     if "subnetting_reception" in save_manager.active_save.tasks.keys():
+            #         if not save_manager.active_save.tasks["subnetting_reception"]:
+            #             save_manager.active_save.tasks["subnetting_reception"] = True
 
             from engine.scene.scene_manager import SceneManager
-            SceneManager.change_scene(DialogScene(self.closest_npc, self, dialog_index))
-            self.update_interact_tasks(self.closest_npc.name)
+            SceneManager.change_scene(DialogScene(self.closest_npc, self))
+            # self.update_interact_tasks(self.closest_npc.name)
+
+        # for task in PlayerData.tasks if npc.name in:
+        # if npc.name.lower() not in task.npcs:
+        #
+        #     continue
+        # if npc.name.lower() == task.objective:
+        #     task.completed = True
 
     def update_interact_tasks(self, actor: str):
         from src.scenes.world.tasks import TaskManager
@@ -201,20 +248,33 @@ class Zone(Scene):
             #             TaskManager.complete_task(0)
 
     def update_player_emote(self):
-        if any([trigger.colliderect(self.player.collider) for trigger in self.map_triggers]):
+        trigger = self.get_trigger()
+        if not trigger or not self.npcs:
+            if self.player.emote:
+                self.player.emote.animation.rewind()
+                self.player.emote = None
+            return
+        if trigger:
             self.player.set_emote("alert")
         elif self.closest_npc.player_distance <= 50:
             self.player.set_emote("ask")
-        elif self.player.emote:
-            self.player.emote.animation.rewind()
-            self.player.emote = None
+
+        # if any([trigger.colliderect(self.player.collider) for trigger in self.map_triggers]):
+        #     self.player.set_emote("alert")
+        # elif self.npcs:
+        #     if self.closest_npc.player_distance <= 50:
+        #         self.player.set_emote("ask")
+        # elif self.player.emote:
+        #     self.player.emote.animation.rewind()
+        #     self.player.emote = None
 
     def update(self) -> None:
         self.player.update()
         self.camera.update()
         self.update_player_emote()
-        self.update_triggers()
+        # self.update_triggers()
         self.notification.update()
+        self.check_triggers()
         self.update_npcs()
 
     def render(self) -> None:

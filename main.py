@@ -1,7 +1,4 @@
-import time
-
 import pygame
-# New Imports
 from engine.preferences import Preferences
 from engine.window import Window
 from engine.data import Data
@@ -11,7 +8,7 @@ from engine.assets import Assets
 from engine.scene.scene_manager import SceneManager
 from engine.save_manager import instance as save_manager
 from engine.item_manager import ItemManager
-from src.scenes.world.tasks import TaskManager
+from engine.task_manager import TaskManager
 
 
 class Game:

@@ -6,8 +6,8 @@ from engine.objects.sprite import Sprite, SpriteGroup
 from engine.constants import Colors
 from engine.ui.text import Text
 from src.scenes.pause_menu.pause_objects import PlayerAvatar, ItemSlot, SpecialItemSlot
-from engine.inventory import Inventory as inventory
 from engine.item_manager import ItemManager
+from engine.playerdata import PlayerData
 
 
 class Inventory(Scene):
@@ -18,7 +18,7 @@ class Inventory(Scene):
         Text((125 + self.x_padding, 38), "Inventario", 32, Colors.SPRITE, self.inventory, centered=False)
         Text((109 + self.x_padding, 74), save_manager.active_save.name, 32, Colors.SPRITE, self.inventory,
              centered=False)
-        Text((241 + self.x_padding, 74), f"{inventory.money}G", 32, Colors.SPRITE, self.inventory,
+        Text((241 + self.x_padding, 74), f"{PlayerData.inventory.money}G", 32, Colors.SPRITE, self.inventory,
              centered=False)
         Sprite((86 + self.x_padding, 80), Assets.images_book["character"], self.inventory, centered=False)
         Sprite((217 + self.x_padding, 80), Assets.images_book["money"], self.inventory, centered=False)
@@ -27,8 +27,9 @@ class Inventory(Scene):
                                  centered=False)
         self.connector_slot = Sprite((205 + self.x_padding, 251), Assets.images_book["connectors"], self.inventory,
                                      centered=False)
-        Text((143 + self.x_padding, 293.5), f"{inventory.how_much('cable')}m", 16, Colors.SPRITE, self.inventory)
-        Text((227 + self.x_padding, 293.5), f"{inventory.how_much('connector')}p", 16, Colors.SPRITE,
+        Text((143 + self.x_padding, 293.5), f"{PlayerData.inventory.how_much('cable')}m", 16, Colors.SPRITE,
+             self.inventory)
+        Text((227 + self.x_padding, 293.5), f"{PlayerData.inventory.how_much('connector')}p", 16, Colors.SPRITE,
              self.inventory)
         Text((449 + self.x_padding, 52.5), "Cable Directo", 16, Colors.SPRITE, self.inventory, shadow=True,
              shadow_opacity=50, shado_color="#A3A7C2")

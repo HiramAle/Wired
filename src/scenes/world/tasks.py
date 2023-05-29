@@ -3,39 +3,6 @@ from typing import Any
 from engine.loader import Loader
 
 
-class Task:
-    def __init__(self, data: dict):
-        self.__data = data
-        self.name: str = data.get("name")
-        self.description: str = data.get("description")
-        self.type: str = data.get("type")
-        self.objective: str = data.get("objective")
-        self.consequence: str = data.get("consequence")
-        self.completed = False
-
-    def __repr__(self):
-        return f"Task ({self.name}, {self.objective})"
-
-    def has_objective(self, objective: str) -> bool:
-        if objective in self.objective:
-            return True
-        print(f"{self.name} doesn't have objective {objective}")
-        return False
-
-    def set(self, key: str, value: Any) -> bool:
-        if key not in self.__data:
-            print(f"{self.name} doesn't have {key} attribute")
-            return False
-        self.__data[key] = value
-        return True
-
-    def get(self, key: str) -> Any:
-        if key not in self.__data:
-            print(f"{self.name} doesn't have {key} attribute")
-            return None
-        return self.__data[key]
-
-
 class TaskManager:
     __tasks: dict[str, Task] = {}
     tasks: dict[str, Task] = {}

@@ -1,21 +1,33 @@
 {
   "dialogs": {
-    "0": [
-      "Hola @, vienes de Routed Inc?",
-      "Soy Ale, trabajo aqui, me dijeron que vendrias",
-      "Trabajaras en el subneteo de",
-      "estos departamentos no es asi?",
-      "Aqui hay 2 cuartos por lo que necesitaras:",
-      "1 cable cruzado y 2 directos,",
-      "asegurate de traerlos antes de hacer el subneteo.",
-      "La mesa de trabajo esta a lado de esas cajas."
-    ],
-    "1": [
-      "Hola de nuevo @"
-    ],
-    "2": [
-      "Así que ya probaste a crear un cable de red?"
-    ]
+    "5": {
+      "text": [
+        "Ya quedó, muchísimas gracias",
+        "Ya has recibido la paga por tu trabajo."
+      ],
+      "type": "mission",
+      "mission_requirement": {
+        "subnetting_1": 1
+      },
+      "new_mission": ""
+    },
+    "4": {
+      "text": [
+        "Hola @, vienes de Routed Inc?",
+        "Soy Ale, trabajo aqui, me dijeron que vendrias",
+        "Trabajaras en el subneteo de",
+        "estos departamentos no es asi?",
+        "Aqui hay 2 cuartos por lo que necesitaras:",
+        "1 cable cruzado y 2 directos,",
+        "asegurate de traerlos antes de hacer el subneteo.",
+        "La mesa de trabajo esta a lado de esas cajas."
+      ],
+      "type": "mission",
+      "mission_requirement": {
+        "subnetting_1": 0
+      },
+      "new_mission": ""
+    }
   },
   "start_zone": "reception"
 }

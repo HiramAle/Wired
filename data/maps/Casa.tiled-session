@@ -93,16 +93,16 @@
         "TMX/Casa_custom.tmx": {
             "expandedObjectLayers": [
                 15,
-                16,
-                11,
                 13,
+                11,
+                16,
                 12
             ],
-            "scale": 1.5,
-            "selectedLayer": 10,
+            "scale": 4,
+            "selectedLayer": 9,
             "viewCenter": {
                 "x": 480,
-                "y": 479.66666666666663
+                "y": 479.875
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -114,39 +114,40 @@
                 15
             ],
             "expandedObjectLayers": [
-                34,
-                35,
+                33,
+                18,
                 31,
-                21,
-                18
+                35,
+                34,
+                21
             ],
-            "scale": 1.5,
-            "selectedLayer": 24,
+            "scale": 2,
+            "selectedLayer": 23,
             "viewCenter": {
-                "x": 1824,
-                "y": 952.3333333333333
+                "x": 424,
+                "y": 1608.75
             }
         },
         "TMX/Company.tmx": {
             "expandedObjectLayers": [
-                14,
                 15,
-                16,
                 13,
-                17
+                17,
+                16,
+                14
             ],
             "scale": 1,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 775,
-                "y": 320.5
+                "x": 1751,
+                "y": 383.5
             }
         },
         "TMX/Tienda_prueba.tmx": {
             "expandedObjectLayers": [
-                14,
                 16,
-                12
+                12,
+                14
             ],
             "scale": 3,
             "selectedLayer": 8,
@@ -157,24 +158,24 @@
         },
         "TMX/Village.tmx": {
             "expandedGroupLayers": [
-                36,
                 46,
-                29,
-                47
+                47,
+                36,
+                29
             ],
             "expandedObjectLayers": [
-                30,
-                29,
-                31,
-                32,
                 13,
+                32,
+                30,
+                31,
+                29,
                 17
             ],
             "scale": 4,
             "selectedLayer": 21,
             "viewCenter": {
-                "x": 960,
-                "y": 1039.875
+                "x": 958,
+                "y": 1134.375
             }
         },
         "TMX/Village.tmx#Singles": {
@@ -182,16 +183,16 @@
         },
         "TMX/reception.tmx": {
             "expandedObjectLayers": [
-                9,
                 13,
-                12,
-                6
+                9,
+                6,
+                12
             ],
             "scale": 2,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 245.5,
-                "y": 369.25
+                "x": 240,
+                "y": 239.75
             }
         },
         "TSX/Basement.tsx": {
@@ -342,9 +343,9 @@
         "TMX/Company.tmx",
         "TMX/reception.tmx",
         "TMX/City.tmx",
+        "TSX/house_singles.tsx",
         "TSX/singles_city.tsx",
         "TSX/company_singles.tsx",
-        "TSX/house_singles.tsx",
         "TSX/singles.tsx",
         "TSX/Tileset_Casa.tsx",
         "TSX/Terrains.tsx"

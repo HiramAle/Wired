@@ -1,9 +1,12 @@
+import random
+
 import pygame
 import src.utils.load as load
 from engine.assets import Assets
 from src.scenes.world.actor import Actor, Emote
 from src.constants.paths import NPC_SPRITE_SHEETS, NPC_DATA
 from engine.input import Input
+from engine.dialog_manager import Dialog
 
 
 class Route:
@@ -35,7 +38,7 @@ class NPC(Actor):
         super().__init__(position, path, [])
         self.name = name
         self.data = load.load_json(f"{NPC_DATA}/{name}.json")
-        self.route = [(200, 200), (200, 500), (200, 200)]
+        self.dialogs: list[Dialog] = [Dialog(dialog_data) for dialog_data in self.data["dialogs"].values()]
         self.routes = []
         self.node_index = 0
         self.speed = 100
@@ -47,46 +50,58 @@ class NPC(Actor):
     def __repr__(self):
         return f"NPC({self.name}, {self.position})"
 
+    def get_dialog(self) -> Dialog:
+        ...
+        # for dialog in self.dialogs.values():
+        #     if requirement not in dialog.requirement.keys():
+        #         continue
+        #     print(f"{dialog.requirement[requirement]} == {status}")
+        #     if dialog.requirement[requirement] == status:
+        #         print(f"Returning {dialog.text} from npc")
+        #         return dialog
+
+    def generic_dialog(self) -> Dialog:
+        from engine.playerdata import PlayerData
+        generic_dialogs = [dialog for dialog in self.dialogs if dialog.type == "generic"]
+        dialogs = []
+        for dialog in generic_dialogs:
+            if not dialog.requirement:
+                dialogs.append(dialog)
+                continue
+            requirements_done = True
+            for requirement, status in dialog.requirement.items():
+                # Return the task from the player tasks, or None if the player doesn't have the task
+                task = PlayerData.tasks.get(requirement)
+                if not task:
+                    requirements_done = False
+                    break
+                if status == 1:
+                    if not task.completed:
+                        requirements_done = False
+                elif status == 0:
+                    if task.completed:
+                        requirements_done = False
+            if requirements_done:
+                dialogs.append(dialog)
+
+        return random.choice(dialogs)
+
+    def task_complete_dialog(self, mission_id: str) -> Dialog:
+        dialogs = [dialog for dialog in self.dialogs if dialog.type == "mission_complete"]
+        print(self.name, dialogs)
+        for dialog in dialogs:
+            requirement_mission = list(dialog.requirement.keys())[0]
+            print(f"Is {requirement_mission} = {mission_id}? {requirement_mission == mission_id}")
+            if list(dialog.requirement.keys())[0] == mission_id:
+                return dialog
+
     @property
     def player_distance(self) -> float:
         return (self.position - self.player.position).magnitude()
 
-    @property
-    def current_node(self) -> tuple | None:
-        if self.node_index < len(self.route):
-            return self.route[self.node_index]
-        return None
-
-    @property
-    def target(self) -> pygame.Vector2:
-        return pygame.Vector2(self.current_node)
-
     def interact(self) -> bool:
         if self.player_distance <= 50 and Input.keyboard.keys["interact"]:
             return True
-
-    def pathing(self, daytime: int):
-        ...
-        # for route in self.routes:
-        #     if route.time == int(daytime):
-        #         self.active_route = route
-        #         break
-        # if not self.active_route:
-        #     return
-        # if self.active_route.finished:
-        #     self.active_route.reset()
-        #     self.direction = "down"
-        #     self.action = "sleep"
-        #     self.x, self.y = 255, 222
-        #     self.shadow = None
-        #     self.active_route = None
-        #     self.paused = False
-        #     return
-        # self.movement = self.active_route.target - self.position
-        # if self.movement.magnitude() < 1:
-        #     self.position = self.active_route.target
-        #     self.movement.x, self.movement.y = 0, 0
-        #     self.active_route.next()
 
     def update(self):
         self.update_status()

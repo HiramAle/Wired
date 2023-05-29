@@ -1,20 +1,62 @@
 {
   "dialogs": {
-    "0": [
-      "@, bienvenido a Routed Inc!",
-      "Antes de darte un trabajo",
-      "Prueba las estaciones de trabajo",
-      "Para practicar tus habilidades en Redes!"
-    ],
-    "1": [
-      "Perfecto, tu primer trabajo sera",
-      "en un lugar cerca de tu casa.",
-      "En los departamentos de la empresa",
-      "habla con Ale, ella te dira mas."
-    ],
-    "2": [
-      "Así que ya probaste a crear un cable de red?"
-    ]
+    "6": {
+      "text": [
+        "Escuche que te fue de maravilla",
+        "Tendras un futuro exitoso!",
+        "Tu siguiente tarea en realidad son",
+        "varias tareas.",
+        "Explora la ciudad y el pueblo",
+        "completando estos trabajos",
+        "para la empresa.",
+        "Muchas felicidades!"
+      ],
+      "type": "mission",
+      "mission_requirement": {
+        "subnetting_1": 1
+      },
+      "new_mission": ""
+    },
+    "2": {
+      "text": [
+        " @, bienvenido a Routed Inc!",
+        "Yo soy Roy",
+        "Antes de darte un trabajo",
+        "Prueba las estaciones de trabajo",
+        "Para practicar tus habilidades en Redes!",
+        "En especial la de crear cables y",
+        "subnetear, te seran de ayuda",
+        "en tu proximo trabajo.",
+        "Por que no creas:",
+        "1 cable directo?"
+      ],
+      "type": "mission_complete",
+      "mission_requirement": {
+        "meet_roy": 1
+      },
+      "new_mission": "create_straight_cable"
+    },
+    "3": {
+      "text": [
+        "Perfecto, tu primer trabajo sera",
+        "en un lugar cerca de tu casa.",
+        "En los departamentos de la empresa",
+        "habla con Ale, ella te dira mas."
+      ],
+      "type": "mission_complete",
+      "mission_requirement": {
+        "create_crossover_cable": 1
+      },
+      "new_mission": "subnetting_1"
+    },
+    "11": {
+      "text": [
+        "Hola"
+      ],
+      "type": "generic",
+      "mission_requirement": {},
+      "new_mission": ""
+    }
   },
   "start_zone": "company"
 }

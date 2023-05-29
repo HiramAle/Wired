@@ -14,11 +14,12 @@ from engine.audio import AudioManager
 from src.scenes.world.player import Player
 from src.scenes.world.time_manager import TimeManager
 from src.scenes.world.zone_manager import ZoneManager
-from src.scenes.world.tasks import TaskManager, Task
+# from src.scenes.world.tasks import TaskManager, Task
 from engine.save_manager import instance as save_manager
 from engine.ui.text import Text
-from engine.inventory import Inventory
+# from engine.inventory import Inventory
 from src.scenes.dialog_scene.portrait import PlayerPortrait
+from engine.playerdata import PlayerData
 
 
 class NightEffect(Sprite):
@@ -42,35 +43,24 @@ class NightEffect(Sprite):
 class World(Scene):
     def __init__(self):
         super().__init__("world")
-        # AudioManager.play_music("exploration")
-        # pygame.mixer.music.set_volume(1)
         self.night = NightEffect()
-        # TaskManager.create_task(0, {"name": "Conoce a Kat",
-        #                             "description": "Explora el pueblo y la ciudad para conocer a tus amigos.",
-        #                             "type": "talk",
-        #                             "objective": "kat",
-        #                             "consequence": "kat_known"})
-        # TaskManager.create_task(1, {"name": "Conoce a Chencho",
-        #                             "description": "Explora el pueblo y la ciudad para conocer a tus amigos.",
-        #                             "type": "talk",
-        #                             "objective": "chencho",
-        #                             "consequence": "chencho_known"})
-        # TaskManager.add_task(0)
         # ----------
         self.player = Player((0, 0), [], [], [])
-        self.npc_list = [NPC("Kat", (0, 0), self.player), NPC("Arian", (0, 0), self.player),
-                         NPC("Chencho", (0, 0), self.player), NPC("Altair", (0, 0), self.player),
-                         NPC("Kike", (0, 0), self.player), NPC("Jordi", (0, 0), self.player),
-                         NPC("Letty", (0, 0), self.player), NPC("Ale", (0, 0), self.player),
-                         NPC("Roy", (0, 0), self.player), NPC("Liz", (0, 0), self.player),
-                         NPC("Angel", (0, 0), self.player), NPC("Zazu", (0, 0), self.player),
-                         NPC("Juliette", (0, 0), self.player), NPC("Cecy", (0, 0), self.player),
-                         NPC("Juan", (0, 0), self.player)]
+        # self.npc_list = [NPC("Kat", (0, 0), self.player), NPC("Arian", (0, 0), self.player),
+        #                  NPC("Chencho", (0, 0), self.player), NPC("Altair", (0, 0), self.player),
+        #                  NPC("Kike", (0, 0), self.player), NPC("Jordi", (0, 0), self.player),
+        #                  NPC("Letty", (0, 0), self.player), NPC("Ale", (0, 0), self.player),
+        #                  NPC("Roy", (0, 0), self.player), NPC("Liz", (0, 0), self.player),
+        #                  NPC("Angel", (0, 0), self.player), NPC("Zazu", (0, 0), self.player),
+        #                  NPC("Juliette", (0, 0), self.player), NPC("Cecy", (0, 0), self.player),
+        #                  NPC("Juan", (0, 0), self.player)]
+        self.npc_list = [NPC("Kat", (0, 0), self.player), NPC("Roy", (0, 0), self.player),
+                         NPC("Chencho", (0, 0), self.player)]
         self.zone = Zone("players_house", self.npc_list, self.player, self.new_zone)
         # ----------
         self.overlay = Assets.images_world["overlay"]
         self.hour = Text((93, 32), TimeManager.formatted_time(), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
-        self.money = Text((93, 50), str(Inventory.money), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
+        self.money = Text((93, 50), str(PlayerData.inventory.money), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
         self.portrait = PlayerPortrait()
         self.next_zone: Zone | None = None
 
@@ -125,10 +115,11 @@ class World(Scene):
         self.fade_surface.set_alpha(self.alpha)
         self.display.blit(self.fade_surface, (0, 0))
 
-    def new_zone(self, zone: str):
+    def new_zone(self, zone: str, before=""):
         self.zone.player.can_move = False
         self.zone.player.action = "idle"
-        self.next_zone = Zone(zone, self.npc_list, self.player, self.new_zone, self.zone.name)
+        zone_before = self.zone.name if before == "" else before
+        self.next_zone = Zone(zone, self.npc_list, self.player, self.new_zone, zone_before)
 
     def update(self):
         self.update_zone_transition()
@@ -139,7 +130,7 @@ class World(Scene):
 
         if Input.keyboard.keys["esc"]:
             from engine.scene.scene_manager import SceneManager
-            SceneManager.change_scene(Pause())
+            SceneManager.change_scene(Pause(self.new_zone))
 
         self.check_for_end_day()
 
@@ -152,7 +143,7 @@ class World(Scene):
         self.display.blit(self.zone.display, (0, 0))
         self.display.blit(self.overlay, (16, 16))
         self.hour.text = TimeManager.formatted_time()
-        self.money.text = str(Inventory.money)
+        self.money.text = str(PlayerData.inventory.money)
         self.hour.render(self.display)
         self.money.render(self.display)
         self.portrait.render(self.display)
