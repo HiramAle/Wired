@@ -6,10 +6,10 @@
   "time": 0,
   "money": 200,
   "inventory": {
-    "cable": 5,
-    "connector": 10,
-    "cable_crossover_3": 5,
-    "cable_straight_3": 5
+    "cable": 3,
+    "connector": 6,
+    "cable_crossover_3": 6,
+    "cable_straight_3": 6
   },
   "tutorials": {
     "cables": false,
@@ -20,7 +20,12 @@
     "meet_kat": true,
     "mysteries_of_celestia": false,
     "meet_chencho": true,
-    "meet_roy": false
+    "meet_roy": true,
+    "create_straight_cable": true,
+    "roy_straight_cable": true,
+    "create_crossover_cable": true,
+    "roy_crossover_cable": true,
+    "meet_ale": false
   },
   "status": {}
 }

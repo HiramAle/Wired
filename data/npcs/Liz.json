@@ -1,17 +1,5 @@
 {
   "dialogs": {
-    "0": [
-      "@, bienvenido a Routed Inc!"
-    ],
-    "1": [
-      "Perfecto, tu primer trabajo sera",
-      "en un lugar cerca de tu casa.",
-      "En los departamentos de la empresa",
-      "habla con Ale, ella te dira mas."
-    ],
-    "2": [
-      "Así que ya probaste a crear un cable de red?"
-    ]
   },
   "start_zone": "company"
 }

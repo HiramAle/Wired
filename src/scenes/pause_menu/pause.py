@@ -13,7 +13,7 @@ from src.scenes.pause_menu.exit import Exit
 
 
 class Pause(Scene):
-    def __init__(self, change_zone: callable):
+    def __init__(self, change_zone: callable = None):
         super().__init__("test")
         index = 0
         self.categories = {"Inventario": Inventory(), "Trabajos": Jobs(), "Mapa": Map(change_zone),

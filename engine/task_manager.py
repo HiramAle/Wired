@@ -12,6 +12,7 @@ class Task:
         self.objective: str = data.get("objective")
         self.npcs: list[str] = data.get("npcs")
         self.consequence: str = data.get("consequence")
+        self.next_task: str = data.get("next_task")
         self.completed = False
 
     def __repr__(self):
@@ -38,5 +39,6 @@ class TaskManager:
         if not cls.exists(task_id):
             return None
         return cls.tasks[task_id]
+
 
 

@@ -15,16 +15,21 @@
       "type": "mission_complete",
       "mission_requirement": {
         "meet_chencho": 1
-      },
-      "new_mission": "meet_roy"
+      }
     },
     "10": {
       "text": [
         "Hola"
       ],
       "type": "generic",
-      "mission_requirement": {},
-      "new_mission": ""
+      "mission_requirement": {}
+    },
+    "11": {
+      "text": [
+        "Hola"
+      ],
+      "type": "generic",
+      "mission_requirement": {}
     }
   },
   "start_zone": "city"

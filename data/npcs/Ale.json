@@ -2,14 +2,19 @@
   "dialogs": {
     "5": {
       "text": [
-        "Ya quedó, muchísimas gracias",
-        "Ya has recibido la paga por tu trabajo."
+        "Hola @, vienes de Routed Inc?",
+        "Soy Ale, trabajo aqui, me dijeron que vendrias",
+        "Trabajaras en el subneteo de",
+        "estos departamentos no es asi?",
+        "Aqui hay 2 cuartos por lo que necesitaras:",
+        "1 cable cruzado y 2 directos,",
+        "asegurate de traerlos antes de hacer el subneteo.",
+        "La mesa de trabajo esta a lado de esas cajas."
       ],
-      "type": "mission",
+      "type": "mission_complete",
       "mission_requirement": {
-        "subnetting_1": 1
-      },
-      "new_mission": ""
+        "meet_ale": 1
+      }
     },
     "4": {
       "text": [
@@ -22,11 +27,20 @@
         "asegurate de traerlos antes de hacer el subneteo.",
         "La mesa de trabajo esta a lado de esas cajas."
       ],
-      "type": "mission",
+      "type": "mission_complete",
       "mission_requirement": {
-        "subnetting_1": 0
-      },
-      "new_mission": ""
+        "meet_ale": 1
+      }
+    },
+    "6": {
+      "text": [
+        "Ya quedó, muchísimas gracias",
+        "Ya has recibido la paga por tu trabajo."
+      ],
+      "type": "mission_complete",
+      "mission_requirement": {
+        "subnetting_reception": 1
+      }
     }
   },
   "start_zone": "reception"

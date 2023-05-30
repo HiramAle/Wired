@@ -83,7 +83,8 @@ class NPC(Actor):
                         requirements_done = False
             if requirements_done:
                 dialogs.append(dialog)
-
+        if not dialogs:
+            return Dialog({"text": ["Hola"], "type": "generic", "mission_requirement": {}})
         return random.choice(dialogs)
 
     def task_complete_dialog(self, mission_id: str) -> Dialog:

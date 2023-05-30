@@ -57,6 +57,8 @@ def import_dialogs():
             if attribute == data.columns[0]:
                 continue
             if attribute == "npc_id":
+                if pandas.isnull(value):
+                    break
                 npc_id = value
                 continue
             if attribute == "text":
@@ -71,11 +73,12 @@ def import_dialogs():
                     mission, status = value.split(" ")
                     value = {mission: int(status)}
                 print(value)
-            if attribute == "new_mission":
+            if attribute == "add_mission":
                 if pandas.isnull(value):
                     value = ""
             dialog[attribute] = value
-        # print(npc_id, dialog)
+        if npc_id == "":
+            continue
         filename = f"../npcs/{npc_id.title()}.json"
         npc_json = Loader.load_json(filename)
         npc_json["dialogs"][str(row.iloc[0])] = dialog

@@ -70,7 +70,6 @@ class GameMap:
                     continue
                 position = tiled_object.x, tiled_object.y
                 properties = tiled_object.properties
-                # TODO: Add collider list for TiledObject
                 collider_objects = tiled_object.properties["colliders"] if "colliders" in properties else []
                 collider_list = []
                 for collider_object in collider_objects:

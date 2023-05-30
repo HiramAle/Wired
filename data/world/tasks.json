@@ -8,7 +8,8 @@
       "kat"
     ],
     "objective": "kat",
-    "consequence": "kat_known"
+    "consequence": "kat_known",
+    "next_task": "meet_chencho"
   },
   "meet_chencho": {
     "id": "meet_chencho",
@@ -20,7 +21,8 @@
       "kat"
     ],
     "objective": "chencho",
-    "consequence": "chencho_known"
+    "consequence": "chencho_known",
+    "next_task": "meet_roy"
   },
   "meet_roy": {
     "id": "meet_roy",
@@ -33,7 +35,8 @@
       "roy"
     ],
     "objective": "roy",
-    "consequence": "roy_known"
+    "consequence": "roy_known",
+    "next_task": "create_straight_cable"
   },
   "create_straight_cable": {
     "id": "create_straight_cable",
@@ -42,25 +45,80 @@
     "type": "has",
     "npcs": [],
     "objective": "cable_straight 1",
-    "consequence": "direct_cable_tutorial"
+    "consequence": "direct_cable_tutorial",
+    "next_task": "roy_straight_cable"
+  },
+  "roy_straight_cable": {
+    "id": "roy_straight_cable",
+    "name": "Habla con Roy",
+    "description": "Cuentale a Roy que has creado un cable directo!",
+    "type": "talk",
+    "npcs": [
+      "roy"
+    ],
+    "objective": "roy",
+    "consequence": NaN,
+    "next_task": "create_crossover_cable"
   },
   "create_crossover_cable": {
     "id": "create_crossover_cable",
     "name": "Crea dos cables cruzados",
     "description": "Crea dos cables cruzados",
     "type": "has",
-    "npcs": [],
+    "npcs": [
+      "roy"
+    ],
     "objective": "cable_crossover 2",
-    "consequence": "crossover_cable_tutorial"
+    "consequence": NaN,
+    "next_task": "roy_crossover_cable"
+  },
+  "roy_crossover_cable": {
+    "id": "roy_crossover_cable",
+    "name": "Habla con Roy",
+    "description": "Cuentale a Roy que has creado dos cables cruzados!",
+    "type": "talk",
+    "npcs": [
+      "roy"
+    ],
+    "objective": "roy",
+    "consequence": NaN,
+    "next_task": "meet_ale"
+  },
+  "meet_ale": {
+    "id": "meet_ale",
+    "name": "Habla con Ale",
+    "description": "Has hablado con Roy y te ha dado tu primer trabajo en Routed Inc. Dirigete a la recepción de los edificios de la empresa, cerca de tu casa, y habla con Ale la encargada de la recepción.",
+    "type": "talk",
+    "npcs": [
+      "ale"
+    ],
+    "objective": "ale",
+    "consequence": NaN,
+    "next_task": "subnetting_reception"
   },
   "subnetting_reception": {
     "id": "subnetting_reception",
-    "name": "El primer trabajo",
-    "description": "Has hablado con Roy y te ha dado tu primer trabajo en Routed Inc. Dirigete a la recepción de los edificios de la empresa, cerca de tu casa, y habla con Ale la encargada de la recepción.",
+    "name": "Subnetea la red de la Recepcíon",
+    "description": "Ale te ha contado de que va este nuevo trabajo, tienes que realizar el subneteo de la Recepción, asegurate de tener los cables necesarios para comenzar.",
     "type": "subnetting",
-    "npcs": [],
+    "npcs": [
+      "ale"
+    ],
     "objective": "reception",
-    "consequence": "subnetting_reception"
+    "consequence": NaN,
+    "next_task": "roy_subnetting_reception"
+  },
+  "roy_subnetting_reception": {
+    "id": "roy_subnetting_reception",
+    "name": "Vuelve con Roy",
+    "description": "Has terminado tu primer trabajo de subneto, vuelve a contarselo a Roy.",
+    "type": "talk",
+    "npcs": [
+      "roy"
+    ],
+    "objective": "roy",
+    "consequence": NaN,
+    "next_task": NaN
   },
   "mysteries_of_celestia": {
     "id": "mysteries_of_celestia",
@@ -69,7 +127,8 @@
     "type": "talk",
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN
+    "consequence": NaN,
+    "next_task": NaN
   },
   "7": {
     "id": 7,
@@ -78,7 +137,8 @@
     "type": "routing",
     "npcs": [],
     "objective": "supermarket",
-    "consequence": "routing_supermarket_done"
+    "consequence": "routing_supermarket_done",
+    "next_task": NaN
   },
   "8": {
     "id": 8,
@@ -87,7 +147,8 @@
     "type": "talk",
     "npcs": [],
     "objective": "roy",
-    "consequence": "roy_talk_2"
+    "consequence": "roy_talk_2",
+    "next_task": NaN
   },
   "9": {
     "id": 9,
@@ -96,7 +157,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN
+    "consequence": NaN,
+    "next_task": NaN
   },
   "10": {
     "id": 10,
@@ -105,7 +167,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN
+    "consequence": NaN,
+    "next_task": NaN
   },
   "11": {
     "id": 11,
@@ -114,7 +177,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN
+    "consequence": NaN,
+    "next_task": NaN
   },
   "12": {
     "id": 12,
@@ -123,7 +187,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN
+    "consequence": NaN,
+    "next_task": NaN
   },
   "13": {
     "id": 13,
@@ -132,7 +197,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN
+    "consequence": NaN,
+    "next_task": NaN
   },
   "14": {
     "id": 14,
@@ -141,7 +207,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN
+    "consequence": NaN,
+    "next_task": NaN
   },
   "15": {
     "id": 15,
@@ -150,7 +217,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN
+    "consequence": NaN,
+    "next_task": NaN
   },
   "16": {
     "id": 16,
@@ -159,7 +227,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN
+    "consequence": NaN,
+    "next_task": NaN
   },
   "17": {
     "id": 17,
@@ -168,7 +237,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN
+    "consequence": NaN,
+    "next_task": NaN
   },
   "18": {
     "id": 18,
@@ -177,7 +247,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN
+    "consequence": NaN,
+    "next_task": NaN
   },
   "19": {
     "id": 19,
@@ -186,6 +257,7 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN
+    "consequence": NaN,
+    "next_task": NaN
   }
 }

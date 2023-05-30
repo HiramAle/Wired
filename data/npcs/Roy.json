@@ -11,11 +11,10 @@
         "para la empresa.",
         "Muchas felicidades!"
       ],
-      "type": "mission",
+      "type": "mission_complete",
       "mission_requirement": {
-        "subnetting_1": 1
-      },
-      "new_mission": ""
+        "roy_subnetting_reception": 1
+      }
     },
     "2": {
       "text": [
@@ -33,10 +32,26 @@
       "type": "mission_complete",
       "mission_requirement": {
         "meet_roy": 1
-      },
-      "new_mission": "create_straight_cable"
+      }
     },
     "3": {
+      "text": [
+        "Perfecto, ahora crea:",
+        "2 cables cruzados"
+      ],
+      "type": "mission_complete",
+      "mission_requirement": {
+        "roy_straight_cable": 1
+      }
+    },
+    "11": {
+      "text": [
+        "Hola"
+      ],
+      "type": "generic",
+      "mission_requirement": {}
+    },
+    "4": {
       "text": [
         "Perfecto, tu primer trabajo sera",
         "en un lugar cerca de tu casa.",
@@ -45,17 +60,31 @@
       ],
       "type": "mission_complete",
       "mission_requirement": {
-        "create_crossover_cable": 1
-      },
-      "new_mission": "subnetting_1"
+        "roy_crossover_cable": 1
+      }
     },
-    "11": {
+    "7": {
+      "text": [
+        "Escuche que te fue de maravilla",
+        "Tendras un futuro exitoso!",
+        "Tu siguiente tarea en realidad son",
+        "varias tareas.",
+        "Explora la ciudad y el pueblo",
+        "completando estos trabajos",
+        "para la empresa.",
+        "Muchas felicidades!"
+      ],
+      "type": "mission_complete",
+      "mission_requirement": {
+        "roy_subnetting_reception": 1
+      }
+    },
+    "12": {
       "text": [
         "Hola"
       ],
       "type": "generic",
-      "mission_requirement": {},
-      "new_mission": ""
+      "mission_requirement": {}
     }
   },
   "start_zone": "company"

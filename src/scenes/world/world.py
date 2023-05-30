@@ -1,4 +1,7 @@
 from __future__ import annotations
+
+import random
+
 import pygame
 from engine.time import Time
 from engine.input import Input
@@ -6,7 +9,7 @@ from engine.assets import Assets
 from engine.scene.scene_manager import Scene
 from src.constants.colors import BLACK_SPRITE
 from src.scenes.world.npc import NPC
-from src.scenes.world.sprite import Sprite
+from engine.objects.sprite import Sprite, SpriteGroup
 from src.scenes.world.zone import Zone
 from engine.constants import Colors
 from src.scenes.pause_menu.pause import Pause
@@ -20,6 +23,29 @@ from engine.ui.text import Text
 # from engine.inventory import Inventory
 from src.scenes.dialog_scene.portrait import PlayerPortrait
 from engine.playerdata import PlayerData
+from engine.time import Timer
+
+
+class Notification(Sprite):
+    def __init__(self, position: tuple, text: str, seconds: int, *groups):
+        super().__init__(position, Assets.images_misc["notification"], *groups)
+        self.pivot = self.Pivot.TOP_LEFT
+        self.text = Text((self.x + 11, self.y + 15), text, 16, Colors.SPRITE, centered=False, shadow=True,
+                         shadow_opacity=50, max_width=140)
+        self.timer = Timer(seconds)
+        self.timer.start()
+
+    def __repr__(self):
+        return f"Notification ({self.text})"
+
+    def update(self, *args, **kwargs):
+        self.text.y = self.y + 15
+        if self.timer.update():
+            self.kill()
+
+    def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
+        super().render(display)
+        self.text.render(display)
 
 
 class NightEffect(Sprite):
@@ -44,19 +70,20 @@ class World(Scene):
     def __init__(self):
         super().__init__("world")
         self.night = NightEffect()
+        self.notifications = SpriteGroup()
         # ----------
         self.player = Player((0, 0), [], [], [])
-        # self.npc_list = [NPC("Kat", (0, 0), self.player), NPC("Arian", (0, 0), self.player),
-        #                  NPC("Chencho", (0, 0), self.player), NPC("Altair", (0, 0), self.player),
-        #                  NPC("Kike", (0, 0), self.player), NPC("Jordi", (0, 0), self.player),
-        #                  NPC("Letty", (0, 0), self.player), NPC("Ale", (0, 0), self.player),
-        #                  NPC("Roy", (0, 0), self.player), NPC("Liz", (0, 0), self.player),
-        #                  NPC("Angel", (0, 0), self.player), NPC("Zazu", (0, 0), self.player),
-        #                  NPC("Juliette", (0, 0), self.player), NPC("Cecy", (0, 0), self.player),
-        #                  NPC("Juan", (0, 0), self.player)]
-        self.npc_list = [NPC("Kat", (0, 0), self.player), NPC("Roy", (0, 0), self.player),
-                         NPC("Chencho", (0, 0), self.player)]
-        self.zone = Zone("players_house", self.npc_list, self.player, self.new_zone)
+        self.npc_list = [NPC("Kat", (0, 0), self.player), NPC("Arian", (0, 0), self.player),
+                         NPC("Chencho", (0, 0), self.player), NPC("Altair", (0, 0), self.player),
+                         NPC("Kike", (0, 0), self.player), NPC("Jordi", (0, 0), self.player),
+                         NPC("Letty", (0, 0), self.player), NPC("Ale", (0, 0), self.player),
+                         NPC("Roy", (0, 0), self.player), NPC("Liz", (0, 0), self.player),
+                         NPC("Angel", (0, 0), self.player), NPC("Zazu", (0, 0), self.player),
+                         NPC("Juliette", (0, 0), self.player), NPC("Cecy", (0, 0), self.player),
+                         NPC("Juan", (0, 0), self.player)]
+        # self.npc_list = [NPC("Kat", (0, 0), self.player), NPC("Roy", (0, 0), self.player),
+        #                  NPC("Chencho", (0, 0), self.player)]
+        self.zone = Zone("players_house", self.npc_list, self.player, self.new_zone, self.notify, self)
         # ----------
         self.overlay = Assets.images_world["overlay"]
         self.hour = Text((93, 32), TimeManager.formatted_time(), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
@@ -73,6 +100,18 @@ class World(Scene):
         self.zone.player.can_move = True
         self.zone.start_zone()
         self.transitioning = False
+        self.notification_spacing = 60
+        PlayerData.notify = self.notify
+
+    def notify(self, text: str, duration: int):
+        starting_x = 10
+        starting_y = 127
+        spacing = 70
+        y_notification = starting_y - (len(self.notifications.sprites()) * spacing)
+        Notification((starting_x, y_notification), text, duration, self.notifications)
+        for notification in self.notifications.sprites():
+            notification: Notification
+            print(f"{notification.text.text}")
 
     def check_for_end_day(self):
         if not TimeManager.day_ended or self.transitioning:
@@ -119,7 +158,7 @@ class World(Scene):
         self.zone.player.can_move = False
         self.zone.player.action = "idle"
         zone_before = self.zone.name if before == "" else before
-        self.next_zone = Zone(zone, self.npc_list, self.player, self.new_zone, zone_before)
+        self.next_zone = Zone(zone, self.npc_list, self.player, self.new_zone, self.notify, self, zone_before)
 
     def update(self):
         self.update_zone_transition()
@@ -127,6 +166,7 @@ class World(Scene):
         TimeManager.update()
         self.night.update()
         self.portrait.update()
+        self.notifications.update()
 
         if Input.keyboard.keys["esc"]:
             from engine.scene.scene_manager import SceneManager
@@ -135,7 +175,15 @@ class World(Scene):
         self.check_for_end_day()
 
         if Input.keyboard.keys["backspace"]:
-            self.portrait.status = "talk"
+            # self.portrait.status = "talk"
+            self.notify(str(random.randint(0, 10)), 3)
+
+    def render_notifications(self, display: pygame.Surface):
+        starting_y = 280
+        spacing = 70
+        for index, notification in enumerate(self.notifications.sprites()):
+            notification.y = starting_y - (index * spacing)
+        self.notifications.render(display)
 
     def render(self) -> None:
         # Render zone
@@ -147,6 +195,7 @@ class World(Scene):
         self.hour.render(self.display)
         self.money.render(self.display)
         self.portrait.render(self.display)
+        self.render_notifications(self.display)
         self.render_zone_transition()
         if self.zone.location_type == "outside":
             self.night.render(self.display)

@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TMX/City.tmx",
+    "activeFile": "TMX/Company.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "Todos los archivos (*)",
@@ -121,11 +121,11 @@
                 34,
                 21
             ],
-            "scale": 2,
-            "selectedLayer": 23,
+            "scale": 0.25,
+            "selectedLayer": 24,
             "viewCenter": {
-                "x": 424,
-                "y": 1608.75
+                "x": 1944,
+                "y": 1030
             }
         },
         "TMX/Company.tmx": {
@@ -136,11 +136,11 @@
                 16,
                 14
             ],
-            "scale": 1,
+            "scale": 11,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 1751,
-                "y": 383.5
+                "x": 857.5454545454545,
+                "y": 562.6818181818182
             }
         },
         "TMX/Tienda_prueba.tmx": {
@@ -150,10 +150,10 @@
                 14
             ],
             "scale": 3,
-            "selectedLayer": 8,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 480,
-                "y": 319.8333333333333
+                "x": 463.99999999999994,
+                "y": 236.16666666666669
             }
         },
         "TMX/Village.tmx": {
@@ -171,11 +171,11 @@
                 29,
                 17
             ],
-            "scale": 4,
+            "scale": 1,
             "selectedLayer": 21,
             "viewCenter": {
-                "x": 958,
-                "y": 1134.375
+                "x": 1351,
+                "y": 710.5
             }
         },
         "TMX/Village.tmx#Singles": {
@@ -189,10 +189,10 @@
                 12
             ],
             "scale": 2,
-            "selectedLayer": 10,
+            "selectedLayer": 9,
             "viewCenter": {
-                "x": 240,
-                "y": 239.75
+                "x": 239,
+                "y": 238.75
             }
         },
         "TSX/Basement.tsx": {
@@ -335,14 +335,14 @@
         "TMX/Company.tmx"
     ],
     "project": "Casa.tiled-project",
-    "property.type": "bool",
+    "property.type": "string",
     "recentFiles": [
         "TMX/Village.tmx",
         "TMX/Casa_custom.tmx",
         "TMX/Tienda_prueba.tmx",
-        "TMX/Company.tmx",
-        "TMX/reception.tmx",
         "TMX/City.tmx",
+        "TMX/reception.tmx",
+        "TMX/Company.tmx",
         "TSX/house_singles.tsx",
         "TSX/singles_city.tsx",
         "TSX/company_singles.tsx",

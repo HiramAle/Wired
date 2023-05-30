@@ -444,9 +444,10 @@
    </properties>
    <point/>
   </object>
-  <object id="428" name="Angel" type="npc_spawn" x="988" y="531">
+  <object id="428" name="Angel" type="npc_spawn" x="873" y="568">
    <properties>
-    <property name="direction" value="down"/>
+    <property name="action" value="sit_1"/>
+    <property name="direction" value="right"/>
    </properties>
    <point/>
   </object>

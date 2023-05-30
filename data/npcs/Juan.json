@@ -1,14 +1,5 @@
 {
   "dialogs": {
-    "0": [
-      "Hola"
-    ],
-    "1": [
-      "Hola de nuevo @"
-    ],
-    "2": [
-      "Así que ya probaste a crear un cable de red?"
-    ]
   },
   "start_zone": "city"
 }

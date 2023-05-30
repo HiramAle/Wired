@@ -8,10 +8,12 @@ from engine.playerdata import PlayerData
 
 
 class DialogScene(Scene):
-    def __init__(self, npc: NPC, zone):
+    def __init__(self, npc: NPC, zone, world):
         super().__init__("dialog")
         self.dialog_box = DialogBox(npc, self.choose_dialog(npc).text)
         self.portrait = Portrait(npc.name)
+        self.zone = zone
+        self.world = world
 
     @staticmethod
     def choose_dialog(npc: NPC) -> Dialog:
@@ -22,38 +24,12 @@ class DialogScene(Scene):
             print(f"Reviewing task {task.id}")
             if npc.name.lower() == task.objective:
                 # Complete task
-                task.completed = True
+                PlayerData.complete_task(task.id)
                 # Add new mission to player
                 dialog = npc.task_complete_dialog(task.id)
-                if dialog.new_mission != "":
-                    PlayerData.tasks.add_task(dialog.new_mission)
                 return dialog
                 # If not, return a generic Dialog
         return npc.generic_dialog()
-
-        # if npc.name.lower() not in task.npcs:
-        #     return npc.get_generic_dialog()
-        #
-        # if not npc.name.lower() == task.objective:
-        #     return npc.get_dialog(task.id, 1)
-        # return npc.get_dialog(task.id, 0)
-
-        # if npc.name.lower() in task.npcs:
-        #     if npc.name.lower() == task.objective:
-        #         if task.completed:
-        #             return npc.get_dialog(task.id, 1)
-        #     else:
-        #         return npc.get_dialog(task.id, 0)
-        # else:
-        #     return npc.get_generic_dialog()
-        # if npc.name.lower() not in task.npcs:
-        #     return npc.get_generic_dialog()
-        # if npc.name.lower() == task.objective:
-        #     print("Completing task")
-        #     task.completed = True
-        # if task.completed:
-        #     print("Task completed")
-        #     return npc.get_dialog(task.id, 1)
 
     def update(self) -> None:
         self.dialog_box.update()
@@ -61,7 +37,12 @@ class DialogScene(Scene):
             from engine.scene.scene_manager import SceneManager
             SceneManager.exit_scene()
         self.portrait.update()
+        self.zone.dialog_update()
+        self.world.notifications.update()
 
     def render(self) -> None:
+        self.zone.render()
+        self.display.blit(self.zone.display, (0, 0))
         self.dialog_box.render(self.display)
         self.portrait.render(self.display)
+        self.world.render_notifications(self.display)

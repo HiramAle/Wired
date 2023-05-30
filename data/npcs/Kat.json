@@ -14,8 +14,7 @@
       "type": "mission_complete",
       "mission_requirement": {
         "meet_kat": 1
-      },
-      "new_mission": "meet_chencho"
+      }
     },
     "7": {
       "text": [
@@ -24,26 +23,32 @@
       "type": "generic",
       "mission_requirement": {
         "meet_chencho": 0
-      },
-      "new_mission": ""
+      }
     },
     "8": {
+      "text": [
+        "Ya has hablado con Chencho?"
+      ],
+      "type": "generic",
+      "mission_requirement": {
+        "meet_chencho": 0
+      }
+    },
+    "9": {
       "text": [
         "Espero que te haya ido bien en tu primer dia"
       ],
       "type": "generic",
       "mission_requirement": {
         "meet_chencho": 1
-      },
-      "new_mission": ""
+      }
     },
-    "9": {
+    "10": {
       "text": [
         "Hola"
       ],
       "type": "generic",
-      "mission_requirement": {},
-      "new_mission": ""
+      "mission_requirement": {}
     }
   },
   "start_zone": "players_house"

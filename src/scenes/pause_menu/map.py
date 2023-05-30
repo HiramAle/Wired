@@ -55,7 +55,7 @@ class Map(Scene):
     def update(self) -> None:
         for marker in self.markers.sprites():
             marker: Marker
-            if marker.clicked:
+            if marker.clicked and self.change_zone:
                 self.change_zone(marker.zone, marker.before)
                 from engine.scene.scene_manager import SceneManager
                 SceneManager.exit_scene()
