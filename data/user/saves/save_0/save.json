@@ -1,19 +1,19 @@
 {
   "sprite_sheet": "data/user/saves/save_0/sprite_sheet.png",
   "portrait": "data/user/saves/save_0/portrait.png",
-  "name": "Gris",
-  "pronoun": "ella",
+  "name": "Brandon",
+  "pronoun": "el",
   "time": 0,
-  "money": 200,
+  "money": 10,
   "inventory": {
-    "cable": 3,
-    "connector": 6,
-    "cable_crossover_3": 6,
-    "cable_straight_3": 6
+    "connector": 2,
+    "cable": 2,
+    "cable_straight_3": 2,
+    "cable_crossover_3": 1
   },
   "tutorials": {
-    "cables": false,
-    "subnetting": false,
+    "cables": true,
+    "subnetting": true,
     "routing": false
   },
   "tasks": {
@@ -25,7 +25,9 @@
     "roy_straight_cable": true,
     "create_crossover_cable": true,
     "roy_crossover_cable": true,
-    "meet_ale": false
+    "meet_ale": true,
+    "subnetting_reception": true,
+    "roy_subnetting_reception": true
   },
   "status": {}
 }

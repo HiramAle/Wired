@@ -6,6 +6,8 @@ from engine.objects.sprite import Sprite, SpriteGroup
 from engine.ui.text import Text
 from engine.constants import Colors
 from engine.playerdata import PlayerData
+from engine.ui.button import Button
+from engine.audio import AudioManager
 
 
 class Item:
@@ -22,8 +24,10 @@ class ListItem(Sprite):
         self.item = item
         self.icon = Sprite((self.x + 18, self.y + 20), item.icon)
         self.name = Text((self.x + 41 + 8, self.y + 5), item.name, 32, Colors.SPRITE, centered=False)
-        self.buy = Sprite((self.x + self.rect.width + 14, self.y + 2), Assets.images_store["button_buy_normal"],
-                          centered=False)
+        # self.buy = Sprite((self.x + self.rect.width + 14, self.y + 2), Assets.images_store["button_buy_normal"],
+        #                   centered=False)
+        self.buy = Button((self.x + self.rect.width + 14, self.y + 2), Assets.images_store["buy_normal"],
+                          Assets.images_store["buy_pressed"], centered=False)
         self.outline_width = 2
         self.outline_color = Colors.WHITE
 
@@ -36,6 +40,9 @@ class ListItem(Sprite):
         display.blit(surface, (rect.left - self.outline_width, rect.top))
         display.blit(surface, (rect.left, rect.top + self.outline_width))
         display.blit(surface, (rect.left, rect.top - self.outline_width))
+
+    def update(self, *args, **kwargs):
+        self.buy.update()
 
     def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
         if self.hovered:
@@ -55,7 +62,8 @@ class Store(Scene):
         self.cables = Text((68, 43), str(PlayerData.inventory.how_much("cable")), 32, Colors.SPRITE, self.store_ui)
         Sprite((20, 29), Assets.images_store["cable_icon"], self.store_ui, centered=False)
         Sprite((99, 18), Assets.images_store["inventory_own"], self.store_ui, centered=False)
-        self.connectors = Text((150, 43), str(PlayerData.inventory.how_much("connector")), 32, Colors.SPRITE, self.store_ui)
+        self.connectors = Text((150, 43), str(PlayerData.inventory.how_much("connector")), 32, Colors.SPRITE,
+                               self.store_ui)
         Sprite((110, 27), Assets.images_store["connector_icon"], self.store_ui, centered=False)
         Sprite((477, 14), Assets.images_store["money"], self.store_ui, centered=False)
         self.money = Text((571, 43), f"{PlayerData.inventory.money}G", 32, Colors.SPRITE, self.store_ui)
@@ -76,13 +84,18 @@ class Store(Scene):
         self.ids = {0: "connectors", 1: "cables"}
 
     def update(self) -> None:
+        self.store_ui.update()
         for index, item in enumerate(self.list_items):
             if item.hovered:
                 self.item_icon.image = pygame.transform.scale_by(item.icon.image, 2)
                 self.item_price.text = str(item.item.price)
             if item.buy.clicked and index in [0, 1]:
                 if PlayerData.inventory.money < item.item.price:
+                    item.buy.state = item.buy.State.NORMAL
+                    item.buy.sound_played = True
+                    AudioManager.play_random_from("cancel")
                     break
+                AudioManager.play_random_from("buy")
                 PlayerData.inventory.money -= item.item.price
                 self.money.text = f"{PlayerData.inventory.money}G"
                 if index == 0:

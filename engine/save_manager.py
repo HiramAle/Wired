@@ -58,6 +58,7 @@ class SaveManager:
         self.active_save.money = PlayerData.inventory.money
         self.active_save.inventory = PlayerData.inventory.items
         self.active_save.tasks = PlayerData.tasks.tasks_dict
+        self.active_save.tutorials = PlayerData.tutorials
         if Loader.save_json(self.active_save.filename, self.active_save.to_dict()):
             print("File saved")
             return
@@ -79,6 +80,7 @@ class SaveManager:
         self.__slot = slot
         PlayerData.load(self.active_save.money, self.active_save.inventory, self.active_save.tasks)
         PlayerData.name = self.active_save.name
+        PlayerData.tutorials = self.active_save.tutorials
 
 
 instance = SaveManager()

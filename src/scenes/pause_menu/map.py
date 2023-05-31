@@ -45,7 +45,9 @@ class Map(Scene):
         self.map = SpriteGroup()
         Sprite((4, 0), Assets.images_book["map"], self.map, centered=False)
         self.zones = {"players_house": {"position": (238, 79), "name": "Casa", "zone": "village"},
-                      "company": {"position": (478, 94), "name": "Routed\nInc", "zone": "city"}}
+                      "company": {"position": (478, 94), "name": "Routed\nInc", "zone": "city"},
+                      "store": {"position": (114, 134), "name": "Tienda", "zone": "village"},
+                      "chenchos_house": {"position": (97, 253), "name": "Casa\nChencho", "zone": "village"}}
         self.markers = SpriteGroup()
         self.change_zone = change_zone
 

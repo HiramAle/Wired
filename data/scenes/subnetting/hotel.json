@@ -1,0 +1,31 @@
+{
+  "ip": "175.42.0.0",
+  "class": "B",
+  "default_mask": "255.255.0.0",
+  "subnets_needed": 4,
+  "custom_mask": "255.255.224.0",
+  "subnets": {
+    "subnet_1": {
+      "id": "175.42.32.0",
+      "broadcast": "175.42.63.255",
+      "first": "175.42.32.1"
+    },
+    "subnet_2": {
+      "id": "175.42.64.0",
+      "broadcast": "175.42.95.255",
+      "first": "175.42.64.1"
+    },
+    "subnet_3": {
+      "id": "175.42.96.0",
+      "broadcast": "175.42.127.255",
+      "first": "175.42.96.1"
+    },
+    "subnet_4": {
+      "id": "175.42.128.0",
+      "broadcast": "175.42.159.255",
+      "first": "175.42.128.1"
+    }
+  },
+  "name": "Hotel",
+  "areas": ["Habitaciones", "Bar", "Piscina", "Gimnasio"]
+}

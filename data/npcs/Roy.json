@@ -18,7 +18,7 @@
     },
     "2": {
       "text": [
-        " @, bienvenido a Routed Inc!",
+        " Hola @, bienvenido a Routed Inc!",
         "Yo soy Roy",
         "Antes de darte un trabajo",
         "Prueba las estaciones de trabajo",
@@ -32,7 +32,10 @@
       "type": "mission_complete",
       "mission_requirement": {
         "meet_roy": 1
-      }
+      },
+      "add_mission": "",
+      "requirement": NaN,
+      "add_item": NaN
     },
     "3": {
       "text": [
@@ -42,7 +45,10 @@
       "type": "mission_complete",
       "mission_requirement": {
         "roy_straight_cable": 1
-      }
+      },
+      "add_mission": "",
+      "requirement": NaN,
+      "add_item": NaN
     },
     "11": {
       "text": [
@@ -61,7 +67,10 @@
       "type": "mission_complete",
       "mission_requirement": {
         "roy_crossover_cable": 1
-      }
+      },
+      "add_mission": "",
+      "requirement": NaN,
+      "add_item": NaN
     },
     "7": {
       "text": [
@@ -77,7 +86,10 @@
       "type": "mission_complete",
       "mission_requirement": {
         "roy_subnetting_reception": 1
-      }
+      },
+      "add_mission": "",
+      "requirement": NaN,
+      "add_item": NaN
     },
     "12": {
       "text": [

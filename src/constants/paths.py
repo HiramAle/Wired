@@ -77,7 +77,10 @@ MAPS = {"players_house": "data/maps/TMX/Casa_custom.tmx",
         "store": "data/maps/TMX/Tienda_prueba.tmx",
         "city": "data/maps/TMX/City.tmx",
         "reception": "data/maps/TMX/reception.tmx",
-        "company": "data/maps/TMX/Company.tmx"}
+        "company": "data/maps/TMX/Company.tmx",
+        "chenchos_house": "data/maps/TMX/NPCs_house.tmx",
+        "hotel": "data/maps/TMX/Hotel.tmx",
+        "school": "data/maps/TMX/Escuela.tmx"}
 TILED_HOUSE = "data/maps/TMX/Casa_custom.tmx"
 VILLAGE = "data/maps/TMX/Village.tmx"
 # Character creation

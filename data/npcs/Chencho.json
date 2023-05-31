@@ -10,12 +10,19 @@
         "Pero a mi me da mala espina",
         "De cualquier forma, Roy tambien esta ahi",
         "Por que no pasas a saludarlo?",
-        "Asi conoces tu nuevo lugar de trabajo"
+        "Asi conoces tu nuevo lugar de trabajo",
+        "Por cierto, ahí arriba está la tienda de",
+        "la ciudad, por que no compras algo",
+        "de cable y conectores antes de ",
+        "ir a tu trabajo?"
       ],
       "type": "mission_complete",
       "mission_requirement": {
         "meet_chencho": 1
-      }
+      },
+      "add_mission": "",
+      "requirement": NaN,
+      "add_item": NaN
     },
     "10": {
       "text": [
@@ -30,7 +37,29 @@
       ],
       "type": "generic",
       "mission_requirement": {}
+    },
+    "12": {
+      "text": [
+        "Como que te quedaste sin dinero?",
+        "No te preocupes, yo te presto",
+        "Aquí tienes!"
+      ],
+      "type": "special",
+      "mission_requirement": {},
+      "add_mission": "",
+      "requirement": "poor",
+      "add_item": "money 200"
     }
   },
-  "start_zone": "city"
+  "start_zone": "city",
+  "requirement": "meet_chencho",
+  "schedule": {
+    "0": "chenchos_house",
+    "1": "chenchos_house",
+    "2": "chenchos_house",
+    "3": "chenchos_house",
+    "4": "chenchos_house",
+    "5": "chenchos_house",
+    "6": "chenchos_house"
+  }
 }

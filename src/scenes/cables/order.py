@@ -13,6 +13,7 @@ from src.scenes.cables.cable_objects import Cable
 from engine.ui.text import Text
 from engine.constants import Colors
 from src.scenes.tutorial.tutorial import Tutorial
+from engine.playerdata import PlayerData
 
 
 class OrderCable(Scene):

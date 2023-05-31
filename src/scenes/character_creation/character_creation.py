@@ -18,6 +18,7 @@ from engine.save_manager import instance as save_manager
 from src.scenes.loading.loading import Loading
 from src.scenes.world.world import World
 from engine.constants import Colors
+from engine.audio import AudioManager
 
 alphabet_dict = {
     'a': [(1, 5), (3, 1), (5, 5), (3, 8), (1, 5), (5, 5)],
@@ -263,9 +264,10 @@ class CharacterCreation(Scene):
                 self.instructions.kill()
                 save_manager.active_save.name = self.name.text
                 save_manager.active_save.pronoun = self.pronouns[self.pronoun_index]
-                save_manager.active_save.save()
+                save_manager.save()
                 self.avatar.save_character()
                 # scene_manager.change_scene(self, loading.Loading(data.load_map, TestMap, ("playershouse",),
                 #                                                  ("playershouse",)), True)
                 from engine.scene.scene_manager import SceneManager
                 SceneManager.change_scene(Loading(Data.load_maps, World), True)
+                AudioManager.play_music("exploration")

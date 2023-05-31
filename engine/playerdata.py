@@ -7,6 +7,7 @@ class PlayerData:
     inventory = Inventory()
     tasks = Tasks()
     notify: callable = None
+    tutorials = {}
 
     @classmethod
     def load(cls, money: int, inventory: dict, tasks: dict):
@@ -37,7 +38,7 @@ class PlayerData:
         task.completed = True
         print(f"Task {task_id} completed")
         print(f"Next task {task.next_task}")
-        if task.next_task:
+        if task.next_task != "":
             cls.add_task(task.next_task)
             print(f"Adding task {task.next_task}")
 

@@ -11,7 +11,7 @@ class TaskManager:
     def get_current_tasks(cls) -> list[Task]:
         current_tasks = []
         for task_id, task in cls.tasks.items():
-            if task.completed:
+            if task.is_completed:
                 continue
             current_tasks.append(task)
         return current_tasks
@@ -27,7 +27,7 @@ class TaskManager:
     def load_player_tasks(cls, tasks: dict):
         for id_task in tasks:
             cls.tasks[id_task] = cls.__tasks[id_task]
-            cls.tasks[id_task].completed = tasks[id_task]
+            cls.tasks[id_task].is_completed = tasks[id_task]
         print("Player tasks: ", cls.tasks)
 
     @classmethod
@@ -89,10 +89,10 @@ class TaskManager:
         if not cls.has(task_id):
             return
 
-        if cls.tasks[task_id].completed:
+        if cls.tasks[task_id].is_completed:
             return
         print(f"Task {cls.tasks[task_id].name} completed")
         from engine.save_manager import instance as save_manager
-        cls.tasks[task_id].completed = True
+        cls.tasks[task_id].is_completed = True
         save_manager.active_save.tasks[task_id] = True
         save_manager.active_save.status[cls.tasks[task_id].consequence] = True

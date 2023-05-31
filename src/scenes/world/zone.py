@@ -19,6 +19,8 @@ from engine.ui.text import Text
 from engine.playerdata import PlayerData
 from src.scenes.world.trigger import Trigger
 from engine.dialog_manager import Dialog
+from engine.data import Data
+from engine.audio import AudioManager
 
 
 class Zone(Scene):
@@ -34,8 +36,6 @@ class Zone(Scene):
         self.map_objects = self.map.objects
         self.map_triggers = self.map.triggers
         self.player = player
-        # self.player.position = self.map.get_position(f"player_{before}").tuple
-        # self.player.direction = self.map.get_position(f"player_{before}").properties["direction"]
         self.player.collisions = []
         self.player.collisions = self.map_colliders + [npc.collider for npc in self.npcs]
         self.camera = Camera(self.map.width, self.map.height)
@@ -45,11 +45,6 @@ class Zone(Scene):
         self.obj: TiledObject | None = None
         for obj in self.map_objects:
             self.player.collisions.extend(obj.colliders)
-        for npc in self.npcs:
-            npc_position = self.map.get_position(npc.name)
-            npc.position = npc_position.position
-            npc.direction = npc_position.properties.get("direction", "down")
-            npc.action = npc_position.properties.get("action", "idle")
 
         self.change_zone = change_zone
         self.zone_objets = []
@@ -60,6 +55,9 @@ class Zone(Scene):
         self.world = world
         self.npc: NPC | None = None
 
+        self.step_timer = Timer(0.3)
+        self.step_timer.start()
+
     def start_zone(self):
         self.player.position = self.map.get_position(f"player_{self.zone_before}").tuple
         self.player.direction = self.map.get_position(f"player_{self.zone_before}").properties["direction"]
@@ -68,6 +66,14 @@ class Zone(Scene):
             self.notify("Nueva mision añadida\nRevisa tu inventario\npara verla", 5)
             PlayerData.add_task("meet_kat")
             PlayerData.add_task("mysteries_of_celestia")
+        for npc in self.npcs:
+            npc_position = self.map.get_position(npc.name)
+            if not npc_position:
+                print(npc.name)
+                continue
+            npc.position = npc_position.position
+            npc.direction = npc_position.properties.get("direction", "down")
+            npc.action = npc_position.properties.get("action", "idle")
 
     @property
     def npcs(self) -> list[NPC]:
@@ -89,23 +95,43 @@ class Zone(Scene):
         # Check Zone and Scene requirements
         match trigger.name:
             case "zone_village":
-                if not PlayerData.tasks.completed("meet_kat"):
+                if not PlayerData.tasks.is_completed("meet_kat"):
                     self.notify("Habla con Kat antes\nde salir", 3)
                     return
             case "zone_company":
-                if not PlayerData.tasks.completed("meet_chencho"):
+                if not PlayerData.tasks.is_completed("meet_chencho"):
                     self.notify("Habla con Chencho antes\nde continuar", 3)
                     return
             case "cables":
                 if not PlayerData.inventory.has_enough("cable", 1) or not PlayerData.inventory.has_enough("connector",
                                                                                                           2):
-                    self.notify("Necesitas mas cable y\nconectorespara crear un\ncable de Red", 3)
-
+                    self.notify("Necesitas mas cable y conectores para crear cable de Red", 3)
+                    return
+            case "subnetting":
+                if not PlayerData.tasks.has_incomplete(f"subnetting_{self.name}"):
+                    return
+                problem_data = Data.subnetting[self.name]
+                crossover_needed = problem_data.subnetsNeeded - 1
+                straight_needed = problem_data.subnetsNeeded
+                if not PlayerData.inventory.has_enough("cable_crossover",
+                                                       crossover_needed) or not PlayerData.inventory.has_enough(
+                    "cable_straight", straight_needed):
+                    self.notify(
+                        f"Necesitas {problem_data.subnetsNeeded - 1} cable cruzado y {problem_data.subnetsNeeded} cable directo.",
+                        3)
+                    return
         # Execute code depending on the trigger type
         from engine.scene.scene_manager import SceneManager
         match trigger.type:
             case "scene":
-                SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene]())
+                match trigger.scene:
+                    case "subnetting":
+                        SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene](self.name))
+                    case _:
+                        SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene]())
+                # Add tutorial if its needed
+                if trigger.scene not in ["store", "sleep"] and not PlayerData.tutorials[trigger.scene]:
+                    SceneManager.change_scene(Tutorial(trigger.scene), True)
             case "zone":
                 self.change_zone(trigger.zone)
             case "save":
@@ -185,7 +211,8 @@ class Zone(Scene):
     def dialog_update(self):
         self.player.animate()
         self.camera.update()
-        self.update_npcs()
+        for npc in self.npcs:
+            npc.update()
 
     def update(self) -> None:
         self.player.update()
@@ -196,6 +223,11 @@ class Zone(Scene):
         self.update_npcs()
 
         self.__move_npc()
+
+        if self.player.movement.magnitude() > 0:
+            if self.step_timer.update():
+                AudioManager.play_random_from("step")
+                self.step_timer.start()
 
     def render(self) -> None:
         self.display.fill(Colors.BLACK)

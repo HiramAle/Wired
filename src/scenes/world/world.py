@@ -24,6 +24,7 @@ from engine.ui.text import Text
 from src.scenes.dialog_scene.portrait import PlayerPortrait
 from engine.playerdata import PlayerData
 from engine.time import Timer
+from engine.data import Data
 
 
 class Notification(Sprite):
@@ -73,16 +74,9 @@ class World(Scene):
         self.notifications = SpriteGroup()
         # ----------
         self.player = Player((0, 0), [], [], [])
-        self.npc_list = [NPC("Kat", (0, 0), self.player), NPC("Arian", (0, 0), self.player),
-                         NPC("Chencho", (0, 0), self.player), NPC("Altair", (0, 0), self.player),
-                         NPC("Kike", (0, 0), self.player), NPC("Jordi", (0, 0), self.player),
-                         NPC("Letty", (0, 0), self.player), NPC("Ale", (0, 0), self.player),
-                         NPC("Roy", (0, 0), self.player), NPC("Liz", (0, 0), self.player),
-                         NPC("Angel", (0, 0), self.player), NPC("Zazu", (0, 0), self.player),
-                         NPC("Juliette", (0, 0), self.player), NPC("Cecy", (0, 0), self.player),
-                         NPC("Juan", (0, 0), self.player)]
-        # self.npc_list = [NPC("Kat", (0, 0), self.player), NPC("Roy", (0, 0), self.player),
-        #                  NPC("Chencho", (0, 0), self.player)]
+        self.npc_list: list[NPC] = []
+        for npc_name, npc_data in Data.npcs.items():
+            self.npc_list.append(NPC(npc_name, self.player))
         self.zone = Zone("players_house", self.npc_list, self.player, self.new_zone, self.notify, self)
         # ----------
         self.overlay = Assets.images_world["overlay"]
@@ -109,9 +103,6 @@ class World(Scene):
         spacing = 70
         y_notification = starting_y - (len(self.notifications.sprites()) * spacing)
         Notification((starting_x, y_notification), text, duration, self.notifications)
-        for notification in self.notifications.sprites():
-            notification: Notification
-            print(f"{notification.text.text}")
 
     def check_for_end_day(self):
         if not TimeManager.day_ended or self.transitioning:

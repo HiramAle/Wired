@@ -14,7 +14,10 @@
       "type": "mission_complete",
       "mission_requirement": {
         "meet_kat": 1
-      }
+      },
+      "add_mission": "",
+      "requirement": NaN,
+      "add_item": NaN
     },
     "7": {
       "text": [
@@ -32,7 +35,10 @@
       "type": "generic",
       "mission_requirement": {
         "meet_chencho": 0
-      }
+      },
+      "add_mission": "",
+      "requirement": NaN,
+      "add_item": NaN
     },
     "9": {
       "text": [
@@ -41,7 +47,10 @@
       "type": "generic",
       "mission_requirement": {
         "meet_chencho": 1
-      }
+      },
+      "add_mission": "",
+      "requirement": NaN,
+      "add_item": NaN
     },
     "10": {
       "text": [
@@ -51,5 +60,15 @@
       "mission_requirement": {}
     }
   },
-  "start_zone": "players_house"
+  "start_zone": "players_house",
+  "requirement": "meet_chencho",
+  "schedule": {
+    "0": "village",
+    "1": "village",
+    "2": "village",
+    "3": "village",
+    "4": "village",
+    "5": "village",
+    "6": "village"
+  }
 }

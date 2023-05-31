@@ -1,14 +1,34 @@
 {
-  "name": "",
-  "pronoun": "",
+  "sprite_sheet": "data/user/saves/save_2/sprite_sheet.png",
+  "portrait": "data/user/saves/save_2/portrait.png",
+  "name": "koku",
+  "pronoun": "elle",
   "time": 0,
-  "money": 200,
-  "inventory": {},
+  "money": 35,
+  "inventory": {
+    "connector": 8,
+    "cable": 5,
+    "cable_crossover_1": 10,
+    "cable_straight_1": 10
+  },
   "tutorials": {
-    "cables": false,
-    "subnetting": false,
+    "cables": true,
+    "subnetting": true,
     "routing": false
   },
-  "tasks": {},
+  "tasks": {
+    "meet_kat": true,
+    "mysteries_of_celestia": false,
+    "meet_chencho": true,
+    "meet_roy": true,
+    "create_straight_cable": true,
+    "roy_straight_cable": true,
+    "create_crossover_cable": true,
+    "roy_crossover_cable": true,
+    "meet_ale": true,
+    "subnetting_reception": true,
+    "roy_subnetting_reception": true,
+    "subnetting_hotel": true
+  },
   "status": {}
 }

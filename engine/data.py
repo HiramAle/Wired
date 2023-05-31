@@ -4,20 +4,21 @@ from engine.loader import Loader
 import pytmx
 import src.utils.load as load
 from src.constants.paths import *
+from src.scenes.subnetting.subnetting_objects import SubnettingExercise
 
 
 class Data:
     cable_data = {}
     # Maps data from Tiled
-    maps: dict[str, pytmx.TiledMap | None] = {"players_house": None, "village": None, "store": None, "city": None,
-                                              "reception": None, "company": None}
+    maps: dict[str, pytmx.TiledMap | None] = {}
+    npcs: dict[str, dict] = {}
     # Character creation
-    character_creation_frames: dict[str, dict[str, int]] = {}
+    character_creation_frames: dict[str, dict[str, int]] = {zone_name for zone_name in MAPS.keys()}
     body_colors: dict[int, tuple] = {}
     eyes_colors: dict[int, tuple] = {}
     hairstyle_colors: dict[str, dict[int, tuple]] = {}
     outfit_colors: dict[int, dict[int, tuple]] = {}
-    subnetting: dict[int, dict] = {}
+    subnetting: dict[str, SubnettingExercise] = {}
     active_save: int = 0
     tutorials: {str, dict} = {}
 
@@ -31,13 +32,22 @@ class Data:
         cls.hairstyle_colors = cls.convert_dictionary(load.load_json(HAIRSTYLE_COLORS))
         cls.outfit_colors = cls.convert_dictionary(load.load_json(OUTFIT_COLORS))
 
-        cls.subnetting = {int(file.split(".")[0]): load.load_json(f"{SUBNETTING_EXERCISES}/{file}") for file in
-                          os.listdir(SUBNETTING_EXERCISES)}
+        # cls.subnetting = {int(file.split(".")[0]): load.load_json(f"{SUBNETTING_EXERCISES}/{file}") for file in
+        #                   os.listdir(SUBNETTING_EXERCISES)}
+        cls.load_subnetting_exercises()
         cls.tutorials = {file.split(".")[0]: Loader.load_json(f"{TUTORIALS}/{file}") for file in os.listdir(TUTORIALS)}
+        cls.npcs = {file.split(".")[0]: Loader.load_json(f"{NPC_DATA}/{file}") for file in os.listdir(NPC_DATA)}
+
+    @classmethod
+    def load_subnetting_exercises(cls):
+        for exercise_file in os.listdir(SUBNETTING_EXERCISES):
+            exercise_data = Loader.load_json(f"{SUBNETTING_EXERCISES}/{exercise_file}")
+            zone_id = exercise_file.split(".")[0]
+            cls.subnetting[zone_id] = SubnettingExercise(zone_id, exercise_data)
 
     @classmethod
     def load_maps(cls, event: threading.Event):
-        for map_name in cls.maps.keys():
+        for map_name in MAPS.keys():
             cls.maps[map_name] = pytmx.load_pygame(MAPS[map_name], pixelalpha=True)
         event.clear()
 

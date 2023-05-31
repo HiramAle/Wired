@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="2180">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="33" nextobjectid="2183">
  <tileset firstgid="1" source="../TSX/City.tsx"/>
  <tileset firstgid="7585" source="../TSX/Terrains.tsx"/>
  <tileset firstgid="10145" source="../TSX/Modern_Exteriors.tsx"/>
@@ -1409,6 +1409,12 @@
     <property name="zone" value="reception"/>
    </properties>
   </object>
+  <object id="2180" name="zone_chenchos" type="zone" x="123" y="1864" width="40" height="31">
+   <properties>
+    <property name="interaction_type" value="keypress"/>
+    <property name="zone" value="chenchos_house"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="31" name="positions">
   <object id="2162" name="amy" type="npc_spawn" x="1347" y="1136">
@@ -1459,6 +1465,18 @@
   <object id="2179" name="player_" x="729" y="941">
    <properties>
     <property name="direction" value="right"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2181" name="player_chenchos_house" x="143" y="1887">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2182" name="Kat" type="npc_spawn" x="1159" y="640">
+   <properties>
+    <property name="direction" value="left"/>
    </properties>
    <point/>
   </object>

@@ -1,0 +1,21 @@
+{
+  "ip": "179.133.0.0",
+  "class": "B",
+  "default_mask": "255.255.0.0",
+  "subnets_needed": 2,
+  "custom_mask": "255.255.192.0",
+  "subnets": {
+    "subnet_1": {
+      "id": "179.133.64.0",
+      "broadcast": "179.133.127.255",
+      "first": "179.133.64.1"
+    },
+    "subnet_2": {
+      "id": "179.133.128.0",
+      "broadcast": "179.133.191.255",
+      "first": "179.133.128.1"
+    }
+  },
+  "name": "Recepción",
+  "areas": ["Cuarto Altair", "Cuarto Jordi"]
+}

@@ -7,6 +7,8 @@ from src.scenes.world.actor import Actor, Emote
 from src.constants.paths import NPC_SPRITE_SHEETS, NPC_DATA
 from engine.input import Input
 from engine.dialog_manager import Dialog
+from src.scenes.world.time_manager import TimeManager
+from engine.playerdata import PlayerData
 
 
 class Route:
@@ -33,9 +35,9 @@ class Route:
 
 
 class NPC(Actor):
-    def __init__(self, name: str, position: tuple, player: Actor):
+    def __init__(self, name: str, player: Actor):
         path = f"{NPC_SPRITE_SHEETS}/{name}.png"
-        super().__init__(position, path, [])
+        super().__init__((0, 0), path, [])
         self.name = name
         self.data = load.load_json(f"{NPC_DATA}/{name}.json")
         self.dialogs: list[Dialog] = [Dialog(dialog_data) for dialog_data in self.data["dialogs"].values()]
@@ -44,25 +46,47 @@ class NPC(Actor):
         self.speed = 100
         self.active_route: Route | None = None
         self.current_zone = self.data["start_zone"]
+        self.set_zone()
         self.talkable = False
         self.player = player
 
     def __repr__(self):
         return f"NPC({self.name}, {self.position})"
 
-    def get_dialog(self) -> Dialog:
-        ...
-        # for dialog in self.dialogs.values():
-        #     if requirement not in dialog.requirement.keys():
-        #         continue
-        #     print(f"{dialog.requirement[requirement]} == {status}")
-        #     if dialog.requirement[requirement] == status:
-        #         print(f"Returning {dialog.text} from npc")
-        #         return dialog
+    def set_zone(self):
+        requirement = self.data.get("requirement", "")
+        if requirement == "":
+            return
+        if not PlayerData.tasks.is_completed(requirement):
+            return
+        schedule = self.data.get("schedule", {})
+        if not schedule:
+            return
+        self.current_zone = schedule[str(TimeManager.current_day_of_week)]
+
+    def get_dialogs(self, dialog_type: str) -> list[Dialog]:
+        return [dialog for dialog in self.dialogs if dialog.type == dialog_type]
+
+    def get_special_dialog(self) -> Dialog:
+        from engine.playerdata import PlayerData
+        special_dialogs = self.get_dialogs("special")
+        print(f"Looking up for possible unique dialogs in {special_dialogs}")
+        for dialog in special_dialogs:
+            if dialog.other_requirement.startswith("has"):
+                item_id = dialog.other_requirement.split(" ")[1]
+                quantity = int(dialog.other_requirement.split(" ")[2])
+                if PlayerData.inventory.has_enough(item_id, quantity):
+                    give_item_id, give_quantity = dialog.add_item.split(" ")
+                    PlayerData.add_item(give_item_id, int(give_quantity))
+                    return dialog
+            elif dialog.other_requirement == "poor":
+                if PlayerData.inventory.money == 0:
+                    PlayerData.add_item("money", 200)
+                    return dialog
 
     def generic_dialog(self) -> Dialog:
         from engine.playerdata import PlayerData
-        generic_dialogs = [dialog for dialog in self.dialogs if dialog.type == "generic"]
+        generic_dialogs = self.get_dialogs("generic")
         dialogs = []
         for dialog in generic_dialogs:
             if not dialog.requirement:
@@ -84,8 +108,11 @@ class NPC(Actor):
             if requirements_done:
                 dialogs.append(dialog)
         if not dialogs:
-            return Dialog({"text": ["Hola"], "type": "generic", "mission_requirement": {}})
-        return random.choice(dialogs)
+            dialog = Dialog({"text": ["Hola"], "type": "generic", "mission_requirement": {}})
+        else:
+            dialog = random.choice(dialogs)
+        print(f"Selected dialog {dialog}")
+        return dialog
 
     def task_complete_dialog(self, mission_id: str) -> Dialog:
         dialogs = [dialog for dialog in self.dialogs if dialog.type == "mission_complete"]

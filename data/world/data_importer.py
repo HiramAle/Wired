@@ -32,6 +32,8 @@ def import_tasks():
                     value = []
                 else:
                     value = value.splitlines()
+            if attribute in ["consequence", "next_task"] and pandas.isnull(value):
+                value = ""
             task[str(attribute).lower()] = value
 
         tasks[row.iloc[0]] = task

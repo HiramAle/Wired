@@ -6,32 +6,34 @@ from engine.ui.image import Image
 from random import choice
 from src.scenes.subnetting.subnet_mask_stage import SubnetMask
 from src.scenes.subnetting.results_stage import Results
+from engine.playerdata import PlayerData
+from engine.data import Data
 
 
 class Subnetting(StagedScene):
-    def __init__(self, zone="", exercise=0):
+    def __init__(self, zone_id: str):
         super().__init__("subnetting")
         self.starting_time = pygame.time.get_ticks()
         pygame.mouse.set_visible(True)
-        zones = ["Museo", "Hotel", "Hospital", "Escuela", "Oficina", "Supermercado"]
-        building_names = {
-            "Museo": ["Galerías", "Exposiciones", "Colecciones", "Auditorios", "Tienda", "Cafetería", "Recepción",
-                      "Talleres"],
-            "Hotel": ["Recepción", "Habitaciones", "Restaurante", "Bar", "Gimnasio", "Piscina",
-                      "Centro de convenciones", "Área de lavandería"],
-            "Hospital": ["Recepción", "Urgencias", "Quirófanos", "Laboratorios", "Salas de recuperación",
-                         "Área de cuidados intensivos", "Farmacia", "Salas de espera"],
-            "Escuela": ["Dirección", "Secretaría", "Salones de clase", "Laboratorios", "Biblioteca", "Patio de recreo",
-                        "Área de comedor", "Auditorios"],
-            "Oficina": ["Recepción", "Cubículos", "Sala de juntas", "Área de descanso", "Comedor",
-                        "Área de almacenamiento", "Departamento de TI", "Archivo"],
-            "Supermercado": ["Área de frutas y verduras", "Carnicería", "Panadería", "Lácteos", "Alimentos enlatados",
-                             "Productos de limpieza", "Farmacia", "Cajas"]
-        }
-        zone = choice(zones) if zone == "" else zone
-        buildings = building_names[zone]
-        exercise_num = exercise if exercise != 0 else randint(1, 10)
-        self.problemData = CustomMaskProblem(zone, exercise_num)
+        # zones = ["Museo", "Hotel", "Hospital", "Escuela", "Oficina", "Supermercado"]
+        # building_names = {
+        #     "Museo": ["Galerías", "Exposiciones", "Colecciones", "Auditorios", "Tienda", "Cafetería", "Recepción",
+        #               "Talleres"],
+        #     "Hotel": ["Recepción", "Habitaciones", "Restaurante", "Bar", "Gimnasio", "Piscina",
+        #               "Centro de convenciones", "Área de lavandería"],
+        #     "Hospital": ["Recepción", "Urgencias", "Quirófanos", "Laboratorios", "Salas de recuperación",
+        #                  "Área de cuidados intensivos", "Farmacia", "Salas de espera"],
+        #     "Escuela": ["Dirección", "Secretaría", "Salones de clase", "Laboratorios", "Biblioteca", "Patio de recreo",
+        #                 "Área de comedor", "Auditorios"],
+        #     "Oficina": ["Recepción", "Cubículos", "Sala de juntas", "Área de descanso", "Comedor",
+        #                 "Área de almacenamiento", "Departamento de TI", "Archivo"],
+        #     "Supermercado": ["Área de frutas y verduras", "Carnicería", "Panadería", "Lácteos", "Alimentos enlatados",
+        #                      "Productos de limpieza", "Farmacia", "Cajas"]
+        # }
+        # zone = self.zones[zone_id]
+        # buildings = zone["areas"]
+        # exercise_num = zone["exercise"]
+        self.problemData = Data.subnetting[zone_id]
         self.group = SpriteGroup()
         self.buildings = SpriteGroup()
         background_image = Assets.images_subnetting[f"notebook_{choice(['blue', 'red', 'brown'])}"]
@@ -54,9 +56,9 @@ class Subnetting(StagedScene):
         for y in range(2):
             for x in range(4):
                 if (x * map_padding_x, y * map_padding_y) in building_positions:
-                    building_name: str = choice(buildings)
+                    building_name: str = choice(self.problemData.areas)
                     while building_name in selected_buildings:
-                        building_name = choice(buildings)
+                        building_name = choice(self.problemData.areas)
                     selected_buildings.append(building_name)
                     building_name = building_name.replace(" ", "\n")
                     building_x = 57 + (map_padding_x * x) + map_padding_x / 2
@@ -66,7 +68,11 @@ class Subnetting(StagedScene):
 
         self.problemData.buildings = self.buildings.sprites()
         # print(self.problemData.buildings)
-        self.set_stage(SubnetMask(self, self.problemData))
+        self.set_stage(SubnetMask(self, self.problemData.zone_id))
+        self.crossover = self.problemData.subnetsNeeded - 1
+        self.direct = self.problemData.subnetsNeeded
+        print(f"Subnetting will remove {self.crossover} crossover")
+        print(f"Subnetting will remove {self.direct} straight")
 
     def update(self) -> None:
         self.group.update()
@@ -78,15 +84,16 @@ class Subnetting(StagedScene):
             elapsed_time = (pygame.time.get_ticks() - self.starting_time) / 1000
             self.map.deactivate()
             self.base_map.deactivate()
-            self.set_stage(Results(self, elapsed_time))
-            from engine.inventory import Inventory
-            Inventory.remove_item("cable_crossover_3", 1)
-            Inventory.remove_item("cable_straight_3", 2)
+            crossover_used = PlayerData.inventory.remove_cable("cable_crossover", self.crossover)
+            straight_used = PlayerData.inventory.remove_cable("cable_straight", self.direct)
+            self.set_stage(Results(self, elapsed_time, crossover_used, straight_used))
 
         if self.current_stage.name == "results":
             if Input.keyboard.keys["space"]:
                 from engine.scene.scene_manager import SceneManager
+                PlayerData.complete_task(f"subnetting_{self.problemData.zone_id}")
                 SceneManager.exit_scene()
+
         if Input.keyboard.keys["esc"]:
             from engine.scene.scene_manager import SceneManager
             from src.scenes.pause_menu.pause import Pause

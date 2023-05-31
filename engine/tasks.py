@@ -29,10 +29,17 @@ class Tasks:
             return True
         return False
 
-    def completed(self, task_id: str) -> bool:
+    def is_completed(self, task_id: str) -> bool:
         if not self.has(task_id):
             return False
         if not self.get(task_id).completed:
+            return False
+        return True
+
+    def has_incomplete(self, task_id:str) -> bool:
+        if not self.has(task_id):
+            return False
+        if self.get(task_id).completed:
             return False
         return True
 

@@ -10,7 +10,7 @@ from src.scenes.pause_menu.map import Map
 from src.scenes.pause_menu.glossary import Glossary
 from src.scenes.pause_menu.options import Options
 from src.scenes.pause_menu.exit import Exit
-
+from engine.audio import AudioManager
 
 class Pause(Scene):
     def __init__(self, change_zone: callable = None):
@@ -36,6 +36,7 @@ class Pause(Scene):
         for tab in self.tabs:
             tab.update()
             if tab.clicked and tab != self.selected_tab:
+                AudioManager.play_random_from("page_flip")
                 self.bookmark.image = Assets.images_book[f"bookmark_{tab.name}"]
                 self.selected_tab.set_state(self.selected_tab.State.IDLE)
                 self.selected_tab = tab

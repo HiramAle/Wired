@@ -5,8 +5,9 @@ from engine.assets import Assets
 from engine.ui.text import Text
 from engine.constants import Colors
 from engine.input import Input
-from engine.time import Time
+from engine.time import Time, Timer
 from engine.playerdata import PlayerData
+from engine.audio import AudioManager
 
 
 class Dialog:
@@ -43,6 +44,8 @@ class DialogBox(Sprite):
         self.char_index = 0
         self.render_speed = 25
         self.end_render = False
+        self.sound_timer = Timer(0.1)
+        self.sound_timer.start()
 
     @property
     def current_dialog(self) -> Dialog:
@@ -61,6 +64,9 @@ class DialogBox(Sprite):
             return
         self.char_index += self.render_speed * Time.dt
         self.dialog_text.text = self.current_dialog.current_sentence[:int(self.char_index)]
+        if self.sound_timer.update():
+            AudioManager.play_random_from("dialog")
+            self.sound_timer.start()
 
     def update(self):
         if Input.keyboard.keys["space"]:
@@ -72,7 +78,6 @@ class DialogBox(Sprite):
                 self.dialog_end = True
             else:
                 self.skip_render()
-
         self.render_text()
 
     def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):

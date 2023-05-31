@@ -57,7 +57,7 @@
       "roy"
     ],
     "objective": "roy",
-    "consequence": NaN,
+    "consequence": "",
     "next_task": "create_crossover_cable"
   },
   "create_crossover_cable": {
@@ -69,7 +69,7 @@
       "roy"
     ],
     "objective": "cable_crossover 2",
-    "consequence": NaN,
+    "consequence": "",
     "next_task": "roy_crossover_cable"
   },
   "roy_crossover_cable": {
@@ -81,7 +81,7 @@
       "roy"
     ],
     "objective": "roy",
-    "consequence": NaN,
+    "consequence": "",
     "next_task": "meet_ale"
   },
   "meet_ale": {
@@ -93,7 +93,7 @@
       "ale"
     ],
     "objective": "ale",
-    "consequence": NaN,
+    "consequence": "",
     "next_task": "subnetting_reception"
   },
   "subnetting_reception": {
@@ -105,7 +105,7 @@
       "ale"
     ],
     "objective": "reception",
-    "consequence": NaN,
+    "consequence": "",
     "next_task": "roy_subnetting_reception"
   },
   "roy_subnetting_reception": {
@@ -117,8 +117,8 @@
       "roy"
     ],
     "objective": "roy",
-    "consequence": NaN,
-    "next_task": NaN
+    "consequence": "",
+    "next_task": ""
   },
   "mysteries_of_celestia": {
     "id": "mysteries_of_celestia",
@@ -127,8 +127,8 @@
     "type": "talk",
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN,
-    "next_task": NaN
+    "consequence": "",
+    "next_task": ""
   },
   "7": {
     "id": 7,
@@ -137,8 +137,8 @@
     "type": "routing",
     "npcs": [],
     "objective": "supermarket",
-    "consequence": "routing_supermarket_done",
-    "next_task": NaN
+    "consequence": "",
+    "next_task": ""
   },
   "8": {
     "id": 8,
@@ -147,28 +147,32 @@
     "type": "talk",
     "npcs": [],
     "objective": "roy",
-    "consequence": "roy_talk_2",
-    "next_task": NaN
+    "consequence": "",
+    "next_task": ""
   },
-  "9": {
-    "id": 9,
-    "name": NaN,
-    "description": NaN,
-    "type": NaN,
-    "npcs": [],
-    "objective": NaN,
-    "consequence": NaN,
-    "next_task": NaN
+  "subnetting_hotel": {
+    "id": "subnetting_hotel",
+    "name": "Subnetea la red del Hotel",
+    "description": "Has hablado con Arian, la dueña del Hotel en la ciudad de Celestia, te pidió que le ayudaras a subnetear la red de su Hotel.",
+    "type": "subnetting",
+    "npcs": [
+      "arian"
+    ],
+    "objective": "hotel",
+    "consequence": "",
+    "next_task": ""
   },
-  "10": {
-    "id": 10,
-    "name": NaN,
-    "description": NaN,
-    "type": NaN,
-    "npcs": [],
-    "objective": NaN,
-    "consequence": NaN,
-    "next_task": NaN
+  "subnetting_school": {
+    "id": "subnetting_school",
+    "name": "Subnetea la red de la Escuela",
+    "description": "Has hablado con Arian, la dueña del Hotel en la ciudad de Celestia, te pidió que le ayudaras a subnetear la red de su Hotel.",
+    "type": "subnetting",
+    "npcs": [
+      "arian"
+    ],
+    "objective": "hotel",
+    "consequence": "",
+    "next_task": ""
   },
   "11": {
     "id": 11,
@@ -177,8 +181,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN,
-    "next_task": NaN
+    "consequence": "",
+    "next_task": ""
   },
   "12": {
     "id": 12,
@@ -187,8 +191,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN,
-    "next_task": NaN
+    "consequence": "",
+    "next_task": ""
   },
   "13": {
     "id": 13,
@@ -197,8 +201,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN,
-    "next_task": NaN
+    "consequence": "",
+    "next_task": ""
   },
   "14": {
     "id": 14,
@@ -207,8 +211,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN,
-    "next_task": NaN
+    "consequence": "",
+    "next_task": ""
   },
   "15": {
     "id": 15,
@@ -217,8 +221,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN,
-    "next_task": NaN
+    "consequence": "",
+    "next_task": ""
   },
   "16": {
     "id": 16,
@@ -227,8 +231,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN,
-    "next_task": NaN
+    "consequence": "",
+    "next_task": ""
   },
   "17": {
     "id": 17,
@@ -237,8 +241,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN,
-    "next_task": NaN
+    "consequence": "",
+    "next_task": ""
   },
   "18": {
     "id": 18,
@@ -247,8 +251,8 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN,
-    "next_task": NaN
+    "consequence": "",
+    "next_task": ""
   },
   "19": {
     "id": 19,
@@ -257,7 +261,7 @@
     "type": NaN,
     "npcs": [],
     "objective": NaN,
-    "consequence": NaN,
-    "next_task": NaN
+    "consequence": "",
+    "next_task": ""
   }
 }

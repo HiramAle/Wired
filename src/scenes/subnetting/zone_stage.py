@@ -5,12 +5,13 @@ from src.scenes.subnetting.subnetting_objects import *
 from random import shuffle
 from engine.assets import Assets
 from engine.ui.text import Text
+from engine.data import Data
 
 
 class Zone(Stage):
-    def __init__(self, scene: StagedScene, data: CustomMaskProblem):
+    def __init__(self, scene: StagedScene, zone_id: str):
         super().__init__("zone_stage", scene)
-        self.data = data
+        self.data = Data.subnetting[zone_id]
         self.group = SpriteGroup()
         self.labels = SpriteGroup()
         self.buildings = SpriteGroup()
@@ -42,7 +43,7 @@ class Zone(Stage):
         self.instructions = Text((483, 188), "Selecciona en\nel mapa una\nárea para\nconfigurar.", 32, Colors.WHITE,
                                  self.group)
         Text((45, 188), "Dirección IP:", 32, "#2E2E2E", self.group, font="fool", centered=False, shadow=False)
-        Text((473.5, 25.5), self.data.zone, 16, "#2E2E2E", self.group, font="fool", shadow=False)
+        Text((473.5, 25.5), self.data.zone_name, 16, "#2E2E2E", self.group, font="fool", shadow=False)
         Text((276.5, 203), self.data.ip, 32, "#2E2E2E", self.group, font="fool", shadow=False)
         self.building_name = Text((112, 338.5), "", 16, "#2E2E2E", font="fool", shadow=False)
         self.continue_message = Text((369.5, 339.5), "Selecciona un lugar en el mapa para configurar", 16, "#2E2E2E",

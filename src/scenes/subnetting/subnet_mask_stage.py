@@ -4,12 +4,13 @@ from engine.ui.image import Image
 from src.scenes.subnetting.zone_stage import Zone
 from src.scenes.subnetting.subnetting_objects import *
 from random import randint, shuffle
+from engine.data import Data
 
 
 class SubnetMask(Stage):
-    def __init__(self, scene: StagedScene, data: CustomMaskProblem):
+    def __init__(self, scene: StagedScene, zone_id: str):
         super().__init__("subnet_mask", scene)
-        self.data = data
+        self.data = Data.subnetting[zone_id]
         self.class_positions = {"a": (401, 55), "b": (418, 112), "c": (403, 171)}
         self.answer_positions = [(448, 45), (515, 58), (459, 95), (525, 107), (454, 144), (515, 164)]
         self.default_masks = {"a": [255, 0, 0, 0], "b": [255, 255, 0, 0], "c": [255, 255, 255, 0]}
@@ -20,7 +21,7 @@ class SubnetMask(Stage):
 
         shuffle(self.possible_answers)
 
-        self.zone = self.data.zone
+        self.zone = self.data.zone_name
         self.ip = self.data.ip
 
         self.group = SpriteGroup()
@@ -213,7 +214,7 @@ class SubnetMask(Stage):
         self.group.update()
         # Tab
         if self.tab.clicked and self.continue_message in self.group.sprites():
-            self.scene.set_stage(Zone(self.scene, self.data))
+            self.scene.set_stage(Zone(self.scene, self.data.zone_id))
         # Get answers
         class_answer = ""
         label_answers = []

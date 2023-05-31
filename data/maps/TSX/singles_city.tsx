@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.1" name="singles_city" tilewidth="928" tileheight="736" tilecount="139" columns="0">
+<tileset version="1.10" tiledversion="1.10.1" name="singles_city" tilewidth="928" tileheight="736" tilecount="142" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="32" height="96" source="../Images/singles_city/bench_left.png"/>
@@ -888,10 +888,27 @@
  <tile id="138">
   <image width="608" height="576" source="../Images/singles_city/building_corp.png"/>
   <objectgroup draworder="index" id="2">
-   <object id="1" x="0" y="289" width="608" height="224"/>
-   <object id="2" x="0" y="514" width="172" height="62"/>
-   <object id="3" x="248" y="514" width="200" height="62"/>
-   <object id="4" x="448" y="513" width="159" height="32"/>
+   <object id="1" x="0" y="289" width="608" height="251"/>
+   <object id="2" x="0" y="540" width="172" height="35"/>
+   <object id="3" x="247" y="540" width="204" height="36"/>
+  </objectgroup>
+ </tile>
+ <tile id="139">
+  <image width="32" height="64" source="../Images/singles_city/construction_fence_9.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="31" width="32" height="33"/>
+  </objectgroup>
+ </tile>
+ <tile id="140">
+  <image width="32" height="64" source="../Images/singles_city/construction_fence_10.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="31" width="32" height="33"/>
+  </objectgroup>
+ </tile>
+ <tile id="141">
+  <image width="224" height="128" source="../Images/singles_city/bus_1.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="2" y="62" width="218" height="62"/>
   </objectgroup>
  </tile>
 </tileset>

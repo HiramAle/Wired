@@ -4,7 +4,6 @@ import pygame
 from engine.assets import Assets
 from engine.time import Time
 from engine.input import Input
-from engine.data import Data
 from engine.objects.sprite import Sprite
 from engine.ui.text import Text
 from src.constants.colors import *
@@ -23,11 +22,13 @@ class Subnet:
         return f"{self.name}: {self.id}"
 
 
-class CustomMaskProblem:
-    def __init__(self, zone: str, exercise=randint(1, 10)):
-        self.zone = zone
+class SubnettingExercise:
+    def __init__(self, zone_id: str, data: dict):
+        self.zone_name = data.get("name")
+        self.zone_id = zone_id
         self.buildings: list[Building] = []
-        self.data: dict = Data.subnetting.get(exercise)
+        self.areas = data.get("areas")
+        self.data: dict = data
         self.ip: str = self.data["ip"]
         self.ipClass: str = self.data["class"]
         self.defaultMask: str = self.data["default_mask"]
@@ -36,7 +37,6 @@ class CustomMaskProblem:
         self.subnets: list[Subnet] = [Subnet(name, data) for name, data in self.data["subnets"].items()]
         self.blanks = self.defaultMask.count("0")
         self.correctAnswers = self.customMask.split(".")[4 - self.blanks:]
-        print(self.customMask, self.blanks, self.correctAnswers)
 
     def subnet_answers(self, index: int) -> list:
         subnet = self.subnets[index]
@@ -80,6 +80,7 @@ class Building(Sprite):
         if self.subnet.name != "":
             self.subnet_id.text = self.subnet.id + "\n" + self.subnet.broadcast
             self.subnet_id.render(display)
+
 
 class LabelStates(enum.Enum):
     FULL = 0
@@ -149,7 +150,6 @@ class Label(Sprite):
     def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
         super().render(display, offset)
         self.text.render(display)
-
 
     def update(self, *args, **kwargs):
         self.text.position = self.rect.center

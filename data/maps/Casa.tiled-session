@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TMX/Company.tmx",
+    "activeFile": "TMX/Escuela.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "Todos los archivos (*)",
@@ -93,16 +93,16 @@
         "TMX/Casa_custom.tmx": {
             "expandedObjectLayers": [
                 15,
+                16,
                 13,
                 11,
-                16,
                 12
             ],
             "scale": 4,
             "selectedLayer": 9,
             "viewCenter": {
                 "x": 480,
-                "y": 479.875
+                "y": 480
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -114,33 +114,69 @@
                 15
             ],
             "expandedObjectLayers": [
-                33,
-                18,
-                31,
-                35,
                 34,
-                21
+                33,
+                35,
+                21,
+                31,
+                18
             ],
-            "scale": 0.25,
+            "scale": 3,
             "selectedLayer": 24,
             "viewCenter": {
-                "x": 1944,
-                "y": 1030
+                "x": 1600,
+                "y": 1536
             }
         },
         "TMX/Company.tmx": {
             "expandedObjectLayers": [
                 15,
+                16,
                 13,
                 17,
-                16,
                 14
             ],
-            "scale": 11,
-            "selectedLayer": 9,
+            "scale": 4,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 857.5454545454545,
-                "y": 562.6818181818182
+                "x": 1000.875,
+                "y": 647
+            }
+        },
+        "TMX/Escuela.tmx": {
+            "expandedObjectLayers": [
+                11,
+                12
+            ],
+            "scale": 2,
+            "selectedLayer": 10,
+            "viewCenter": {
+                "x": 384.25,
+                "y": 256.5
+            }
+        },
+        "TMX/Hotel.tmx": {
+            "expandedObjectLayers": [
+                10,
+                11
+            ],
+            "scale": 2,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 656.25,
+                "y": 442.5
+            }
+        },
+        "TMX/NPCs_house.tmx": {
+            "expandedObjectLayers": [
+                13,
+                12
+            ],
+            "scale": 3,
+            "selectedLayer": 8,
+            "viewCenter": {
+                "x": 447.8333333333333,
+                "y": 240
             }
         },
         "TMX/Tienda_prueba.tmx": {
@@ -152,30 +188,30 @@
             "scale": 3,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 463.99999999999994,
-                "y": 236.16666666666669
+                "x": 480,
+                "y": 320
             }
         },
         "TMX/Village.tmx": {
             "expandedGroupLayers": [
-                46,
                 47,
                 36,
-                29
+                29,
+                46
             ],
             "expandedObjectLayers": [
-                13,
+                29,
                 32,
+                13,
                 30,
                 31,
-                29,
                 17
             ],
-            "scale": 1,
+            "scale": 3,
             "selectedLayer": 21,
             "viewCenter": {
-                "x": 1351,
-                "y": 710.5
+                "x": 960,
+                "y": 1039.6666666666665
             }
         },
         "TMX/Village.tmx#Singles": {
@@ -183,16 +219,16 @@
         },
         "TMX/reception.tmx": {
             "expandedObjectLayers": [
-                13,
-                9,
                 6,
+                9,
+                13,
                 12
             ],
             "scale": 2,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 239,
-                "y": 238.75
+                "x": 240,
+                "y": 240
             }
         },
         "TSX/Basement.tsx": {
@@ -279,6 +315,9 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "TSX/carpets.tsx": {
+            "scaleInDock": 1
+        },
         "TSX/company_singles.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 0.25,
@@ -292,16 +331,36 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "TSX/hotel_singles.tsx": {
+            "scaleInDock": 1
+        },
         "TSX/house_singles.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 0.33,
             "scaleInEditor": 0.5
+        },
+        "TSX/npcshouse_singles.tsx": {
+            "scaleInDock": 1
+        },
+        "TSX/npcshouse_tiles.tsx": {
+            "scaleInDock": 1
         },
         "TSX/path_custom.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "TSX/reception_singles.tsx": {
+            "scaleInDock": 1
+        },
+        "TSX/school_singles.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.33
+        },
+        "TSX/school_tiles.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "TSX/sewer_tiles.tsx": {
             "scaleInDock": 1
         },
         "TSX/singles.tsx": {
@@ -313,6 +372,9 @@
             "dynamicWrapping": true,
             "scaleInDock": 0.125,
             "scaleInEditor": 0.0625
+        },
+        "TSX/stairs.tsx": {
+            "scaleInDock": 1
         },
         "TSX/store_singles.tsx": {
             "dynamicWrapping": false,
@@ -332,10 +394,13 @@
         "TMX/Tienda_prueba.tmx",
         "TMX/City.tmx",
         "TMX/reception.tmx",
-        "TMX/Company.tmx"
+        "TMX/Company.tmx",
+        "TMX/NPCs_house.tmx",
+        "TMX/Hotel.tmx",
+        "TMX/Escuela.tmx"
     ],
     "project": "Casa.tiled-project",
-    "property.type": "string",
+    "property.type": "object",
     "recentFiles": [
         "TMX/Village.tmx",
         "TMX/Casa_custom.tmx",
@@ -343,12 +408,12 @@
         "TMX/City.tmx",
         "TMX/reception.tmx",
         "TMX/Company.tmx",
-        "TSX/house_singles.tsx",
+        "TMX/NPCs_house.tmx",
+        "TMX/Hotel.tmx",
+        "TMX/Escuela.tmx",
         "TSX/singles_city.tsx",
-        "TSX/company_singles.tsx",
-        "TSX/singles.tsx",
-        "TSX/Tileset_Casa.tsx",
-        "TSX/Terrains.tsx"
+        "TSX/house_singles.tsx",
+        "TSX/company_singles.tsx"
     ],
     "tileset.lastUsedFilter": "Archivos de conjuntos de patrones Tiled (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

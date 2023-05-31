@@ -1,5 +1,15 @@
 {
   "dialogs": {
   },
-  "start_zone": "village"
+  "start_zone": "village",
+  "requirement": "meet_chencho",
+  "schedule": {
+    "0": "village",
+    "1": "school",
+    "2": "village",
+    "3": "village",
+    "4": "village",
+    "5": "village",
+    "6": "village"
+  }
 }

@@ -29,6 +29,17 @@ class DialogScene(Scene):
                 dialog = npc.task_complete_dialog(task.id)
                 return dialog
                 # If not, return a generic Dialog
+        # Check if NPC can give mission
+        for dialog in npc.dialogs:
+            if dialog.add_mission != "":
+
+                PlayerData.add_task(dialog.add_mission)
+                return dialog
+        # Check if NPC can give item
+        unique_dialog = npc.get_special_dialog()
+        if unique_dialog:
+            return unique_dialog
+        print("Returning generic dialog")
         return npc.generic_dialog()
 
     def update(self) -> None:
