@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.9" tiledversion="1.9.2" name="store_singles" tilewidth="192" tileheight="192" tilecount="59" columns="0">
+<tileset version="1.10" tiledversion="1.10.1" name="store_singles" tilewidth="192" tileheight="192" tilecount="59" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="64" height="64" source="../Images/store_singles/bags_1.png"/>
@@ -210,7 +210,7 @@
  <tile id="39">
   <image width="128" height="192" source="../Images/store_singles/table.png"/>
   <objectgroup draworder="index" id="2">
-   <object id="1" x="2" y="19" width="124" height="139"/>
+   <object id="1" x="2" y="56" width="124" height="134"/>
   </objectgroup>
  </tile>
  <tile id="40">

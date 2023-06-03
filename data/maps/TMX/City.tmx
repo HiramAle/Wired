@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="36" nextobjectid="1102">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="36" nextobjectid="1104">
  <tileset firstgid="1" source="../TSX/City.tsx"/>
  <tileset firstgid="7585" source="../TSX/Floors_and_Water.tsx"/>
  <tileset firstgid="11581" source="../TSX/Terrains.tsx"/>
@@ -1498,6 +1498,12 @@
     <property name="zone" value="hospital"/>
    </properties>
   </object>
+  <object id="1102" name="zone_music_store" type="zone" x="2256" y="1536" width="64" height="32">
+   <properties>
+    <property name="interaction_type" value="keypress"/>
+    <property name="zone" value="music_store"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="35" name="positions">
   <object id="1080" name="player_village" x="440" y="1600">
@@ -1549,6 +1555,12 @@
    <point/>
   </object>
   <object id="1101" name="juliette" type="npc_spawn" x="960" y="1376">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1103" name="player_music_store" x="2288" y="1568">
    <properties>
     <property name="direction" value="down"/>
    </properties>

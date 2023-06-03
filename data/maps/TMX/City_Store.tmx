@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="127">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="126">
  <tileset firstgid="1" source="../TSX/RoomBuilder.tsx"/>
  <tileset firstgid="8285" source="../TSX/store_singles.tsx"/>
+ <tileset firstgid="8346" source="../TSX/store_carpets.tsx"/>
  <layer id="2" name="floor" width="30" height="30">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -104,13 +105,40 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="5" name="carpet">
-  <object id="67" gid="8289" x="128" y="608" width="32" height="32" rotation="-90"/>
-  <object id="68" gid="8289" x="192" y="608" width="32" height="32" rotation="-90"/>
-  <object id="69" gid="8288" x="224" y="608" width="64" height="32"/>
-  <object id="77" gid="8335" x="672" y="608" width="160" height="64"/>
-  <object id="79" gid="8336" x="96" y="832" width="160" height="64"/>
- </objectgroup>
+ <layer id="7" name="carpets" width="30" height="30">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8346,8347,8348,8349,8350,0,0,0,0,
+0,0,0,8370,0,8370,0,8370,0,0,0,0,0,0,0,0,0,0,0,0,0,8356,8357,8358,8359,8360,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,8351,8352,8353,8354,8355,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,8361,8362,8363,8364,8365,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
  <objectgroup id="4" name="furniture">
   <object id="1" gid="8301" x="672" y="544" width="160" height="96"/>
   <object id="4" gid="8297" x="94" y="211" width="192" height="96"/>
@@ -122,7 +150,7 @@
   <object id="12" gid="8314" x="320" y="288" width="64" height="64"/>
   <object id="13" gid="8313" x="384" y="288" width="64" height="64"/>
   <object id="16" gid="8299" x="832" y="544" width="64" height="96"/>
-  <object id="18" gid="2147491946" x="832" y="640" width="64" height="96"/>
+  <object id="18" gid="8298" x="832" y="640" width="64" height="96"/>
   <object id="20" gid="8318" x="480" y="736" width="32" height="64"/>
   <object id="21" gid="8317" x="384" y="736" width="32" height="64"/>
   <object id="22" gid="8285" x="320" y="320" width="64" height="64"/>
@@ -182,28 +210,28 @@
   <object id="120" x="82" y="416" width="224" height="12"/>
   <object id="121" x="82" y="160" width="14" height="256"/>
  </objectgroup>
- <objectgroup id="7" name="triggers">
+ <objectgroup id="8" name="triggers">
   <object id="122" name="zone_city" type="zone" x="416" y="768" width="64" height="32">
    <properties>
     <property name="interaction_type" value="keypress"/>
     <property name="zone" value="city"/>
    </properties>
   </object>
-  <object id="126" name="store" type="scene" x="672" y="544" width="160" height="24">
+  <object id="124" name="store" type="scene" x="672" y="544" width="160" height="32">
    <properties>
     <property name="interaction_type" value="keypress"/>
     <property name="scene" value="store"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="8" name="positions">
-  <object id="123" name="player_city" x="448" y="760">
+ <objectgroup id="9" name="positions">
+  <object id="123" name="player_city" x="448" y="768">
    <properties>
     <property name="direction" value="up"/>
    </properties>
    <point/>
   </object>
-  <object id="124" name="liz2" type="npc_spawn" x="752" y="470">
+  <object id="125" name="liz2" type="npc_spawn" x="752" y="480">
    <properties>
     <property name="direction" value="down"/>
    </properties>

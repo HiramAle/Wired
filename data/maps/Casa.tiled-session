@@ -38,6 +38,9 @@
         "C:/Users/magic/Desktop/Wired/data/Casa/TSX/Villas.tsx": {
             "scaleInDock": 1
         },
+        "C:/Users/magic/Desktop/Wired/data/Tienda/TSX/store_carpets.tsx": {
+            "scaleInDock": 1
+        },
         "C:/Users/magic/Desktop/s23 - Audio & fixes/data/Tilesets/Fences.tsx": {
             "scaleInDock": 1
         },
@@ -93,15 +96,15 @@
         "TMX/Casa_custom.tmx": {
             "expandedObjectLayers": [
                 11,
-                15,
                 13,
+                15,
                 12
             ],
             "scale": 2,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 349.75,
-                "y": 333.5
+                "x": 480,
+                "y": 480
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -113,46 +116,45 @@
                 15
             ],
             "expandedObjectLayers": [
+                34,
+                18,
+                31,
                 21,
                 33,
-                31,
-                18,
-                34,
                 35
             ],
-            "scale": 1.5,
+            "scale": 0.75,
             "selectedLayer": 24,
             "viewCenter": {
-                "x": 601,
-                "y": 1565.3333333333333
+                "x": 2540.6666666666665,
+                "y": 1598.6666666666665
             }
         },
         "TMX/City_Store.tmx": {
             "expandedObjectLayers": [
-                5,
                 8,
-                7
+                9
             ],
-            "scale": 0.5,
-            "selectedLayer": 7,
+            "scale": 2,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 491,
-                "y": 868
+                "x": 477.25,
+                "y": 465.5
             }
         },
         "TMX/Company.tmx": {
             "expandedObjectLayers": [
-                16,
-                15,
-                17,
+                13,
                 14,
-                13
+                17,
+                16,
+                15
             ],
             "scale": 1,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 619.5,
-                "y": 257
+                "x": 1116.5,
+                "y": 298
             }
         },
         "TMX/Escuela.tmx": {
@@ -163,34 +165,35 @@
             "scale": 1,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 573.5,
-                "y": 350
+                "x": 575.5,
+                "y": 352
             }
         },
         "TMX/Hospital.tmx": {
             "expandedObjectLayers": [
-                6,
+                8,
                 5,
-                8
+                6,
+                3
             ],
             "scale": 1.5,
-            "selectedLayer": 7,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 749,
-                "y": 351.33333333333326
+                "x": 984.3333333333333,
+                "y": 321.33333333333326
             }
         },
         "TMX/Hotel.tmx": {
             "expandedObjectLayers": [
                 11,
-                10,
-                5
+                5,
+                10
             ],
-            "scale": 3,
+            "scale": 0.75,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 234.16666666666666,
-                "y": 315.3333333333333
+                "x": 559.3333333333333,
+                "y": 366.6666666666667
             }
         },
         "TMX/NPCs_house.tmx": {
@@ -207,32 +210,32 @@
         },
         "TMX/Tienda_prueba.tmx": {
             "expandedObjectLayers": [
-                16,
-                14,
                 13,
+                14,
+                16,
                 12
             ],
             "scale": 3,
-            "selectedLayer": 8,
+            "selectedLayer": 10,
             "viewCenter": {
-                "x": 480,
-                "y": 320
+                "x": 477.8333333333333,
+                "y": 226.66666666666666
             }
         },
         "TMX/Village.tmx": {
             "expandedGroupLayers": [
+                36,
                 47,
                 29,
-                36,
                 46
             ],
             "expandedObjectLayers": [
-                29,
-                33,
-                31,
                 32,
-                17,
-                13
+                31,
+                13,
+                33,
+                29,
+                17
             ],
             "scale": 0.5,
             "selectedLayer": 14,
@@ -244,12 +247,24 @@
         "TMX/Village.tmx#Singles": {
             "scaleInDock": 0.03125
         },
+        "TMX/music_store.tmx": {
+            "expandedObjectLayers": [
+                13,
+                14
+            ],
+            "scale": 1,
+            "selectedLayer": 11,
+            "viewCenter": {
+                "x": -63.5,
+                "y": 240
+            }
+        },
         "TMX/reception.tmx": {
             "expandedObjectLayers": [
+                13,
                 9,
-                6,
                 14,
-                13
+                6
             ],
             "scale": 3,
             "selectedLayer": 9,
@@ -443,6 +458,7 @@
     "project": "Casa.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "TSX/house_singles.tsx",
         "TMX/Village.tmx",
         "TMX/Casa_custom.tmx",
         "TMX/Tienda_prueba.tmx",
@@ -450,7 +466,6 @@
         "TMX/reception.tmx",
         "TMX/Company.tmx",
         "TMX/NPCs_house.tmx",
-        "TSX/house_singles.tsx",
         "TMX/City_Store.tmx",
         "TMX/Hospital.tmx",
         "TMX/Escuela.tmx",
