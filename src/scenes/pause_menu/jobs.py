@@ -32,12 +32,15 @@ class Jobs(Scene):
         Text((143 + 8, 42), "Trabajos", 32, Colors.SPRITE, self.ui, centered=False)
         self.pages = []
         self.tasks = []
-        for index, task in enumerate(PlayerData.tasks.current_tasks):
-            if index % 5 == 0 and index != 0:
-                self.pages.append(self.tasks)
-                self.tasks = []
-            self.tasks.append(task)
-
+        # for index, task in enumerate(PlayerData.tasks.current_tasks):
+        #     if index % 5 == 0 and index != 0:
+        #         self.pages.append(self.tasks)
+        #         self.tasks = []
+        #     self.tasks.append(task)
+        for index in range(0, len(PlayerData.tasks.current_tasks), 5):
+            self.tasks = PlayerData.tasks.current_tasks[index:index + 5]
+            self.pages.append(self.tasks)
+        print(self.pages)
         self.render_tasks()
         self.task_title_frame = Sprite((346 + 8, 46), Assets.images_book["task_name"], self.ui, centered=False)
         self.task_title = Text(self.task_title_frame.center, "", 16, Colors.SPRITE, self.ui)

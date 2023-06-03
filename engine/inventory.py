@@ -32,12 +32,9 @@ class Inventory:
         if not self.has(item_id):
             print(f"Player doesn't have {item_id}")
             return
-        print(f"Player has {self.items[item_id]}")
-        print(f"Removing {quantity}")
         self.items[item_id] -= quantity
         if self.items[item_id] <= 0:
             self.items[item_id] = 0
-        print(f"Player have {self.items[item_id]}")
 
     def has(self, item_id: str) -> bool:
         for item in self.items.keys():
@@ -81,10 +78,15 @@ class Inventory:
 
     def remove_cable(self, cable_type: str, quantity: int) -> list[int]:
         print(f"Removing {quantity} of {cable_type}")
-        cables = [cable for cable in self.items.keys() if cable.startswith(cable_type)]
+        cables_qualities = [cable for cable in self.items.keys() if cable.startswith(cable_type)]
+        cables = []
+        for cable_quality in cables_qualities:
+            cables.extend([cable_quality] * self.how_much(cable_quality))
+        print(cables)
         print(f"Player has {len(cables)} of {cable_type}")
-        if len(cables) >= quantity:
-            random.shuffle(cables)
-            for cable in cables:
-                self.remove_item(cable)
-        return [int(cable[-1]) for cable in cables]
+        random.shuffle(cables)
+        removed_cables = cables[:quantity]
+        print(f"Removed cables {removed_cables}")
+        for cable in removed_cables:
+            self.remove_item(cable)
+        return [int(cable[-1]) for cable in removed_cables]

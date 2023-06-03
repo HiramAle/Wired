@@ -30,6 +30,7 @@ class SceneManager:
         Initializes the scenes stack by setting the current scenes to a Loading Scene.
         """
         cls.set_active_scene(Loading(Assets.load, MainMenu))
+        # cls.set_active_scene(Loading(Assets.load, Subnetting, None, ("reception",)))
 
     @classmethod
     def get_active_scene(cls) -> Scene:
@@ -67,6 +68,7 @@ class SceneManager:
             cls.set_active_scene(FadeTransition(cls.get_active_scene(), to_scene, empty), swap)
         else:
             cls.set_active_scene(to_scene, swap)
+
     @classmethod
     def exit_scene(cls) -> None:
         """

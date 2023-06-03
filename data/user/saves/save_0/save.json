@@ -2,38 +2,36 @@
   "sprite_sheet": "data/user/saves/save_0/sprite_sheet.png",
   "portrait": "data/user/saves/save_0/portrait.png",
   "name": "Zazu",
-  "week_day": 6,
+  "week_day": 0,
   "pronoun": "el",
   "time": 0,
-  "money": 380,
+  "money": 180,
   "inventory": {
-    "connector": 2,
-    "cable": 0,
-    "cable_straight_2": 2,
+    "connector": 4,
+    "cable": 5,
+    "cable_straight_2": 4,
     "cable_straight_3": 1,
     "cable_straight_1": 2,
-    "serial_cable": 3
+    "serial_cable": 3,
+    "cable_crossover_1": 1
   },
   "tutorials": {
     "cables": true,
-    "subnetting": false,
-    "routing": false
+    "subnetting": true,
+    "routing": true
   },
   "tasks": {
-    "meet_kat": false,
-    "meet_chencho": false,
+    "meet_kat": true,
+    "meet_chencho": true,
     "mysteries_of_celestia": false,
-    "meet_roy": false,
-    "create_straight_cable": false,
-    "roy_straight_cable": false,
-    "create_crossover_cable": false,
-    "roy_crossover_cable": false,
-    "meet_ale": false,
-    "subnetting_reception": false,
-    "roy_subnetting_reception": false,
-    "subnetting_hotel": false,
+    "meet_roy": true,
     "chenchos_collection": false,
-    "routing_hotel": false
+    "create_straight_cable": true,
+    "roy_straight_cable": true,
+    "create_crossover_cable": true,
+    "roy_crossover_cable": true,
+    "meet_ale": true,
+    "subnetting_reception": false
   },
   "status": {}
 }

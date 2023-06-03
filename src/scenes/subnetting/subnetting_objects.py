@@ -1,3 +1,4 @@
+from __future__ import annotations
 import enum
 import math
 import pygame
@@ -52,10 +53,11 @@ class Building(Sprite):
         self.building_type = building_type
         self.default_image = Assets.images_subnetting["test_house"]
         self.outline_image = Assets.images_subnetting["test_house_outline"]
+        self.done_image = Assets.images_subnetting["test_house_outline_green"]
         self._selected = False
-        self.name = Text((self.rect.centerx + 7.5, self.rect.bottom - 5), self.building_type, 16, Colors.WHITE)
-        self.subnet_id = Text((self.rect.centerx + 7.5, self.rect.top + 5), "", 16, Colors.WHITE)
         self.subnet = Subnet("", {"id": "", "broadcast": "", "first": ""})
+        self.done = False
+        self.overlay = InfoOverlay(self)
 
     @property
     def selected(self):
@@ -71,15 +73,33 @@ class Building(Sprite):
 
     def update(self, *args, **kwargs):
         if self.hovered and self.scale == 1:
-            self.name.position = Input.mouse.x + 20, Input.mouse.y - 20
+            self.overlay.position = Input.mouse.x, Input.mouse.y - 25
+            self.overlay.update()
+        if self.subnet.name != "" and self.overlay.subnet_id.text == "":
+            self.overlay.subnet_id.text = f"De {self.subnet.id} a\n{self.subnet.broadcast}"
+        if self.done and self.image != self.done_image:
+            self.image = self.done_image
 
     def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
         super().render(display, offset)
         if self.hovered and self.scale == 1:
-            self.name.render(display)
-        if self.subnet.name != "":
-            self.subnet_id.text = self.subnet.id + "\n" + self.subnet.broadcast
-            self.subnet_id.render(display)
+            self.overlay.render(display)
+
+
+class InfoOverlay(Sprite):
+    def __init__(self, building: Building):
+        super().__init__((0, 0), Assets.images_subnetting["house_ui"])
+        self.clean_image = self.image.copy()
+        self.building = building
+        self.building_name = Text((self.rect.width / 2, 8), " ".join(self.building.building_type.splitlines()), 16,
+                                  Colors.SPRITE)
+        self.subnet_id = Text((8, 15), "", 16, Colors.SPRITE, centered=False)
+
+    def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
+        self.image = self.clean_image.copy()
+        self.building_name.render(self.image)
+        self.subnet_id.render(self.image)
+        super().render(display)
 
 
 class LabelStates(enum.Enum):
@@ -93,6 +113,11 @@ class ClassLabel(Sprite):
         super().__init__(position, image, *groups, **kwargs)
         self.network_class = net_class
         self._state = LabelStates.STICK
+        self.default_position = position
+
+    def reposition(self):
+        self.position = self.default_position
+        self.state = LabelStates.STICK
 
     def __repr__(self):
         return self.network_class
@@ -135,6 +160,10 @@ class Label(Sprite):
         self.can_move = False if static else True
         self.shifting = False
         self.shift_position = (0, 0)
+
+    def reposition(self):
+        self.position = self.default_position
+        self.state = LabelStates.STICK
 
     def shift(self):
         if not self.shifting:

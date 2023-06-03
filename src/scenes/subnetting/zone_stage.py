@@ -40,7 +40,7 @@ class Zone(Stage):
         underscore_name.blit(Assets.images_subnetting["name_underscore"], (0, 0))
         Image((435, 17), underscore_name, self.group, centered=False)
         self.posit_it = Image((366, 93), Assets.images_subnetting["post_it_class"], self.group, centered=False, scale=2)
-        self.instructions = Text((483, 188), "Selecciona en\nel mapa una\nárea para\nconfigurar.", 32, Colors.WHITE,
+        self.instructions = Text((483, 188), "Selecciona en\nel mapa una\nárea para\nconfigurar.", 32, Colors.SPRITE,
                                  self.group)
         Text((45, 188), "Dirección IP:", 32, "#2E2E2E", self.group, font="fool", centered=False, shadow=False)
         Text((473.5, 25.5), self.data.zone_name, 16, "#2E2E2E", self.group, font="fool", shadow=False)
@@ -54,8 +54,75 @@ class Zone(Stage):
 
         self.selected_label: Label | None = None
         self.dragging = False
-
         self.finished_subnet = True
+        self.can_drag = True
+
+    def start_dragging(self):
+        if not self.can_drag:
+            return
+        # If is dragging, cant start dragging
+        if self.dragging:
+            return
+        # If it is not dragging but player doesn't press left hold, cant start dragging
+        if not Input.mouse.buttons["left_hold"]:
+            return
+        for label in self.labels.sprites():
+            label: Label
+            if label.rect.collidepoint(Input.mouse.position):
+                self.dragging = True
+                self.selected_label = label
+                self.selected_label.state = LabelStates.FULL
+                if self.selected_label.holder:
+                    self.selected_label.holder.label = None
+                    self.selected_label.holder = None
+                return
+
+    def on_dragging(self):
+        if not self.dragging:
+            return
+        self.selected_label.y -= (self.selected_label.y - Input.mouse.y) / (0.01 / Time.dt)
+        self.selected_label.x -= (self.selected_label.x - Input.mouse.x) / (0.01 / Time.dt)
+
+    def en_dragging(self):
+        if not self.dragging:
+            return
+        if not self.selected_label:
+            return
+        if Input.mouse.buttons["left_hold"]:
+            return
+        answer_holder: None | LabelHolder = None
+        for holder in self.holders.sprites():
+            holder: LabelHolder
+            if holder.rect.collidepoint(Input.mouse.position):
+                answer_holder = holder
+                break
+        if not answer_holder:
+            self.selected_label.reposition()
+            self.selected_label = None
+            self.dragging = False
+            return
+        if answer_holder.label:
+            answer_holder.label.holder = None
+            answer_holder.label.reposition()
+
+        answer_holder.label = self.selected_label
+        self.selected_label.holder = answer_holder
+        self.selected_label.state = LabelStates.FULL
+        self.selected_label = None
+        self.dragging = False
+
+        print(f"Answers are correct? {self.correct_answers} = {self.get_answers()}")
+        if self.correct_answers == self.get_answers():
+            self.continue_message.add(self.group)
+            self.selected_building.done = True
+            self.selected_building.subnet = self.data.subnets[self.subnet_index]
+            self.continue_message.add(self.group)
+            self.finished_subnet = True
+            self.subnet_index += 1
+            self.can_drag = False
+            if self.subnet_index == self.data.subnetsNeeded:
+                print("finished")
+                self.finished = True
 
     def drag(self):
         # Start dragging
@@ -86,7 +153,6 @@ class Zone(Stage):
 
             self.selected_label.layer = 1
             self.dragging = False
-
             self.selected_label = None
 
             used_holders = len([label.holder for label in self.labels.sprites() if label.holder])
@@ -95,7 +161,6 @@ class Zone(Stage):
                 print(f"{self.correct_answers} == {self.get_answers()}?")
                 if self.correct_answers == self.get_answers():
                     self.selected_building.subnet = self.data.subnets[self.subnet_index]
-                    print(self.selected_building.subnet)
                     self.continue_message.add(self.group)
                     self.finished_subnet = True
                     self.subnet_index += 1
@@ -142,7 +207,10 @@ class Zone(Stage):
         self.group.update()
         self.labels.update()
 
-        self.drag()
+        # self.drag()
+        self.start_dragging()
+        self.on_dragging()
+        self.en_dragging()
 
         if self.selected_building and self.posit_it:
             self.posit_it.kill()
@@ -178,9 +246,12 @@ class Zone(Stage):
         for building in self.buildings.sprites():
             building: Building
             if building.clicked and self.finished_subnet:
-                if building == self.selected_building:
-                    continue
+                # if building == self.selected_building:
+                #     continue
+                if building.done:
+                    break
                 building.selected = True
+                self.can_drag = True
                 if self.selected_building:
                     self.selected_building.selected = False
                 self.selected_building = building
@@ -198,5 +269,10 @@ class Zone(Stage):
             from src.scenes.pause_menu.pause import Pause
             SceneManager.change_scene(Pause())
 
+        if Input.keyboard.keys["backspace"]:
+            pygame.image.save(self.display, "screen_shoot.png")
+
     def render(self) -> None:
         self.group.render(self.display)
+        if self.selected_label:
+            self.selected_label.render(self.display)

@@ -8,14 +8,15 @@ from engine.playerdata import PlayerData
 
 
 class Results(Stage):
-    def __init__(self, scene, time: float, crossover_used: list[int], straight_used: list[int]):
+    def __init__(self, scene, time: float, straight_used: list[int]):
         super().__init__("results", scene)
         self.group = SpriteGroup()
         self.time_elapsed = time
 
-        quality_3 = (crossover_used + straight_used).count(3)
-        quality_2 = (crossover_used + straight_used).count(2)
-        quality_1 = (crossover_used + straight_used).count(1)
+        print(f"Results straight_used {straight_used}")
+        quality_3 = straight_used.count(3)
+        quality_2 = straight_used.count(2)
+        quality_1 = straight_used.count(1)
 
         payment = 0
 
@@ -26,7 +27,7 @@ class Results(Stage):
         else:
             time_bonus = 10
 
-        for quality in crossover_used + straight_used:
+        for quality in straight_used:
             payment += quality * 10
 
         payment += time_bonus

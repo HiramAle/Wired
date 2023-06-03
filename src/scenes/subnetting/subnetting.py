@@ -69,10 +69,8 @@ class Subnetting(StagedScene):
         self.problemData.buildings = self.buildings.sprites()
         # print(self.problemData.buildings)
         self.set_stage(SubnetMask(self, self.problemData.zone_id))
-        self.crossover = self.problemData.subnetsNeeded - 1
-        self.direct = self.problemData.subnetsNeeded
-        print(f"Subnetting will remove {self.crossover} crossover")
-        print(f"Subnetting will remove {self.direct} straight")
+        self.straight = self.problemData.subnetsNeeded
+        print(f"Subnetting will remove {self.straight} straight")
 
     def update(self) -> None:
         self.group.update()
@@ -84,9 +82,9 @@ class Subnetting(StagedScene):
             elapsed_time = (pygame.time.get_ticks() - self.starting_time) / 1000
             self.map.deactivate()
             self.base_map.deactivate()
-            crossover_used = PlayerData.inventory.remove_cable("cable_crossover", self.crossover)
-            straight_used = PlayerData.inventory.remove_cable("cable_straight", self.direct)
-            self.set_stage(Results(self, elapsed_time, crossover_used, straight_used))
+            straight_used = PlayerData.inventory.remove_cable("cable_straight", self.straight)
+            print("straight used", straight_used)
+            self.set_stage(Results(self, elapsed_time, straight_used))
 
         if self.current_stage.name == "results":
             if Input.keyboard.keys["space"]:
@@ -103,3 +101,6 @@ class Subnetting(StagedScene):
         self.display.fill("#242424")
         self.group.render(self.display)
         self.current_stage.render()
+        for building in self.buildings.sprites():
+            if building.hovered:
+                building.render(self.display)
