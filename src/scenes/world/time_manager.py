@@ -1,5 +1,7 @@
 from engine.time import Time
 
+days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+
 
 class TimeManager:
     current_time_minutes = 360
@@ -14,6 +16,10 @@ class TimeManager:
         minutes = (int(cls.current_time_minutes % 60) // 10) * 10
         time_string = "{:02d}:{:02d}".format(hours, minutes)
         return time_string
+
+    @classmethod
+    def formatted_week_day(cls) -> str:
+        return days[cls.current_day_of_week]
 
     @classmethod
     def restart(cls):
@@ -34,8 +40,3 @@ class TimeManager:
         # Tells if the day is ended
         if cls.current_time_minutes >= 1320:
             cls.day_ended = True
-            print("Day ended")
-            # cls.current_time_minutes = 360
-            # cls.current_day_of_week += 1
-            # if cls.current_day_of_week > 6:
-            #     cls.current_day_of_week = 0

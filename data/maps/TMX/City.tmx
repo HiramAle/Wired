@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="36" nextobjectid="1093">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="100" height="96" tilewidth="32" tileheight="32" infinite="0" nextlayerid="36" nextobjectid="1102">
  <tileset firstgid="1" source="../TSX/City.tsx"/>
  <tileset firstgid="7585" source="../TSX/Floors_and_Water.tsx"/>
  <tileset firstgid="11581" source="../TSX/Terrains.tsx"/>
@@ -1486,15 +1486,27 @@
     <property name="zone" value="school"/>
    </properties>
   </object>
+  <object id="1093" name="zone_store" type="zone" x="552" y="1520" width="80" height="45">
+   <properties>
+    <property name="interaction_type" value="keypress"/>
+    <property name="zone" value="city_store"/>
+   </properties>
+  </object>
+  <object id="1098" name="zone_hospital" type="zone" x="280" y="2710" width="80" height="45">
+   <properties>
+    <property name="interaction_type" value="keypress"/>
+    <property name="zone" value="hospital"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="35" name="positions">
-  <object id="1080" name="player_village" x="376" y="1587">
+  <object id="1080" name="player_village" x="440" y="1600">
    <properties>
     <property name="direction" value="down"/>
    </properties>
    <point/>
   </object>
-  <object id="1081" name="Chencho" type="npc_spawn" x="592" y="1613">
+  <object id="1081" name="chencho" type="npc_spawn" x="593" y="1585">
    <properties>
     <property name="direction" value="down"/>
    </properties>
@@ -1513,6 +1525,30 @@
    <point/>
   </object>
   <object id="1092" name="player_school" x="2493" y="2658">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1096" name="player_city_store" x="598" y="1542">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1097" name="player_hospital" x="322" y="2739">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1100" name="letty" type="npc_spawn" x="1152" y="960">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="1101" name="juliette" type="npc_spawn" x="960" y="1376">
    <properties>
     <property name="direction" value="down"/>
    </properties>

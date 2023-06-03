@@ -29,13 +29,7 @@ class SceneManager:
         """
         Initializes the scenes stack by setting the current scenes to a Loading Scene.
         """
-        # cls.set_active_scene(Loading(Assets.load, Routing))
         cls.set_active_scene(Loading(Assets.load, MainMenu))
-        # cls.set_active_scene(Loading(Assets.load, Tutorial, None, ("subnetting",)))
-        # cls.set_active_scene(Loading(Assets.load, Subnetting))
-        # Assets.load(threading.Event())
-        # cls.set_active_scene(Store())
-        # cls.set_active_scene(TestScene())
 
     @classmethod
     def get_active_scene(cls) -> Scene:
@@ -60,20 +54,19 @@ class SceneManager:
         scene.start()
 
     @classmethod
-    def change_scene(cls, to_scene: Scene, transition=False, swap=False) -> None:
+    def change_scene(cls, to_scene: Scene, transition=False, swap=False, empty=False) -> None:
         """
         Changes the current scenes to the specified 'to_scene'.
         :param to_scene: The new scenes to transition to.
         :param transition: If True, transitions between the scenes using a CircularTransition object. Defaults to False.
         :param swap: If True, removes the current scenes from the stack before adding the new scenes. Defaults to False.
+        :param empty: If True, removes the current scenes from the stack before adding the new scenes. Defaults to False.
         """
-        # print(f"Transitioning from {cls.get_active_scene().name} to {to_scene.name}")
         if transition:
             cls.transitioning = True
-            cls.set_active_scene(FadeTransition(cls.get_active_scene(), to_scene), swap)
+            cls.set_active_scene(FadeTransition(cls.get_active_scene(), to_scene, empty), swap)
         else:
             cls.set_active_scene(to_scene, swap)
-
     @classmethod
     def exit_scene(cls) -> None:
         """
@@ -105,3 +98,7 @@ class SceneManager:
         Prints the names of all scenes currently in the stack.
         """
         print([scene.name for scene in cls.stack_scene])
+
+    @classmethod
+    def clear(cls):
+        cls.stack_scene = []

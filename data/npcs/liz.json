@@ -1,0 +1,28 @@
+{
+  "name": "Liz",
+  "dialogues": [
+    {
+      "npc_id": "liz",
+      "text": [
+        "Holaa"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "store",
+  "schedule": {
+    "0": "store",
+    "1": "store",
+    "2": "store",
+    "3": "store",
+    "4": "store",
+    "5": "store",
+    "6": "store"
+  },
+  "consequences": []
+}

@@ -21,7 +21,12 @@ class Dialog:
 
     @property
     def current_sentence(self) -> str:
-        return self.sentences[self.sentence_index].replace("@", PlayerData.name)
+        vocal_pronoun = {"el": "o", "ella": "a", "elle": "e"}
+        possessive_pronoun = {"el": "el", "ella": "la", "elle": "le"}
+        sentence = self.sentences[self.sentence_index].replace("name", PlayerData.name)
+        sentence = sentence.replace("@", vocal_pronoun[PlayerData.pronoun])
+        sentence = sentence.replace("*", possessive_pronoun[PlayerData.pronoun])
+        return sentence
 
     def next_sentence(self):
         self.sentence_index += 1
@@ -29,13 +34,13 @@ class Dialog:
 
 class DialogBox(Sprite):
     def __init__(self, npc: NPC, text: list[str]):
-        super().__init__((127, 246), Assets.images_world["dialog_box"])
+        super().__init__((123, 246), Assets.images_world["dialog_box"])
         self.pivot = self.Pivot.TOP_LEFT
         self.dialogs = [Dialog(text)]
         self.dialog_index = 0
         self.npc = npc
-        self.actor_name = Text((197, 336), npc.name, 32, Colors.SPRITE, shadow=True, shadow_opacity=50)
-        self.dialog_text = Text((222, 262), "", 32, Colors.SPRITE, shadow=True, shadow_opacity=50)
+        self.actor_name = Text((174.5, 336), npc.data["name"], 32, Colors.SPRITE, shadow=True, shadow_opacity=50)
+        self.dialog_text = Text((230, 255), "", 32, Colors.SPRITE, shadow=True, shadow_opacity=50)
         self.dialog_text.max_width = 280
         self.dialog_text.pivot = self.dialog_text.Pivot.TOP_LEFT
         self.continue_indicator = Sprite((496, 316), Assets.images_world["continue"])

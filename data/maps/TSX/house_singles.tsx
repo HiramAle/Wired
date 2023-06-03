@@ -2,9 +2,9 @@
 <tileset version="1.10" tiledversion="1.10.1" name="house_singles" tilewidth="160" tileheight="160" tilecount="60" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
-  <image width="64" height="128" source="../Images/Singles/House/bed.png"/>
+  <image width="64" height="80" source="../Images/Singles/House/bed.png"/>
   <objectgroup draworder="index" id="2">
-   <object id="1" x="6" y="52" width="50" height="52"/>
+   <object id="1" x="6" y="26" width="50" height="52"/>
   </objectgroup>
  </tile>
  <tile id="1">
@@ -38,9 +38,9 @@
   </objectgroup>
  </tile>
  <tile id="6">
-  <image width="64" height="96" source="../Images/Singles/House/couch.png"/>
+  <image width="64" height="84" source="../Images/Singles/House/couch.png"/>
   <objectgroup draworder="index" id="2">
-   <object id="2" x="2" y="30" width="44" height="64"/>
+   <object id="2" x="2" y="19" width="44" height="64"/>
   </objectgroup>
  </tile>
  <tile id="7">
@@ -77,9 +77,9 @@
   <image width="32" height="64" source="../Images/Singles/House/nightstand.png"/>
  </tile>
  <tile id="13">
-  <image width="32" height="96" source="../Images/Singles/House/plant.png"/>
+  <image width="32" height="56" source="../Images/Singles/House/plant.png"/>
   <objectgroup draworder="index" id="2">
-   <object id="1" x="6" y="57" width="20" height="19"/>
+   <object id="1" x="6" y="37" width="20" height="19"/>
   </objectgroup>
  </tile>
  <tile id="14">
@@ -143,7 +143,7 @@
   <image width="32" height="64" source="../Images/Singles/House/tools.png"/>
  </tile>
  <tile id="29">
-  <image width="64" height="128" source="../Images/Singles/House/bed.png"/>
+  <image width="64" height="80" source="../Images/Singles/House/bed.png"/>
  </tile>
  <tile id="30">
   <image width="32" height="32" source="../Images/Singles/House/bench.png"/>
@@ -167,7 +167,7 @@
   <image width="64" height="64" source="../Images/Singles/House/computer.png"/>
  </tile>
  <tile id="37">
-  <image width="64" height="96" source="../Images/Singles/House/couch.png"/>
+  <image width="64" height="84" source="../Images/Singles/House/couch.png"/>
  </tile>
  <tile id="38">
   <image width="96" height="64" source="../Images/Singles/House/desktop.png"/>
@@ -214,9 +214,9 @@
   <image width="32" height="64" source="../Images/Singles/House/nightstand.png"/>
  </tile>
  <tile id="48">
-  <image width="32" height="96" source="../Images/Singles/House/plant.png"/>
+  <image width="32" height="56" source="../Images/Singles/House/plant.png"/>
   <objectgroup draworder="index" id="2">
-   <object id="1" x="6" y="58" width="20" height="18"/>
+   <object id="1" x="6" y="36" width="20" height="20"/>
   </objectgroup>
  </tile>
  <tile id="49">

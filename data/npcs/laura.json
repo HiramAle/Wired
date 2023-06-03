@@ -1,0 +1,74 @@
+{
+  "name": "Laura",
+  "dialogues": [
+    {
+      "npc_id": "laura",
+      "text": [
+        "Hola, \u00bfEst\u00e1s aqu\u00ed por el puesto de profesor?",
+        "\u00bfNo? Si sabes de alguien av\u00edsame",
+        "Ahora, si vienes de Routed Inc necesitamos algo",
+        "Subnetear la red de la escuela, la mesa est\u00e1 detr\u00e1s de m\u00ed",
+        "Subiendo las escaleras"
+      ],
+      "type": "new_task",
+      "task": "",
+      "new_tasks": [
+        "subnetting_hospital"
+      ],
+      "requirements": [
+        "task roy_subnetting_reception 1"
+      ],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "laura",
+      "text": [
+        "Hola, \u00bft\u00fa eres name?",
+        "Necesito que alguien haga un trabajo",
+        "Es para subnetar la red de la escuela",
+        "\u00bfTe gustar\u00eda ayudarme?"
+      ],
+      "type": "new_task",
+      "task": "",
+      "new_tasks": [
+        "routing_music_store"
+      ],
+      "requirements": [
+        "task subnetting_store 1"
+      ],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "laura",
+      "text": [
+        "Hola, \u00bft\u00fa eres name?",
+        "Necesito que alguien haga un trabajo",
+        "Es para subnetar la red de la escuela",
+        "\u00bfTe gustar\u00eda ayudarme?"
+      ],
+      "type": "new_task",
+      "task": "",
+      "new_tasks": [
+        "routing_music_store"
+      ],
+      "requirements": [
+        "task subnetting_music_store 1"
+      ],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "school",
+  "schedule": {
+    "0": "school",
+    "1": "school",
+    "2": "school",
+    "3": "school",
+    "4": "school",
+    "5": "school",
+    "6": "school"
+  },
+  "consequences": []
+}

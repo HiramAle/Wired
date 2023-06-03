@@ -1,0 +1,34 @@
+{
+  "type": "static_interface",
+  "cables": 4,
+  "routers": {
+    "router1": {
+      "ip_route": [
+        "0.0.0.0 0.0.0.0 Se2/0",
+        "0.0.0.0 0.0.0.0 Se3/0"
+      ],
+      "network": []
+    },
+    "router2": {
+      "ip_route": [
+        "0.0.0.0 0.0.0.0 Se3/0",
+        "0.0.0.0 0.0.0.0 Se2/0"
+      ],
+      "network": []
+    },
+    "router3": {
+      "ip_route": [
+        "0.0.0.0 0.0.0.0 Se3/0",
+        "0.0.0.0 0.0.0.0 Se2/0"
+      ],
+      "network": []
+    },
+    "router4": {
+      "ip_route": [
+        "0.0.0.0 0.0.0.0 Se2/0",
+        "0.0.0.0 0.0.0.0 Se3/0"
+      ],
+      "network": []
+    }
+  }
+}

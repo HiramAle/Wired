@@ -55,6 +55,21 @@ class ExitButton(Sprite):
             self.image = self.normal_image
 
 
+class DeleteButton(Sprite):
+    def __init__(self, position: tuple, *groups: SpriteGroup):
+        super().__init__(position, Assets.images_main_menu["trash_icon"], *groups)
+        self.centered = False
+        self.normal_image = self.image.copy()
+        mask = pygame.mask.from_surface(self.image)
+        self.hover_image = mask.to_surface(setcolor=BLACK_MOTION, unsetcolor=WHITE_MOTION)
+
+    def update(self):
+        if self.hovered:
+            self.image = self.hover_image
+        else:
+            self.image = self.normal_image
+
+
 class DescriptionTitle(Text):
     def __init__(self, position: tuple, text: str, *groups: SpriteGroup):
         super().__init__(position, text, 16, WHITE_MOTION, *groups)

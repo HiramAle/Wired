@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TMX/Escuela.tmx",
+    "activeFile": "TMX/Casa_custom.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "Todos los archivos (*)",
@@ -92,17 +92,16 @@
         },
         "TMX/Casa_custom.tmx": {
             "expandedObjectLayers": [
-                15,
-                16,
-                13,
                 11,
+                15,
+                13,
                 12
             ],
-            "scale": 4,
-            "selectedLayer": 9,
+            "scale": 2,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 480,
-                "y": 480
+                "x": 349.75,
+                "y": 333.5
             }
         },
         "TMX/Casa_custom.tmx#Modern_Exteriors": {
@@ -114,33 +113,46 @@
                 15
             ],
             "expandedObjectLayers": [
-                34,
-                33,
-                35,
                 21,
+                33,
                 31,
-                18
+                18,
+                34,
+                35
             ],
-            "scale": 3,
+            "scale": 1.5,
             "selectedLayer": 24,
             "viewCenter": {
-                "x": 1600,
-                "y": 1536
+                "x": 601,
+                "y": 1565.3333333333333
+            }
+        },
+        "TMX/City_Store.tmx": {
+            "expandedObjectLayers": [
+                5,
+                8,
+                7
+            ],
+            "scale": 0.5,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 491,
+                "y": 868
             }
         },
         "TMX/Company.tmx": {
             "expandedObjectLayers": [
-                15,
                 16,
-                13,
+                15,
                 17,
-                14
+                14,
+                13
             ],
-            "scale": 4,
-            "selectedLayer": 10,
+            "scale": 1,
+            "selectedLayer": 9,
             "viewCenter": {
-                "x": 1000.875,
-                "y": 647
+                "x": 619.5,
+                "y": 257
             }
         },
         "TMX/Escuela.tmx": {
@@ -148,23 +160,37 @@
                 11,
                 12
             ],
-            "scale": 2,
+            "scale": 1,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 384.25,
-                "y": 256.5
+                "x": 573.5,
+                "y": 350
+            }
+        },
+        "TMX/Hospital.tmx": {
+            "expandedObjectLayers": [
+                6,
+                5,
+                8
+            ],
+            "scale": 1.5,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 749,
+                "y": 351.33333333333326
             }
         },
         "TMX/Hotel.tmx": {
             "expandedObjectLayers": [
+                11,
                 10,
-                11
+                5
             ],
-            "scale": 2,
-            "selectedLayer": 7,
+            "scale": 1,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 656.25,
-                "y": 442.5
+                "x": 629.5,
+                "y": 364
             }
         },
         "TMX/NPCs_house.tmx": {
@@ -172,21 +198,22 @@
                 13,
                 12
             ],
-            "scale": 3,
+            "scale": 1.5,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 447.8333333333333,
+                "x": 447.66666666666663,
                 "y": 240
             }
         },
         "TMX/Tienda_prueba.tmx": {
             "expandedObjectLayers": [
                 16,
-                12,
-                14
+                14,
+                13,
+                12
             ],
             "scale": 3,
-            "selectedLayer": 10,
+            "selectedLayer": 8,
             "viewCenter": {
                 "x": 480,
                 "y": 320
@@ -195,23 +222,23 @@
         "TMX/Village.tmx": {
             "expandedGroupLayers": [
                 47,
-                36,
                 29,
+                36,
                 46
             ],
             "expandedObjectLayers": [
                 29,
-                32,
-                13,
-                30,
+                33,
                 31,
-                17
+                32,
+                17,
+                13
             ],
-            "scale": 3,
-            "selectedLayer": 21,
+            "scale": 0.5,
+            "selectedLayer": 14,
             "viewCenter": {
                 "x": 960,
-                "y": 1039.6666666666665
+                "y": 1038
             }
         },
         "TMX/Village.tmx#Singles": {
@@ -219,16 +246,16 @@
         },
         "TMX/reception.tmx": {
             "expandedObjectLayers": [
-                6,
                 9,
-                13,
-                12
+                6,
+                14,
+                13
             ],
-            "scale": 2,
+            "scale": 3,
             "selectedLayer": 9,
             "viewCenter": {
                 "x": 240,
-                "y": 240
+                "y": 320
             }
         },
         "TSX/Basement.tsx": {
@@ -324,12 +351,19 @@
             "scaleInEditor": 1
         },
         "TSX/company_tiles.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "TSX/fontain.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "TSX/hospital_singles.tsx": {
+            "scaleInDock": 1
+        },
+        "TSX/hospital_tiles.tsx": {
+            "scaleInDock": 1
         },
         "TSX/hotel_singles.tsx": {
             "scaleInDock": 1
@@ -374,10 +408,14 @@
             "scaleInEditor": 0.0625
         },
         "TSX/stairs.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "TSX/store_singles.tsx": {
             "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "TSX/window.tsx": {
             "scaleInDock": 1
         }
     },
@@ -397,23 +435,26 @@
         "TMX/Company.tmx",
         "TMX/NPCs_house.tmx",
         "TMX/Hotel.tmx",
-        "TMX/Escuela.tmx"
+        "TMX/Escuela.tmx",
+        "TMX/Hospital.tmx",
+        "TMX/City_Store.tmx",
+        "TSX/house_singles.tsx"
     ],
     "project": "Casa.tiled-project",
-    "property.type": "object",
+    "property.type": "bool",
     "recentFiles": [
         "TMX/Village.tmx",
-        "TMX/Casa_custom.tmx",
-        "TMX/Tienda_prueba.tmx",
-        "TMX/City.tmx",
-        "TMX/reception.tmx",
-        "TMX/Company.tmx",
-        "TMX/NPCs_house.tmx",
-        "TMX/Hotel.tmx",
-        "TMX/Escuela.tmx",
-        "TSX/singles_city.tsx",
         "TSX/house_singles.tsx",
-        "TSX/company_singles.tsx"
+        "TMX/City_Store.tmx",
+        "TMX/Hospital.tmx",
+        "TMX/Escuela.tmx",
+        "TMX/Hotel.tmx",
+        "TMX/NPCs_house.tmx",
+        "TMX/Company.tmx",
+        "TMX/reception.tmx",
+        "TMX/City.tmx",
+        "TMX/Tienda_prueba.tmx",
+        "TMX/Casa_custom.tmx"
     ],
     "tileset.lastUsedFilter": "Archivos de conjuntos de patrones Tiled (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

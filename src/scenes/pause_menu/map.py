@@ -4,6 +4,9 @@ from engine.scene.scene import Scene
 from engine.objects.sprite import Sprite, SpriteGroup
 from engine.ui.text import Text
 from engine.constants import Colors
+from engine.playerdata import PlayerData
+from engine.input import Input
+from engine.window import Window
 
 
 class Marker(Sprite):
@@ -47,7 +50,10 @@ class Map(Scene):
         self.zones = {"players_house": {"position": (238, 79), "name": "Casa", "zone": "village"},
                       "company": {"position": (478, 94), "name": "Routed\nInc", "zone": "city"},
                       "store": {"position": (114, 134), "name": "Tienda", "zone": "village"},
-                      "chenchos_house": {"position": (97, 253), "name": "Casa\nChencho", "zone": "village"}}
+                      "chenchos_house": {"position": (97, 253), "name": "Casa\nChencho", "zone": "village"},
+                      "city_store": {"position": (363, 144), "name": "Tienda", "zone": "city"},
+                      "hospital": {"position": (366, 233), "name": "Hospital", "zone": "city"},
+                      "school": {"position": (523, 222), "name": "Escuela", "zone": "city"}}
         self.markers = SpriteGroup()
         self.change_zone = change_zone
 
@@ -57,10 +63,19 @@ class Map(Scene):
     def update(self) -> None:
         for marker in self.markers.sprites():
             marker: Marker
-            if marker.clicked and self.change_zone:
+            if marker.clicked and self.change_zone and PlayerData.tasks.is_completed("meet_kat"):
                 self.change_zone(marker.zone, marker.before)
                 from engine.scene.scene_manager import SceneManager
                 SceneManager.exit_scene()
+
+        # Change cursor
+        # if any([marker.hovered for marker in self.markers.sprites()]):
+        #     if Input.mouse.buttons["left_hold"]:
+        #         Window.set_cursor("grab")
+        #     else:
+        #         Window.set_cursor("hand")
+        # else:
+        #     Window.set_cursor("arrow")
 
     def render(self) -> None:
         self.display = pygame.Surface(self.display.get_size(), pygame.SRCALPHA)

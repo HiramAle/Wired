@@ -70,6 +70,7 @@ NPC_DATA = "data/npcs"
 DATA_CABLES = "data/scenes/cables.json"
 DATA_CHARACTER_CREATION_FRAMES = "data/character_creation/animation_frames_data.json"
 SUBNETTING_EXERCISES = "data/scenes/subnetting"
+ROUTING_EXERCISES = "data/scenes/routing"
 TUTORIALS = "data/tutorials"
 # Maps
 MAPS = {"players_house": "data/maps/TMX/Casa_custom.tmx",
@@ -80,7 +81,9 @@ MAPS = {"players_house": "data/maps/TMX/Casa_custom.tmx",
         "company": "data/maps/TMX/Company.tmx",
         "chenchos_house": "data/maps/TMX/NPCs_house.tmx",
         "hotel": "data/maps/TMX/Hotel.tmx",
-        "school": "data/maps/TMX/Escuela.tmx"}
+        "school": "data/maps/TMX/Escuela.tmx",
+        "hospital": "data/maps/TMX/Hospital.tmx",
+        "city_store": "data/maps/TMX/City_Store.tmx"}
 TILED_HOUSE = "data/maps/TMX/Casa_custom.tmx"
 VILLAGE = "data/maps/TMX/Village.tmx"
 # Character creation

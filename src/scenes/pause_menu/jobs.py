@@ -15,7 +15,7 @@ class TaskLabel(Sprite):
         super().__init__(position, Assets.images_book["task_title"], *groups)
         self.pivot = self.Pivot.TOP_LEFT
         self.task = TaskManager.get_task(task_id)
-        self.task_title = Text(self.center, self.task.name, 16, Colors.SPRITE)
+        self.task_title = Text(self.center, self.task.title, 16, Colors.SPRITE)
 
     def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
         super().render(display)
@@ -27,11 +27,11 @@ class Jobs(Scene):
         super().__init__("jobs")
         self.jobs = SpriteGroup()
         self.ui = SpriteGroup()
-        Text((143 + 8, 42), "Trabajos", 32, Colors.SPRITE, self.ui, centered=False)
-        for index, (task_id, task) in enumerate(
-                [(task_id, task) for task_id, task in PlayerData.tasks.tasks.items() if not task.completed]):
-            TaskLabel((85 + 8, 90 + (index * 52)), task_id, self.jobs)
 
+        Text((143 + 8, 42), "Trabajos", 32, Colors.SPRITE, self.ui, centered=False)
+        
+        for index, task in enumerate(PlayerData.tasks.current_tasks):
+            TaskLabel((85 + 8, 90 + (index * 52)), task.id, self.jobs)
         self.task_title_frame = Sprite((346 + 8, 46), Assets.images_book["task_name"], self.ui, centered=False)
         self.task_title = Text(self.task_title_frame.center, "", 16, Colors.SPRITE, self.ui)
         self.task_description_frame = Sprite((351 + 8, 105), Assets.images_book["task_description"], self.ui,
@@ -43,7 +43,7 @@ class Jobs(Scene):
             job: TaskLabel
             if not job.hovered:
                 continue
-            self.task_title.text = job.task.name
+            self.task_title.text = job.task.title
             self.task_description.text = job.task.description
 
     def render(self) -> None:

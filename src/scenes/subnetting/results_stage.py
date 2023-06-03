@@ -36,8 +36,8 @@ class Results(Stage):
         Text((180, 16), "¡RESULTADOS!", 64, "#2E2E2E", self.group, centered=False, shadow=False)
         # Time
         Text((163, 84), "Tiempo...", 32, "#2E2E2E", self.group, centered=False, shadow=False)
-        Text((360, 84), self.time_string(), 32, "#2E2E2E", self.group, centered=False, shadow=False)
-        Text((420, 84), f"+${time_bonus}", 32, "#2E2E2E", self.group, centered=False, shadow=False)
+        Text((330, 84), self.time_string(), 32, "#2E2E2E", self.group, centered=False, shadow=False)
+        Text((410, 84), f"+${time_bonus}", 32, "#2E2E2E", self.group, centered=False, shadow=False)
         # Quality 3
         Text((163, 110), f"Cables usados...", 32, "#2E2E2E", self.group, centered=False, shadow=False)
         Text((360, 110), str(quality_3), 32, "#2E2E2E", self.group, centered=False, shadow=False)
@@ -56,7 +56,6 @@ class Results(Stage):
 
         self.instructions = Text((320, 334), "Presiona espacio para continuar", 16, "#2E2E2E", self.group, shadow=False)
         self.instructions.image.set_alpha(int(255 * .75))
-
         PlayerData.inventory.money += payment
 
     def time_string(self):

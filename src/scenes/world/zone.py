@@ -62,14 +62,11 @@ class Zone(Scene):
         self.player.position = self.map.get_position(f"player_{self.zone_before}").tuple
         self.player.direction = self.map.get_position(f"player_{self.zone_before}").properties["direction"]
         self.camera.position = self.player.x - 320, self.player.y - 180
-        if self.name == "players_house" and not PlayerData.tasks.get("meet_kat"):
-            self.notify("Nueva mision añadida\nRevisa tu inventario\npara verla", 5)
+        if self.name == "players_house" and not PlayerData.tasks.tasks:
             PlayerData.add_task("meet_kat")
-            PlayerData.add_task("mysteries_of_celestia")
         for npc in self.npcs:
             npc_position = self.map.get_position(npc.name)
             if not npc_position:
-                print(npc.name)
                 continue
             npc.position = npc_position.position
             npc.direction = npc_position.properties.get("direction", "down")
@@ -103,32 +100,35 @@ class Zone(Scene):
                     self.notify("Habla con Chencho antes\nde continuar", 3)
                     return
             case "cables":
-                if not PlayerData.inventory.has_enough("cable", 1) or not PlayerData.inventory.has_enough("connector",
+                if not PlayerData.inventory.how_many("cable") >= 1 or not PlayerData.inventory.has_enough("connector",
                                                                                                           2):
                     self.notify("Necesitas mas cable y conectores para crear cable de Red", 3)
                     return
             case "subnetting":
                 if not PlayerData.tasks.has_incomplete(f"subnetting_{self.name}"):
+                    self.notify("Aún no puedes trabajar aquí", 3)
                     return
                 problem_data = Data.subnetting[self.name]
-                crossover_needed = problem_data.subnetsNeeded - 1
-                straight_needed = problem_data.subnetsNeeded
-                if not PlayerData.inventory.has_enough("cable_crossover",
-                                                       crossover_needed) or not PlayerData.inventory.has_enough(
-                    "cable_straight", straight_needed):
-                    self.notify(
-                        f"Necesitas {problem_data.subnetsNeeded - 1} cable cruzado y {problem_data.subnetsNeeded} cable directo.",
-                        3)
+                if not PlayerData.inventory.has_enough("cable_straight", problem_data.subnetsNeeded):
+                    self.notify(f"Necesitas {problem_data.subnetsNeeded} de cable directo.", 3)
                     return
+            case "routing":
+                if not PlayerData.tasks.has_incomplete(f"routing_{self.name}"):
+                    self.notify("Aún no puedes trabajar aquí", 3)
+                    return
+                problem_data = Data.routing[self.name]
+                if not PlayerData.inventory.has_enough("serial_cable", problem_data.cables):
+                    self.notify(f"Necesitas {problem_data.cables} de cable serial.", 3)
+                    return
+
         # Execute code depending on the trigger type
         from engine.scene.scene_manager import SceneManager
         match trigger.type:
             case "scene":
-                match trigger.scene:
-                    case "subnetting":
-                        SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene](self.name))
-                    case _:
-                        SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene]())
+                if trigger.scene in ["subnetting", "routing"]:
+                    SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene](self.name))
+                else:
+                    SceneManager.change_scene(SceneManager.scenes_by_name[trigger.scene]())
                 # Add tutorial if its needed
                 if trigger.scene not in ["store", "sleep"] and not PlayerData.tutorials[trigger.scene]:
                     SceneManager.change_scene(Tutorial(trigger.scene), True)
@@ -194,19 +194,24 @@ class Zone(Scene):
 
         if self.closest_npc.interact():
             from engine.scene.scene_manager import SceneManager
+            self.player.action = "idle"
+            self.closest_npc.set_direction()
             SceneManager.change_scene(DialogScene(self.closest_npc, self, self.world))
 
     def update_player_emote(self):
         trigger = self.get_trigger()
-        if not trigger or not self.npcs:
+        if not trigger:
             if self.player.emote:
                 self.player.emote.animation.rewind()
                 self.player.emote = None
-            return
         if trigger:
             self.player.set_emote("alert")
-        elif self.closest_npc.player_distance <= 50:
-            self.player.set_emote("ask")
+        if self.npcs:
+            if self.closest_npc.player_distance <= 50:
+                self.player.set_emote("ask")
+            elif self.player.emote:
+                self.player.emote.animation.rewind()
+                self.player.emote = None
 
     def dialog_update(self):
         self.player.animate()
@@ -222,8 +227,6 @@ class Zone(Scene):
         self.check_triggers()
         self.update_npcs()
 
-        self.__move_npc()
-
         if self.player.movement.magnitude() > 0:
             if self.step_timer.update():
                 AudioManager.play_random_from("step")
@@ -234,6 +237,13 @@ class Zone(Scene):
         self.display.blit(self.map.ground, -self.camera.offset)
         for zone_object in sorted(self.zone_objets, key=lambda sprite: sprite.sort_point):
             zone_object.render(self.display, self.camera.offset)
+
+        # for zone_object in sorted(self.zone_objets, key=lambda sprite: sprite.sort_point):
+        #     zone_object.draw_colliders(self.display, self.camera.offset)
+        #     adjusted_collider = zone_object.rect.copy()
+        #     adjusted_collider.x -= self.camera.x
+        #     adjusted_collider.y -= self.camera.y
+        #     pygame.draw.rect(self.display, Colors.BLUE, adjusted_collider, 2)
 
         if self.obj:
             self.obj.render(self.display)

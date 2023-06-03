@@ -1,0 +1,15 @@
+{
+  "name": "Julia",
+  "dialogues": [],
+  "default_zone": "village",
+  "schedule": {
+    "0": "village",
+    "1": "village",
+    "2": "village",
+    "3": "village",
+    "4": "village",
+    "5": "village",
+    "6": "village"
+  },
+  "consequences": []
+}

@@ -1,0 +1,50 @@
+{
+  "name": "Jordi",
+  "dialogues": [
+    {
+      "npc_id": "jordi",
+      "text": [
+        "name, necesito tu ayuda. Kat tiene mi figura de Evangelion",
+        "Y no me la quiere devolver, necesito que hables con ella",
+        "Tal vez a ti te dice la verdad y te la devuelve."
+      ],
+      "type": "new_task",
+      "task": "",
+      "new_tasks": [
+        "chinlli"
+      ],
+      "requirements": [
+        "task meet_kat 1"
+      ],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "jordi",
+      "text": [
+        "Muchas gracias por traer devuelta a la Rei Chiquita",
+        "No s\u00e9 que har\u00eda sin ella",
+        "Toma, por las molest\u00edas"
+      ],
+      "type": "task_complete",
+      "task": "chinlli_3",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [
+        "money 100"
+      ],
+      "consequences": []
+    }
+  ],
+  "default_zone": "village",
+  "schedule": {
+    "0": "village",
+    "1": "village",
+    "2": "village",
+    "3": "village",
+    "4": "village",
+    "5": "village",
+    "6": "village"
+  },
+  "consequences": []
+}

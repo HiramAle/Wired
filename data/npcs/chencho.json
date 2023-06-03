@@ -1,0 +1,113 @@
+{
+  "name": "Chencho",
+  "dialogues": [
+    {
+      "npc_id": "chencho",
+      "text": [
+        "Holaaaaaaaaaaaaa",
+        "Que bueno verte de nuevo, pense que nunca volverias",
+        "Escuche que te contrataron en Routed Inc",
+        "Dicen que es un buen lugar para trabajar",
+        "Pero a mi me da mala espina",
+        "De cualquier forma, Roy tambien esta ah\u00ed",
+        "\u00bfPor qu\u00e9 no pasas a saludarlo?",
+        "As\u00ed conoces tu nuevo lugar de trabajo",
+        "Por cierto, ah\u00ed arriba est\u00e1 la tienda de la ciudad",
+        "Compra algo de cable antes de ir, seguro te ser\u00e1 de ayuda",
+        "Si me necesitas estar\u00e9 en mi casa, en el pueblo",
+        "Dame una visita y te ense\u00f1ar\u00e9 mi colecci\u00f3n"
+      ],
+      "type": "task_complete",
+      "task": "meet_chencho",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "chencho",
+      "text": [
+        "name! Me da gusto volver a verte",
+        "Como lo promet\u00ed, aqu\u00ed est\u00e1 mi colecci\u00f3n",
+        "Cada una de estas figuras me las obsequ\u00edo mi madre",
+        "Ella te apreciaba mucho . . .",
+        "Bueno todav\u00eda lo hace, pero cuando regrese de su viaje te lo dir\u00e1",
+        "Por cierto, me dijo que te diera esto",
+        "Por tu nuevo trabajo",
+        "Cu\u00eddate"
+      ],
+      "type": "task_complete",
+      "task": "chenchos_collection",
+      "new_tasks": [],
+      "requirements": [
+        "npc_is_in chenchos_house true"
+      ],
+      "add_item": [
+        "usb_double_cable 1"
+      ],
+      "consequences": []
+    },
+    {
+      "npc_id": "chencho",
+      "text": [
+        "Hola name, claro, aqu\u00ed tienes la figura",
+        "Gracias por venir hasta ac\u00e1 por ella"
+      ],
+      "type": "task_complete",
+      "task": "chinlli_2",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "chencho",
+      "text": [
+        "Como que te quedaste sin dinero?",
+        "No te preocupes, yo te presto",
+        "Aqu\u00ed tienes!"
+      ],
+      "type": "add_item",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [
+        "has_exact money 0"
+      ],
+      "add_item": [
+        "money 200",
+        "cable 10"
+      ],
+      "consequences": []
+    },
+    {
+      "npc_id": "chencho",
+      "text": [
+        "\u00bfYa conociste a Zazu?",
+        "Es un poco quisquilloso con la comida",
+        "No come aguacate, no come catsup, no come salsa . . .",
+        "Una vez mi mam\u00e1 le compr\u00f3 un pambazo",
+        "Pero lo tuvo que devolver porque ten\u00eda salsa",
+        "Por eso no lo invito a mis cumplea\u00f1os"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [
+        "consequence zazu_known true"
+      ],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "city",
+  "schedule": {
+    "0": "chenchos_house",
+    "1": "chenchos_house",
+    "2": "chenchos_house",
+    "3": "chenchos_house",
+    "4": "chenchos_house",
+    "5": "chenchos_house",
+    "6": "chenchos_house"
+  },
+  "consequences": []
+}

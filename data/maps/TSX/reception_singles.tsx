@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.9" tiledversion="1.9.2" name="reception_singles" tilewidth="128" tileheight="192" tilecount="23" columns="0">
+<tileset version="1.9" tiledversion="1.9.2" name="reception_singles" tilewidth="128" tileheight="192" tilecount="26" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="128" height="192" source="../Images/reception_singles/stairs.png"/>
@@ -117,6 +117,18 @@
   <image width="64" height="64" source="../Images/reception_singles/chair_3.png"/>
   <objectgroup draworder="index" id="2">
    <object id="1" x="4" y="20" width="38" height="40"/>
+  </objectgroup>
+ </tile>
+ <tile id="28">
+  <image width="32" height="64" source="../Images/reception_singles/fence_2.png"/>
+ </tile>
+ <tile id="29">
+  <image width="32" height="64" source="../Images/reception_singles/fence_1.png"/>
+ </tile>
+ <tile id="30">
+  <image width="96" height="64" source="../Images/reception_singles/desk_subnetting.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="4" y="18" width="82" height="46"/>
   </objectgroup>
  </tile>
 </tileset>

@@ -136,11 +136,9 @@
   <object id="61" x="544" y="95" width="14" height="121"/>
   <object id="66" x="417" y="512" width="63" height="12"/>
  </objectgroup>
- <objectgroup id="13" name="interactions">
-  <object id="62" name="buy" x="385" y="219" width="156" height="40"/>
- </objectgroup>
+ <objectgroup id="13" name="interactions"/>
  <objectgroup id="16" name="triggers">
-  <object id="65" name="store" type="scene" x="446" y="220" width="93" height="37">
+  <object id="65" name="store" type="scene" x="448" y="224" width="93" height="32">
    <properties>
     <property name="interaction_type" value="keypress"/>
     <property name="scene" value="store"/>
@@ -161,7 +159,7 @@
    </properties>
    <point/>
   </object>
-  <object id="69" name="Liz" type="npc_spawn" x="480" y="149">
+  <object id="69" name="liz" type="npc_spawn" x="480" y="149">
    <properties>
     <property name="direction" value="down"/>
    </properties>

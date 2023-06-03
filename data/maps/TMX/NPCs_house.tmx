@@ -136,7 +136,7 @@
    </properties>
    <point/>
   </object>
-  <object id="74" name="Chencho" type="npc_spawn" x="511" y="277">
+  <object id="74" name="chencho" type="npc_spawn" x="511" y="277">
    <properties>
     <property name="direction" value="down"/>
    </properties>

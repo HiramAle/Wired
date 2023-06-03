@@ -16,6 +16,7 @@ class GameSave:
         if not save_data:
             save_data = {"name": "",
                          "pronoun": "",
+                         "week_day": 0,
                          "time": 0,
                          "money": 200,
                          "inventory": {
@@ -33,6 +34,7 @@ class GameSave:
                          }
             Loader.save_json(self.filename, save_data)
         self.name = save_data["name"]
+        self.week_day = save_data["week_day"]
         self.pronoun = save_data["pronoun"]
         self.time = save_data["time"]
         self.money = save_data["money"]
@@ -40,6 +42,37 @@ class GameSave:
         self.tutorials = save_data["tutorials"]
         self.tasks = save_data["tasks"]
         self.status = save_data["status"]
+
+    def erase(self):
+        save_data = {"name": "",
+                     "pronoun": "",
+                     "week_day": 0,
+                     "time": 0,
+                     "money": 200,
+                     "inventory": {
+                     },
+                     "tutorials": {
+                         "cables": False,
+                         "subnetting": False,
+                         "routing": False
+                     },
+                     "tasks": {
+
+                     },
+                     "status": {
+
+                     }
+                     }
+        self.name = save_data["name"]
+        self.week_day = save_data["week_day"]
+        self.pronoun = save_data["pronoun"]
+        self.time = save_data["time"]
+        self.money = save_data["money"]
+        self.inventory = save_data["inventory"]
+        self.tutorials = save_data["tutorials"]
+        self.tasks = save_data["tasks"]
+        self.status = save_data["status"]
+        Loader.save_json(self.filename, save_data)
 
     def to_dict(self) -> dict:
         return {key: value for key, value in vars(self).items() if key not in ["filename"]}
@@ -54,15 +87,24 @@ class SaveManager:
         for index, folder in enumerate(os.listdir(Paths.USER_SAVES_FOLDER)):
             self.saves.append(GameSave(f"{Paths.USER_SAVES_FOLDER}/{folder}"))
 
+    def erase_save(self, save_index: int):
+        self.saves[save_index].erase()
+
     def save(self):
         self.active_save.money = PlayerData.inventory.money
         self.active_save.inventory = PlayerData.inventory.items
         self.active_save.tasks = PlayerData.tasks.tasks_dict
         self.active_save.tutorials = PlayerData.tutorials
+
         if Loader.save_json(self.active_save.filename, self.active_save.to_dict()):
             print("File saved")
             return
         print("Can't save file")
+
+    def delete(self, save_index: int):
+        save = self.saves[save_index]
+        if save.name != "":
+            save.erase()
 
     @property
     def active_save(self) -> GameSave | None:
@@ -78,9 +120,13 @@ class SaveManager:
             print("Slot index must be between 0 and 2")
             return
         self.__slot = slot
+        self.reload_data()
+
+    def reload_data(self):
         PlayerData.load(self.active_save.money, self.active_save.inventory, self.active_save.tasks)
         PlayerData.name = self.active_save.name
         PlayerData.tutorials = self.active_save.tutorials
+        PlayerData.pronoun = self.active_save.pronoun
 
 
 instance = SaveManager()

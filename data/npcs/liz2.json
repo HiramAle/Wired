@@ -1,0 +1,41 @@
+{
+  "name": "Liz",
+  "dialogues": [
+    {
+      "npc_id": "liz2",
+      "text": [
+        "Holaa"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "liz2",
+      "text": [
+        "Como que me has visto en otra tienda?",
+        "No lo creo, yo siempre he trabajado aqu\u00ed."
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "city_store",
+  "schedule": {
+    "0": "city_store",
+    "1": "city_store",
+    "2": "city_store",
+    "3": "city_store",
+    "4": "city_store",
+    "5": "city_store",
+    "6": "city_store"
+  },
+  "consequences": []
+}

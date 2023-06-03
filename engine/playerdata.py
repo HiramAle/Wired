@@ -8,6 +8,12 @@ class PlayerData:
     tasks = Tasks()
     notify: callable = None
     tutorials = {}
+    statuses = []
+    pronoun = "elle"
+
+    @classmethod
+    def data_repr(cls):
+        return f"Data ({cls.name}, {cls.inventory.items}, {cls.tasks.tasks}, {cls.tutorials})"
 
     @classmethod
     def load(cls, money: int, inventory: dict, tasks: dict):
@@ -19,7 +25,7 @@ class PlayerData:
         cls.tasks.add_task(task_id)
         if cls.notify:
             print("Adding notification")
-            cls.notify(f"Tarea añadida:\n{cls.tasks.get(task_id).name}", 3)
+            cls.notify(f"Tarea añadida:\n{cls.tasks.get(task_id).title}", 3)
 
     @classmethod
     def add_item(cls, item_id: str, quantity=1):
@@ -36,11 +42,13 @@ class PlayerData:
             return
         task = cls.tasks.get(task_id)
         task.completed = True
-        print(f"Task {task_id} completed")
-        print(f"Next task {task.next_task}")
-        if task.next_task != "":
-            cls.add_task(task.next_task)
-            print(f"Adding task {task.next_task}")
+        if cls.notify:
+            extra = ""
+            if task.next_tasks:
+                extra = "Nuevas tareas añadidas."
+            cls.notify(f"Tarea {task.title} completada! {extra}", 3)
+        for new_task in task.next_tasks:
+            cls.add_task(new_task)
 
     @classmethod
     def remove_item(cls, item_id: str, quantity: int = 1):

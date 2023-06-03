@@ -1,19 +1,21 @@
 {
   "meet_kat": {
     "id": "meet_kat",
-    "name": "Bienvenido a Celestia",
+    "title": "Bienvenido a Celestia",
     "description": "Has llegado a Celestia, tu nuevo hogar y lugar de trabajo. Te han hablado de Kat, una chica del lugar que te ayudara a comenzar tu nueva vida.",
     "type": "talk",
     "npcs": [
       "kat"
     ],
     "objective": "kat",
-    "consequence": "kat_known",
-    "next_task": "meet_chencho"
+    "next_tasks": [
+      "meet_chencho",
+      "mysteries_of_celestia"
+    ]
   },
   "meet_chencho": {
     "id": "meet_chencho",
-    "name": "Tu viejo amigo",
+    "title": "Bienvenido a Celestia",
     "description": "Kat ha mencionado a Chencho, un amigo de tu antigua vida que ahora vive tambien en Celestia. Toma el autobus y reunete con el en la ciudad.",
     "type": "talk",
     "npcs": [
@@ -21,13 +23,15 @@
       "kat"
     ],
     "objective": "chencho",
-    "consequence": "chencho_known",
-    "next_task": "meet_roy"
+    "next_tasks": [
+      "meet_roy",
+      "chenchos_collection"
+    ]
   },
   "meet_roy": {
     "id": "meet_roy",
-    "name": "Routed Inc",
-    "description": "Te han hablado e Roy, uno de los empleados de Routed Inc, con quien ahora trabajaras, ve que tiene para decirte.",
+    "title": "Bienvenido a Celestia",
+    "description": "Te han hablado e Roy, uno de los empleados de Routed Inc, con quien ahora trabajaras, ve qu\u00e9 tiene para decirte.",
     "type": "talk",
     "npcs": [
       "chencho",
@@ -35,233 +39,256 @@
       "roy"
     ],
     "objective": "roy",
-    "consequence": "roy_known",
-    "next_task": "create_straight_cable"
+    "next_tasks": [
+      "create_straight_cable"
+    ]
   },
   "create_straight_cable": {
     "id": "create_straight_cable",
-    "name": "Crea un cable directo",
-    "description": "Crea un cable directo",
+    "title": "Primeras lecciones",
+    "description": "Crea un cable directo usando la mesa de cableado",
     "type": "has",
     "npcs": [],
     "objective": "cable_straight 1",
-    "consequence": "direct_cable_tutorial",
-    "next_task": "roy_straight_cable"
+    "next_tasks": [
+      "roy_straight_cable"
+    ]
   },
   "roy_straight_cable": {
     "id": "roy_straight_cable",
-    "name": "Habla con Roy",
+    "title": "Primeras lecciones",
     "description": "Cuentale a Roy que has creado un cable directo!",
     "type": "talk",
     "npcs": [
       "roy"
     ],
     "objective": "roy",
-    "consequence": "",
-    "next_task": "create_crossover_cable"
+    "next_tasks": [
+      "create_crossover_cable"
+    ]
   },
   "create_crossover_cable": {
     "id": "create_crossover_cable",
-    "name": "Crea dos cables cruzados",
-    "description": "Crea dos cables cruzados",
+    "title": "Primeras lecciones",
+    "description": "Crea un cable cruzado usando la mesa de cableado",
     "type": "has",
     "npcs": [
       "roy"
     ],
-    "objective": "cable_crossover 2",
-    "consequence": "",
-    "next_task": "roy_crossover_cable"
+    "objective": "cable_crossover 1",
+    "next_tasks": [
+      "roy_crossover_cable"
+    ]
   },
   "roy_crossover_cable": {
     "id": "roy_crossover_cable",
-    "name": "Habla con Roy",
-    "description": "Cuentale a Roy que has creado dos cables cruzados!",
+    "title": "Primeras lecciones",
+    "description": "Cuentale a Roy que has creado un cable cruzado!",
     "type": "talk",
     "npcs": [
       "roy"
     ],
     "objective": "roy",
-    "consequence": "",
-    "next_task": "meet_ale"
+    "next_tasks": [
+      "meet_ale"
+    ]
   },
   "meet_ale": {
     "id": "meet_ale",
-    "name": "Habla con Ale",
-    "description": "Has hablado con Roy y te ha dado tu primer trabajo en Routed Inc. Dirigete a la recepción de los edificios de la empresa, cerca de tu casa, y habla con Ale la encargada de la recepción.",
+    "title": "Routed Inc.",
+    "description": "Has hablado con Roy y te ha dado tu primer trabajo en Routed Inc. Dirigete a la recepci\u00f3n de los edificios de la empresa, cerca de tu casa, y habla con Ale la encargada de la recepci\u00f3n.",
     "type": "talk",
     "npcs": [
       "ale"
     ],
     "objective": "ale",
-    "consequence": "",
-    "next_task": "subnetting_reception"
+    "next_tasks": [
+      "subnetting_reception"
+    ]
   },
   "subnetting_reception": {
     "id": "subnetting_reception",
-    "name": "Subnetea la red de la Recepcíon",
-    "description": "Ale te ha contado de que va este nuevo trabajo, tienes que realizar el subneteo de la Recepción, asegurate de tener los cables necesarios para comenzar.",
+    "title": "Routed Inc.",
+    "description": "Ale te ha contado de que va este nuevo trabajo, tienes que realizar el subneteo de la Recepci\u00f3n, asegurate de tener los cables necesarios para comenzar.",
     "type": "subnetting",
     "npcs": [
       "ale"
     ],
     "objective": "reception",
-    "consequence": "",
-    "next_task": "roy_subnetting_reception"
+    "next_tasks": [
+      "roy_subnetting_reception"
+    ]
   },
   "roy_subnetting_reception": {
     "id": "roy_subnetting_reception",
-    "name": "Vuelve con Roy",
+    "title": "Routed Inc.",
     "description": "Has terminado tu primer trabajo de subneto, vuelve a contarselo a Roy.",
     "type": "talk",
     "npcs": [
       "roy"
     ],
     "objective": "roy",
-    "consequence": "",
-    "next_task": ""
+    "next_tasks": []
   },
   "mysteries_of_celestia": {
     "id": "mysteries_of_celestia",
-    "name": "Los misterios de Celestia",
-    "description": "En multiples ocasiones has oido hablar de Celestia, y algunas cosas parecen envolver al pueblo en misterio. Habla con los habitantes del pueblo para conocer mas acerca del lugar y lo que puede haber detrás de el.",
+    "title": "Los misterios de Celestia",
+    "description": "En multiples ocasiones has oido hablar de Celestia, y algunas cosas parecen envolver al pueblo en misterio. Habla con los habitantes del pueblo para conocer mas acerca del lugar y lo que puede haber detr\u00e1s de el.",
     "type": "talk",
     "npcs": [],
     "objective": NaN,
-    "consequence": "",
-    "next_task": ""
-  },
-  "7": {
-    "id": 7,
-    "name": "Realiza tu primer trabajo de enrutamiento",
-    "description": "Dirigete al Supermercado y realiza tu primer trabajo de Enrutamiento",
-    "type": "routing",
-    "npcs": [],
-    "objective": "supermarket",
-    "consequence": "",
-    "next_task": ""
-  },
-  "8": {
-    "id": 8,
-    "name": "Regresa con Roy",
-    "description": "Habla con Roy",
-    "type": "talk",
-    "npcs": [],
-    "objective": "roy",
-    "consequence": "",
-    "next_task": ""
+    "next_tasks": []
   },
   "subnetting_hotel": {
     "id": "subnetting_hotel",
-    "name": "Subnetea la red del Hotel",
-    "description": "Has hablado con Arian, la dueña del Hotel en la ciudad de Celestia, te pidió que le ayudaras a subnetear la red de su Hotel.",
+    "title": "Subnetea la red del Hotel",
+    "description": "Has hablado con Arian, la due\u00f1a del Hotel en la ciudad de Celestia, te pidi\u00f3 que le ayudaras a subnetear la red de su Hotel.",
     "type": "subnetting",
     "npcs": [
       "arian"
     ],
     "objective": "hotel",
-    "consequence": "",
-    "next_task": ""
+    "next_tasks": []
   },
   "subnetting_school": {
     "id": "subnetting_school",
-    "name": "Subnetea la red de la Escuela",
-    "description": "Has hablado con Arian, la dueña del Hotel en la ciudad de Celestia, te pidió que le ayudaras a subnetear la red de su Hotel.",
+    "title": "Subnetea la red de la Escuela",
+    "description": "Has hablado con Arian, la due\u00f1a del Hotel en la ciudad de Celestia, te pidi\u00f3 que le ayudaras a subnetear la red de su Hotel.",
     "type": "subnetting",
     "npcs": [
       "arian"
     ],
     "objective": "hotel",
-    "consequence": "",
-    "next_task": ""
+    "next_tasks": []
   },
-  "11": {
-    "id": 11,
-    "name": NaN,
-    "description": NaN,
-    "type": NaN,
-    "npcs": [],
-    "objective": NaN,
-    "consequence": "",
-    "next_task": ""
+  "subnetting_muisc_store": {
+    "id": "subnetting_muisc_store",
+    "title": "Subnetea la red de la Tienda de M\u00fasica",
+    "description": "placeholder",
+    "type": "subnetting",
+    "npcs": [
+      "juliette"
+    ],
+    "objective": "music_store",
+    "next_tasks": []
   },
-  "12": {
-    "id": 12,
-    "name": NaN,
-    "description": NaN,
-    "type": NaN,
-    "npcs": [],
-    "objective": NaN,
-    "consequence": "",
-    "next_task": ""
+  "subnetting_hospital": {
+    "id": "subnetting_hospital",
+    "title": "Subnetea la red de el Hospital",
+    "description": "placeholder",
+    "type": "subnetting",
+    "npcs": [
+      "juan"
+    ],
+    "objective": "hospital",
+    "next_tasks": []
   },
-  "13": {
-    "id": 13,
-    "name": NaN,
-    "description": NaN,
-    "type": NaN,
-    "npcs": [],
-    "objective": NaN,
-    "consequence": "",
-    "next_task": ""
+  "routing_hospital": {
+    "id": "routing_hospital",
+    "title": "Enrutamiento Hospital",
+    "description": "placeholder",
+    "type": "routing",
+    "npcs": [
+      "juan"
+    ],
+    "objective": "hospital",
+    "next_tasks": []
   },
-  "14": {
-    "id": 14,
-    "name": NaN,
-    "description": NaN,
-    "type": NaN,
-    "npcs": [],
-    "objective": NaN,
-    "consequence": "",
-    "next_task": ""
+  "routing_school": {
+    "id": "routing_school",
+    "title": "Enrutamiento Escuela",
+    "description": "placeholder",
+    "type": "routing",
+    "npcs": [
+      "laura"
+    ],
+    "objective": "school",
+    "next_tasks": []
   },
-  "15": {
-    "id": 15,
-    "name": NaN,
-    "description": NaN,
-    "type": NaN,
-    "npcs": [],
-    "objective": NaN,
-    "consequence": "",
-    "next_task": ""
+  "routing_reception": {
+    "id": "routing_reception",
+    "title": "Enrutamiento Recepci\u00f3n",
+    "description": "placeholder",
+    "type": "routing",
+    "npcs": [
+      "ale"
+    ],
+    "objective": "reception",
+    "next_tasks": []
   },
-  "16": {
-    "id": 16,
-    "name": NaN,
-    "description": NaN,
-    "type": NaN,
-    "npcs": [],
-    "objective": NaN,
-    "consequence": "",
-    "next_task": ""
+  "routing_hotel": {
+    "id": "routing_hotel",
+    "title": "Enrutamiento Hotel",
+    "description": "placeholder",
+    "type": "routing",
+    "npcs": [
+      "arian"
+    ],
+    "objective": "hotel",
+    "next_tasks": []
   },
-  "17": {
-    "id": 17,
-    "name": NaN,
-    "description": NaN,
-    "type": NaN,
-    "npcs": [],
-    "objective": NaN,
-    "consequence": "",
-    "next_task": ""
+  "routing_music_store": {
+    "id": "routing_music_store",
+    "title": "Enrutamiento Tienda de M\u00fasica",
+    "description": "placeholder",
+    "type": "routing",
+    "npcs": [
+      "juliette"
+    ],
+    "objective": "music_store",
+    "next_tasks": []
   },
-  "18": {
-    "id": 18,
-    "name": NaN,
-    "description": NaN,
-    "type": NaN,
-    "npcs": [],
-    "objective": NaN,
-    "consequence": "",
-    "next_task": ""
+  "chenchos_collection": {
+    "id": "chenchos_collection",
+    "title": "La colecci\u00f3n mas grande de Celestia",
+    "description": "Chencho te ha contado de su colecci\u00f3n, pero no te dijo qu\u00e9 colecciona, dale una visita en su casa, al suroeste del pueblo.",
+    "type": "talk",
+    "npcs": [
+      "chencho"
+    ],
+    "objective": "chencho",
+    "next_tasks": []
   },
-  "19": {
-    "id": 19,
-    "name": NaN,
-    "description": NaN,
-    "type": NaN,
-    "npcs": [],
-    "objective": NaN,
-    "consequence": "",
-    "next_task": ""
+  "chinlli": {
+    "id": "chinlli",
+    "title": "You are (not) alone",
+    "description": "Jordi te pid\u00edo que hablaras con Kat y que le dieras un mensaje muy importante. Busca a Kat.",
+    "type": "talk",
+    "npcs": [
+      "jordi",
+      "kat"
+    ],
+    "objective": "kat",
+    "next_tasks": [
+      "chinlli_2"
+    ]
+  },
+  "chinlli_2": {
+    "id": "chinlli_2",
+    "title": "You are (not) alone",
+    "description": "Chencho tiene la figura de Jordi, recuperala!",
+    "type": "talk",
+    "npcs": [
+      "jordi",
+      "kat",
+      "chencho"
+    ],
+    "objective": "chencho",
+    "next_tasks": [
+      "chinlli_3"
+    ]
+  },
+  "chinlli_3": {
+    "id": "chinlli_3",
+    "title": "You are (not) alone",
+    "description": "Ahora que tienes la figura, devuelvela a su due\u00f1o original y averiga qu\u00e9 tiene de importante esta figura.",
+    "type": "talk",
+    "npcs": [
+      "jordi",
+      "kat",
+      "chencho"
+    ],
+    "objective": "jordi",
+    "next_tasks": []
   }
 }

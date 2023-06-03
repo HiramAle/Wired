@@ -35,17 +35,17 @@ class Route:
 
 
 class NPC(Actor):
-    def __init__(self, name: str, player: Actor):
+    def __init__(self, name: str, player: Actor = None):
         path = f"{NPC_SPRITE_SHEETS}/{name}.png"
         super().__init__((0, 0), path, [])
         self.name = name
         self.data = load.load_json(f"{NPC_DATA}/{name}.json")
-        self.dialogs: list[Dialog] = [Dialog(dialog_data) for dialog_data in self.data["dialogs"].values()]
+        self.dialogs: list[Dialog] = [Dialog(dialog_data) for dialog_data in self.data["dialogues"]]
         self.routes = []
         self.node_index = 0
         self.speed = 100
         self.active_route: Route | None = None
-        self.current_zone = self.data["start_zone"]
+        self.current_zone = self.data["default_zone"]
         self.set_zone()
         self.talkable = False
         self.player = player
@@ -53,75 +53,117 @@ class NPC(Actor):
     def __repr__(self):
         return f"NPC({self.name}, {self.position})"
 
+    def set_direction(self):
+        direction = self.player.position - self.position
+        direction.normalize_ip()
+        if direction.y > 0.5:
+            self.direction = "down"
+        elif direction.y < -0.5:
+            self.direction = "up"
+        elif direction.x > 0.5:
+            self.direction = "right"
+        else:
+            self.direction = "left"
+
     def set_zone(self):
-        requirement = self.data.get("requirement", "")
-        if requirement == "":
+        if not PlayerData.tasks.is_completed("meet_chencho"):
             return
-        if not PlayerData.tasks.is_completed(requirement):
-            return
-        schedule = self.data.get("schedule", {})
-        if not schedule:
-            return
+        schedule = self.data.get("schedule")
         self.current_zone = schedule[str(TimeManager.current_day_of_week)]
 
     def get_dialogs(self, dialog_type: str) -> list[Dialog]:
         return [dialog for dialog in self.dialogs if dialog.type == dialog_type]
 
-    def get_special_dialog(self) -> Dialog:
-        from engine.playerdata import PlayerData
-        special_dialogs = self.get_dialogs("special")
-        print(f"Looking up for possible unique dialogs in {special_dialogs}")
-        for dialog in special_dialogs:
-            if dialog.other_requirement.startswith("has"):
-                item_id = dialog.other_requirement.split(" ")[1]
-                quantity = int(dialog.other_requirement.split(" ")[2])
-                if PlayerData.inventory.has_enough(item_id, quantity):
-                    give_item_id, give_quantity = dialog.add_item.split(" ")
-                    PlayerData.add_item(give_item_id, int(give_quantity))
-                    return dialog
-            elif dialog.other_requirement == "poor":
-                if PlayerData.inventory.money == 0:
-                    PlayerData.add_item("money", 200)
-                    return dialog
+    def check_dialog_requirements(self, requirements: list[str]) -> bool:
+        for requirement in requirements:
+            requirement_type, object_id, object_param = requirement.split(" ")
+            if requirement_type == "task" and object_param == "1":
+                if not PlayerData.tasks.is_completed(object_id):
+                    return False
+            if requirement_type == "task" and object_param == "0":
+                if PlayerData.tasks.is_completed(object_id):
+                    return False
+            if requirement_type == "has_exact":
+                if PlayerData.inventory.how_much(object_id) != object_param:
+                    return False
+            if requirement_type == "has_enough":
+                if not PlayerData.inventory.has_enough(object_id, object_param):
+                    return False
+            if requirement_type == "consequence":
+                if object_id not in PlayerData.statuses:
+                    return False
+            if requirement_type == "npc_is_in":
+                if self.current_zone != object_id:
+                    return False
 
-    def generic_dialog(self) -> Dialog:
-        from engine.playerdata import PlayerData
-        generic_dialogs = self.get_dialogs("generic")
-        dialogs = []
-        for dialog in generic_dialogs:
-            if not dialog.requirement:
-                dialogs.append(dialog)
+        return True
+
+    def task_complete_dialog(self) -> Dialog | None:
+        print(PlayerData.tasks.current_tasks)
+        for task in PlayerData.tasks.current_tasks:
+            print(f"Checking {task.id}, {self.name.lower()} = {task.objective}?")
+            if self.name.lower() == task.objective:
+                # Find task where the objective is talk to the NPC
+                dg = None
+                for dialog in self.get_dialogs("task_complete"):
+                    if dialog.task == task.id:
+                        dg = dialog
+                        break
+                # If it finds it check the requirements
+                if not dg:
+                    continue
+                if not self.check_dialog_requirements(dg.requirements):
+                    continue
+                for command in dg.add_item:
+                    item_id, quantity = command.split(" ")
+                    PlayerData.add_item(item_id, int(quantity))
+                # Complete task
+                PlayerData.complete_task(task.id)
+                return dg
+        return None
+
+    def get_new_task_dialog(self) -> Dialog | None:
+        for dialog in self.get_dialogs("new_task"):
+            if not self.check_dialog_requirements(dialog.requirements):
                 continue
-            requirements_done = True
-            for requirement, status in dialog.requirement.items():
-                # Return the task from the player tasks, or None if the player doesn't have the task
-                task = PlayerData.tasks.get(requirement)
-                if not task:
-                    requirements_done = False
-                    break
-                if status == 1:
-                    if not task.completed:
-                        requirements_done = False
-                elif status == 0:
-                    if task.completed:
-                        requirements_done = False
-            if requirements_done:
-                dialogs.append(dialog)
-        if not dialogs:
-            dialog = Dialog({"text": ["Hola"], "type": "generic", "mission_requirement": {}})
-        else:
-            dialog = random.choice(dialogs)
-        print(f"Selected dialog {dialog}")
-        return dialog
-
-    def task_complete_dialog(self, mission_id: str) -> Dialog:
-        dialogs = [dialog for dialog in self.dialogs if dialog.type == "mission_complete"]
-        print(self.name, dialogs)
-        for dialog in dialogs:
-            requirement_mission = list(dialog.requirement.keys())[0]
-            print(f"Is {requirement_mission} = {mission_id}? {requirement_mission == mission_id}")
-            if list(dialog.requirement.keys())[0] == mission_id:
+            for new_task_id in dialog.new_tasks:
+                if new_task_id in PlayerData.tasks.tasks:
+                    continue
+                PlayerData.add_task(new_task_id)
                 return dialog
+        return None
+
+    def get_add_item_dialog(self) -> Dialog | None:
+        for dialog in self.get_dialogs("add_item"):
+            if not self.check_dialog_requirements(dialog.requirements):
+                continue
+            for item_command in dialog.add_item:
+                item_id, quantity = item_command.split(" ")
+                PlayerData.add_item(item_id, quantity)
+            return dialog
+        return None
+
+    def get_generic_dialog(self) -> Dialog:
+        generic_dialogs = self.get_dialogs("generic")
+        possible_dialogs = []
+        for dialog in generic_dialogs:
+            # If generic dialog doesn't have any requirements, is added to the possible dialogs
+            if not dialog.requirements:
+                possible_dialogs.append(dialog)
+                continue
+            if not self.check_dialog_requirements(dialog.requirements):
+                continue
+            possible_dialogs.append(dialog)
+
+        if not possible_dialogs:
+            dialog = Dialog({"text": ["Hola"]})
+        else:
+            dialog = random.choice(possible_dialogs)
+        if dialog.consequences:
+            for consequence in dialog.consequences:
+                req_type, add_consequence = consequence.split(" ")
+                PlayerData.statuses.append(add_consequence)
+        return dialog
 
     @property
     def player_distance(self) -> float:

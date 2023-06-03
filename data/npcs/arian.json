@@ -1,0 +1,53 @@
+{
+  "name": "Arian",
+  "dialogues": [
+    {
+      "npc_id": "arian",
+      "text": [
+        "\u00bfTe env\u00eda Routed Inc? ",
+        "Necesito que alguien haga un trabajo de subneteo",
+        "\u00bfEs para mi Hotel, podr\u00edas ayudarme?",
+        "Tu lugar de trabajo est\u00e1 en el cuarto de mi derecha"
+      ],
+      "type": "new_task",
+      "task": "",
+      "new_tasks": [
+        "subnetting_hotel"
+      ],
+      "requirements": [
+        "task roy_subnetting_reception 1"
+      ],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "arian",
+      "text": [
+        "Gracias por ayudarme con el subneteo",
+        "Ahora necesito el enrutamiento",
+        "El equipo est\u00e1 a lado de la mesa de trabajo"
+      ],
+      "type": "new_task",
+      "task": "",
+      "new_tasks": [
+        "routing_hotel"
+      ],
+      "requirements": [
+        "task subnetting_hotel 1"
+      ],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "hotel",
+  "schedule": {
+    "0": "hotel",
+    "1": "hotel",
+    "2": "hotel",
+    "3": "hotel",
+    "4": "hotel",
+    "5": "hotel",
+    "6": "hotel"
+  },
+  "consequences": []
+}

@@ -6,13 +6,14 @@ from src.constants.colors import DARK_BLACK_MOTION
 
 
 class FadeTransition(Transition):
-    def __init__(self, to_scene: Scene, from_scene: Scene):
+    def __init__(self, to_scene: Scene, from_scene: Scene, empty=False):
         super().__init__("fade", to_scene, from_scene)
         self.transitionSpeed = 500
         self.alpha = 0
         self.fade_in = True
         self.fade_out = False
         self.fade_surface = pygame.Surface(to_scene.display.get_size(), pygame.SRCALPHA)
+        self.empty = empty
 
     def update(self) -> None:
         if self.fade_in:
@@ -32,6 +33,8 @@ class FadeTransition(Transition):
         if not self.fade_in and not self.fade_out:
             from engine.scene.scene_manager import SceneManager
             SceneManager.transitioning = False
+            if self.empty:
+                SceneManager.clear()
             SceneManager.set_active_scene(self.toScene, swap=True)
             pygame.mouse.set_visible(True)
 

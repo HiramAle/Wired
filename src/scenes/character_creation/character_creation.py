@@ -113,7 +113,7 @@ class CharacterCreation(Scene):
         Text((176, 197), "Mis pronombres son", 32, Colors.SPRITE, self.character_info, shadow=False)
         self.instructions = Text((self.clipboard_padding, 278 + 7.5), "[presiona la tecla F para firmar]", 16,
                                  "#2e2e2e", self.character_info, shadow=False, opacity=63)
-        self.name = Text((175, 305.5), "", 16, Colors.SPRITE, self.character_info, shadow=False)
+        self.character_name = Text((175, 305.5), "", 16, Colors.SPRITE, self.character_info, shadow=False)
 
         self.active_tab = "selection"
         Window.set_cursor("arrow")
@@ -193,24 +193,12 @@ class CharacterCreation(Scene):
                 self.avatar.next_outfit()
                 self.outfit_picker.colors = Data.outfit_colors[self.avatar.outfit]
 
-            # if game_input.keyboard.keys["space"]:
-            #     self.avatar.randomize()
-            #     self.outfit_picker.colors = data.outfit_colors[self.avatar.outfit]
-            #     if self.avatar.hairstyle in range(0, 26):
-            #         self.hair_picker.colors = data.hairstyle_colors["normal"]
-            #     else:
-            #         self.hair_picker.colors = data.hairstyle_colors["dyed"]
-            #     self.skin_picker.randomize()
-            #     self.eyes_picker.randomize()
-            #     self.outfit_picker.randomize()
-            #     self.hair_picker.randomize()
-
         elif self.active_tab == "info":
             if Input.mouse.buttons["left"] and self.name_label.writing:
                 self.name_label.writing = False
             self.character_info.update()
 
-            self.name.text = self.name_label.text
+            self.character_name.text = self.name_label.text
 
             pronoun_changed = False
             if self.left_pronoun.clicked:
@@ -227,11 +215,31 @@ class CharacterCreation(Scene):
                     self.pronoun_index = 2
                 self.pronoun_icon.image = self.pronoun_icons[self.pronoun_index]
 
-            # self.name_label.text = "1"
-            # print(self.name_label.text)
+            self.start_game()
 
-            # elif input.keyboard.keys["space"]:
-            #     self.avatar.save_character()
+    def start_game(self):
+        if self.character_name.text == "":
+            return
+        if self.name_label.writing:
+            return
+        if Input.keyboard.key_pressed not in ["F", "f"]:
+            return
+        from engine.scene.scene_manager import SceneManager
+        if SceneManager.transitioning:
+            return
+        Image((self.clipboard_padding, 283), self.draw_signature(self.character_name.text), self.default_group)
+        self.instructions.kill()
+        save_manager.active_save.name = self.character_name.text
+        save_manager.active_save.pronoun = self.pronouns[self.pronoun_index]
+        save_manager.save()
+        from engine.playerdata import PlayerData
+        PlayerData.load(save_manager.active_save.money, save_manager.active_save.inventory,
+                        save_manager.active_save.tasks)
+        PlayerData.pronoun = save_manager.active_save.pronoun
+        PlayerData.tutorials = save_manager.active_save.tutorials
+        self.avatar.save_character()
+        SceneManager.change_scene(Loading(Data.load_world, World), True, True)
+        AudioManager.play_music("exploration")
 
     @staticmethod
     def get_prevalent_color(surface: pygame.Surface):
@@ -259,15 +267,3 @@ class CharacterCreation(Scene):
         elif self.active_tab == "info":
             self.character_info.render(self.display)
             pygame.draw.line(self.display, BLACK_SPRITE, (126, 298), (224, 298))
-            if self.name.text != "" and Input.keyboard.key_pressed in ["F", "f"] and not self.name_label.writing:
-                Image((self.clipboard_padding, 283), self.draw_signature(self.name.text), self.default_group)
-                self.instructions.kill()
-                save_manager.active_save.name = self.name.text
-                save_manager.active_save.pronoun = self.pronouns[self.pronoun_index]
-                save_manager.save()
-                self.avatar.save_character()
-                # scene_manager.change_scene(self, loading.Loading(data.load_map, TestMap, ("playershouse",),
-                #                                                  ("playershouse",)), True)
-                from engine.scene.scene_manager import SceneManager
-                SceneManager.change_scene(Loading(Data.load_maps, World), True)
-                AudioManager.play_music("exploration")

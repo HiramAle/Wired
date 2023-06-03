@@ -2,6 +2,9 @@ from __future__ import annotations
 import pygame
 from src.constants.locals import CANVAS_WIDTH, CANVAS_HEIGHT
 from typing import Optional
+from engine.objects.sprite import SpriteGroup
+from engine.input import Input
+from engine.window import Window
 
 
 class Scene:
@@ -9,6 +12,16 @@ class Scene:
         self.name = name if name else self.__class__.__name__
         self.display = pygame.Surface((CANVAS_WIDTH, CANVAS_HEIGHT), pygame.SRCALPHA)
         self.transitionPosition: tuple = self.center
+        self.interactive = SpriteGroup()
+
+    def update_cursor(self):
+        if any([sprite.hovered for sprite in self.interactive.sprites()]):
+            if Input.mouse.buttons["left_hold"]:
+                Window.set_cursor("grab")
+            else:
+                Window.set_cursor("hand")
+        else:
+            Window.set_cursor("arrow")
 
     def start(self):
         ...

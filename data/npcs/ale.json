@@ -1,0 +1,66 @@
+{
+  "name": "Ale",
+  "dialogues": [
+    {
+      "npc_id": "ale",
+      "text": [
+        "Hola name, \u00bfvienes de Routed Inc?",
+        "Soy Ale, yo dirigo estos departamentos, me dijeron que vendrias",
+        "\u00bfPuedes hacer el subneteo de este lugar?",
+        "Aqui hay 2 cuartos por lo que necesitaras:",
+        " 2 cables directos",
+        "Asegurate de traerlos antes de hacer el subneteo",
+        "La mesa de trabajo esta a lado de esas cajas",
+        "Siempre que veas una mesa as\u00ed podr\u00edas hacer el subneteo del lugar"
+      ],
+      "type": "task_complete",
+      "task": "meet_ale",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "ale",
+      "text": [
+        "Much\u00edsimas gracias por ayudarme",
+        "con la red de la recepci\u00f3n"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [
+        "task subnetting_reception 1"
+      ],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "ale",
+      "text": [
+        "Hola, ahora necesito ayuda con el enrutamiento"
+      ],
+      "type": "new_task",
+      "task": "",
+      "new_tasks": [
+        "routing_music_store"
+      ],
+      "requirements": [
+        "task roy_subnetting_reception 1"
+      ],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "reception",
+  "schedule": {
+    "0": "reception",
+    "1": "reception",
+    "2": "reception",
+    "3": "reception",
+    "4": "reception",
+    "5": "reception",
+    "6": "reception"
+  },
+  "consequences": []
+}

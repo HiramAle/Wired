@@ -98,6 +98,11 @@
    <object id="6" x="298" y="631" width="23" height="21"/>
    <object id="7" x="304" y="652" width="17" height="21"/>
    <object id="8" x="310" y="673" width="11" height="21"/>
+   <object id="12" x="102" y="610" width="20" height="92"/>
+   <object id="13" x="198" y="610" width="20" height="92"/>
+   <object id="14" x="122" y="610" width="76" height="52"/>
+   <object id="16" x="96" y="610" width="6" height="24"/>
+   <object id="17" x="218" y="610" width="6" height="24"/>
   </objectgroup>
  </tile>
  <tile id="13">

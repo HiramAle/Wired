@@ -251,15 +251,15 @@
   <object id="55" gid="36665" x="224" y="544" width="32" height="96"/>
   <object id="56" gid="36658" x="192" y="256" width="32" height="64"/>
   <object id="57" gid="36651" x="608" y="448" width="96" height="64"/>
-  <object id="58" gid="36613" x="224" y="288" width="64" height="128"/>
+  <object id="58" gid="36613" x="222" y="271" width="64" height="80"/>
   <object id="59" gid="36614" x="192" y="608" width="32" height="32"/>
   <object id="60" gid="36615" x="704" y="448" width="64" height="96"/>
-  <object id="62" gid="36619" x="576" y="640" width="64" height="96"/>
+  <object id="62" gid="36619" x="576" y="640" width="64" height="84"/>
   <object id="63" gid="36621" x="352" y="256" width="64" height="64"/>
   <object id="64" gid="36622" x="288" y="544" width="32" height="96"/>
   <object id="65" gid="36624" x="416" y="544" width="32" height="96"/>
   <object id="66" gid="36623" x="448" y="544" width="160" height="64"/>
-  <object id="67" gid="36626" x="576" y="448" width="32" height="96"/>
+  <object id="67" gid="36626" x="578" y="431" width="32" height="56"/>
   <object id="68" gid="36628" x="192" y="352" width="32" height="64"/>
   <object id="69" gid="36629" x="224" y="352" width="32" height="64"/>
   <object id="70" gid="36630" x="160" y="672" width="96" height="64"/>
@@ -314,7 +314,7 @@
    </properties>
    <point/>
   </object>
-  <object id="76" name="Kat" type="npc_spawn" x="400" y="589">
+  <object id="76" name="kat" type="npc_spawn" x="400" y="589">
    <properties>
     <property name="direction" value="down"/>
    </properties>
@@ -324,35 +324,6 @@
    <properties>
     <property name="direction" value="right"/>
    </properties>
-   <point/>
-  </object>
- </objectgroup>
- <objectgroup id="16" name="nodes" visible="0">
-  <object id="81" name="A" x="330" y="240">
-   <point/>
-  </object>
-  <object id="82" x="330" y="336">
-   <point/>
-  </object>
-  <object id="83" x="384" y="336">
-   <point/>
-  </object>
-  <object id="84" x="384" y="524">
-   <point/>
-  </object>
-  <object id="85" x="384" y="592">
-   <point/>
-  </object>
-  <object id="86" x="256" y="216">
-   <point/>
-  </object>
-  <object id="89" x="496" y="592">
-   <point/>
-  </object>
-  <object id="90" x="496" y="662">
-   <point/>
-  </object>
-  <object id="91" x="496" y="729">
    <point/>
   </object>
  </objectgroup>

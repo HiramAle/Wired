@@ -58,9 +58,10 @@ class Option(UIElement):
         self.image.fill(BLACK_MOTION)
         self.pivot = self.Pivot.TOP_LEFT
         self.text = Text(self.rect.center, option_name, 32, BLUE_MOTION, shadow=False, layer=4, parent=self)
+        self.is_hovered = False
 
     def update(self):
-        if self.hovered:
+        if self.hovered or self.is_hovered:
             self.image.fill(WHITE_MOTION)
             self.text.text_color = BLACK_MOTION
         else:

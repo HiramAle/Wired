@@ -1,8 +1,7 @@
 {
-  "sprite_sheet": "data/user/saves/save_1/sprite_sheet.png",
-  "portrait": "data/user/saves/save_1/portrait.png",
-  "name": "Maus",
-  "pronoun": "el",
+  "name": "",
+  "pronoun": "",
+  "week_day": 0,
   "time": 0,
   "money": 200,
   "inventory": {},

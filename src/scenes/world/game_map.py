@@ -49,9 +49,6 @@ class GameMap:
         for layer in self.objects_layers:
             for tiled_object in layer:
                 tiled_object: pytmx.TiledObject
-                if tiled_object.id == 691:
-                    print(tiled_object.__dict__)
-                    print(tiled_object.image)
                 if layer.name == "collision":
                     collider = pygame.Rect(tiled_object.x, tiled_object.y, tiled_object.width, tiled_object.height)
                     self.colliders.append(collider)
@@ -80,5 +77,3 @@ class GameMap:
                     collider_list.append(collider)
                 sorted_by_center = "center" if "centered" in properties else "bottom"
                 self.objects.append(TiledObject(position, image, collider_list, sorted_by_center))
-        # Get player start position or player enter instead
-        # self.player_position = self.positions["player_start"] if self.start else self.positions["player_enter"]

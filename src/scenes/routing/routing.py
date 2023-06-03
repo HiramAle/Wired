@@ -13,6 +13,8 @@ from engine.objects.sprite import Sprite, SpriteGroup
 from engine.constants import Colors
 from enum import Enum
 from engine.loader import Loader
+from engine.data import Data
+from engine.playerdata import PlayerData
 
 interactions = SpriteGroup()
 hide = SpriteGroup()
@@ -459,42 +461,6 @@ class Console(Sprite):
                 text.render(display)
 
 
-class Exercise:
-    class RouterData:
-        def __init__(self, data: dict):
-            super().__init__()
-            self.ip_route = data["ip_route"]
-            self.network = data["network"]
-
-    def __init__(self, data: dict):
-        self.type = data["type"]
-        self.routers = [self.RouterData(router_data) for router_data in data["routers"].values()]
-
-    def get_router_config(self, index: int):
-        router_data = self.routers[index]
-        commands = ["enable", "config t"]
-        for ip_route in router_data.ip_route:
-            commands.append(f"ip route {ip_route}")
-        for network in router_data.network:
-            commands.append(f"network {network}")
-        return commands
-
-    def get_answers(self):
-        answers = [[], [], []]
-        for router_config in self.routers:
-            for command in router_config.ip_route:
-                for index, text in enumerate(command.split(" ")):
-                    if text in answers[index]:
-                        continue
-                    answers[index].append(text)
-            for command in router_config.network:
-                for index, text in enumerate(command.split(" ")):
-                    if text in answers[index]:
-                        continue
-                    answers[index].append(text)
-        return answers
-
-
 class RouterConfig:
     def __init__(self, config: list[str], config_type: str):
         self.config = config
@@ -568,10 +534,47 @@ class RouterConfig:
         return Notification.Type.CORRECT_CONFIG
 
 
-class Routing(Scene):
+class EndOverlay(Sprite):
     def __init__(self):
+        super().__init__((60, 36), Assets.images_routing["end_overlay"])
+        self.overlay = SpriteGroup()
+        self.pivot = self.Pivot.TOP_LEFT
+        Text((151, 85), "¡Red enrutada exitosamente!", 32, Colors.SPRITE, self.overlay, centered=False)
+        Text((121, 147), "Dinero obtenido", 32, Colors.SPRITE, self.overlay, centered=False)
+        Text((121, 183), "Tiempo de trabajo", 32, Colors.SPRITE, self.overlay, centered=False)
+        self.pay = Text((447, 147), f"{1}G", 32, Colors.SPRITE, self.overlay, centered=False)
+        self.time = Text((447, 183), f"{1}:{1}", 32, Colors.SPRITE, self.overlay, centered=False)
+        Text((237, 276), "Presiona espacio para continuar", 16, "#3A3A50", self.overlay, centered=False, opacity=125)
+        self.deactivate()
+        self.payment = 0
+        self.cables = 0
+        self.zone_id = ""
+
+    def update(self, *args, **kwargs):
+        if not self.active:
+            return
+
+        if Input.keyboard.keys["space"]:
+            from engine.scene.scene_manager import SceneManager
+            SceneManager.exit_scene()
+            PlayerData.inventory.money += self.payment
+            PlayerData.remove_item("serial_cable", self.cables)
+            PlayerData.complete_task(f"routing_{self.zone_id}")
+
+    def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
+        if not self.active:
+            return
+        super().render(display)
+        self.overlay.render(display, offset)
+
+
+class Routing(Scene):
+    def __init__(self, zone_id: str):
         super().__init__("routing")
-        self.exercise = Exercise(Loader.load_json("data/scenes/routing/2.json"))
+        # self.exercise = Exercise(Loader.load_json("data/scenes/routing/2.json"))
+        self.starting_time = pygame.time.get_ticks()
+        self.exercise = Data.routing[zone_id]
+        self.zone_id = zone_id
         self.correct = RouterConfig(self.exercise.get_router_config(0), self.exercise.type)
         self.static = SpriteGroup()
         self.answers = SpriteGroup()
@@ -626,12 +629,16 @@ class Routing(Scene):
         self.write.pivot = self.enter.Pivot.TOP_LEFT
         self.erase = Button((531, 289), "erase", self.buttons, interactions, hide)
         self.erase.pivot = self.enter.Pivot.TOP_LEFT
+        self.results_overlay = EndOverlay()
+        self.payment = len(self.exercise.routers) * 30
+        self.time_elapsed = 0
 
     def update(self) -> None:
         self.answers.update()
         self.static.update()
         self.taskbar.update()
         self.buttons.update()
+        self.results_overlay.update()
 
         if any([sprite.hovered for sprite in interactions.sprites()]):
             if Input.mouse.buttons["left_hold"]:
@@ -670,15 +677,32 @@ class Routing(Scene):
                 return
             self.selected_router.current_config = RouterConfig(self.console.get_commands(), self.exercise.type)
             self.taskbar.notify(self.selected_router.check_config())
-            print(self.taskbar.notification.type)
             if self.selected_router.configured:
                 self.selected_router = None
                 self.console.commands = []
+            if all([router.configured for router in self.routers.sprites()]) and not self.results_overlay.active:
+                self.results_overlay.activate()
+                self.time_elapsed = (pygame.time.get_ticks() - self.starting_time) / 1000
+                minutes = int(self.time_elapsed / 60)
+                seconds = int(self.time_elapsed % 60)
+                time_string = "{:02d}:{:02d}".format(minutes, seconds)
+                self.results_overlay.time.text = time_string
+                if self.time_elapsed <= 90:
+                    time_bonus = 50
+                elif self.time_elapsed <= 120:
+                    time_bonus = 30
+                else:
+                    time_bonus = 10
+                self.payment += time_bonus
+                self.results_overlay.pay.text = f"+${self.payment}G"
+                self.results_overlay.payment = self.payment
+                self.results_overlay.cables = self.exercise.cables
+                self.results_overlay.zone_id = self.zone_id
 
     def render(self) -> None:
         self.static.render(self.display)
         self.answers.render(self.display)
         self.routers.render(self.display)
         self.buttons.render(self.display)
-
         self.taskbar.render(self.display)
+        self.results_overlay.render(self.display)

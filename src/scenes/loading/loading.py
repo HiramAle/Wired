@@ -37,7 +37,7 @@ class Loading(Scene):
         self.next_scene = scene
         self.loading = Event()
         self.loading.set()
-        Thread(name="loading_assets", target=loading_function, args=[self.loading, *self.thread_args]).start()
+        Thread(name="loading", target=loading_function, args=[self.loading, *self.thread_args]).start()
         self.transitionPosition = 440, 180
         pygame.mouse.set_visible(False)
         self.sprites = SpriteGroup()

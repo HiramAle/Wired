@@ -11,6 +11,7 @@ class Inventory:
         self.items: dict[str, int] = {}
 
     def load_inventory(self, money: int, inventory: dict):
+        self.items = {}
         self.money = money
         for id_item, quantity in inventory.items():
             self.items[id_item] = quantity
@@ -31,16 +32,18 @@ class Inventory:
         if not self.has(item_id):
             print(f"Player doesn't have {item_id}")
             return
+        print(f"Player has {self.items[item_id]}")
+        print(f"Removing {quantity}")
         self.items[item_id] -= quantity
-        if self.items[item_id] <= 0 and item_id not in ["cable", "connector"]:
-            self.items.pop(item_id)
+        if self.items[item_id] <= 0:
+            self.items[item_id] = 0
+        print(f"Player have {self.items[item_id]}")
 
     def has(self, item_id: str) -> bool:
         for item in self.items.keys():
             if item.startswith(item_id):
                 return True
         return False
-        # return item_id in self.items.keys()
 
     def has_enough(self, item_id: str, quantity: int) -> bool:
         if item_id == "money":
@@ -68,6 +71,13 @@ class Inventory:
                 continue
             counter += item_quantity
         return counter
+
+    def how_many(self, item_id: str) -> int:
+        if item_id == "money":
+            return self.money
+        if not self.has(item_id):
+            return 0
+        return self.items[item_id]
 
     def remove_cable(self, cable_type: str, quantity: int) -> list[int]:
         print(f"Removing {quantity} of {cable_type}")

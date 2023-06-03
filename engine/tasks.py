@@ -6,6 +6,7 @@ class Tasks:
         self.tasks: dict[str, Task] = {}
 
     def load_tasks(self, tasks: dict):
+        self.tasks = {}
         for task_id, task_status in tasks.items():
             task = TaskManager.get_task(task_id)
             task.completed = task_status
@@ -36,7 +37,7 @@ class Tasks:
             return False
         return True
 
-    def has_incomplete(self, task_id:str) -> bool:
+    def has_incomplete(self, task_id: str) -> bool:
         if not self.has(task_id):
             return False
         if self.get(task_id).completed:

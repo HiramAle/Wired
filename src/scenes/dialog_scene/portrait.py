@@ -8,7 +8,7 @@ from engine.objects.sprite import Sprite
 class Portrait(Sprite):
     def __init__(self, npc: str):
         super().__init__((178, 295), pygame.Surface((64, 64), pygame.SRCALPHA))
-        self.frames = Assets.portrait_frames[npc]["talk"]
+        self.frames = Assets.portrait_frames[npc.title()]["talk"]
         self.animation_speed = 10
         self.frame_index = 0
 

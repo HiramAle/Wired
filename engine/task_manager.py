@@ -6,17 +6,16 @@ class Task:
     def __init__(self, task_id: str, data: dict):
         self.__data = data
         self.id = task_id
-        self.name: str = data.get("name")
+        self.title: str = data.get("title", "")
         self.description: str = data.get("description")
         self.type: str = data.get("type")
         self.objective: str = data.get("objective")
         self.npcs: list[str] = data.get("npcs")
-        self.consequence: str = data.get("consequence")
-        self.next_task: str = data.get("next_task")
+        self.next_tasks: list[str] = data.get("next_tasks")
         self.completed = False
 
     def __repr__(self):
-        return f"Task ({self.name}, {self.objective})"
+        return f"Task ({self.title}, {self.objective})"
 
 
 class TaskManager:
@@ -39,6 +38,3 @@ class TaskManager:
         if not cls.exists(task_id):
             return None
         return cls.tasks[task_id]
-
-
-

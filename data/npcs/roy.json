@@ -1,0 +1,93 @@
+{
+  "name": "Roy",
+  "dialogues": [
+    {
+      "npc_id": "roy",
+      "text": [
+        "Hola name, bienvenid@ a Routed Inc!",
+        "Yo soy Roy, amigo de Chencho y el actual Jefe de la empresa",
+        "Me da gusto que hayas llegado, antes de darte un trabajo",
+        "\u00bfPor qu\u00e9 no pruebas a hacer algunos cables de red?",
+        "Ya que ser\u00e1 una habilidad importante para desarrollar",
+        "Si caminas hac\u00eda la izquierda encontraras la mesa de cableado",
+        "Donde quiera que haya una mesa de cableado puedes crear cables",
+        "Prueba a hacer un cable directo, es un cable muy com\u00fan",
+        "Se hace ordenando los dos extremos del cable ",
+        "Con el mismo est\u00e1ndar",
+        "Se utiliza para conectar dispositivos diferentes",
+        "Como una PC a un Switch o un Switch a un Router",
+        "Y en la empresa los usamos para el subneteo"
+      ],
+      "type": "task_complete",
+      "task": "meet_roy",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "roy",
+      "text": [
+        "Muy bieeen! Pon atenci\u00f3n a la calidad de los cables",
+        "De eso depende la paga en tus trabajos de subneteo",
+        "Ahora, prueba a hacer un cable cruzado",
+        "Este cable intercala los est\u00e1ndares",
+        "Por un lado tiene el A y en el otro el B",
+        "No importa el orden de los est\u00e1ndares, pero s\u00ed que sean distintos",
+        "Este cable se usa para conectar dispositivos iguales",
+        "Como dos Switches o dos Routers",
+        "Crea uno en la mesa de cableado"
+      ],
+      "type": "task_complete",
+      "task": "roy_straight_cable",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "roy",
+      "text": [
+        "Perfecto! Veo que tu habilidad para hacer cables es excelente",
+        "Ahora, tu primer trabajo ser\u00e1 en el pueblo",
+        "Dir\u00edgete a los departamentos de la empresa",
+        "Est\u00e1n a lado de la tienda del pueblo",
+        "Es un trabajo de subneteo, Ale te dar\u00e1 mas detalles"
+      ],
+      "type": "task_complete",
+      "task": "roy_crossover_cable",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "roy",
+      "text": [
+        "Ale me dijo que te fue de maravilla",
+        "Muchas felicidades name",
+        "Nuestra meta en esta empresa es conectar toda la ciudad",
+        "Para eso necesitamos subnetear y enrutar todos los lugares",
+        "Sal y explora el pueblo y la ciudad",
+        "Seguro habr\u00e1 muchos que necesiten de nuestro trabajo"
+      ],
+      "type": "task_complete",
+      "task": "roy_subnetting_reception",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "company",
+  "schedule": {
+    "0": "company",
+    "1": "company",
+    "2": "company",
+    "3": "company",
+    "4": "company",
+    "5": "company",
+    "6": "company"
+  },
+  "consequences": []
+}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.9" tiledversion="1.9.2" name="store_singles" tilewidth="192" tileheight="96" tilecount="37" columns="0">
+<tileset version="1.9" tiledversion="1.9.2" name="store_singles" tilewidth="192" tileheight="192" tilecount="59" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="64" height="64" source="../Images/store_singles/bags_1.png"/>
@@ -206,5 +206,110 @@
   <objectgroup draworder="index" id="2">
    <object id="1" x="2" y="2.375" width="27.875" height="27.375"/>
   </objectgroup>
+ </tile>
+ <tile id="39">
+  <image width="128" height="192" source="../Images/store_singles/table.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="2" y="19" width="124" height="139"/>
+  </objectgroup>
+ </tile>
+ <tile id="40">
+  <image width="128" height="96" source="../Images/store_singles/fitting_room.png"/>
+  <objectgroup draworder="index" id="3">
+   <object id="3" x="26.2727" y="86" width="75.7273" height="8"/>
+  </objectgroup>
+ </tile>
+ <tile id="41">
+  <image width="64" height="96" source="../Images/store_singles/clothes_6.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="2" y="34" width="60" height="42"/>
+  </objectgroup>
+ </tile>
+ <tile id="42">
+  <image width="32" height="96" source="../Images/store_singles/clothes_7.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="6.25" y="31.125" width="17.625" height="50.75"/>
+  </objectgroup>
+ </tile>
+ <tile id="43">
+  <image width="32" height="96" source="../Images/store_singles/clothes_8.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="6.25" y="31.125" width="17.625" height="50.75"/>
+  </objectgroup>
+ </tile>
+ <tile id="44">
+  <image width="64" height="64" source="../Images/store_singles/clothes_9.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="6" y="19.875" width="52" height="25.875"/>
+  </objectgroup>
+ </tile>
+ <tile id="45">
+  <image width="32" height="64" source="../Images/store_singles/clothes_10.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="2" x="8" y="34" width="22" height="27.875"/>
+  </objectgroup>
+ </tile>
+ <tile id="46">
+  <image width="32" height="32" source="../Images/store_singles/bench_2.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="2" y="2" width="27.875" height="28"/>
+  </objectgroup>
+ </tile>
+ <tile id="47">
+  <image width="32" height="64" source="../Images/store_singles/mirror_1.png"/>
+ </tile>
+ <tile id="48">
+  <image width="128" height="96" source="../Images/store_singles/fitting_room_2.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="24" y="87" width="36" height="6.90909"/>
+  </objectgroup>
+ </tile>
+ <tile id="49">
+  <image width="64" height="64" source="../Images/store_singles/carpet_3.png"/>
+ </tile>
+ <tile id="50">
+  <image width="160" height="64" source="../Images/store_singles/carpet_4.png"/>
+ </tile>
+ <tile id="51">
+  <image width="160" height="64" source="../Images/store_singles/carpet_5.png"/>
+ </tile>
+ <tile id="52">
+  <image width="192" height="96" source="../Images/store_singles/counter_5.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="22" y="38" width="148" height="38"/>
+  </objectgroup>
+ </tile>
+ <tile id="53">
+  <image width="32" height="64" source="../Images/store_singles/add_1.png"/>
+ </tile>
+ <tile id="54">
+  <image width="32" height="64" source="../Images/store_singles/add_2.png"/>
+ </tile>
+ <tile id="55">
+  <image width="32" height="64" source="../Images/store_singles/add_3.png"/>
+ </tile>
+ <tile id="56">
+  <image width="64" height="64" source="../Images/store_singles/add_4.png"/>
+ </tile>
+ <tile id="57">
+  <image width="96" height="64" source="../Images/store_singles/carts.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="10.25" y="21.625" width="60.25" height="30.625"/>
+  </objectgroup>
+ </tile>
+ <tile id="58">
+  <image width="64" height="96" source="../Images/store_singles/flowers_5.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="30" width="64" height="54"/>
+  </objectgroup>
+ </tile>
+ <tile id="59">
+  <image width="32" height="64" source="../Images/store_singles/flowers_6.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="6" y="28" width="20" height="18"/>
+  </objectgroup>
+ </tile>
+ <tile id="60">
+  <image width="32" height="32" source="../Images/store_singles/discound_add_3.png"/>
  </tile>
 </tileset>

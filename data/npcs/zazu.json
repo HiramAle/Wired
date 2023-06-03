@@ -1,0 +1,15 @@
+{
+  "name": "Hiram",
+  "dialogues": [],
+  "default_zone": "school",
+  "schedule": {
+    "0": "school",
+    "1": "school",
+    "2": "school",
+    "3": "school",
+    "4": "school",
+    "5": "school",
+    "6": "school"
+  },
+  "consequences": []
+}

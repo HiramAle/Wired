@@ -1,0 +1,36 @@
+{
+  "name": "Juliette",
+  "dialogues": [
+    {
+      "npc_id": "juliette",
+      "text": [
+        "\u00bfHas venido a escucharme cantar? ",
+        "\u00bfC\u00f3mo que no?",
+        "\u00a1Ahhh! Vienes a subnetear, perfecto",
+        "La mesa de trabajo est\u00e1 a la derecha",
+        "Por la sala de guitarras"
+      ],
+      "type": "new_task",
+      "task": "",
+      "new_tasks": [
+        "subnetting_music_store"
+      ],
+      "requirements": [
+        "task roy_subnetting_reception 1"
+      ],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "music_store",
+  "schedule": {
+    "0": "music_store",
+    "1": "music_store",
+    "2": "music_store",
+    "3": "music_store",
+    "4": "music_store",
+    "5": "music_store",
+    "6": "music_store"
+  },
+  "consequences": []
+}

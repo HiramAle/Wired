@@ -1,0 +1,18 @@
+{
+  "type": "static_interface",
+  "cables": 1,
+  "routers": {
+    "router1": {
+      "ip_route": [
+        "179.133.128.0 255.255.192.0 10.10.10.2"
+      ],
+      "network": []
+    },
+    "router2": {
+      "ip_route": [
+        "179.133.64.0 255.255.192.0 10.10.10.1"
+      ],
+      "network": []
+    }
+  }
+}

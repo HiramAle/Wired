@@ -1,0 +1,50 @@
+{
+  "name": "Juan",
+  "dialogues": [
+    {
+      "npc_id": "juan",
+      "text": [
+        "Hola name, escuch\u00e9 que trabajas en una empresa de Redes",
+        "\u00bfPodr\u00edas ayudarme subneteando la red del Hospital?"
+      ],
+      "type": "new_task",
+      "task": "",
+      "new_tasks": [
+        "subnetting_school"
+      ],
+      "requirements": [
+        "task roy_subnetting_reception 1"
+      ],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "juan",
+      "text": [
+        "Hola name, escuch\u00e9 que trabajas en una empresa de Redes",
+        "\u00bfPodr\u00edas ayudarme subneteando la red del Hospital?"
+      ],
+      "type": "new_task",
+      "task": "",
+      "new_tasks": [
+        "routing_hospital"
+      ],
+      "requirements": [
+        "task subnetting_hospital 1"
+      ],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "hospital",
+  "schedule": {
+    "0": "hospital",
+    "1": "hospital",
+    "2": "hospital",
+    "3": "hospital",
+    "4": "hospital",
+    "5": "hospital",
+    "6": "hospital"
+  },
+  "consequences": []
+}

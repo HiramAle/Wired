@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="36" height="22" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="194">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="36" height="22" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="200">
  <tileset firstgid="1" source="../TSX/Room_Builder.tsx"/>
  <tileset firstgid="8285" source="../TSX/stairs.tsx"/>
  <tileset firstgid="8345" source="../TSX/school_singles.tsx"/>
@@ -281,9 +281,27 @@
     <property name="zone" value="city"/>
    </properties>
   </object>
+  <object id="197" name="routing" type="scene" x="648" y="448" width="48" height="32">
+   <properties>
+    <property name="interaction_type" value="keypress"/>
+    <property name="scene" value="routing"/>
+   </properties>
+  </object>
+  <object id="198" name="cables" type="scene" x="768" y="168" width="96" height="32">
+   <properties>
+    <property name="interaction_type" value="keypress"/>
+    <property name="scene" value="cables"/>
+   </properties>
+  </object>
+  <object id="199" name="subnetting" type="scene" x="64" y="192" width="88" height="32">
+   <properties>
+    <property name="interaction_type" value="keypress"/>
+    <property name="scene" value="subnetting"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="12" name="positions">
-  <object id="190" name="Kike" type="npc_spawn" x="304" y="528">
+  <object id="190" name="kike" type="npc_spawn" x="304" y="528">
    <properties>
     <property name="direction" value="right"/>
    </properties>
@@ -295,13 +313,13 @@
    </properties>
    <point/>
   </object>
-  <object id="192" name="Laura" type="npc_spawn" x="176" y="496">
+  <object id="192" name="laura" type="npc_spawn" x="176" y="496">
    <properties>
     <property name="direction" value="down"/>
    </properties>
    <point/>
   </object>
-  <object id="193" name="Javier" type="npc_spawn" x="464" y="192">
+  <object id="193" name="javier" type="npc_spawn" x="464" y="192">
    <properties>
     <property name="direction" value="down"/>
    </properties>

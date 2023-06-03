@@ -4,7 +4,6 @@ from src.scenes.dialog_scene.portrait import Portrait
 from src.scenes.world.npc import NPC
 from engine.input import Input
 from engine.dialog_manager import Dialog
-from engine.playerdata import PlayerData
 
 
 class DialogScene(Scene):
@@ -18,29 +17,19 @@ class DialogScene(Scene):
     @staticmethod
     def choose_dialog(npc: NPC) -> Dialog:
         # Check if npc is the objective of current tasks
-        print(f"Choosing dialog of {npc.name}")
-        print(f"Looking up the current tasks {PlayerData.tasks.current_tasks}")
-        for task in PlayerData.tasks.current_tasks:
-            print(f"Reviewing task {task.id}")
-            if npc.name.lower() == task.objective:
-                # Complete task
-                PlayerData.complete_task(task.id)
-                # Add new mission to player
-                dialog = npc.task_complete_dialog(task.id)
-                return dialog
-                # If not, return a generic Dialog
-        # Check if NPC can give mission
-        for dialog in npc.dialogs:
-            if dialog.add_mission != "":
-
-                PlayerData.add_task(dialog.add_mission)
-                return dialog
+        complete_task_dialog = npc.task_complete_dialog()
+        if complete_task_dialog:
+            return complete_task_dialog
+        # Check if NPC can give task
+        new_task_dialog = npc.get_new_task_dialog()
+        if new_task_dialog:
+            return new_task_dialog
         # Check if NPC can give item
-        unique_dialog = npc.get_special_dialog()
-        if unique_dialog:
-            return unique_dialog
+        add_item_dialog = npc.get_add_item_dialog()
+        if add_item_dialog:
+            return add_item_dialog
         print("Returning generic dialog")
-        return npc.generic_dialog()
+        return npc.get_generic_dialog()
 
     def update(self) -> None:
         self.dialog_box.update()

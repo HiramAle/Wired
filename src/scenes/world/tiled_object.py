@@ -1,5 +1,6 @@
 import pygame
 from src.scenes.world.sprite import Sprite
+from engine.constants import Colors
 
 
 class TiledObject(Sprite):
@@ -24,3 +25,10 @@ class TiledObject(Sprite):
     @property
     def rect(self) -> pygame.Rect:
         return self.image.get_rect(topleft=self._position)
+
+    def draw_colliders(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
+        for collider in self.colliders:
+            adjusted_collider = collider.copy()
+            adjusted_collider.x -= offset.x
+            adjusted_collider.y -= offset.y
+            pygame.draw.rect(display, Colors.RED, adjusted_collider, 2)

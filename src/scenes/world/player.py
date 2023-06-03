@@ -39,7 +39,7 @@ class Player(Actor):
     def set_emote(self, emote: str):
         if self.emote:
             return
-        self.emote = Emote((self.x, self.y - 24), Assets.animations["emotes"][emote])
+        self.emote = Emote((self.x, self.y - 24), Assets.animations["emotes"][emote], emote)
         self.emote.animation.play()
 
     def update(self):

@@ -21,20 +21,20 @@ class Exit(Scene):
              self.exit, centered=False)
         Sprite((390.5 + self.x_padding, 208), Assets.images_book["bed"], self.exit)
         PlayerAvatar((390.5 + self.x_padding, 208), "sleep", self.exit)
-        self.menu_button = Button((104, 120), "button_menu", self.exit, centered=False)
-        self.desktop_button = Button((104, 194), "button_desktop", self.exit, centered=False)
+        # self.menu_button = Button((104, 120), "button_menu", self.exit, self.interactive, centered=False)
+        self.desktop_button = Button((104, 120), "button_desktop", self.exit, self.interactive, centered=False)
         self.module_button = None
         from engine.scene.scene_manager import SceneManager
         SceneManager.print_stack()
         if SceneManager.stack_scene[-1].name != "world":
-            self.module_button = Button((104, 268), "button_module", self.exit, centered=False)
+            self.module_button = Button((104, 194), "button_module", self.exit, centered=False)
 
     def update(self) -> None:
         self.exit.update()
         from engine.scene.scene_manager import SceneManager
-        if self.menu_button.clicked:
-            from src.scenes.main_menu.main_menu import MainMenu
-            SceneManager.change_scene(MainMenu(), True)
+        # if self.menu_button.clicked:
+        #     from src.scenes.main_menu.main_menu import MainMenu
+        #     SceneManager.change_scene(MainMenu(), transition=True,empty=True)
         if self.desktop_button.clicked:
             import sys
             sys.exit()

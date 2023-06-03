@@ -114,7 +114,10 @@ class CrimpCable(Scene):
             if Input.mouse.buttons["left"]:
                 color_x = int(self.indicator.x - self.color_bar.rect.left)
                 # print(self.color_bar.image.get_at((color_x, self.color_bar.rect.centery)))
-                color = self.color_values[tuple(self.color_bar.image.get_at((color_x, 9)))]
+                try:
+                    color = self.color_values[tuple(self.color_bar.image.get_at((color_x, 9)))]
+                except KeyError or IndexError:
+                    color = random.choice(list(self.color_values.values()))
                 self.qualities.append(self.color_quality[color])
                 # self.qualities.append(self.color_quality[color])
                 self.crimp_tool.playing = True

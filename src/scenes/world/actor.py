@@ -6,13 +6,15 @@ from engine.assets import Assets
 from engine.time import Time
 from src.scenes.world.sprite import Sprite
 from engine.animation.animation import Animation
+from engine.constants import Colors
 
 
 class Emote(Sprite):
-    def __init__(self, position: tuple, animation: Animation):
+    def __init__(self, position: tuple, animation: Animation, name:str):
         super().__init__(position, animation.current_frame)
         self.animation = animation
         self.animation.loop = False
+        self.name = name
 
     def update(self):
         self.animation.update()
@@ -40,6 +42,14 @@ class Actor(Sprite):
         self.shadow = Assets.images_actors["actor_shadow"]
         self.collider = pygame.Rect(0, 0, 28, 20)
         self.emote: Emote | None = None
+
+    def draw_colliders(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
+        adjusted_collider = self.collider.copy()
+        adjusted_collider.x -= offset.x
+        adjusted_collider.y -= offset.y
+        pygame.draw.rect(display, Colors.RED, adjusted_collider, 2)
+
+
 
     def update_status(self):
         if self.movement.magnitude() > 0:

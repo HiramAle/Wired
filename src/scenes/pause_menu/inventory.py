@@ -27,16 +27,25 @@ class Inventory(Scene):
                                  centered=False)
         self.connector_slot = Sprite((205 + self.x_padding, 251), Assets.images_book["connectors"], self.inventory,
                                      centered=False)
-        Text((143 + self.x_padding, 293.5), f"{PlayerData.inventory.how_much('cable')}m", 16, Colors.SPRITE,
+        Text((143 + self.x_padding, 293.5), f"{PlayerData.inventory.how_many('cable')}m", 16, Colors.SPRITE,
              self.inventory)
+        print(f"Player has {PlayerData.inventory.how_many('cable')}")
         Text((227 + self.x_padding, 293.5), f"{PlayerData.inventory.how_much('connector')}p", 16, Colors.SPRITE,
              self.inventory)
         Text((449 + self.x_padding, 52.5), "Cable Directo", 16, Colors.SPRITE, self.inventory, shadow=True,
              shadow_opacity=50, shado_color="#A3A7C2")
         Text((449 + self.x_padding, 115.5), "Cable Cruzado", 16, Colors.SPRITE, self.inventory, shadow=True,
              shadow_opacity=50, shado_color="#A3A7C2")
-        Text((449 + self.x_padding, 175.5), "Objetos Especiales", 16, Colors.SPRITE, self.inventory, shadow=True,
+
+        usb_item = ItemManager.get_item_by_id("usb_double_cable") if PlayerData.inventory.has(
+            "usb_double_cable") else ItemManager.get_item_by_id("default")
+        other_items = [usb_item, ItemManager.get_item_by_id("serial_cable")]
+        Text((387 + self.x_padding, 175.5), other_items[0].name, 16, Colors.SPRITE, self.inventory, shadow=True,
              shadow_opacity=50, shado_color="#A3A7C2")
+        Text((412 + (78 / 2) + self.x_padding, 175.5), other_items[1].name, 16, Colors.SPRITE, self.inventory,
+             shadow=True, shadow_opacity=50, shado_color="#A3A7C2")
+        # Text((476 + (78 / 2) + self.x_padding, 175.5), other_items[2].name, 16, Colors.SPRITE, self.inventory,
+        #      shadow=True, shadow_opacity=50, shado_color="#A3A7C2")
         self.slots = []
         for index in range(3):
             slot = ItemSlot((365 + (index * 64) + self.x_padding, 64),
@@ -46,9 +55,13 @@ class Inventory(Scene):
             slot = ItemSlot((365 + (index * 64) + self.x_padding, 125),
                             ItemManager.get_item_by_id(f"cable_crossover_{index + 1}"), self.inventory)
             self.slots.append(slot)
-
-        for index in range(3):
-            SpecialItemSlot((365 + (index * 64) + self.x_padding, 186), "a", self.inventory)
+        # other_items = ["usb_double_cable", "serial_cable"]
+        for index, item in enumerate(other_items):
+            unique = True
+            if item.id == "serial_cable":
+                unique = False
+            slot = SpecialItemSlot((365 + (index * 64) + self.x_padding, 186), item, self.inventory, unique=unique)
+            self.slots.append(slot)
 
         self.item_name = Text((449 + self.x_padding, 251 - 8), "", 32, Colors.SPRITE, self.inventory)
         self.item_description_frame = Sprite((344 + self.x_padding, 272 - 10), Assets.images_book["item_description"],

@@ -18,8 +18,9 @@ class Tab(Sprite):
         EXITING = 3
         HIDE = 4
 
-    def __init__(self, position: tuple, name: str):
-        super().__init__(position, pygame.Surface(Assets.images_book["tab_idle"].get_size(), pygame.SRCALPHA))
+    def __init__(self, position: tuple, name: str, *groups, **kwargs):
+        super().__init__(position, pygame.Surface(Assets.images_book["tab_idle"].get_size(), pygame.SRCALPHA), *groups,
+                         **kwargs)
         self.pivot = self.Pivot.TOP_LEFT
         self.name = name.lower()
         self.icon = Sprite((self.x + 20, self.rect.centery), Assets.images_book[name.lower()])
@@ -86,7 +87,8 @@ class ItemSlot(Sprite):
         super().__init__(position, Assets.images_book[f"cable_{item.id[-1]}"], *groups, **kwargs)
         self.item = item
         self.pivot = self.Pivot.TOP_LEFT
-        self.quantity = Text((self.x + 31, self.y + 32.5), str(PlayerData.inventory.how_much(item.id)), 16, Colors.WHITE)
+        self.quantity = Text((self.x + 31, self.y + 32.5), str(PlayerData.inventory.how_much(item.id)), 16,
+                             Colors.WHITE)
 
     def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
         super().render(display)
@@ -94,9 +96,26 @@ class ItemSlot(Sprite):
 
 
 class SpecialItemSlot(Sprite):
-    def __init__(self, position: tuple, item: str, *groups, **kwargs):
-        super().__init__(position, Assets.images_book["special_item"], *groups)
+    def __init__(self, position: tuple, item: Item, *groups, **kwargs):
+        if item.id == "serial_cable":
+            image = Assets.images_book["item_multiple"]
+        else:
+            if PlayerData.inventory.has("usb_double_cable"):
+                image = Assets.images_book["USB_item"]
+            else:
+                image = Assets.images_book["empty_item"]
+
+        super().__init__(position, image, *groups)
         self.pivot = self.Pivot.TOP_LEFT
+        self.item = item
+        self.unique = kwargs.get("unique", True)
+        self.quantity = Text((self.x + 31, self.y + 32.5), str(PlayerData.inventory.how_much(item.id)), 16,
+                             Colors.WHITE)
+
+    def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
+        super().render(display)
+        if not self.unique:
+            self.quantity.render(display)
 
 
 class Button(Sprite):

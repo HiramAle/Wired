@@ -38,5 +38,17 @@
   "backspace": {
     "trigger": "press",
     "binding": 8
+  },
+  "map": {
+    "trigger": "press",
+    "binding": 109
+  },
+  "journal": {
+    "trigger": "press",
+    "binding": 106
+  },
+  "control": {
+    "trigger": "hold",
+    "binding": 1073742048
   }
 }

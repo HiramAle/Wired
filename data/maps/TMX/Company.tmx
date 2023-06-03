@@ -444,18 +444,6 @@
     <property name="scene" value="cables"/>
    </properties>
   </object>
-  <object id="424" name="routing" type="scene" x="142" y="192" width="45" height="31">
-   <properties>
-    <property name="interaction_type" value="keypress"/>
-    <property name="scene" value="routing"/>
-   </properties>
-  </object>
-  <object id="425" name="subnetting" type="scene" x="1103" y="274" width="81" height="26">
-   <properties>
-    <property name="interaction_type" value="keypress"/>
-    <property name="scene" value="subnetting"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup id="16" name="positions">
   <object id="419" name="player_city" x="623" y="673">
@@ -464,7 +452,7 @@
    </properties>
    <point/>
   </object>
-  <object id="426" name="Roy" type="npc_spawn" x="527" y="405">
+  <object id="426" name="roy" type="npc_spawn" x="527" y="405">
    <properties>
     <property name="direction" value="down"/>
    </properties>

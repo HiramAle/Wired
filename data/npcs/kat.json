@@ -1,0 +1,83 @@
+{
+  "name": "Kat",
+  "dialogues": [
+    {
+      "npc_id": "kat",
+      "text": [
+        "Hola name, bienvenid@ a Celestia",
+        "Me dijeron que vendr\u00edas",
+        "\u00bfTrabajas en Routed Inc no es as\u00ed?",
+        "Yo soy Kat, he vivido toda mi vida en este pueblo",
+        "Es bueno ver una cara nueva por aqu\u00ed",
+        "Tu amigo Chencho te est\u00e1 esperando en la parada de autobus",
+        "Por qu\u00e9 no vas con \u00e9l?",
+        "Puedes caminar saliendo de tu casa hac\u00eda el sur",
+        "Si tienes dudas dale un vistazo a tu mapa con la tecla <M>",
+        "Cu\u00eddate, nos ver\u00e9mos luego"
+      ],
+      "type": "task_complete",
+      "task": "meet_kat",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "kat",
+      "text": [
+        "Ya has hablado con Chencho?"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [
+        "task meet_kat 1",
+        "task meet_chencho 0"
+      ],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "kat",
+      "text": [
+        "Espero que te haya ido bien en tu primer dia, muchas felicidades."
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [
+        "task subnetting_reception 1"
+      ],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "kat",
+      "text": [
+        "As\u00ed que Jordi quiere su figura devuelta, muy bien",
+        "Solo que hay un problema . . .",
+        "Ya no la tengo",
+        "Jeje",
+        "Se la prest\u00e9 a Chencho pero no he ido a su casa",
+        "Podr\u00edas pasar por ella y llevarla con Jordi?"
+      ],
+      "type": "task_complete",
+      "task": "chinlli",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "players_house",
+  "schedule": {
+    "0": "village",
+    "1": "village",
+    "2": "village",
+    "3": "village",
+    "4": "village",
+    "5": "village",
+    "6": "village"
+  },
+  "consequences": []
+}

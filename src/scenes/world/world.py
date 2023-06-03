@@ -74,14 +74,18 @@ class World(Scene):
         self.notifications = SpriteGroup()
         # ----------
         self.player = Player((0, 0), [], [], [])
-        self.npc_list: list[NPC] = []
-        for npc_name, npc_data in Data.npcs.items():
-            self.npc_list.append(NPC(npc_name, self.player))
+        self.npc_list: list[NPC] = Data.obj_npcs
+        for npc in self.npc_list:
+            npc.player = self.player
+            npc.set_zone()
         self.zone = Zone("players_house", self.npc_list, self.player, self.new_zone, self.notify, self)
         # ----------
+        TimeManager.current_day_of_week = save_manager.active_save.week_day
         self.overlay = Assets.images_world["overlay"]
+        self.day_overlay = Assets.images_world["week_day"]
         self.hour = Text((93, 32), TimeManager.formatted_time(), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
         self.money = Text((93, 50), str(PlayerData.inventory.money), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
+        self.day = Text((50, 82), TimeManager.formatted_week_day(), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
         self.portrait = PlayerPortrait()
         self.next_zone: Zone | None = None
 
@@ -123,6 +127,8 @@ class World(Scene):
                 self.fade_out = True
                 self.zone = self.next_zone
                 self.zone.start_zone()
+                self.zone.player.collider.centerx = self.zone.player.x
+                self.zone.player.collider.bottom = self.zone.player.rect.bottom
         if self.fade_out:
             self.next_zone.update()
             self.alpha -= self.transitionSpeed * Time.dt
@@ -148,6 +154,7 @@ class World(Scene):
     def new_zone(self, zone: str, before=""):
         self.zone.player.can_move = False
         self.zone.player.action = "idle"
+        self.zone.player.movement = pygame.Vector2(0, 0)
         zone_before = self.zone.name if before == "" else before
         self.next_zone = Zone(zone, self.npc_list, self.player, self.new_zone, self.notify, self, zone_before)
 
@@ -158,19 +165,18 @@ class World(Scene):
         self.night.update()
         self.portrait.update()
         self.notifications.update()
-
-        if Input.keyboard.keys["esc"]:
-            from engine.scene.scene_manager import SceneManager
-            SceneManager.change_scene(Pause(self.new_zone))
-
+        from engine.scene.scene_manager import SceneManager
+        if not SceneManager.transitioning:
+            if Input.keyboard.keys["esc"]:
+                SceneManager.change_scene(Pause(self.new_zone))
+            elif Input.keyboard.keys["map"]:
+                SceneManager.change_scene(Pause(self.new_zone, 2))
+            elif Input.keyboard.keys["journal"]:
+                SceneManager.change_scene(Pause(self.new_zone, 1))
         self.check_for_end_day()
 
-        if Input.keyboard.keys["backspace"]:
-            # self.portrait.status = "talk"
-            self.notify(str(random.randint(0, 10)), 3)
-
     def render_notifications(self, display: pygame.Surface):
-        starting_y = 280
+        starting_y = 160
         spacing = 70
         for index, notification in enumerate(self.notifications.sprites()):
             notification.y = starting_y - (index * spacing)
@@ -181,10 +187,12 @@ class World(Scene):
         self.zone.render()
         self.display.blit(self.zone.display, (0, 0))
         self.display.blit(self.overlay, (16, 16))
+        self.display.blit(self.day_overlay, (16, 70))
         self.hour.text = TimeManager.formatted_time()
         self.money.text = str(PlayerData.inventory.money)
         self.hour.render(self.display)
         self.money.render(self.display)
+        self.day.render(self.display)
         self.portrait.render(self.display)
         self.render_notifications(self.display)
         self.render_zone_transition()
