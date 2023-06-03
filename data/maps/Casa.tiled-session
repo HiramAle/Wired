@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TMX/Casa_custom.tmx",
+    "activeFile": "TMX/Hotel.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "Todos los archivos (*)",
@@ -186,11 +186,11 @@
                 10,
                 5
             ],
-            "scale": 1,
+            "scale": 3,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 629.5,
-                "y": 364
+                "x": 234.16666666666666,
+                "y": 315.3333333333333
             }
         },
         "TMX/NPCs_house.tmx": {
@@ -444,17 +444,17 @@
     "property.type": "bool",
     "recentFiles": [
         "TMX/Village.tmx",
+        "TMX/Casa_custom.tmx",
+        "TMX/Tienda_prueba.tmx",
+        "TMX/City.tmx",
+        "TMX/reception.tmx",
+        "TMX/Company.tmx",
+        "TMX/NPCs_house.tmx",
         "TSX/house_singles.tsx",
         "TMX/City_Store.tmx",
         "TMX/Hospital.tmx",
         "TMX/Escuela.tmx",
-        "TMX/Hotel.tmx",
-        "TMX/NPCs_house.tmx",
-        "TMX/Company.tmx",
-        "TMX/reception.tmx",
-        "TMX/City.tmx",
-        "TMX/Tienda_prueba.tmx",
-        "TMX/Casa_custom.tmx"
+        "TMX/Hotel.tmx"
     ],
     "tileset.lastUsedFilter": "Archivos de conjuntos de patrones Tiled (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

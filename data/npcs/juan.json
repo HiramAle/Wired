@@ -10,7 +10,7 @@
       "type": "new_task",
       "task": "",
       "new_tasks": [
-        "subnetting_school"
+        "subnetting_hospital"
       ],
       "requirements": [
         "task roy_subnetting_reception 1"

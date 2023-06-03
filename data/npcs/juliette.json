@@ -20,6 +20,25 @@
       ],
       "add_item": [],
       "consequences": []
+    },
+    {
+      "npc_id": "juliette",
+      "text": [
+        "Hola, \u00bft\u00fa eres name?",
+        "Necesito que alguien haga un trabajo",
+        "Es para subnetar la red de la escuela",
+        "\u00bfTe gustar\u00eda ayudarme?"
+      ],
+      "type": "new_task",
+      "task": "",
+      "new_tasks": [
+        "routing_music_store"
+      ],
+      "requirements": [
+        "task subnetting_music_store 1"
+      ],
+      "add_item": [],
+      "consequences": []
     }
   ],
   "default_zone": "music_store",

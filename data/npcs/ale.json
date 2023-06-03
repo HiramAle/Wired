@@ -43,7 +43,7 @@
       "type": "new_task",
       "task": "",
       "new_tasks": [
-        "routing_music_store"
+        "routing_reception"
       ],
       "requirements": [
         "task roy_subnetting_reception 1"
