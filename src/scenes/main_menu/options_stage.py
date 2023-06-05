@@ -38,6 +38,8 @@ class OptionsStage(Stage):
         self.exit_button = ExitButton((110, 69), self.group, self.interactive)
         # Preferences
         self.display_sizes = [(960, 540), (1280, 720), (1920, 1080)]
+        if tuple(Preferences.native_resolution) not in self.display_sizes:
+            self.display_sizes.append(tuple(Preferences.native_resolution))
         self.size_index = self.display_sizes.index((Preferences.window_width, Preferences.window_height))
         self.selected_size = self.display_sizes[self.size_index]
         # Display
@@ -49,15 +51,22 @@ class OptionsStage(Stage):
         self.volume_left = ArrowButton((96 + 70, 170), "right", self.group, self.volume_group, self.interactive)
         self.volume_right = ArrowButton((96 + 310 - 70, 170), "left", self.group, self.volume_group, self.interactive)
         self.description_title = DescriptionTitle((256, 245), "Pantalla", self.group)
-        self.hidden_index = (Preferences.volume // 5) - 1
+        print(f"Preferences volume {Preferences.volume}")
+        self.volume = Preferences.volume
         self.music_icons: list[Image] = []
         for i in range(5):
             sprite = Image((190 + (i * 30), 170), Assets.images_main_menu["note_music"], self.group, self.volume_group)
-            if i > self.hidden_index:
-                sprite.deactivate()
             self.music_icons.append(sprite)
+        self.update_music_icons()
 
         self.apply_button = TextButton("- APLICAR -", (197, 210), self.group, self.interactive)
+
+    def update_music_icons(self):
+        for note in self.music_icons:
+            note.deactivate()
+        for note in self.music_icons[:self.volume]:
+            note.activate()
+        AudioManager.set_volume(self.volume)
 
     def update(self):
         self.group.update()
@@ -79,13 +88,16 @@ class OptionsStage(Stage):
             self.scene.exit_stage()
         # Volume changer
         if self.volume_left.clicked:
-            if self.hidden_index >= 0:
-                self.music_icons[self.hidden_index].deactivate()
-                self.hidden_index -= 1
+            self.volume -= 1
+            if self.volume < 0:
+                self.volume = 0
+            self.update_music_icons()
+
         if self.volume_right.clicked:
-            if self.hidden_index < 4:
-                self.hidden_index += 1
-                self.music_icons[self.hidden_index].activate()
+            self.volume += 1
+            if self.volume > 5:
+                self.volume = 5
+            self.update_music_icons()
 
         # Display changer
         if self.display_left.clicked:
@@ -93,16 +105,18 @@ class OptionsStage(Stage):
             if self.size_index < 0:
                 self.size_index = len(self.display_sizes) - 1
             self.selected_size = self.display_sizes[self.size_index]
+            Window.set_window_size(self.selected_size)
         if self.display_right.clicked:
             self.size_index += 1
             if self.size_index >= len(self.display_sizes):
                 self.size_index = 0
             self.selected_size = self.display_sizes[self.size_index]
+            Window.set_window_size(self.selected_size)
         self.size_text.text = format_size(self.selected_size)
         # Apply button
         if self.apply_button.clicked:
-            Window.set_window_size(self.selected_size)
-            AudioManager.set_volume((self.hidden_index + 1))
+            Preferences.volume = self.volume
+            Preferences.save()
 
         # Change cursor
         if any([sprite.hovered for sprite in self.interactive.sprites()]):

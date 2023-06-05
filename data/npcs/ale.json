@@ -38,7 +38,11 @@
     {
       "npc_id": "ale",
       "text": [
-        "Hola, ahora necesito ayuda con el enrutamiento"
+        "Hola, gracias de nuevo por el subneteo.",
+        "Tenemos un problema en la red de los departamentos. ",
+        "Los residentes no pueden acceder a Internet. ",
+        "\u00bfPodr\u00edas configurar los routers para solucionar el problema?",
+        "El equipo est\u00e1 subiendo las escaleras, al fondo"
       ],
       "type": "new_task",
       "task": "",
@@ -48,6 +52,18 @@
       "requirements": [
         "task roy_subnetting_reception 1"
       ],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "ale",
+      "text": [
+        "\u00bfHas visto naruto?"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
       "add_item": [],
       "consequences": []
     }

@@ -1,0 +1,28 @@
+{
+  "name": "Angel",
+  "dialogues": [
+    {
+      "npc_id": "angel",
+      "text": [
+        "Facebook es mi red social favorita."
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "company",
+  "schedule": {
+    "0": "company",
+    "1": "company",
+    "2": "company",
+    "3": "company",
+    "4": "company",
+    "5": "company",
+    "6": "company"
+  },
+  "consequences": []
+}

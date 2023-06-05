@@ -42,6 +42,7 @@ class Notification(Sprite):
         CONFIG_T_NOT_EMPTY = "El comando config t no\nnecesita parámetros"
         VERSION_2_NOT_EMPTY = "El comando version 2 no\nnecesita parámetros"
         ROUTER_RIP_NOT_EMPTY = "El comando router rip no\nnecesita parámetros"
+        SUMMARY_NOT_EMPTY = "El comando no auto-summary\nno necesita parámetros"
         BAD_NETWORK = "Comando invalido.\nFormato:\nnetwork [ip-address]"
         BAD_COMMAND = "¿Estas seguro que se\nutiliza ese comando?"
 
@@ -228,7 +229,7 @@ class CommandLine(Sprite):
 
     def is_command_valid(self) -> Notification.Type:
         command = self.options[0].text.text
-        if command in ["enable", "config t", "version 2", "router rip"]:
+        if command in ["enable", "config t", "version 2", "router rip", "no auto-summary"]:
             for next_command in self.options[1:]:
                 if next_command.text.text != "":
                     match command:
@@ -240,6 +241,8 @@ class CommandLine(Sprite):
                             return Notification.Type.VERSION_2_NOT_EMPTY
                         case "router rip":
                             return Notification.Type.ROUTER_RIP_NOT_EMPTY
+                        case "no auto-summary":
+                            return Notification.Type.SUMMARY_NOT_EMPTY
             return Notification.Type.CORRECT_CONFIG
         elif command == "ip route":
             have_error = False
@@ -314,7 +317,7 @@ class Router(Sprite):
     def correct_config(self, value: "RouterConfig"):
         self._correct_config = value
         if self._correct_config.config_type == "rip":
-            self.default_commands += ["router rip", "version 2"]
+            self.default_commands += ["router rip", "version 2", "no auto-summary"]
 
     def check_config(self) -> Notification.Type:
         validate = self.current_config.validate()
@@ -365,8 +368,8 @@ class Router(Sprite):
 
 
 class Topology(Sprite):
-    def __init__(self, *groups, **kwargs):
-        super().__init__((320, 180), Assets.images_routing["topology"], *groups, **kwargs)
+    def __init__(self, zone: str, *groups, **kwargs):
+        super().__init__((320, 180), Assets.images_routing[zone], *groups, **kwargs)
         self.min_button = Sprite((self.rect.x + 451, self.rect.y + 4), pygame.Surface((18, 18), pygame.SRCALPHA),
                                  interactions)
         self.min_button.pivot = self.min_button.Pivot.TOP_LEFT
@@ -375,7 +378,7 @@ class Topology(Sprite):
 
 
 class TaskBar(Sprite):
-    def __init__(self, *groups, **kwargs):
+    def __init__(self, zone: str, *groups, **kwargs):
         super().__init__((0, 332), Assets.images_routing["task_bar"], *groups, **kwargs)
         self.pivot = self.Pivot.TOP_LEFT
         self.text_time = Text((574, 331), self.get_time(), 32, Colors.WHITE)
@@ -384,7 +387,7 @@ class TaskBar(Sprite):
         self.topology_button.pivot = self.topology_button.Pivot.TOP_LEFT
         self.topology_active = False
         self.change = False
-        self.topology = Topology()
+        self.topology = Topology(zone)
         self.notification = Notification()
 
     @staticmethod
@@ -468,6 +471,7 @@ class RouterConfig:
         self.enable = False
         self.config_t = False
         self.rip = False
+        self.auto_summary = False
         self.version = False
         self.ip_route = []
         self.network = []
@@ -481,6 +485,8 @@ class RouterConfig:
                 self.rip = True
             elif command.startswith("version 2"):
                 self.version = True
+            elif command.startswith("no auto-summary"):
+                self.auto_summary = True
             elif command.startswith("ip route"):
                 self.ip_route.append(command)
             elif command.startswith("network"):
@@ -517,6 +523,9 @@ class RouterConfig:
             if self.config[3] != "version 2":
                 print("RIP: Doesnt specify version")
                 return Notification.Type.NOT_VERSION
+            if self.config[4] != "no auto-summary":
+                print("RIP: Doesnt specify version")
+                return Notification.Type.RIP_SHORT
         # Static specific validation
         elif self.config_type == "static":
             if "router rip" in self.config:
@@ -597,7 +606,8 @@ class Routing(Scene):
         self.title._shadow_padding = 1.75
         Image((0, 0), Assets.images_routing["background"], self.static, centered=False)
         Image((21, 45), Assets.images_routing["router_area"], self.static, centered=False)
-        Answer((225, 140), ["ip route", "ip config", "network", "enable", "config t", "router rip", "version 2"],
+        Answer((225, 140),
+               ["ip route", "ip config", "network", "enable", "config t", "router rip", "version 2", "no auto-summary"],
                self.answers)
         Answer((225, 181), ["192.45.12.0", "34.2.67.3", ""] + self.exercise.get_answers()[0], self.answers)
         Answer((225, 222), ["255.255.0.0", "255.255.255.0", ""] + self.exercise.get_answers()[1], self.answers)
@@ -619,7 +629,7 @@ class Routing(Scene):
         # Command Line
         self.command_line = CommandLine(self.answers.sprites(), self.static)
         # Taskbar
-        self.taskbar = TaskBar()
+        self.taskbar = TaskBar(zone_id)
         # Console
         self.console = Console(self.static)
         # Buttons

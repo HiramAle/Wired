@@ -1,15 +1,15 @@
 {
   "name": "Ale",
   "dialogues": [],
-  "default_zone": "village",
+  "default_zone": "music_store",
   "schedule": {
-    "0": "village",
-    "1": "village",
-    "2": "village",
-    "3": "village",
-    "4": "village",
-    "5": "village",
-    "6": "village"
+    "0": "music_store",
+    "1": "music_store",
+    "2": "music_store",
+    "3": "music_store",
+    "4": "music_store",
+    "5": "music_store",
+    "6": "music_store"
   },
   "consequences": []
 }

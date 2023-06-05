@@ -251,7 +251,7 @@
   <object id="55" gid="36665" x="224" y="544" width="32" height="96"/>
   <object id="56" gid="36658" x="192" y="256" width="32" height="64"/>
   <object id="57" gid="36651" x="608" y="448" width="96" height="64"/>
-  <object id="58" gid="36613" x="222" y="271" width="64" height="80"/>
+  <object id="58" gid="36613" x="224" y="268" width="64" height="80"/>
   <object id="59" gid="36614" x="192" y="608" width="32" height="32"/>
   <object id="60" gid="36615" x="704" y="448" width="64" height="96"/>
   <object id="62" gid="36619" x="576" y="640" width="64" height="84"/>

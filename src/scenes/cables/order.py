@@ -47,7 +47,7 @@ class OrderCable(Scene):
         self.cables = []
 
         shuffled_cables = Data.cable_data["A"].copy()
-        # shuffle(shuffled_cables)
+        shuffle(shuffled_cables)
 
         for index, cable_name in enumerate(shuffled_cables):
             cable_position = (int(self.display.get_width() / 2), 40 + (index * 40))
@@ -163,6 +163,7 @@ class OrderCable(Scene):
             from engine.scene.scene_manager import SceneManager
             from src.scenes.pause_menu.pause import Pause
             SceneManager.change_scene(Pause())
+
 
     def render(self) -> None:
         self.group.render(self.display)

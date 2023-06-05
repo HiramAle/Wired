@@ -1,37 +1,17 @@
 {
-  "sprite_sheet": "data/user/saves/save_0/sprite_sheet.png",
-  "portrait": "data/user/saves/save_0/portrait.png",
-  "name": "Zazu",
+  "name": "",
+  "pronoun": "",
   "week_day": 0,
-  "pronoun": "el",
   "time": 0,
-  "money": 180,
-  "inventory": {
-    "connector": 4,
-    "cable": 5,
-    "cable_straight_2": 4,
-    "cable_straight_3": 1,
-    "cable_straight_1": 2,
-    "serial_cable": 3,
-    "cable_crossover_1": 1
-  },
+  "money": 200,
+  "inventory": {},
   "tutorials": {
-    "cables": true,
-    "subnetting": true,
-    "routing": true
+    "cables": false,
+    "subnetting": false,
+    "routing": false
   },
   "tasks": {
-    "meet_kat": true,
-    "meet_chencho": true,
-    "mysteries_of_celestia": false,
-    "meet_roy": true,
-    "chenchos_collection": false,
-    "create_straight_cable": true,
-    "roy_straight_cable": true,
-    "create_crossover_cable": true,
-    "roy_crossover_cable": true,
-    "meet_ale": true,
-    "subnetting_reception": false
+    "meet_kat": false
   },
   "status": {}
 }

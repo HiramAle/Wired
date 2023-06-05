@@ -67,6 +67,18 @@
       "requirements": [],
       "add_item": [],
       "consequences": []
+    },
+    {
+      "npc_id": "kat",
+      "text": [
+        "No puedo esperar a que sea temporada de mangos."
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
     }
   ],
   "default_zone": "players_house",
@@ -76,8 +88,8 @@
     "2": "village",
     "3": "village",
     "4": "village",
-    "5": "village",
-    "6": "village"
+    "5": "music_store",
+    "6": "city"
   },
   "consequences": []
 }

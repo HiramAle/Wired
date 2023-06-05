@@ -4,6 +4,7 @@ from src.scenes.dialog_scene.portrait import Portrait
 from src.scenes.world.npc import NPC
 from engine.input import Input
 from engine.dialog_manager import Dialog
+from src.scenes.world.key_hint import KeyHint
 
 
 class DialogScene(Scene):
@@ -13,6 +14,7 @@ class DialogScene(Scene):
         self.portrait = Portrait(npc.name)
         self.zone = zone
         self.world = world
+        self.key_hint = KeyHint(KeyHint.Type.SKIP)
 
     @staticmethod
     def choose_dialog(npc: NPC) -> Dialog:
@@ -33,9 +35,10 @@ class DialogScene(Scene):
 
     def update(self) -> None:
         self.dialog_box.update()
-        if Input.keyboard.keys["esc"] or self.dialog_box.dialog_end:
+        if self.dialog_box.dialog_end:
             from engine.scene.scene_manager import SceneManager
             SceneManager.exit_scene()
+            self.zone.key_hint.activate()
         self.portrait.update()
         self.zone.dialog_update()
         self.world.notifications.update()
@@ -46,3 +49,4 @@ class DialogScene(Scene):
         self.dialog_box.render(self.display)
         self.portrait.render(self.display)
         self.world.render_notifications(self.display)
+        self.key_hint.render(self.display)

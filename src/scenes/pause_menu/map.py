@@ -16,7 +16,7 @@ class Marker(Sprite):
         self.zone = zone
         self.x += 8
         zone_position = self.rect.centerx, self.rect.centery + 30
-        self.zone_text = Text(zone_position, name, 32, Colors.WHITE, shadow=True, shadow_opacity=125,
+        self.zone_text = Text(zone_position, name, 16, Colors.WHITE, shadow=True, shadow_opacity=200,
                               shadow_color=Colors.SPRITE)
         self.outline_color = Colors.WHITE
         self.outline_width = 3
@@ -46,14 +46,16 @@ class Map(Scene):
     def __init__(self, change_zone: callable):
         super().__init__("map")
         self.map = SpriteGroup()
-        Sprite((4, 0), Assets.images_book["map"], self.map, centered=False)
-        self.zones = {"players_house": {"position": (238, 79), "name": "Casa", "zone": "village"},
-                      "company": {"position": (478, 94), "name": "Routed\nInc", "zone": "city"},
-                      "store": {"position": (114, 134), "name": "Tienda", "zone": "village"},
-                      "chenchos_house": {"position": (97, 253), "name": "Casa\nChencho", "zone": "village"},
-                      "city_store": {"position": (363, 144), "name": "Tienda", "zone": "city"},
-                      "hospital": {"position": (366, 233), "name": "Hospital", "zone": "city"},
-                      "school": {"position": (523, 222), "name": "Escuela", "zone": "city"}}
+        Sprite((79 + 8, 76), Assets.images_book["village_map"], self.map, centered=False)
+        Sprite((341 + 8, 76), Assets.images_book["city_map"], self.map, centered=False)
+        self.zones = {"players_house": {"position": (230 + 8, 96), "name": "Casa", "zone": "village"},
+                      "company": {"position": (475 + 8, 104), "name": "Routed\nInc", "zone": "city"},
+                      "store": {"position": (127 + 8, 139), "name": "Tienda", "zone": "village"},
+                      "chenchos_house": {"position": (111 + 8, 237), "name": "Casa\nChencho", "zone": "village"},
+                      "city_store": {"position": (380 + 8, 153), "name": "Tienda", "zone": "city"},
+                      "hospital": {"position": (382 + 8, 217), "name": "Hospital", "zone": "city"},
+                      "school": {"position": (510 + 8, 213), "name": "Escuela", "zone": "city"},
+                      "music_store": {"position": (493 + 8, 153), "name": "Tienda de\nMúsica", "zone": "city"}}
         self.markers = SpriteGroup()
         self.change_zone = change_zone
 

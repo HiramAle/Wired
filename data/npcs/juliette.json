@@ -24,10 +24,11 @@
     {
       "npc_id": "juliette",
       "text": [
-        "Hola, \u00bft\u00fa eres name?",
-        "Necesito que alguien haga un trabajo",
-        "Es para subnetar la red de la escuela",
-        "\u00bfTe gustar\u00eda ayudarme?"
+        "\u00a1name! ",
+        "Gracias por haber configurado las subredes. ",
+        "Todav\u00eda necesitamos tu ayuda para solucionar algunos problemas ",
+        "Especificamente de enrutamiento en nuestra red de la tienda. \u00bfPodr\u00edas configurar los routers?",
+        "Es para mejorar la conectividad de los clientes"
       ],
       "type": "new_task",
       "task": "",
@@ -37,6 +38,20 @@
       "requirements": [
         "task subnetting_music_store 1"
       ],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "juliette",
+      "text": [
+        "Si buscas instrumentos, partituras o consejos ",
+        "sobre m\u00fasica, est\u00e1s en el lugar adecuado. ",
+        "\u00a1Si\u00e9ntete libre de preguntarme cualquier cosa!"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
       "add_item": [],
       "consequences": []
     }

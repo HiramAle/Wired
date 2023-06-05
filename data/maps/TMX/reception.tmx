@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="15" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="116">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="15" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="119">
  <tileset firstgid="1" source="../TSX/RoomBuilder.tsx"/>
  <tileset firstgid="8285" source="../TSX/reception_singles.tsx"/>
  <tileset firstgid="8316" source="../TSX/Reception_tiles.tsx"/>
+ <tileset firstgid="8376" source="../TSX/music_store_singles.tsx"/>
  <layer id="1" name="walls" width="15" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -147,7 +148,7 @@
   <object id="32" gid="8294" x="191" y="452" width="32" height="64"/>
   <object id="33" gid="8295" x="366" y="595" width="32" height="64"/>
   <object id="39" gid="8298" x="76" y="514" width="128" height="96"/>
-  <object id="44" gid="8300" x="55" y="293" width="64" height="96"/>
+  <object id="44" gid="8300" x="52" y="294" width="64" height="96"/>
   <object id="46" gid="8301" x="384" y="502" width="32" height="64"/>
   <object id="47" gid="8302" x="352" y="288" width="64" height="96"/>
   <object id="49" gid="8301" x="327" y="288" width="32" height="64"/>
@@ -155,11 +156,12 @@
   <object id="59" gid="8305" x="108" y="407" width="64" height="32"/>
   <object id="60" gid="8307" x="78" y="413" width="32" height="64"/>
   <object id="61" gid="8308" x="180" y="416" width="32" height="64"/>
-  <object id="62" gid="8308" x="111" y="239" width="32" height="64"/>
+  <object id="62" gid="8308" x="79" y="231" width="32" height="64"/>
   <object id="67" gid="8310" x="56" y="597" width="64" height="64"/>
   <object id="68" gid="8310" x="136" y="597" width="64" height="64"/>
   <object id="69" gid="8304" x="112" y="584" width="32" height="64"/>
   <object id="109" gid="8315" x="214" y="450" width="96" height="64"/>
+  <object id="117" gid="8417" x="95" y="287" width="64" height="96"/>
  </objectgroup>
  <objectgroup id="8" name="collision">
   <object id="80" x="50" y="245" width="380" height="11"/>
@@ -188,6 +190,12 @@
    <properties>
     <property name="interaction_type" value="keypress"/>
     <property name="scene" value="subnetting"/>
+   </properties>
+  </object>
+  <object id="118" name="routing" type="scene" x="104" y="284" width="48" height="32">
+   <properties>
+    <property name="interaction_type" value="keypress"/>
+    <property name="scene" value="routing"/>
    </properties>
   </object>
  </objectgroup>

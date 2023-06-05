@@ -32,15 +32,9 @@ class Jobs(Scene):
         Text((143 + 8, 42), "Trabajos", 32, Colors.SPRITE, self.ui, centered=False)
         self.pages = []
         self.tasks = []
-        # for index, task in enumerate(PlayerData.tasks.current_tasks):
-        #     if index % 5 == 0 and index != 0:
-        #         self.pages.append(self.tasks)
-        #         self.tasks = []
-        #     self.tasks.append(task)
         for index in range(0, len(PlayerData.tasks.current_tasks), 5):
             self.tasks = PlayerData.tasks.current_tasks[index:index + 5]
             self.pages.append(self.tasks)
-        print(self.pages)
         self.render_tasks()
         self.task_title_frame = Sprite((346 + 8, 46), Assets.images_book["task_name"], self.ui, centered=False)
         self.task_title = Text(self.task_title_frame.center, "", 16, Colors.SPRITE, self.ui)
@@ -48,9 +42,9 @@ class Jobs(Scene):
                                              centered=False)
         self.task_description = Text(self.task_description_frame.center, "", 16, Colors.SPRITE, self.ui, max_width=160)
         self.left_button = Button((152, 297), Assets.images_book["button_left_normal"],
-                                  Assets.images_book["button_left_pressed"], centered=False)
+                                  Assets.images_book["button_left_pressed"], centered=False, outline=False)
         self.right_button = Button((219, 297), Assets.images_book["button_right_normal"],
-                                   Assets.images_book["button_right_pressed"], centered=False)
+                                   Assets.images_book["button_right_pressed"], centered=False, outline=False)
 
     @property
     def current_page(self) -> list:

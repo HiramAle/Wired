@@ -1,8 +1,12 @@
 {
-  "window_width": 1280,
-  "window_height": 720,
-  "fullscreen": false,
+  "native_resolution": [
+    1920,
+    1080
+  ],
+  "window_width": 1920,
+  "window_height": 1080,
+  "fullscreen": true,
   "borderless": false,
-  "windowed": true,
-  "volume": 5
+  "windowed": false,
+  "volume": 25
 }

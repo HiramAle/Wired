@@ -27,9 +27,9 @@ class GameSave:
                              "routing": False
                          },
                          "tasks": {
+                             "meet_kat": False
                          },
                          "status": {
-
                          }
                          }
             Loader.save_json(self.filename, save_data)
@@ -57,10 +57,9 @@ class GameSave:
                          "routing": False
                      },
                      "tasks": {
-
+                         "meet_kat": False
                      },
                      "status": {
-
                      }
                      }
         self.name = save_data["name"]

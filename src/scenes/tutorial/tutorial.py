@@ -78,13 +78,20 @@ class Tutorial(Scene):
         self.background.pivot = self.background.Pivot.TOP_LEFT
         # ---------- Steps ----------
         self.steps: list[Step] = []
+        self.step_images: list[Sprite] = []
         step_start_x = 44
         x = step_start_x
         y = 270
-        for index in range(5):
+
+        number = 4 if name == "subnetting" else 5
+
+        for index in range(number):
             self.steps.append(Step((x, y), name, index + 1))
+            self.step_images.append(
+                Sprite((237, 159.5), Assets.all_tutorials[name][f"tutorial_{index + 1}"]))
             x += 80
         self.__step_index = 0
+
         # ---------- Texts ----------
         self.texts = SpriteGroup()
         Text((45, 26), self.data.title, 32, Colors.SPRITE, self.texts, centered=False)
@@ -128,3 +135,4 @@ class Tutorial(Scene):
             step.render(self.display)
         self.texts.render(self.display)
         self.button.render(self.display)
+        self.step_images[self.__step_index].render(self.display)

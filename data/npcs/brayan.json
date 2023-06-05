@@ -1,0 +1,30 @@
+{
+  "name": "Brayan",
+  "dialogues": [
+    {
+      "npc_id": "brayan",
+      "text": [
+        "Siempre termino aqu\u00ed, o por bailar o por soldar"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [
+        "npc_is_in hospital true"
+      ],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "city",
+  "schedule": {
+    "0": "city_store",
+    "1": "hospital",
+    "2": "hospital",
+    "3": "store",
+    "4": "hospital",
+    "5": "hospital",
+    "6": "city"
+  },
+  "consequences": []
+}

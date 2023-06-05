@@ -1,6 +1,7 @@
 import pygame
 from ctypes import windll
 from os import environ
+
 from engine.preferences import Preferences
 from engine.assets import Assets
 from engine.constants import Locals
@@ -25,7 +26,7 @@ class Window:
         cls.width = Preferences.window_width
         cls.height = Preferences.window_height
         cls.size = cls.width, cls.height
-        cls.screen = pygame.display.set_mode(cls.size)
+        cls.screen = pygame.display.set_mode(cls.size, vsync=1)
         pygame.display.set_caption(Locals.GAME_NAME)
         pygame.display.set_icon(Loader.load_image("assets/images/misc/icon.png"))
 
@@ -40,8 +41,8 @@ class Window:
         cls.width, cls.height = size
         cls.size = size
         Preferences.window_width, Preferences.window_height = size
-        Preferences.save()
-        pygame.display.set_mode(size)
+        # Preferences.save()
+        cls.screen = pygame.display.set_mode(cls.size)
 
     @staticmethod
     def update():

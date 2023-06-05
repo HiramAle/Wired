@@ -1,13 +1,43 @@
 {
   "name": "Letty",
-  "dialogues": [],
+  "dialogues": [
+    {
+      "npc_id": "letty",
+      "text": [
+        "Tendidos como bandidos"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "letty",
+      "text": [
+        "Existen dos tipos principales de enrutamiento: est\u00e1tico y din\u00e1mico.",
+        "El enrutamiento est\u00e1tico implica configurar manualmente ",
+        "las rutas en los routers.",
+        "Mientras que el enrutamiento din\u00e1mico utiliza protocolos",
+        "para que los routers intercambien informaci\u00f3n ",
+        "y aprendan las rutas autom\u00e1ticamente."
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
   "default_zone": "city",
   "schedule": {
-    "0": "city",
+    "0": "city_store",
     "1": "city",
     "2": "city",
     "3": "city",
-    "4": "city",
+    "4": "village",
     "5": "city",
     "6": "city"
   },

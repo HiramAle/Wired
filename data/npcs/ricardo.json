@@ -1,0 +1,15 @@
+{
+  "name": "Ricardo",
+  "dialogues": [],
+  "default_zone": "city",
+  "schedule": {
+    "0": "city",
+    "1": "school",
+    "2": "school",
+    "3": "school",
+    "4": "school",
+    "5": "school",
+    "6": "city"
+  },
+  "consequences": []
+}

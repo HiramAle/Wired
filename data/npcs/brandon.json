@@ -1,0 +1,30 @@
+{
+  "name": "Brandon",
+  "dialogues": [
+    {
+      "npc_id": "brandon",
+      "text": [
+        "Nunca fui bueno. . .",
+        "Para redes, hasta que practiqu\u00e9 mucho en clase",
+        "Y ahora no soy tan malo"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "store",
+  "schedule": {
+    "0": "store",
+    "1": "store",
+    "2": "store",
+    "3": "store",
+    "4": "store",
+    "5": "store",
+    "6": "store"
+  },
+  "consequences": []
+}

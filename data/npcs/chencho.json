@@ -97,6 +97,18 @@
       ],
       "add_item": [],
       "consequences": []
+    },
+    {
+      "npc_id": "chencho",
+      "text": [
+        "La vida es como un nopal"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
     }
   ],
   "default_zone": "city",
@@ -106,7 +118,7 @@
     "2": "chenchos_house",
     "3": "chenchos_house",
     "4": "chenchos_house",
-    "5": "chenchos_house",
+    "5": "music_store",
     "6": "chenchos_house"
   },
   "consequences": []

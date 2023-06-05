@@ -30,5 +30,7 @@
       "broadcast": "114.191.255.255",
       "first": "114.160.0.1"
     }
-  }
+  },
+  "name": "Hospital",
+  "areas": ["Sala de espera", "Urgencias", "Quirófanos", "Laboratorios", "Farmacia"]
 }

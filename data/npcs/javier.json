@@ -1,6 +1,19 @@
 {
   "name": "Javier",
-  "dialogues": [],
+  "dialogues": [
+    {
+      "npc_id": "javier",
+      "text": [
+        "Ahorita voy a ir por un cafecito"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
   "default_zone": "school",
   "schedule": {
     "0": "school",
@@ -9,7 +22,7 @@
     "3": "school",
     "4": "school",
     "5": "school",
-    "6": "school"
+    "6": "city_store"
   },
   "consequences": []
 }

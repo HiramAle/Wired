@@ -122,7 +122,7 @@
   "roy_subnetting_reception": {
     "id": "roy_subnetting_reception",
     "title": "Routed Inc.",
-    "description": "Has terminado tu primer trabajo de subneto, vuelve a contarselo a Roy.",
+    "description": "Has terminado tu primer trabajo de subneteo, vuelve a contarselo a Roy.",
     "type": "talk",
     "npcs": [
       "roy"
@@ -161,10 +161,10 @@
     "objective": "hotel",
     "next_tasks": []
   },
-  "subnetting_muisc_store": {
-    "id": "subnetting_muisc_store",
+  "subnetting_music_store": {
+    "id": "subnetting_music_store",
     "title": "Subnetea la red de la Tienda de M\u00fasica",
-    "description": "placeholder",
+    "description": "Has conocido a Juliette, una cantante y due\u00f1a de la tienda de m\u00fasica de la ciudad. Te ha pedido que le ayudes con el subneteo de la tienda.",
     "type": "subnetting",
     "npcs": [
       "juliette"
@@ -175,7 +175,7 @@
   "subnetting_hospital": {
     "id": "subnetting_hospital",
     "title": "Subnetea la red de el Hospital",
-    "description": "placeholder",
+    "description": "Juan, el encargado del hospital ha mencionado que tiene problemas con los equipos m\u00e9dicos y la red en el hospital. Ayudalo con el subneteo de su red.",
     "type": "subnetting",
     "npcs": [
       "juan"
@@ -186,7 +186,7 @@
   "routing_hospital": {
     "id": "routing_hospital",
     "title": "Enrutamiento Hospital",
-    "description": "placeholder",
+    "description": "Parece que Juan sigue teniendo problemas, ay\u00fadalo con el enrutamiento del Hospital.",
     "type": "routing",
     "npcs": [
       "juan"
@@ -197,7 +197,7 @@
   "routing_school": {
     "id": "routing_school",
     "title": "Enrutamiento Escuela",
-    "description": "placeholder",
+    "description": "Laura te ha pedido ayuda con el enrutamiento de la escuela.",
     "type": "routing",
     "npcs": [
       "laura"
@@ -208,7 +208,7 @@
   "routing_reception": {
     "id": "routing_reception",
     "title": "Enrutamiento Recepci\u00f3n",
-    "description": "placeholder",
+    "description": "Ale tiene problemas con la red de los departamentos, ay\u00fadala con el enrutamient de la red de los departamentos. ",
     "type": "routing",
     "npcs": [
       "ale"
@@ -219,7 +219,7 @@
   "routing_hotel": {
     "id": "routing_hotel",
     "title": "Enrutamiento Hotel",
-    "description": "placeholder",
+    "description": "Arian quiere que toda la red del hotel funcione a la perfeci\u00f3n, termina el enrutamiento del hotel.",
     "type": "routing",
     "npcs": [
       "arian"
@@ -230,7 +230,7 @@
   "routing_music_store": {
     "id": "routing_music_store",
     "title": "Enrutamiento Tienda de M\u00fasica",
-    "description": "placeholder",
+    "description": "Juliette necesita ayuda con el enrutamiento de su tienda de m\u00fasica.",
     "type": "routing",
     "npcs": [
       "juliette"
@@ -289,6 +289,17 @@
       "chencho"
     ],
     "objective": "jordi",
+    "next_tasks": []
+  },
+  "taylor": {
+    "id": "taylor",
+    "title": "Eras Tour",
+    "description": "Kike quiere mucho ver a su artista favorita, habla con \u00e9l para darle un poco de tu dinero y apoyarlo.",
+    "type": "talk",
+    "npcs": [
+      "kike"
+    ],
+    "objective": "kike",
     "next_tasks": []
   }
 }

@@ -1,6 +1,40 @@
 {
   "name": "Kike",
-  "dialogues": [],
+  "dialogues": [
+    {
+      "npc_id": "kike",
+      "text": [
+        "Escuch\u00e9 que Taylor Swift va a venir, \u00bftienes algo de dinero ",
+        "de sobra?"
+      ],
+      "type": "new_task",
+      "task": "",
+      "new_tasks": [
+        "taylor"
+      ],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    },
+    {
+      "npc_id": "kike",
+      "text": [
+        "\u00a1Muchas graciaaas! ",
+        "Pero no te preocupes, no lo dec\u00eda enserio. Ese dinero es tuyo.",
+        "Y por tu interes en apoyarme, toma esto.",
+        "Espero que te sea \u00fatil."
+      ],
+      "type": "task_complete",
+      "task": "taylor",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [
+        "cable 2",
+        "connector 4"
+      ],
+      "consequences": []
+    }
+  ],
   "default_zone": "village",
   "schedule": {
     "0": "school",
@@ -8,7 +42,7 @@
     "2": "school",
     "3": "school",
     "4": "school",
-    "5": "school",
+    "5": "music_store",
     "6": "school"
   },
   "consequences": []

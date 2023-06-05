@@ -1,15 +1,31 @@
 {
   "name": "Hiram",
-  "dialogues": [],
+  "dialogues": [
+    {
+      "npc_id": "zazu",
+      "text": [
+        "Todas las aves son dinosaurios",
+        "Pero no todos los dinosaurios son aves"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [
+        "npc_is_in school true"
+      ],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
   "default_zone": "school",
   "schedule": {
-    "0": "school",
+    "0": "chenchos_house",
     "1": "school",
     "2": "school",
     "3": "school",
     "4": "school",
-    "5": "school",
-    "6": "school"
+    "5": "music_store",
+    "6": "city"
   },
   "consequences": []
 }

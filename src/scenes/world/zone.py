@@ -1,3 +1,5 @@
+import enum
+
 import pygame
 from engine.window import Window
 from engine.input import Input
@@ -21,6 +23,7 @@ from src.scenes.world.trigger import Trigger
 from engine.dialog_manager import Dialog
 from engine.data import Data
 from engine.audio import AudioManager
+from src.scenes.world.key_hint import KeyHint
 
 
 class Zone(Scene):
@@ -57,13 +60,14 @@ class Zone(Scene):
 
         self.step_timer = Timer(0.3)
         self.step_timer.start()
+        self.key_hint = KeyHint(KeyHint.Type.PAUSE)
 
     def start_zone(self):
         self.player.position = self.map.get_position(f"player_{self.zone_before}").tuple
         self.player.direction = self.map.get_position(f"player_{self.zone_before}").properties["direction"]
         self.camera.position = self.player.x - 320, self.player.y - 180
-        if self.name == "players_house" and not PlayerData.tasks.tasks:
-            PlayerData.add_task("meet_kat")
+        # if self.name == "players_house" and not PlayerData.tasks.tasks:
+        #     PlayerData.add_task("meet_kat")
         for npc in self.npcs:
             npc_position = self.map.get_position(npc.name)
             if not npc_position:
@@ -105,6 +109,8 @@ class Zone(Scene):
                     self.notify("Necesitas mas cable y conectores para crear cable de Red", 3)
                     return
             case "subnetting":
+                print(f"subnetting_{self.name}")
+                print([task.id for task in PlayerData.tasks.current_tasks])
                 if not PlayerData.tasks.has_incomplete(f"subnetting_{self.name}"):
                     self.notify("Aún no puedes trabajar aquí", 3)
                     return
@@ -197,6 +203,7 @@ class Zone(Scene):
             self.player.action = "idle"
             self.closest_npc.set_direction()
             SceneManager.change_scene(DialogScene(self.closest_npc, self, self.world))
+            self.key_hint.deactivate()
 
     def update_player_emote(self):
         trigger = self.get_trigger()
@@ -213,6 +220,28 @@ class Zone(Scene):
                 self.player.emote.animation.rewind()
                 self.player.emote = None
 
+    def update_trigger_emote(self):
+        trigger = self.get_trigger()
+        if not trigger:
+            return False
+        self.key_hint.activate()
+        if trigger.type == "zone":
+            self.key_hint.hint_type = KeyHint.Type.ENTER
+        elif trigger.type == "save":
+            self.key_hint.hint_type = KeyHint.Type.SLEEP
+        else:
+            self.key_hint.hint_type = KeyHint.Type.INTERACT
+        return True
+
+    def update_npc_emote(self):
+        if not self.npcs:
+            return False
+        if self.closest_npc.player_distance > 50:
+            return False
+        self.key_hint.activate()
+        self.key_hint.hint_type = KeyHint.Type.TALK
+        return True
+
     def dialog_update(self):
         self.player.animate()
         self.camera.update()
@@ -222,7 +251,8 @@ class Zone(Scene):
     def update(self) -> None:
         self.player.update()
         self.camera.update()
-        self.update_player_emote()
+        if not any([self.update_trigger_emote(), self.update_npc_emote()]):
+            self.key_hint.deactivate()
         self.notification.update()
         self.check_triggers()
         self.update_npcs()
@@ -232,20 +262,19 @@ class Zone(Scene):
                 AudioManager.play_random_from("step")
                 self.step_timer.start()
 
+        if Input.keyboard.keys["backspace"]:
+            for npc in self.npc_list:
+                print(npc.name, npc.current_zone)
+
     def render(self) -> None:
         self.display.fill(Colors.BLACK)
         self.display.blit(self.map.ground, -self.camera.offset)
         for zone_object in sorted(self.zone_objets, key=lambda sprite: sprite.sort_point):
             zone_object.render(self.display, self.camera.offset)
 
-        # for zone_object in sorted(self.zone_objets, key=lambda sprite: sprite.sort_point):
-        #     zone_object.draw_colliders(self.display, self.camera.offset)
-        #     adjusted_collider = zone_object.rect.copy()
-        #     adjusted_collider.x -= self.camera.x
-        #     adjusted_collider.y -= self.camera.y
-        #     pygame.draw.rect(self.display, Colors.BLUE, adjusted_collider, 2)
-
         if self.obj:
             self.obj.render(self.display)
 
         self.notification.render(self.display)
+
+        self.key_hint.render(self.display)

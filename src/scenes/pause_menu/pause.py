@@ -19,7 +19,7 @@ class Pause(Scene):
         super().__init__("test")
         AudioManager.play_random_from("page_flip")
         self.categories = {"Inventario": Inventory(), "Trabajos": Jobs(), "Mapa": Map(change_zone),
-                           "Glosario": Glossary(), "Opciones": Options(), "Salir": Exit()}
+                           "Opciones": Options(), "Salir": Exit()}
         self.book_background = Sprite((39, 16), Assets.images_book["book_background"], centered=False)
         self.tabs = [Tab((39, 50 + (index * 30)), name, self.interactive) for index, name in enumerate(self.categories)]
         self.selected_tab = self.tabs[index]
@@ -45,6 +45,8 @@ class Pause(Scene):
                 self.category_name = tab.name.title()
         if Input.keyboard.keys["esc"]:
             from engine.scene.scene_manager import SceneManager
+            from engine.preferences import Preferences
+            Preferences.save()
             SceneManager.exit_scene()
         self.update_cursor()
 

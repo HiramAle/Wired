@@ -3,7 +3,7 @@
   "steps": [
     {
       "title": "Estándar",
-      "description": "Hay dos tipos de estándares que pueden requerirse al armar los cables: T568A y T568B.\n\nDe este dependerá el orden de colores de los cables.\n\nCuando se encuentren ordenados correctamente verás en pantalla un mensaje para presionar <<Espacio>> y continuar con el crimpado."
+      "description": "Hay dos tipos de cables que pueden requerirse: directo y cruzado.\nDe este dependerá el orden de colores de los cables de cada lado (mismo o diferente estándar en cada lado del cable).\nCuando se encuentren ordenados correctamente verás en pantalla un mensaje para presionar <<Espacio>> y continuar con el crimpado."
     },
     {
       "title": "Crimpado",
@@ -11,15 +11,15 @@
     },
     {
       "title": "Calidad",
-      "description": "La calidad del cable dependerá de en que posición de la barra superior se encontraba el cursor al momento de crimpar el cable.\n\nVerde - 3 estrellas\nAmarillo - 2 estrellas\nRojo - 1 estrella\n\nEsta calidad influirá en que tanto durará el cable y de cuanto te pagarán al realizar trabajos de subneteo y enrutamiento."
+      "description": "La calidad del cable dependerá de en que posición de la barra superior se encontraba el cursor al momento de crimpar el cable.\n\nVerde - 3 estrellas\nAmarillo - 2 estrellas\nRojo - 1 estrella\n\nEsta calidad influirá en que tanto durará el cable y de cuanto te pagarán al realizar trabajos de subneteo."
     },
     {
       "title": "Inventario",
-      "description": "En el inventario podrás visualizar los cables que has realizado, con su calidad, cantidad y estándar. \n\nTambién puedes consultar la guía en cualquier momento para recordar el orden de colores de cada estándar dando click en la pestaña correspondiente de la izquierda."
+      "description": "En el inventario podrás visualizar los cables que has realizado, con su calidad, cantidad y tipo."
     },
     {
       "title": "Trabajos",
-      "description": "Para realizar trabajos de subneteo y enrutamiento, se tomarán de tu inventario la cantidad de cables necesarios para conectar la red, con calidades al azar.\n\nSolo podrás realizar el trabajo si cuentas con los cables suficientes.\n\n¡Procura que todos tus cables sean de la mejor calidad y recibirás una mejor paga!"
+      "description": "Para realizar trabajos de subneteo, se tomarán de tu inventario la cantidad de cables necesarios para conectar la red, con calidades al azar.\n\nSolo podrás realizar el trabajo si cuentas con los cables suficientes.\n\n¡Procura que todos tus cables sean de la mejor calidad y recibirás una mejor paga!"
     }
   ]
 }

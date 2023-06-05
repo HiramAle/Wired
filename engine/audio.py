@@ -5,7 +5,6 @@ from engine.assets import Assets
 
 
 class AudioManager:
-
     @classmethod
     def init(cls):
         pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=512)
@@ -18,11 +17,11 @@ class AudioManager:
             return
         pygame.mixer.music.load(song)
         pygame.mixer.music.play(-1)
-        pygame.mixer.music.set_volume(Preferences.volume / 25)
+        pygame.mixer.music.set_volume(Preferences.volume / 5)
 
     @classmethod
     def play_sound(cls, sound: pygame.mixer.Sound):
-        sound.set_volume(Preferences.volume / 25)
+        sound.set_volume(Preferences.volume / 5)
         sound.play()
 
     @classmethod
@@ -31,8 +30,7 @@ class AudioManager:
 
     @staticmethod
     def set_volume(volume: int):
-        if 0 > volume > 20:
+        if 0 > volume > 5:
             raise ValueError("Volume cannot be greater than 20 and lesser than 0.")
-        Preferences.volume = volume * 5
-        pygame.mixer.music.set_volume(Preferences.volume / 250)
-        Preferences.save()
+        Preferences.volume = volume
+        pygame.mixer.music.set_volume(Preferences.volume / 5)

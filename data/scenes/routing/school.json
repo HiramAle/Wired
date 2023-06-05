@@ -1,5 +1,5 @@
 {
-  "type": "static_interface",
+  "type": "static_default",
   "cables": 4,
   "routers": {
     "router1": {

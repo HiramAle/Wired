@@ -20,5 +20,11 @@
       "broadcast": "175.15.127.255",
       "first": "175.15.96.1"
     }
-  }
+  },
+  "name": "Tienda de música",
+  "areas": [
+    "Sala de guitarras",
+    "Zona de teclados",
+    "Área de percusión"
+  ]
 }

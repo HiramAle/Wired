@@ -169,6 +169,8 @@ class CrimpCable(Scene):
             from src.scenes.pause_menu.pause import Pause
             SceneManager.change_scene(Pause())
 
+
+
     def start(self):
         pygame.mouse.set_visible(True)
 

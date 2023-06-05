@@ -12,6 +12,18 @@
       "requirements": [],
       "add_item": [],
       "consequences": []
+    },
+    {
+      "npc_id": "liz",
+      "text": [
+        "BTS es mi banda favorita!"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
     }
   ],
   "default_zone": "store",

@@ -77,6 +77,18 @@
       "requirements": [],
       "add_item": [],
       "consequences": []
+    },
+    {
+      "npc_id": "roy",
+      "text": [
+        "Espero que te este yendo bien con todos esos trabajos de redes"
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
     }
   ],
   "default_zone": "company",

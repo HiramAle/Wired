@@ -25,5 +25,7 @@
       "broadcast": "175.42.159.255",
       "first": "175.42.128.1"
     }
-  }
+  },
+  "name": "Recepción",
+  "areas": ["Dirección", "Salones de clase", "Biblioteca", "Auditorios"]
 }

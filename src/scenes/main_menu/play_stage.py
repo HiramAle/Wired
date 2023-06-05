@@ -18,8 +18,7 @@ from src.scenes.world.world import World
 from engine.audio import AudioManager
 from engine.save_manager import instance as save_manager
 
-description_text = "Archivo de guardado de @\nUsar CTRL + Click borrará el guardado"
-erase_description = "¿Quieres borrar el archivo de guardado de @?"
+description_text = "Archivo de guardado de @"
 empty_description = "Empezar una nueva aventura en Celestia"
 
 
@@ -69,21 +68,20 @@ class NewGame(Stage):
                     self.description.text = \
                         description_text[:].replace("@", players_name).replace("tt", str(time_played % 60))
                 else:
-                    self.description_title.deactivate()
-                    self.description.deactivate()
+                    self.description_title.text = "Nuevo Juego"
+                    self.description.text = empty_description
             if save_button.clicked:
                 self.transitionPosition = save_button.rect.center
                 save_manager.active_save = index
+                from engine.scene.scene_manager import SceneManager
                 if save_button.text.text == "- VACIO -":
-                    from engine.scene.scene_manager import SceneManager
+
                     SceneManager.change_scene(loading.Loading(Assets.load_character_creation_assets,
                                                               CharacterCreation))
-                elif Input.keyboard.keys["control"]:
-                    save_button.text.text = "- VACIO -"
-                    save_manager.erase_save(index)
-                else:
-                    from engine.scene.scene_manager import SceneManager
+                elif not SceneManager.transitioning:
                     AudioManager.play_music("exploration")
+                    from src.scenes.world.time_manager import TimeManager
+                    TimeManager.current_day_of_week = save_manager.active_save.week_day
                     SceneManager.change_scene(loading.Loading(Data.load_world, World), True)
 
     def render(self) -> None:

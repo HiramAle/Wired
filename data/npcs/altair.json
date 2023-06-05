@@ -1,6 +1,19 @@
 {
   "name": "Altair",
-  "dialogues": [],
+  "dialogues": [
+    {
+      "npc_id": "altair",
+      "text": [
+        "No todas nos podemos dar el lujo de ser rom\u00e1nticas."
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
   "default_zone": "village",
   "schedule": {
     "0": "village",
@@ -8,7 +21,7 @@
     "2": "village",
     "3": "village",
     "4": "village",
-    "5": "village",
+    "5": "music_store",
     "6": "village"
   },
   "consequences": []

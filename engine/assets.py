@@ -39,9 +39,13 @@ class Assets:
     # outfit/color/action/direction/frames
     outfits: dict[int, dict[int, dict[str, list[pygame.Surface]]]] = {}
     # portrait
-    bodies_portrait : dict[int, dict[str, list[pygame.Surface]]] = {}
+    bodies_portrait: dict[int, dict[str, list[pygame.Surface]]] = {}
     eyes_portrait: dict[int, dict[str, list[pygame.Surface]]] = {}
     hairstyles_portrait: dict[int, dict[int, dict[str, list[pygame.Surface]]]] = {}
+    routing_tutorial: dict[str, pygame.Surface] = {}
+    cables_tutorial: dict[str, pygame.Surface] = {}
+    subnetting_tutorial: dict[str, pygame.Surface] = {}
+    all_tutorials: dict[str, dict[str, pygame.Surface]] = {}
 
     @classmethod
     def prepare(cls) -> None:
@@ -70,6 +74,12 @@ class Assets:
         cls.load_sounds()
         cls.load_music_paths()
         cls.load_portraits()
+        cls.routing_tutorial = load_image_directory("assets/tutorials/routing")
+        cls.cables_tutorial = load_image_directory("assets/tutorials/cables")
+        cls.subnetting_tutorial = load_image_directory("assets/tutorials/subnetting")
+        cls.all_tutorials = {"cables": cls.cables_tutorial,
+                             "subnetting": cls.subnetting_tutorial,
+                             "routing": cls.routing_tutorial}
         event.clear()
 
     @classmethod
@@ -84,7 +94,6 @@ class Assets:
         for file in listdir(NPC_PORTRAITS):
             npc_name = file.split(".")[0].split("_")[0]
             cls.portrait_frames[npc_name] = Loader.load_portrait_frames(f"{NPC_PORTRAITS}/{file}", 96)
-
 
     @classmethod
     def load_sounds(cls):

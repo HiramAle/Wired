@@ -1,15 +1,15 @@
 {
   "name": "Sabine",
   "dialogues": [],
-  "default_zone": "village",
+  "default_zone": "hotel",
   "schedule": {
-    "0": "village",
-    "1": "village",
-    "2": "village",
-    "3": "village",
-    "4": "village",
-    "5": "village",
-    "6": "village"
+    "0": "hotel",
+    "1": "hotel",
+    "2": "hotel",
+    "3": "hotel",
+    "4": "hotel",
+    "5": "hotel",
+    "6": "hotel"
   },
   "consequences": []
 }

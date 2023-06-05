@@ -19,6 +19,7 @@ from src.scenes.loading.loading import Loading
 from src.scenes.world.world import World
 from engine.constants import Colors
 from engine.audio import AudioManager
+from engine.playerdata import PlayerData
 
 alphabet_dict = {
     'a': [(1, 5), (3, 1), (5, 5), (3, 8), (1, 5), (5, 5)],
@@ -232,12 +233,15 @@ class CharacterCreation(Scene):
         save_manager.active_save.name = self.character_name.text
         save_manager.active_save.pronoun = self.pronouns[self.pronoun_index]
         save_manager.save()
-        from engine.playerdata import PlayerData
+
+        PlayerData.name = save_manager.active_save.name
         PlayerData.load(save_manager.active_save.money, save_manager.active_save.inventory,
                         save_manager.active_save.tasks)
         PlayerData.pronoun = save_manager.active_save.pronoun
         PlayerData.tutorials = save_manager.active_save.tutorials
         self.avatar.save_character()
+        from src.scenes.world.time_manager import TimeManager
+        TimeManager.current_day_of_week = save_manager.active_save.week_day
         SceneManager.change_scene(Loading(Data.load_world, World), True, True)
         AudioManager.play_music("exploration")
 

@@ -80,8 +80,8 @@ class Store(Scene):
         Sprite((434, 246), Assets.images_store["price_frame"], self.store_ui, centered=False)
         self.item_icon = Sprite((490, 176), pygame.Surface((32, 32), pygame.SRCALPHA), self.store_ui)
         self.item_price = Text((474, 273), "", 32, Colors.SPRITE, self.store_ui)
-        self.items = [Item("Conector RJ45", Assets.images_store["connector_icon"], 10),
-                      Item("Cable UTP CAT-6", Assets.images_store["cable_icon"], 15),
+        self.items = [Item("Conector RJ45", Assets.images_store["connector_icon"], 5),
+                      Item("Cable UTP CAT-6", Assets.images_store["cable_icon"], 10),
                       Item("Cable Serial", Assets.images_store["serial_icon"], 40)]
         self.list_items = []
         self.list_items.append(ListItem((112, 123), self.items[0], self.store_ui))

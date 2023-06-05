@@ -10,6 +10,8 @@
     "subnetting": false,
     "routing": false
   },
-  "tasks": {},
+  "tasks": {
+    "meet_kat": false
+  },
   "status": {}
 }

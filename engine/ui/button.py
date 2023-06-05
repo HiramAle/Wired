@@ -18,6 +18,7 @@ class Button(UIElement):
         self.outline_color = Colors.WHITE
         self.normal_image = normal_state
         self.pressed_image = pressed_state
+        self.outline = kwargs.get("outline", True)
 
     def draw_outline(self, display: pygame.Surface):
         mask = pygame.mask.from_surface(self.image)
@@ -40,6 +41,6 @@ class Button(UIElement):
             self.image = self.normal_image
 
     def render(self, display: pygame.Surface, offset=pygame.Vector2(0, 0)):
-        if self.hovered:
+        if self.hovered and self.outline:
             self.draw_outline(display)
         super().render(display)

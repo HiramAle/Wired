@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="34" nextobjectid="2214">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="65" tilewidth="32" tileheight="32" infinite="0" nextlayerid="34" nextobjectid="2218">
  <tileset firstgid="1" source="../TSX/City.tsx"/>
  <tileset firstgid="7585" source="../TSX/Terrains.tsx"/>
  <tileset firstgid="10145" source="../TSX/Modern_Exteriors.tsx"/>
@@ -1183,6 +1183,30 @@
   <object id="2213" name="kat" type="npc_spawn" x="1208" y="560">
    <properties>
     <property name="direction" value="left"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2214" name="haye" type="npc_spawn" x="1404" y="865">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2215" name="julia" type="npc_spawn" x="1450" y="866">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2216" name="letty" type="npc_spawn" x="1316" y="1135">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2217" name="mau" type="npc_spawn" x="700" y="1552">
+   <properties>
+    <property name="direction" value="down"/>
    </properties>
    <point/>
   </object>

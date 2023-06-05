@@ -1,0 +1,28 @@
+{
+  "name": "Mau",
+  "dialogues": [
+    {
+      "npc_id": "mau",
+      "text": [
+        "Acabo de subir a Master en el Lol."
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "village",
+  "schedule": {
+    "0": "village",
+    "1": "village",
+    "2": "village",
+    "3": "village",
+    "4": "village",
+    "5": "village",
+    "6": "village"
+  },
+  "consequences": []
+}

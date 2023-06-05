@@ -63,12 +63,12 @@ class Subnetting(StagedScene):
                     building_name = building_name.replace(" ", "\n")
                     building_x = 57 + (map_padding_x * x) + map_padding_x / 2
                     building_y = 29 + (map_padding_y * y) + map_padding_y / 2
-                    Building((building_x, building_y), building_name, self.buildings)
+                    Building((building_x, building_y), building_name, self.buildings, self.interactive)
                     # print(building_name)
 
         self.problemData.buildings = self.buildings.sprites()
         # print(self.problemData.buildings)
-        self.set_stage(SubnetMask(self, self.problemData.zone_id))
+        self.set_stage(SubnetMask(self, self.problemData.zone_id, self.interactive))
         self.straight = self.problemData.subnetsNeeded
         print(f"Subnetting will remove {self.straight} straight")
 
@@ -96,6 +96,8 @@ class Subnetting(StagedScene):
             from engine.scene.scene_manager import SceneManager
             from src.scenes.pause_menu.pause import Pause
             SceneManager.change_scene(Pause())
+
+        self.update_cursor()
 
     def render(self) -> None:
         self.display.fill("#242424")

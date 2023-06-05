@@ -40,8 +40,9 @@ class Zone(Stage):
         underscore_name.blit(Assets.images_subnetting["name_underscore"], (0, 0))
         Image((435, 17), underscore_name, self.group, centered=False)
         self.posit_it = Image((366, 93), Assets.images_subnetting["post_it_class"], self.group, centered=False, scale=2)
-        self.instructions = Text((483, 188), "Selecciona en\nel mapa una\nárea para\nconfigurar.", 32, Colors.SPRITE,
+        self.instructions = Text((483, 170), "Selecciona en\nel mapa una\nárea para\nconfigurar.", 32, Colors.SPRITE,
                                  self.group)
+        self.alert = Text((483, 240), "El proceso es por\nsubneteo tradicional.", 16, Colors.SPRITE, self.group)
         Text((45, 188), "Dirección IP:", 32, "#2E2E2E", self.group, font="fool", centered=False, shadow=False)
         Text((473.5, 25.5), self.data.zone_name, 16, "#2E2E2E", self.group, font="fool", shadow=False)
         Text((276.5, 203), self.data.ip, 32, "#2E2E2E", self.group, font="fool", shadow=False)
@@ -215,6 +216,7 @@ class Zone(Stage):
         if self.selected_building and self.posit_it:
             self.posit_it.kill()
             self.instructions.kill()
+            self.alert.kill()
             self.posit_it = None
             Image((96, 272), Assets.images_subnetting["test_house"], self.group, scale=2)
             Image((72, 325), Assets.images_subnetting["indicator"], self.group, centered=False)

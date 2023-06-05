@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="70">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="73">
  <tileset firstgid="1" source="../TSX/RoomBuilder.tsx"/>
  <tileset firstgid="8285" source="../TSX/store_singles.tsx"/>
  <layer id="1" name="walls" width="30" height="20">
@@ -162,6 +162,24 @@
   <object id="69" name="liz" type="npc_spawn" x="480" y="149">
    <properties>
     <property name="direction" value="down"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="70" name="brayan" type="npc_spawn" x="253" y="538">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="71" name="haye" type="npc_spawn" x="689" y="432">
+   <properties>
+    <property name="direction" value="down"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="72" name="brandon" type="npc_spawn" x="352" y="148">
+   <properties>
+    <property name="direction" value="right"/>
    </properties>
    <point/>
   </object>

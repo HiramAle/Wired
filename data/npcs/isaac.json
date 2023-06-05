@@ -1,0 +1,30 @@
+{
+  "name": "Isaac",
+  "dialogues": [
+    {
+      "npc_id": "isaac",
+      "text": [
+        "Oye name",
+        "\u00bfTe gusta gorillaz? V\u00ed que en la tienda de m\u00fasica",
+        "tienen algunos de sus discos."
+      ],
+      "type": "generic",
+      "task": "",
+      "new_tasks": [],
+      "requirements": [],
+      "add_item": [],
+      "consequences": []
+    }
+  ],
+  "default_zone": "city",
+  "schedule": {
+    "0": "city",
+    "1": "music_store",
+    "2": "music_store",
+    "3": "music_store",
+    "4": "music_store",
+    "5": "music_store",
+    "6": "music_store"
+  },
+  "consequences": []
+}

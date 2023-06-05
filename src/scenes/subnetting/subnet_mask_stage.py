@@ -8,7 +8,7 @@ from engine.data import Data
 
 
 class SubnetMask(Stage):
-    def __init__(self, scene: StagedScene, zone_id: str):
+    def __init__(self, scene: StagedScene, zone_id: str, interactive: SpriteGroup):
         super().__init__("subnet_mask", scene)
         self.data = Data.subnetting[zone_id]
         self.class_positions = {"a": (401, 55), "b": (418, 112), "c": (403, 171)}
@@ -31,7 +31,7 @@ class SubnetMask(Stage):
         self.holders = SpriteGroup()
         self.cm_labels = SpriteGroup()
         # Images
-        Image((0, 0), Assets.images_subnetting["subnet_mask_tab"], self.group, centered=False)
+        Image((0, 0), Assets.images_subnetting["subnet_mask_tab"], self.group, interactive,centered=False)
         Image((362, 19), Assets.images_subnetting["subnet_mask_holder"], self.group,
               centered=False)
         Image((40, 251), Assets.images_subnetting["post_it_class"], self.group, centered=False)
@@ -56,10 +56,11 @@ class SubnetMask(Stage):
                                      shadow=False)
 
         for network_class, position in self.class_positions.items():
-            ClassLabel(position, network_class, self.group, self.class_labels)
+            ClassLabel(position, network_class, self.group, self.class_labels, interactive)
 
         for index, position in enumerate(self.answer_positions):
-            Label((position[0] + 25, position[1] + 12.5), self.possible_answers[index], False, self.group, self.labels)
+            Label((position[0] + 25, position[1] + 12.5), self.possible_answers[index], False, self.group, self.labels,
+                  interactive)
 
         for index in range(4):
             Label((340 + 25 + (index * 65), 262 + 13.5), "", True, self.group, self.df_labels)

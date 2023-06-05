@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.9" tiledversion="1.9.2" name="music_store_singles" tilewidth="160" tileheight="96" tilecount="35" columns="0">
+<tileset version="1.10" tiledversion="1.10.1" name="music_store_singles" tilewidth="160" tileheight="96" tilecount="35" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="2">
   <image width="34" height="26" source="../Images/music_store_singles/bench_1.png"/>
@@ -34,7 +34,7 @@
  <tile id="7">
   <image width="44" height="37" source="../Images/music_store_singles/chair_3.png"/>
   <objectgroup draworder="index" id="2">
-   <object id="1" x="0" y="0" width="44" height="37"/>
+   <object id="1" x="0" y="14" width="44" height="23"/>
   </objectgroup>
  </tile>
  <tile id="9">

@@ -1,7 +1,7 @@
 import random
 
 import pygame
-import src.utils.load as load
+from engine.data import Loader
 from engine.assets import Assets
 from src.scenes.world.actor import Actor, Emote
 from src.constants.paths import NPC_SPRITE_SHEETS, NPC_DATA
@@ -39,7 +39,7 @@ class NPC(Actor):
         path = f"{NPC_SPRITE_SHEETS}/{name}.png"
         super().__init__((0, 0), path, [])
         self.name = name
-        self.data = load.load_json(f"{NPC_DATA}/{name}.json")
+        self.data = Loader.load_json(f"{NPC_DATA}/{name}.json")
         self.dialogs: list[Dialog] = [Dialog(dialog_data) for dialog_data in self.data["dialogues"]]
         self.routes = []
         self.node_index = 0
@@ -126,6 +126,7 @@ class NPC(Actor):
         for dialog in self.get_dialogs("new_task"):
             if not self.check_dialog_requirements(dialog.requirements):
                 continue
+            # print(dialog)
             for new_task_id in dialog.new_tasks:
                 if new_task_id in PlayerData.tasks.tasks:
                     continue

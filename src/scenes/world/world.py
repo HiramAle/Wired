@@ -85,7 +85,7 @@ class World(Scene):
         self.day_overlay = Assets.images_world["week_day"]
         self.hour = Text((93, 32), TimeManager.formatted_time(), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
         self.money = Text((93, 50), str(PlayerData.inventory.money), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
-        self.day = Text((50, 82), TimeManager.formatted_week_day(), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
+        self.day = Text((50, 80), TimeManager.formatted_week_day(), 16, Colors.SPRITE, shadow=True, shadow_opacity=50)
         self.portrait = PlayerPortrait()
         self.next_zone: Zone | None = None
 

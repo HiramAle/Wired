@@ -21,8 +21,9 @@
     {
       "npc_id": "juan",
       "text": [
-        "Hola name, escuch\u00e9 que trabajas en una empresa de Redes",
-        "\u00bfPodr\u00edas ayudarme subneteando la red del Hospital?"
+        "\u00a1Gracias por tu ayuda con el subneteo ",
+        "\u00bfPodr\u00edas configurar los routers tambi\u00e9n? ",
+        "Esto mejorar\u00e1 la conectividad de los equipos m\u00e9dicos"
       ],
       "type": "new_task",
       "task": "",
@@ -38,7 +39,7 @@
   ],
   "default_zone": "hospital",
   "schedule": {
-    "0": "hospital",
+    "0": "hotel",
     "1": "hospital",
     "2": "hospital",
     "3": "hospital",
